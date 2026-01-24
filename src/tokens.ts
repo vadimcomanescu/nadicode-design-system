@@ -1,4 +1,4 @@
-import { tokens as configTokens } from './lib/tokens.config';
+import { tokens as configTokens, colorTokens as configColorTokens } from './lib/tokens.config';
 
 export interface TokenColors {
   background: string;
@@ -10,6 +10,8 @@ export interface TokenColors {
   border: {
     DEFAULT: string;
     hover: string;
+    subtle: string;
+    'subtle-hover': string;
   };
   primary: {
     DEFAULT: string;
@@ -79,4 +81,10 @@ export interface DesignTokens {
   shadows: TokenShadows;
 }
 
+export interface ColorTokens {
+  dark: TokenColors;
+  light: TokenColors;
+}
+
 export const tokens = configTokens as unknown as DesignTokens;
+export const colorTokens = configColorTokens as unknown as ColorTokens;

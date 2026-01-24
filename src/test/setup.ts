@@ -32,3 +32,37 @@ if (typeof window !== 'undefined') {
     window.HTMLElement.prototype.hasPointerCapture = () => false;
   }
 }
+
+// Mock localStorage for theme tests
+const localStorageMock = (() => {
+  let store: Record<string, string> = {};
+  return {
+    getItem: (key: string) => store[key] ?? null,
+    setItem: (key: string, value: string) => {
+      store[key] = value;
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = {};
+    },
+  };
+})();
+
+if (typeof window !== 'undefined' && !window.localStorage) {
+  Object.defineProperty(window, 'localStorage', {
+    value: localStorageMock,
+  });
+}
+
+// Ensure localStorage methods exist (even if localStorage exists but methods are stubbed)
+if (typeof window !== 'undefined' && window.localStorage) {
+  const originalLocalStorage = window.localStorage;
+  if (typeof originalLocalStorage.clear !== 'function') {
+    Object.defineProperty(window, 'localStorage', {
+      value: localStorageMock,
+      writable: true,
+    });
+  }
+}

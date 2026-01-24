@@ -9,18 +9,22 @@ import { Separator } from "./components/ui/Separator";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./components/ui/Dialog";
 import { Typography } from "./components/ui/Typography";
 import { Container, Grid } from "./components/layout/Grid";
+import { ThemeToggle } from "./components/ui/ThemeToggle";
 import { tokens } from "./tokens";
 
 function App() {
   return (
     <div className="min-h-screen bg-background text-text-primary py-12">
       <Container>
-        <header className="mb-12">
-          <Typography variant="h1" className="mb-4">Design System 2026</Typography>
-          <Typography variant="body" className="text-xl text-text-secondary max-w-2xl">
-            A comprehensive design system for AI-integrated web applications. 
-            Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
-          </Typography>
+        <header className="mb-12 flex items-start justify-between">
+          <div>
+            <Typography variant="h1" className="mb-4">Design System 2026</Typography>
+            <Typography variant="body" className="text-xl text-text-secondary max-w-2xl">
+              A comprehensive design system for AI-integrated web applications.
+              Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
+            </Typography>
+          </div>
+          <ThemeToggle />
         </header>
 
         <section className="mb-16">
@@ -47,7 +51,7 @@ function App() {
             <ColorCard name="Surface" hex={tokens.colors.surface.DEFAULT} className="bg-surface" />
             <ColorCard name="Surface Active" hex={tokens.colors.surface.active} className="bg-surface-active" />
             <ColorCard name="Border" hex={tokens.colors.border.DEFAULT} className="bg-border" />
-            <ColorCard name="Primary" hex={tokens.colors.primary.DEFAULT} className="bg-primary text-black" />
+            <ColorCard name="Primary" hex={tokens.colors.primary.DEFAULT} className="bg-primary text-primary-foreground" />
             <ColorCard name="Accent" hex={tokens.colors.accent.DEFAULT} className="bg-accent text-white" />
             <ColorCard name="Destructive" hex={tokens.colors.border.DEFAULT} className="bg-destructive text-white" />
           </Grid>

@@ -1,5 +1,6 @@
-export const tokens = {
-  colors: {
+// Color tokens for both themes
+export const colorTokens = {
+  dark: {
     background: '#050505',
     surface: {
       DEFAULT: '#0F0F0F',
@@ -9,6 +10,8 @@ export const tokens = {
     border: {
       DEFAULT: '#272727',
       hover: '#3F3F3F',
+      subtle: 'rgba(255, 255, 255, 0.05)',
+      'subtle-hover': 'rgba(255, 255, 255, 0.1)',
     },
     primary: {
       DEFAULT: '#FFFFFF',
@@ -19,7 +22,7 @@ export const tokens = {
       foreground: '#FFFFFF',
     },
     accent: {
-      DEFAULT: '#3B82F6', // Electric Blue
+      DEFAULT: '#3B82F6',
       foreground: '#FFFFFF',
     },
     destructive: {
@@ -34,8 +37,53 @@ export const tokens = {
       primary: '#F2F2F2',
       secondary: '#A1A1A1',
       tertiary: '#525252',
-    }
+    },
   },
+  light: {
+    background: '#FAFAFA',
+    surface: {
+      DEFAULT: '#FFFFFF',
+      hover: '#F5F5F5',
+      active: '#E8E8E8',
+    },
+    border: {
+      DEFAULT: '#E5E5E5',
+      hover: '#D4D4D4',
+      subtle: 'rgba(0, 0, 0, 0.05)',
+      'subtle-hover': 'rgba(0, 0, 0, 0.1)',
+    },
+    primary: {
+      DEFAULT: '#0A0A0A',
+      foreground: '#FFFFFF',
+    },
+    secondary: {
+      DEFAULT: '#F5F5F5',
+      foreground: '#0A0A0A',
+    },
+    accent: {
+      DEFAULT: '#3B82F6',
+      foreground: '#FFFFFF',
+    },
+    destructive: {
+      DEFAULT: '#DC2626',
+      foreground: '#FFFFFF',
+    },
+    muted: {
+      DEFAULT: '#F5F5F5',
+      foreground: '#737373',
+    },
+    text: {
+      primary: '#0A0A0A',
+      secondary: '#737373',
+      tertiary: '#A3A3A3',
+    },
+  },
+};
+
+// Non-color tokens (theme-independent)
+export const tokens = {
+  // Keep colors for backward compatibility (using dark as default)
+  colors: colorTokens.dark,
   typography: {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
@@ -59,7 +107,7 @@ export const tokens = {
   },
   spacing: {
     base: 4,
-    '4.5': '1.125rem', // 18px
+    '4.5': '1.125rem',
   },
   shadows: {
     'glow': '0 0 20px -5px rgba(255, 255, 255, 0.1)',

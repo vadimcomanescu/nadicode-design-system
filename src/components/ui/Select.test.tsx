@@ -1,30 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue, SelectGroup, SelectLabel, SelectSeparator } from './Select';
 import { describe, it, expect } from 'vitest';
-
-// Needed for Radix UI Select to work in JSDOM
-// https://github.com/radix-ui/primitives/issues/1220#issuecomment-1126785647
-class MockPointerEvent extends Event {
-  button: number;
-  ctrlKey: boolean;
-  pointerType: string;
-
-  constructor(type: string, props: PointerEventInit) {
-    super(type, props);
-    this.button = props.button || 0;
-    this.ctrlKey = props.ctrlKey || false;
-    this.pointerType = props.pointerType || 'mouse';
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-window.PointerEvent = MockPointerEvent as any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-window.HTMLElement.prototype.scrollIntoView = (() => {}) as any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-window.HTMLElement.prototype.releasePointerCapture = (() => {}) as any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-window.HTMLElement.prototype.hasPointerCapture = (() => false) as any;
 
 describe('Select', () => {
   it('opens and selects an item', async () => {
@@ -40,23 +16,28 @@ describe('Select', () => {
       </Select>
     );
 
-    const trigger = screen.getByLabelText('Food');
-    expect(screen.getByText('Select a food')).toBeInTheDocument();
+    const combobox = screen.getByRole('combobox', { name: 'Food' });
+    expect(combobox).toHaveTextContent('Select a food');
 
     // Open select
-    fireEvent.pointerDown(trigger, { pointerType: 'mouse' });
+    fireEvent.pointerDown(combobox, { pointerType: 'mouse' });
+
+    await screen.findByRole('listbox');
 
     // Check items are visible
-    expect(screen.getByText('Apple')).toBeInTheDocument();
-    expect(screen.getByText('Banana')).toBeInTheDocument();
+    const appleOption = await screen.findByRole('option', { name: 'Apple' });
+    const bananaOption = await screen.findByRole('option', { name: 'Banana' });
+    expect(appleOption).toBeInTheDocument();
+    expect(bananaOption).toBeInTheDocument();
 
     // Select an item
-    const appleItem = screen.getByText('Apple');
-    // We need to use pointer events for Radix Select
-    fireEvent.click(appleItem);
+    fireEvent.click(appleOption);
 
     // Check value updated
-    expect(screen.getByText('Apple')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(combobox).toHaveTextContent('Apple');
+      expect(combobox).toHaveAttribute('aria-expanded', 'false');
+    });
   });
 
   it('renders with placeholder when no value is selected', () => {
@@ -88,7 +69,7 @@ describe('Select', () => {
     expect(trigger).toBeDisabled();
   });
 
-  it('handles disabled items', () => {
+  it('handles disabled items', async () => {
     render(
       <Select>
         <SelectTrigger>
@@ -104,13 +85,15 @@ describe('Select', () => {
     const trigger = screen.getByRole('combobox');
     fireEvent.pointerDown(trigger, { pointerType: 'mouse' });
 
+    await screen.findByRole('listbox');
+
     const option2 = screen.getByRole('option', { name: 'Option 2' });
     // Radix UI sets data-disabled on disabled items and aria-disabled
     expect(option2).toHaveAttribute('data-disabled');
     expect(option2).toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('renders groups and separators', () => {
+  it('renders groups and separators', async () => {
     render(
       <Select>
         <SelectTrigger>
@@ -132,6 +115,8 @@ describe('Select', () => {
 
     const trigger = screen.getByRole('combobox');
     fireEvent.pointerDown(trigger, { pointerType: 'mouse' });
+
+    await screen.findByRole('listbox');
 
     expect(screen.getByText('Group 1')).toBeInTheDocument();
     expect(screen.getByText('Group 2')).toBeInTheDocument();

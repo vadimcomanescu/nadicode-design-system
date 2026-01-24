@@ -30,7 +30,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "flex h-9 w-full rounded-md border border-border bg-surface px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-text-tertiary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-50 text-text-primary",
               startIcon && "pl-10",
               endIcon && "pr-10",
-              error && "border-red-500 focus-visible:ring-red-500",
+              error && "border-destructive focus-visible:ring-destructive",
               className
             )}
             ref={ref}
@@ -43,7 +43,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {typeof error === 'string' && (
-          <p className="text-xs font-medium text-red-500">{error}</p>
+          <p className="text-xs font-medium text-destructive">{error}</p>
         )}
       </div>
     );

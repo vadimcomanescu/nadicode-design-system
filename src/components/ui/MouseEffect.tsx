@@ -56,7 +56,7 @@ export function MouseGlow({ className }: { className?: string }) {
       <div
         className="absolute inset-0 h-full w-full"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(59, 130, 246, 0.4)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='rgba(59, 130, 246, 1.0)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(99, 102, 241, 0.4)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='rgba(99, 102, 241, 1.0)'/%3E%3C/svg%3E")`,
           backgroundSize: "24px 24px"
         }}
       />

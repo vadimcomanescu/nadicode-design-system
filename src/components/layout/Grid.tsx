@@ -24,7 +24,7 @@ Container.displayName = "Container";
 
 interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   cols?: 1 | 2 | 3 | 4 | 5 | 6 | 12;
-  gap?: 'sm' | 'md' | 'lg';
+  gap?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
@@ -43,6 +43,7 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       sm: "gap-2",
       md: "gap-4",
       lg: "gap-8",
+      xl: "gap-12",
     };
 
     return (

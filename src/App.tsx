@@ -482,7 +482,7 @@ console.log(greet("World"));`}
                     <Typography variant="h3">Resizable Layouts</Typography>
                     <div className="h-[400px] border border-border rounded-lg overflow-hidden">
                       <ResizablePanelGroup direction="horizontal">
-                        <ResponsivePanel defaultSize={25} minSize={20} mobileBehavior="hide">
+                        <ResponsivePanel defaultSize={25} minSize={20} mobileBehavior="hide" className="md:hidden lg:flex">
                           <div className="flex h-full flex-col p-4 bg-surface gap-2">
                             <div className="p-2 font-semibold text-text-primary mb-2">My App</div>
                             <Button variant="ghost" className="justify-start w-full">
@@ -496,7 +496,7 @@ console.log(greet("World"));`}
                             </Button>
                           </div>
                         </ResponsivePanel>
-                        <ResponsiveHandle withHandle mobileBehavior="hide" />
+                        <ResponsiveHandle withHandle mobileBehavior="hide" className="md:hidden lg:flex" />
                         <ResizablePanel defaultSize={75}>
                           <div className="flex h-full items-center justify-center p-6 bg-background">
                             <div className="text-center space-y-2">
@@ -716,9 +716,9 @@ function ColorCard({ name, hex, className }: { name: string, hex: string, classN
   return (
     <div className="rounded-lg overflow-hidden border border-border">
       <div className={`h-24 w-full ${className}`}></div>
-      <div className="p-3 bg-surface">
-        <Typography variant="small" className="block font-semibold text-text-primary">{name}</Typography>
-        <Typography variant="small" className="block text-text-secondary font-mono">{hex}</Typography>
+      <div className="p-3 bg-surface flex items-center justify-between">
+        <Typography variant="small" className="font-semibold text-text-primary">{name}</Typography>
+        <Typography variant="small" className="text-text-secondary font-mono">{hex}</Typography>
       </div>
     </div>
   )

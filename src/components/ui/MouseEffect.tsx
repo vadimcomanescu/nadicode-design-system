@@ -34,11 +34,11 @@ export function MouseGlow({ className }: { className?: string }) {
   }, [className])
 
   // Mask image: Radial gradient that is transparent at edges and opaque at center
-  // revealed at mouse position.
+  // revealed at mouse position. Reduced radius for tighter focus.
   const maskImage = useMotionTemplate`radial-gradient(
-    600px circle at ${springX}px ${springY}px,
+    300px circle at ${springX}px ${springY}px,
     black,
-    transparent 80%
+    transparent 100%
   )`
 
   return (
@@ -52,12 +52,12 @@ export function MouseGlow({ className }: { className?: string }) {
         WebkitMaskImage: maskImage
       }}
     >
-      {/* Structural Dot Pattern */}
+      {/* Structural Grid & Tiny Dots Pattern */}
       <div
         className="absolute inset-0 h-full w-full"
         style={{
-          backgroundImage: `radial-gradient(circle, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`, // Blue dots
-          backgroundSize: "24px 24px" // Dot spacing
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(59, 130, 246, 0.4)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='rgba(59, 130, 246, 1.0)'/%3E%3C/svg%3E")`,
+          backgroundSize: "24px 24px"
         }}
       />
     </motion.div>

@@ -33,7 +33,8 @@ import { Calendar } from "./components/ui/Calendar";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "./components/ui/Table";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./components/ui/Carousel";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "./components/ui/InputOTP";
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./components/ui/Resizable";
+import { ResizablePanel, ResizablePanelGroup } from "./components/ui/Resizable";
+import { ResponsiveHandle, ResponsivePanel } from "./components/ui/Responsive";
 import { useState } from "react";
 import { CodeBlock } from "./components/blocks/CodeBlock";
 import { AudioVisualizer } from "./components/blocks/AudioVisualizer";
@@ -149,36 +150,36 @@ function App() {
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Data Entry</Typography>
               <Grid cols={2} gap="xl">
                 <div className="space-y-6">
-                   <div className="space-y-2">
-                     <Label>Email</Label>
-                     <Input placeholder="user@example.com" />
-                   </div>
-                   <div className="space-y-2">
-                     <Label>Bio</Label>
-                     <Textarea placeholder="Tell us about yourself" />
-                   </div>
-                   <div className="space-y-2">
-                      <Label>One-Time Password</Label>
-                      <InputOTP maxLength={6}>
-                        <InputOTPGroup>
-                          <InputOTPSlot index={0} />
-                          <InputOTPSlot index={1} />
-                          <InputOTPSlot index={2} />
-                          <InputOTPSlot index={3} />
-                          <InputOTPSlot index={4} />
-                          <InputOTPSlot index={5} />
-                        </InputOTPGroup>
-                      </InputOTP>
-                   </div>
-                   <div className="space-y-2">
-                     <Label>Security Level</Label>
-                     <Slider defaultValue={[50]} max={100} step={1} />
-                   </div>
+                  <div className="space-y-2">
+                    <Label>Email</Label>
+                    <Input placeholder="user@example.com" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Bio</Label>
+                    <Textarea placeholder="Tell us about yourself" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>One-Time Password</Label>
+                    <InputOTP maxLength={6}>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={0} />
+                        <InputOTPSlot index={1} />
+                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={3} />
+                        <InputOTPSlot index={4} />
+                        <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                    </InputOTP>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Security Level</Label>
+                    <Slider defaultValue={[50]} max={100} step={1} />
+                  </div>
                 </div>
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <Label>Framework</Label>
-                     <Select>
+                    <Select>
                       <SelectTrigger>
                         <SelectValue placeholder="Select framework" />
                       </SelectTrigger>
@@ -230,11 +231,11 @@ function App() {
               </Grid>
             </section>
 
-             {/* OVERLAYS */}
+            {/* OVERLAYS */}
             <section>
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Overlays & Feedback</Typography>
               <div className="flex flex-wrap gap-4">
-                 <Dialog>
+                <Dialog>
                   <DialogTrigger asChild><Button variant="outline">Dialog</Button></DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
@@ -293,8 +294,8 @@ function App() {
                   </Tooltip>
                 </TooltipProvider>
 
-                <Button 
-                  variant="accent" 
+                <Button
+                  variant="accent"
                   onClick={() => {
                     toast({
                       title: "Scheduled: Catch up",
@@ -322,7 +323,7 @@ function App() {
                       <Typography variant="muted">@shadcn</Typography>
                     </div>
                   </div>
-                  
+
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
                       <AccordionTrigger>Is it accessible?</AccordionTrigger>
@@ -342,24 +343,24 @@ function App() {
                     <Progress value={progress} className="w-full" />
                   </div>
                 </div>
-                
-                 <div className="space-y-4">
-                    <Card variant="glass">
-                      <CardHeader>
-                        <CardTitle>Notifications</CardTitle>
-                        <CardDescription>You have 3 unread messages.</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                           <Skeleton className="h-12 w-full" />
-                           <Skeleton className="h-12 w-full" />
-                           <Skeleton className="h-12 w-full" />
-                        </div>
-                      </CardContent>
-                    </Card>
+
+                <div className="space-y-4">
+                  <Card variant="glass">
+                    <CardHeader>
+                      <CardTitle>Notifications</CardTitle>
+                      <CardDescription>You have 3 unread messages.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <Skeleton className="h-12 w-full" />
+                        <Skeleton className="h-12 w-full" />
+                        <Skeleton className="h-12 w-full" />
+                      </div>
+                    </CardContent>
+                  </Card>
 
 
-                   <HoverCard>
+                  <HoverCard>
                     <HoverCardTrigger asChild>
                       <Button variant="link">@nextjs</Button>
                     </HoverCardTrigger>
@@ -378,43 +379,43 @@ function App() {
                 </div>
               </Grid>
             </section>
-          
-             {/* COMPLEX */}
+
+            {/* COMPLEX */}
             <section>
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Complex Components</Typography>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <div className="border border-border rounded-md p-4 flex justify-center">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
-                      className="rounded-md border"
-                    />
-                 </div>
-                  <div className="border border-border rounded-md p-4 flex items-center justify-center min-h-[400px]">
-                    <div className="w-full max-w-[240px]">
-                      <Carousel className="w-full">
-                         <CarouselContent>
-                           {Array.from({ length: 5 }).map((_, index) => (
-                             <CarouselItem key={index}>
-                               <div className="p-1">
-                                 <Card variant="glass">
-                                   <CardContent className="flex aspect-square items-center justify-center p-6">
-                                     <span className="text-4xl font-semibold">{index + 1}</span>
-                                   </CardContent>
-                                 </Card>
-                               </div>
-                             </CarouselItem>
-                           ))}
-                         </CarouselContent>
-                         <CarouselPrevious />
-                         <CarouselNext />
-                       </Carousel>
-                    </div>
+                <div className="border border-border rounded-md p-4 flex justify-center">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    className="rounded-md border"
+                  />
+                </div>
+                <div className="border border-border rounded-md p-4 flex items-center justify-center min-h-[400px]">
+                  <div className="w-full max-w-[240px]">
+                    <Carousel className="w-full">
+                      <CarouselContent>
+                        {Array.from({ length: 5 }).map((_, index) => (
+                          <CarouselItem key={index}>
+                            <div className="p-1">
+                              <Card variant="glass">
+                                <CardContent className="flex aspect-square items-center justify-center p-6">
+                                  <span className="text-4xl font-semibold">{index + 1}</span>
+                                </CardContent>
+                              </Card>
+                            </div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious />
+                      <CarouselNext />
+                    </Carousel>
                   </div>
+                </div>
 
               </div>
-              
+
               <div className="mt-8 border border-border rounded-md">
                 <Table>
                   <TableCaption>A list of your recent invoices.</TableCaption>
@@ -446,250 +447,262 @@ function App() {
           </TabsContent>
 
           <TabsContent value="layout">
-             <section className="space-y-16">
-               <div>
-                  <Typography variant="h2" className="mb-8 border-b border-border pb-2">Blocks & Layouts</Typography>
-                  <Grid cols={1} gap="xl">
-                    <div className="space-y-4">
-                      <Typography variant="h3">Chat Interface</Typography>
-                      <ChatLayout />
-                    </div>
+            <section className="space-y-16">
+              <div>
+                <Typography variant="h2" className="mb-8 border-b border-border pb-2">Blocks & Layouts</Typography>
+                <Grid cols={1} gap="xl">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Chat Interface</Typography>
+                    <ChatLayout />
+                  </div>
 
-                    <div className="space-y-4">
-                      <Typography variant="h3">Code Block</Typography>
-                      <CodeBlock 
-                        filename="example.js"
-                        code={`function greet(name) {
+                  <div className="space-y-4">
+                    <Typography variant="h3">Code Block</Typography>
+                    <CodeBlock
+                      filename="example.js"
+                      code={`function greet(name) {
   return "Hello, " + name;
 }
 
-console.log(greet("World"));`} 
-                      />
+console.log(greet("World"));`}
+                    />
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Audio Visualizer</Typography>
+                    <Card variant="glass">
+                      <CardContent className="flex flex-col items-center justify-center p-12 gap-6">
+                        <AudioVisualizer isPlaying={true} />
+                        <Button variant="outline">Play Voice Sample</Button>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Resizable Layouts</Typography>
+                    <div className="h-[400px] border border-border rounded-lg overflow-hidden">
+                      <ResizablePanelGroup direction="horizontal">
+                        <ResponsivePanel defaultSize={25} minSize={20} mobileBehavior="hide">
+                          <div className="flex h-full flex-col p-4 bg-surface gap-2">
+                            <div className="p-2 font-semibold text-text-primary mb-2">My App</div>
+                            <Button variant="ghost" className="justify-start w-full">
+                              <Users className="mr-2 h-4 w-4" /> Team
+                            </Button>
+                            <Button variant="ghost" className="justify-start w-full bg-surface-active">
+                              <Package className="mr-2 h-4 w-4" /> Projects
+                            </Button>
+                            <Button variant="ghost" className="justify-start w-full">
+                              <Settings className="mr-2 h-4 w-4" /> Settings
+                            </Button>
+                          </div>
+                        </ResponsivePanel>
+                        <ResponsiveHandle withHandle mobileBehavior="hide" />
+                        <ResizablePanel defaultSize={75}>
+                          <div className="flex h-full items-center justify-center p-6 bg-background">
+                            <div className="text-center space-y-2">
+                              <Typography variant="h4">Project Dashboard</Typography>
+                              <Typography variant="muted">Select an item from the sidebar to view details.</Typography>
+                            </div>
+                          </div>
+                        </ResizablePanel>
+                      </ResizablePanelGroup>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Charts</Typography>
+                    <ChartBlock />
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Dashboard v1</Typography>
+                    <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                      <Dashboard01Block />
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Dashboard v2</Typography>
+                    <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                      <Dashboard02Block />
+                    </div>
+                  </div>
+
+                  <div className="space-y-8">
+                    <Typography variant="h2" className="mb-8 border-b border-border pb-2">High-Level Composition (v4)</Typography>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Fields & Groups</Typography>
+                      <FieldSet>
+                        <FieldLegend>Account Settings</FieldLegend>
+                        <FieldGroup>
+                          <Field orientation="horizontal">
+                            <FieldLabel>Display Name</FieldLabel>
+                            <Input placeholder="Evil Rabbit" />
+                          </Field>
+                          <Field orientation="horizontal">
+                            <FieldLabel>Email Address</FieldLabel>
+                            <FieldContent>
+                              <Input placeholder="rabbit@evil.com" />
+                              <FieldDescription>We'll never share your email.</FieldDescription>
+                            </FieldContent>
+                          </Field>
+                          <FieldSeparator>Security</FieldSeparator>
+                          <Field orientation="horizontal">
+                            <FieldLabel>Two-Factor Auth</FieldLabel>
+                            <Switch />
+                          </Field>
+                        </FieldGroup>
+                      </FieldSet>
                     </div>
 
                     <div className="space-y-4">
-                      <Typography variant="h3">Audio Visualizer</Typography>
-                      <Card variant="glass">
-                        <CardContent className="flex flex-col items-center justify-center p-12 gap-6">
-                           <AudioVisualizer isPlaying={true} />
-                           <Button variant="outline">Play Voice Sample</Button>
-                        </CardContent>
-                      </Card>
+                      <Typography variant="h3">Items & Lists</Typography>
+                      <ItemGroup className="max-w-md border border-border rounded-lg p-2 bg-surface">
+                        <Item variant="outline">
+                          <ItemMedia variant="icon"><Users /></ItemMedia>
+                          <ItemContent>
+                            <ItemTitle>Team Members</ItemTitle>
+                            <ItemDescription>Manage your team access.</ItemDescription>
+                          </ItemContent>
+                          <ItemActions><Button size="sm" variant="outline">View</Button></ItemActions>
+                        </Item>
+                        <ItemSeparator />
+                        <Item variant="default">
+                          <ItemMedia variant="icon"><Settings /></ItemMedia>
+                          <ItemContent>
+                            <ItemTitle>General Settings</ItemTitle>
+                            <ItemDescription>Global preferences and configurations.</ItemDescription>
+                          </ItemContent>
+                          <ItemActions><Button size="sm" variant="outline">Edit</Button></ItemActions>
+                        </Item>
+                      </ItemGroup>
                     </div>
+                  </div>
 
-                    <div className="space-y-4">
-                      <Typography variant="h3">Resizable Layouts</Typography>
-                      <div className="h-[400px] border border-border rounded-lg overflow-hidden">
-                        <ResizablePanelGroup direction="horizontal">
-                            <ResizablePanel defaultSize={25} minSize={20}>
-                              <div className="flex h-full items-center justify-center p-6 bg-surface">
-                                <span className="font-semibold text-text-secondary">Sidebar</span>
-                              </div>
-                            </ResizablePanel>
-                            <ResizableHandle withHandle />
-                            <ResizablePanel defaultSize={75}>
-                              <div className="flex h-full items-center justify-center p-6">
-                                <span className="font-semibold">Main Content</span>
-                              </div>
-                            </ResizablePanel>
-                          </ResizablePanelGroup>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Charts (Full Collection)</Typography>
+                    <ChartCollectionBlock />
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h2">Additional UI Primitives</Typography>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-4">
+                        <Typography variant="h4">Combobox</Typography>
+                        <Combobox
+                          options={[
+                            { label: "Option 1", value: "1" },
+                            { label: "Option 2", value: "2" },
+                            { label: "Option 3", value: "3" },
+                          ]}
+                        />
+                      </div>
+                      <div className="space-y-4">
+                        <Typography variant="h4">Date Picker</Typography>
+                        <DatePicker />
+                      </div>
+                      <div className="space-y-4">
+                        <Typography variant="h4">Input Group</Typography>
+                        <InputGroup>
+                          <InputGroupAddon>https://</InputGroupAddon>
+                          <Input placeholder="example.com" className="rounded-none" />
+                          <InputGroupAddon>.com</InputGroupAddon>
+                        </InputGroup>
+                      </div>
+                      <div className="space-y-4">
+                        <Typography variant="h4">Button Group</Typography>
+                        <ButtonGroup>
+                          <Button variant="outline">Day</Button>
+                          <Button variant="outline">Week</Button>
+                          <Button variant="outline">Month</Button>
+                        </ButtonGroup>
+                      </div>
+                      <div className="space-y-4">
+                        <Typography variant="h4">Native Select</Typography>
+                        <NativeSelect>
+                          <option>Selection A</option>
+                          <option>Selection B</option>
+                        </NativeSelect>
+                      </div>
+                      <div className="space-y-4">
+                        <Typography variant="h4">Keyboard Shortcut</Typography>
+                        <div className="flex gap-2 items-center">
+                          <span>Press</span>
+                          <Kbd>⌘</Kbd>
+                          <Kbd>K</Kbd>
+                          <span>to search</span>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <Typography variant="h4">Spinner</Typography>
+                        <Spinner className="text-accent" />
                       </div>
                     </div>
+                  </div>
 
-                    <div className="space-y-4">
-                      <Typography variant="h3">Charts</Typography>
-                      <ChartBlock />
+                  <div className="space-y-4">
+                    <Typography variant="h3">Empty State</Typography>
+                    <Empty>
+                      <EmptyIcon>
+                        <Package className="h-6 w-6" />
+                      </EmptyIcon>
+                      <EmptyTitle>No projects found</EmptyTitle>
+                      <EmptyDescription>You haven't created any projects yet. Get started by creating a new one.</EmptyDescription>
+                      <Button>Create Project</Button>
+                    </Empty>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Data Table</Typography>
+                    <DataTable
+                      searchKey="name"
+                      columns={[
+                        { accessorKey: "name", header: "Name" },
+                        { accessorKey: "status", header: "Status" },
+                        { accessorKey: "amount", header: "Amount" },
+                      ]}
+                      data={[
+                        { name: "John Doe", status: "Active", amount: "$120" },
+                        { name: "Jane Smith", status: "Inactive", amount: "$80" },
+                      ]}
+                    />
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Dashboard (Complex)</Typography>
+                    <div className="border border-border rounded-lg overflow-hidden">
+                      <DashboardBlock />
                     </div>
+                  </div>
 
-                    <div className="space-y-4">
-                      <Typography variant="h3">Dashboard v1</Typography>
-                      <div className="border border-border rounded-lg overflow-hidden h-[600px]">
-                        <Dashboard01Block />
-                      </div>
-                    </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Directory (Sidebar + Menu)</Typography>
+                    <DirectoryBlock />
+                  </div>
 
-                    <div className="space-y-4">
-                      <Typography variant="h3">Dashboard v2</Typography>
-                      <div className="border border-border rounded-lg overflow-hidden h-[600px]">
-                        <Dashboard02Block />
-                      </div>
-                    </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Create Form (Zod + Validation)</Typography>
+                    <CreateBlock />
+                  </div>
 
-                    <div className="space-y-8">
-                       <Typography variant="h2" className="mb-8 border-b border-border pb-2">High-Level Composition (v4)</Typography>
-                       
-                       <div className="space-y-4">
-                          <Typography variant="h3">Fields & Groups</Typography>
-                          <FieldSet>
-                            <FieldLegend>Account Settings</FieldLegend>
-                            <FieldGroup>
-                               <Field orientation="horizontal">
-                                  <FieldLabel>Display Name</FieldLabel>
-                                  <Input placeholder="Evil Rabbit" />
-                               </Field>
-                               <Field orientation="horizontal">
-                                  <FieldLabel>Email Address</FieldLabel>
-                                  <FieldContent>
-                                    <Input placeholder="rabbit@evil.com" />
-                                    <FieldDescription>We'll never share your email.</FieldDescription>
-                                  </FieldContent>
-                               </Field>
-                               <FieldSeparator>Security</FieldSeparator>
-                               <Field orientation="horizontal">
-                                  <FieldLabel>Two-Factor Auth</FieldLabel>
-                                  <Switch />
-                               </Field>
-                            </FieldGroup>
-                          </FieldSet>
-                       </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Login Block</Typography>
+                    <LoginBlock />
+                  </div>
 
-                       <div className="space-y-4">
-                          <Typography variant="h3">Items & Lists</Typography>
-                          <ItemGroup className="max-w-md border border-border rounded-lg p-2 bg-surface">
-                             <Item variant="outline">
-                                <ItemMedia variant="icon"><Users /></ItemMedia>
-                                <ItemContent>
-                                   <ItemTitle>Team Members</ItemTitle>
-                                   <ItemDescription>Manage your team access.</ItemDescription>
-                                </ItemContent>
-                                <ItemActions><Button size="sm" variant="outline">View</Button></ItemActions>
-                             </Item>
-                             <ItemSeparator />
-                             <Item variant="default">
-                                <ItemMedia variant="icon"><Settings /></ItemMedia>
-                                <ItemContent>
-                                   <ItemTitle>General Settings</ItemTitle>
-                                   <ItemDescription>Global preferences and configurations.</ItemDescription>
-                                </ItemContent>
-                                <ItemActions><Button size="sm" variant="outline">Edit</Button></ItemActions>
-                             </Item>
-                          </ItemGroup>
-                       </div>
-                    </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Signup Block</Typography>
+                    <SignupBlock />
+                  </div>
 
-                    <div className="space-y-4">
-                      <Typography variant="h3">Charts (Full Collection)</Typography>
-                      <ChartCollectionBlock />
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h2">Additional UI Primitives</Typography>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                         <div className="space-y-4">
-                           <Typography variant="h4">Combobox</Typography>
-                           <Combobox 
-                             options={[
-                               { label: "Option 1", value: "1" },
-                               { label: "Option 2", value: "2" },
-                               { label: "Option 3", value: "3" },
-                             ]} 
-                           />
-                         </div>
-                         <div className="space-y-4">
-                           <Typography variant="h4">Date Picker</Typography>
-                           <DatePicker />
-                         </div>
-                         <div className="space-y-4">
-                           <Typography variant="h4">Input Group</Typography>
-                           <InputGroup>
-                             <InputGroupAddon>https://</InputGroupAddon>
-                             <Input placeholder="example.com" className="rounded-none" />
-                             <InputGroupAddon>.com</InputGroupAddon>
-                           </InputGroup>
-                         </div>
-                         <div className="space-y-4">
-                           <Typography variant="h4">Button Group</Typography>
-                           <ButtonGroup>
-                             <Button variant="outline">Day</Button>
-                             <Button variant="outline">Week</Button>
-                             <Button variant="outline">Month</Button>
-                           </ButtonGroup>
-                         </div>
-                         <div className="space-y-4">
-                           <Typography variant="h4">Native Select</Typography>
-                           <NativeSelect>
-                             <option>Selection A</option>
-                             <option>Selection B</option>
-                           </NativeSelect>
-                         </div>
-                         <div className="space-y-4">
-                           <Typography variant="h4">Keyboard Shortcut</Typography>
-                           <div className="flex gap-2 items-center">
-                             <span>Press</span>
-                             <Kbd>⌘</Kbd>
-                             <Kbd>K</Kbd>
-                             <span>to search</span>
-                           </div>
-                         </div>
-                         <div className="space-y-4">
-                           <Typography variant="h4">Spinner</Typography>
-                           <Spinner className="text-accent" />
-                         </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                       <Typography variant="h3">Empty State</Typography>
-                       <Empty>
-                         <EmptyIcon>
-                            <Package className="h-6 w-6" />
-                         </EmptyIcon>
-                         <EmptyTitle>No projects found</EmptyTitle>
-                         <EmptyDescription>You haven't created any projects yet. Get started by creating a new one.</EmptyDescription>
-                         <Button>Create Project</Button>
-                       </Empty>
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h3">Data Table</Typography>
-                      <DataTable 
-                        searchKey="name"
-                        columns={[
-                          { accessorKey: "name", header: "Name" },
-                          { accessorKey: "status", header: "Status" },
-                          { accessorKey: "amount", header: "Amount" },
-                        ]} 
-                        data={[
-                          { name: "John Doe", status: "Active", amount: "$120" },
-                          { name: "Jane Smith", status: "Inactive", amount: "$80" },
-                        ]} 
-                      />
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h3">Dashboard (Complex)</Typography>
-                      <div className="border border-border rounded-lg overflow-hidden">
-                        <DashboardBlock />
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h3">Directory (Sidebar + Menu)</Typography>
-                      <DirectoryBlock />
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h3">Create Form (Zod + Validation)</Typography>
-                      <CreateBlock />
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h3">Login Block</Typography>
-                      <LoginBlock />
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h3">Signup Block</Typography>
-                      <SignupBlock />
-                    </div>
-
-                    <div className="space-y-4">
-                      <Typography variant="h3">OTP Block</Typography>
-                      <OTPBlock />
-                    </div>
-                  </Grid>
-               </div>
-             </section>
+                  <div className="space-y-4">
+                    <Typography variant="h3">OTP Block</Typography>
+                    <OTPBlock />
+                  </div>
+                </Grid>
+              </div>
+            </section>
           </TabsContent>
         </Tabs>
 

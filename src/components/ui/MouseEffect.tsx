@@ -1,8 +1,8 @@
 import * as React from "react"
-import { motion, useMotionValue, useSpring } from "framer-motion"
+import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion"
 import { cn } from "../../lib/utils"
 
-export function MouseGlow({ children, className }: { children?: React.ReactNode, className?: string }) {
+export function MouseGlow({ className }: { className?: string }) {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -11,46 +11,56 @@ export function MouseGlow({ children, className }: { children?: React.ReactNode,
   const springY = useSpring(mouseY, { damping: 20, stiffness: 150 })
 
   function handleMouseMove(e: React.MouseEvent | MouseEvent) {
-    const target = (e.currentTarget || document.body) as HTMLElement
-    if (target === document.body) {
-       mouseX.set(e.clientX)
-       mouseY.set(e.clientY)
+    const isGlobal = className?.includes("fixed") || className?.includes("absolute")
+    if (isGlobal) {
+      mouseX.set(e.clientX)
+      mouseY.set(e.clientY)
     } else {
-      const { left, top } = target.getBoundingClientRect()
-      mouseX.set(e.clientX - left)
-      mouseY.set(e.clientY - top)
+      const target = e.currentTarget as HTMLElement
+      if (target && target.getBoundingClientRect) {
+        const { left, top } = target.getBoundingClientRect()
+        mouseX.set(e.clientX - left)
+        mouseY.set(e.clientY - top)
+      }
     }
   }
 
   React.useEffect(() => {
-    // Only bind to window if it's a global background effect
     const isGlobal = className?.includes("fixed") || className?.includes("absolute")
     if (!isGlobal) return
-    
+
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [className])
 
+  // Mask image: Radial gradient that is transparent at edges and opaque at center
+  // revealed at mouse position.
+  const maskImage = useMotionTemplate`radial-gradient(
+    600px circle at ${springX}px ${springY}px,
+    black,
+    transparent 80%
+  )`
 
   return (
-    <div
-      onMouseMove={handleMouseMove}
-      className={cn("group relative", className)}
+    <motion.div
+      className={cn(
+        "pointer-events-none fixed inset-0 z-0 hidden dark:block", // Hidden in light mode
+        className
+      )}
+      style={{
+        maskImage,
+        WebkitMaskImage: maskImage
+      }}
     >
-      <motion.div
-        className={cn(
-          "pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100",
-          (className?.includes("fixed") || className?.includes("absolute")) && "opacity-100"
-        )}
+      {/* Structural Dot Pattern */}
+      <div
+        className="absolute inset-0 h-full w-full"
         style={{
-          background: `radial-gradient(800px circle at ${springX}px ${springY}px, rgba(59, 130, 246, 0.15), transparent 60%)`,
-          zIndex: 1
+          backgroundImage: `radial-gradient(circle, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`, // Blue dots
+          backgroundSize: "24px 24px" // Dot spacing
         }}
       />
-      <div className="relative z-10 w-full h-full">
-        {children}
-      </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -64,6 +74,12 @@ export function MouseSpotlight({ children, className }: { children?: React.React
     mouseY.set(clientY - top)
   }
 
+  const bgImage = useMotionTemplate`radial-gradient(
+    250px circle at ${mouseX}px ${mouseY}px, 
+    rgba(255,255,255,0.06), 
+    transparent 80%
+  )`
+
   return (
     <div
       onMouseMove={handleMouseMove}
@@ -72,7 +88,7 @@ export function MouseSpotlight({ children, className }: { children?: React.React
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(250px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.06), transparent 80%)`,
+          background: bgImage,
         }}
       />
       {children}

@@ -119,19 +119,19 @@ export function Dashboard02Block() {
           </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-           <Card className="m-2 bg-sidebar-accent border-none shadow-none">
-              <CardHeader className="p-4 pt-0">
-                <CardTitle className="text-sm">Upgrade to Pro</CardTitle>
-                <CardDescription className="text-xs">
-                  Unlock all features and get unlimited access.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-4 pt-0">
-                <Button size="sm" className="w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
+          <Card className="m-2 border border-border bg-background/80 backdrop-blur-sm shadow-sm transition-all hover:shadow-md">
+            <CardHeader className="p-4 pt-0">
+              <CardTitle className="text-sm">Upgrade to Pro</CardTitle>
+              <CardDescription className="text-xs">
+                Unlock all features and get unlimited access.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-4 pt-0">
+              <Button size="sm" className="w-full shadow-sm">
+                Upgrade
+              </Button>
+            </CardContent>
+          </Card>
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>
@@ -190,64 +190,66 @@ export function Dashboard02Block() {
           </div>
         </header>
         <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
-              <Card variant="glass">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                   <CardTitle className="text-sm font-medium">Orders</CardTitle>
-                   <ShoppingCart className="h-4 w-4 text-text-secondary" />
-                </CardHeader>
-                <CardContent>
-                   <div className="text-2xl font-bold">1,234</div>
-                   <p className="text-xs text-green-500">+12% from last week</p>
-                </CardContent>
-              </Card>
-              <Card variant="glass">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                   <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-                   <CreditCard className="h-4 w-4 text-text-secondary" />
-                </CardHeader>
-                <CardContent>
-                   <div className="text-2xl font-bold">$12,234</div>
-                   <p className="text-xs text-text-secondary">+19% growth</p>
-                </CardContent>
-              </Card>
-            </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
             <Card variant="glass">
-              <CardHeader className="flex flex-row items-center">
-                <div className="grid gap-2">
-                  <CardTitle>Recent Orders</CardTitle>
-                  <CardDescription>Manage your store's recent orders.</CardDescription>
-                </div>
-                <Button asChild size="sm" className="ml-auto gap-1">
-                  <a href="#">
-                    View All
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                </Button>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Orders</CardTitle>
+                <ShoppingCart className="h-4 w-4 text-text-secondary" />
               </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">1,234</div>
+                <p className="text-xs text-green-500">+12% from last week</p>
+              </CardContent>
+            </Card>
+            <Card variant="glass">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Revenue</CardTitle>
+                <CreditCard className="h-4 w-4 text-text-secondary" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">$12,234</div>
+                <p className="text-xs text-text-secondary">+19% growth</p>
+              </CardContent>
+            </Card>
+          </div>
+          <Card variant="glass">
+            <CardHeader className="flex flex-row items-center">
+              <div className="grid gap-2">
+                <CardTitle>Recent Orders</CardTitle>
+                <CardDescription>Manage your store's recent orders.</CardDescription>
+              </div>
+              <Button asChild size="sm" className="ml-auto gap-1">
+                <a href="#">
+                  View All
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </CardHeader>
 
-             <CardContent>
-               <Table>
-                 <TableHeader>
-                   <TableRow>
-                     <TableHead>Customer</TableHead>
-                     <TableHead>Status</TableHead>
-                     <TableHead className="text-right">Amount</TableHead>
-                   </TableRow>
-                 </TableHeader>
-                 <TableBody>
-                   <TableRow>
-                     <TableCell>
-                       <div className="font-medium">Liam Johnson</div>
-                       <div className="text-sm text-text-secondary">liam@email.com</div>
-                     </TableCell>
-                     <TableCell><Badge variant="outline">Approved</Badge></TableCell>
-                     <TableCell className="text-right">$250.00</TableCell>
-                   </TableRow>
-                 </TableBody>
-               </Table>
-             </CardContent>
-           </Card>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Customer</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead className="text-right">Amount</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>
+                        <div className="font-medium">Liam Johnson</div>
+                        <div className="text-sm text-text-secondary">liam@email.com</div>
+                      </TableCell>
+                      <TableCell><Badge variant="outline">Approved</Badge></TableCell>
+                      <TableCell className="text-right">$250.00</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
         </main>
       </div>
     </SidebarProvider>

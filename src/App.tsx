@@ -315,12 +315,12 @@ function App() {
                 <div className="space-y-8">
                   <div className="flex items-center space-x-4">
                     <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
+                      <AvatarImage src="/nadia.png" />
+                      <AvatarFallback>NA</AvatarFallback>
                     </Avatar>
                     <div className="space-y-1">
-                      <Typography variant="h4">Shadcn</Typography>
-                      <Typography variant="muted">@shadcn</Typography>
+                      <Typography variant="h4">Nadia</Typography>
+                      <Typography variant="muted">@nadia</Typography>
                     </div>
                   </div>
 

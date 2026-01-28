@@ -54,6 +54,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/DropdownMenu"
 import { Avatar, AvatarFallback } from "../ui/Avatar"
+import { PromoCard } from "../ui/PromoCard"
 
 export function Dashboard02Block() {
   return (
@@ -119,19 +120,12 @@ export function Dashboard02Block() {
           </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-          <Card className="m-2 border border-border bg-background/80 backdrop-blur-sm shadow-sm transition-all hover:shadow-md">
-            <CardHeader className="p-4 pt-0">
-              <CardTitle className="text-sm">Upgrade to Pro</CardTitle>
-              <CardDescription className="text-xs">
-                Unlock all features and get unlimited access.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-4 pt-0">
-              <Button size="sm" className="w-full shadow-sm">
-                Upgrade
-              </Button>
-            </CardContent>
-          </Card>
+          <PromoCard
+            className="m-2"
+            title="Upgrade to Pro"
+            description="Unlock all features and get unlimited access."
+            actionLabel="Upgrade"
+          />
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>

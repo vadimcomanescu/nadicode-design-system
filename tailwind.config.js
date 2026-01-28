@@ -59,6 +59,13 @@ export default {
           border: 'rgb(var(--sidebar-border))',
           ring: 'rgb(var(--sidebar-ring))',
         },
+        chart: {
+          1: 'rgb(var(--chart-1))',
+          2: 'rgb(var(--chart-2))',
+          3: 'rgb(var(--chart-3))',
+          4: 'rgb(var(--chart-4))',
+          5: 'rgb(var(--chart-5))',
+        },
       },
       fontFamily: tokens.typography.fontFamily,
       fontSize: tokens.typography.sizes,

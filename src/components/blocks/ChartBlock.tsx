@@ -29,12 +29,12 @@ const chartData = [
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "hsl(var(--sidebar-primary))",
+    color: "rgb(var(--chart-1))",
     icon: Monitor,
   },
   mobile: {
     label: "Mobile",
-    color: "hsl(var(--sidebar-accent))",
+    color: "rgb(var(--chart-2))",
     icon: Smartphone,
   },
 } satisfies ChartConfig

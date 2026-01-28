@@ -68,19 +68,31 @@ const radialData = [
 const config = {
   desktop: {
     label: "Desktop",
-    color: "hsl(var(--sidebar-primary))",
+    color: "rgb(var(--chart-1))",
   },
   mobile: {
     label: "Mobile",
-    color: "hsl(var(--sidebar-accent))",
+    color: "rgb(var(--chart-2))",
   },
   chrome: {
     label: "Chrome",
-    color: "hsl(var(--sidebar-primary))",
+    color: "rgb(var(--chart-1))",
   },
   safari: {
     label: "Safari",
-    color: "hsl(var(--sidebar-accent))",
+    color: "rgb(var(--chart-2))",
+  },
+  firefox: {
+    label: "Firefox",
+    color: "rgb(var(--chart-3))",
+  },
+  edge: {
+    label: "Edge",
+    color: "rgb(var(--chart-4))",
+  },
+  other: {
+    label: "Other",
+    color: "rgb(var(--chart-5))",
   },
 } satisfies ChartConfig
 
@@ -94,14 +106,14 @@ export function ChartCollectionBlock() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={config} className="h-[250px] w-full">
-            <AreaChart 
+            <AreaChart
               data={areaData}
               margin={{ left: 12, right: 12, top: 12, bottom: 12 }}
             >
               <CartesianGrid vertical={false} />
-              <XAxis 
-                dataKey="month" 
-                tickLine={false} 
+              <XAxis
+                dataKey="month"
+                tickLine={false}
                 axisLine={false}
                 tickMargin={8}
                 tickFormatter={(value) => value.slice(0, 3)}
@@ -125,14 +137,14 @@ export function ChartCollectionBlock() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={config} className="h-[250px] w-full">
-            <BarChart 
+            <BarChart
               data={areaData}
               margin={{ left: 12, right: 12, top: 12, bottom: 12 }}
             >
               <CartesianGrid vertical={false} />
-              <XAxis 
-                dataKey="month" 
-                tickLine={false} 
+              <XAxis
+                dataKey="month"
+                tickLine={false}
                 axisLine={false}
                 tickMargin={8}
                 tickFormatter={(value) => value.slice(0, 3)}
@@ -150,14 +162,14 @@ export function ChartCollectionBlock() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={config} className="h-[250px] w-full">
-            <LineChart 
+            <LineChart
               data={areaData}
               margin={{ left: 12, right: 12, top: 12, bottom: 12 }}
             >
               <CartesianGrid vertical={false} />
-              <XAxis 
-                dataKey="month" 
-                tickLine={false} 
+              <XAxis
+                dataKey="month"
+                tickLine={false}
                 axisLine={false}
                 tickMargin={8}
                 tickFormatter={(value) => value.slice(0, 3)}
@@ -201,7 +213,7 @@ export function ChartCollectionBlock() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={config} className="h-[250px] w-full">
-            <RadarChart 
+            <RadarChart
               data={radarData}
               margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
             >

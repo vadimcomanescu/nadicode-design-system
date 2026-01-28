@@ -31,7 +31,7 @@ describe('App', () => {
     renderApp();
 
     // Check for main header
-    expect(screen.getByText('Design System 2026')).toBeInTheDocument();
+    expect(screen.getByText('Nadicode Seed Design')).toBeInTheDocument();
 
     // Check for section headers
     expect(screen.getByText('Typography')).toBeInTheDocument();

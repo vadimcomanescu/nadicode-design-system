@@ -136,22 +136,27 @@
     --chart-5: 236 72 153;
     /* Plasma Pink-500 */
 
-    body {
-      @apply bg-background text-text-primary antialiased selection:bg-accent selection:text-white min-h-screen transition-colors duration-300;
-      font-feature-settings: "rlig" 1, "calt" 1;
-      background-image:
-        radial-gradient(at 0% 0%, rgb(var(--color-accent) / 0.05) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgb(var(--color-accent) / 0.05) 0px, transparent 50%);
-    }
+  }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply font-semibold tracking-tight;
-    }
+  body {
+    @apply bg-background text-text-primary antialiased min-h-screen transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-image:
+      radial-gradient(at 0% 0%, rgb(var(--color-accent) / 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgb(var(--color-accent) / 0.05) 0px, transparent 50%);
+  }
+
+  ::selection {
+    @apply bg-accent text-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight;
   }
 }
 

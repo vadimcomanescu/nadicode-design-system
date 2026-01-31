@@ -6,12 +6,11 @@ import {
 } from "@stripe/react-stripe-js"
 import { Button } from "./Button"
 import { Alert, AlertDescription, AlertTitle } from "./Alert"
-import { Loader2, Check, ShieldCheck, CreditCard } from "lucide-react"
+import { Loader2, Check, ShieldCheck } from "lucide-react"
 import { useTheme } from "../../lib/ThemeProvider"
 import { Typography } from "./Typography"
 import { Input } from "./Input"
 import { Label } from "./Label"
-import { Separator } from "./Separator"
 
 interface CheckoutFormDemoProps {
     amount?: number
@@ -22,7 +21,7 @@ interface CheckoutFormDemoProps {
 
 export function CheckoutFormDemo({
     amount = 2000, // $20.00
-    currency = "usd",
+
     productName = "Seed Design Pro",
     features = [
         "Unlimited components",
@@ -80,7 +79,7 @@ export function CheckoutFormDemo({
             return
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: "card",
             card: cardElement,
         })

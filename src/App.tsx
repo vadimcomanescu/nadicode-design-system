@@ -64,6 +64,11 @@ import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldLeg
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "./components/ui/Item";
 
 import { MouseGlow } from "./components/ui/MouseEffect";
+import { StatsGeneric } from "./components/blocks/StatsGeneric";
+import { DataGridBlock } from "./components/blocks/DataGridBlock";
+import { AuthLayout } from "./components/blocks/AuthLayout";
+import { SettingsLayout } from "./components/blocks/SettingsLayout";
+import { DatePickerWithRange } from "./components/ui/DateRangePicker";
 
 function App() {
   const { toast } = useToast();
@@ -92,6 +97,7 @@ function App() {
             <TabsTrigger value="components">Components</TabsTrigger>
             <TabsTrigger value="blocks">Blocks</TabsTrigger>
             <TabsTrigger value="charts">Charts</TabsTrigger>
+
             <TabsTrigger value="pages">Pages</TabsTrigger>
           </TabsList>
 
@@ -222,6 +228,12 @@ function App() {
                         <InputOTPSlot index={5} />
                       </InputOTPGroup>
                     </InputOTP>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label>Date Range (New)</Label>
+                      <DatePickerWithRange />
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Label>Security Level</Label>
@@ -722,6 +734,16 @@ console.log(greet("World"));`}
                     <Typography variant="h3">OTP Block</Typography>
                     <OTPBlock />
                   </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Stats Generic (KPIs)</Typography>
+                    <StatsGeneric />
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Data Grid (Advanced)</Typography>
+                    <DataGridBlock />
+                  </div>
                 </Grid>
               </div>
             </section>
@@ -787,9 +809,28 @@ console.log(greet("World"));`}
                     <SignupPage />
                   </div>
                 </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Auth Layout (Split Glass)</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden h-[600px] relative">
+                    <div className="absolute inset-0 overflow-auto">
+                      <AuthLayout />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Settings Layout (Sidebar)</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden h-[600px] relative">
+                    <div className="absolute inset-0 overflow-auto">
+                      <SettingsLayout />
+                    </div>
+                  </div>
+                </div>
               </Grid>
             </section>
           </TabsContent>
+
         </Tabs>
 
       </Container>

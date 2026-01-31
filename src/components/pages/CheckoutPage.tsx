@@ -9,7 +9,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "../ui/Breadcrumb"
-import { AlertCircle, Terminal } from "lucide-react"
+import { Terminal } from "lucide-react"
 import { CheckoutFormDemo } from "../ui/CheckoutFormDemo"
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid

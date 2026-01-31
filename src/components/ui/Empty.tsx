@@ -8,7 +8,7 @@ const Empty = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-col items-center justify-center space-y-4 rounded-lg border border-dashed border-border bg-surface p-12 text-center",
+      "flex flex-col items-center justify-center space-y-4 rounded-lg border border-dashed border-border bg-surface/50 p-12 text-center shadow-sm animate-in fade-in-50",
       className
     )}
     {...props}
@@ -16,18 +16,19 @@ const Empty = React.forwardRef<
 ))
 Empty.displayName = "Empty"
 
-const EmptyIcon = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const EmptyIcon = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
   <div
+    ref={ref}
     className={cn(
-      "flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-text-secondary",
+      "flex h-12 w-12 items-center justify-center rounded-full bg-secondary/50 text-secondary-foreground ring-4 ring-secondary/10",
       className
     )}
     {...props}
   />
-)
+))
 EmptyIcon.displayName = "EmptyIcon"
 
 const EmptyTitle = React.forwardRef<
@@ -36,7 +37,7 @@ const EmptyTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("text-lg font-semibold text-text-primary", className)}
+    className={cn("text-lg font-semibold text-foreground tracking-tight", className)}
     {...props}
   />
 ))
@@ -48,7 +49,7 @@ const EmptyDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("max-w-sm text-sm text-text-tertiary", className)}
+    className={cn("max-w-sm text-sm text-muted-foreground leading-relaxed", className)}
     {...props}
   />
 ))

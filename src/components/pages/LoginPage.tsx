@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "../ui/Select"
 
-export function LoginBlock() {
+export function LoginPage() {
   return (
     <Card className="w-[350px] mx-auto text-text-primary">
       <CardHeader>

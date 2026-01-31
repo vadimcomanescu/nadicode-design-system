@@ -9,7 +9,7 @@ import {
 import { Input } from "../ui/Input"
 import { Label } from "../ui/Label"
 
-export function SignupBlock() {
+export function SignupPage() {
   return (
     <Card className="mx-auto max-w-sm text-text-primary">
       <CardHeader>

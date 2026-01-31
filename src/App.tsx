@@ -39,16 +39,18 @@ import { useState } from "react";
 import { CodeBlock } from "./components/blocks/CodeBlock";
 import { AudioVisualizer } from "./components/blocks/AudioVisualizer";
 import { ChatLayout } from "./components/blocks/ChatLayout";
-import { ChartBlock } from "./components/blocks/ChartBlock";
+import { ChartBlock } from "./components/charts/ChartBlock";
 import { DirectoryBlock } from "./components/blocks/DirectoryBlock";
 import { CreateBlock } from "./components/blocks/CreateBlock";
-import { LoginBlock } from "./components/blocks/LoginBlock";
-import { SignupBlock } from "./components/blocks/SignupBlock";
+import { LoginPage } from "./components/pages/LoginPage";
+import { SignupPage } from "./components/pages/SignupPage";
+import CheckoutPage from "./components/pages/CheckoutPage";
 import { OTPBlock } from "./components/blocks/OTPBlock";
 import { DashboardBlock } from "./components/blocks/DashboardBlock";
-import { Dashboard01Block } from "./components/blocks/Dashboard01Block";
-import { Dashboard02Block } from "./components/blocks/Dashboard02Block";
-import { ChartCollectionBlock } from "./components/blocks/ChartCollectionBlock";
+import { Dashboard01Page } from "./components/pages/Dashboard01Page";
+import { Dashboard02Page } from "./components/pages/Dashboard02Page";
+import { ChartCollectionBlock } from "./components/charts/ChartCollectionBlock";
+import { InteractiveAreaChart } from "./components/charts/InteractiveAreaChart";
 import { Combobox } from "./components/ui/Combobox";
 import { DatePicker } from "./components/ui/DatePicker";
 import { DataTable } from "./components/ui/DataTable";
@@ -88,10 +90,51 @@ function App() {
           <TabsList className="glass mb-8">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="components">Components</TabsTrigger>
-            <TabsTrigger value="layout">Layout</TabsTrigger>
+            <TabsTrigger value="blocks">Blocks</TabsTrigger>
+            <TabsTrigger value="charts">Charts</TabsTrigger>
+            <TabsTrigger value="pages">Pages</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-16">
+            <section>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Core Principles</Typography>
+              <Grid cols={3} gap="lg">
+                <Card variant="glass" className="h-full">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+                      Synthetic AI Aesthetics
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Typography variant="body" className="text-text-secondary">
+                      Designed for the next generation of intelligence. Interfaces that feel alive, using deep blacks, subtle glows, and glassmorphism to create a futuristic yet professional environment.
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <Card variant="glass" className="h-full">
+                  <CardHeader>
+                    <CardTitle>Ultra-Realistic Depth</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Typography variant="body" className="text-text-secondary">
+                      Moving beyond flat design. We use realistic shadows, borders, and lighting to create a tangible sense of depth and hierarchy, making the UI feel grounded and physical.
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <Card variant="glass" className="h-full">
+                  <CardHeader>
+                    <CardTitle>High-Contrast Accessibility</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Typography variant="body" className="text-text-secondary">
+                      Beauty does not compromise usability. We prioritize strict contrast ratios ensuring that our "dark mode" is legible, crisp, and accessible to everyone.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </section>
+
             <section>
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Typography</Typography>
               <div className="space-y-6">
@@ -446,7 +489,7 @@ function App() {
             </section>
           </TabsContent>
 
-          <TabsContent value="layout">
+          <TabsContent value="blocks">
             <section className="space-y-16">
               <div>
                 <Typography variant="h2" className="mb-8 border-b border-border pb-2">Blocks & Layouts</Typography>
@@ -509,24 +552,7 @@ console.log(greet("World"));`}
                     </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <Typography variant="h3">Charts</Typography>
-                    <ChartBlock />
-                  </div>
 
-                  <div className="space-y-4">
-                    <Typography variant="h3">Dashboard v1</Typography>
-                    <div className="border border-border rounded-lg overflow-hidden h-[600px]">
-                      <Dashboard01Block />
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <Typography variant="h3">Dashboard v2</Typography>
-                    <div className="border border-border rounded-lg overflow-hidden h-[600px]">
-                      <Dashboard02Block />
-                    </div>
-                  </div>
 
                   <div className="space-y-8">
                     <Typography variant="h2" className="mb-8 border-b border-border pb-2">High-Level Composition (v4)</Typography>
@@ -578,11 +604,6 @@ console.log(greet("World"));`}
                         </Item>
                       </ItemGroup>
                     </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <Typography variant="h3">Charts (Full Collection)</Typography>
-                    <ChartCollectionBlock />
                   </div>
 
                   <div className="space-y-4">
@@ -686,15 +707,7 @@ console.log(greet("World"));`}
                     <CreateBlock />
                   </div>
 
-                  <div className="space-y-4">
-                    <Typography variant="h3">Login Block</Typography>
-                    <LoginBlock />
-                  </div>
 
-                  <div className="space-y-4">
-                    <Typography variant="h3">Signup Block</Typography>
-                    <SignupBlock />
-                  </div>
 
                   <div className="space-y-4">
                     <Typography variant="h3">OTP Block</Typography>
@@ -702,6 +715,70 @@ console.log(greet("World"));`}
                   </div>
                 </Grid>
               </div>
+            </section>
+          </TabsContent>
+
+          <TabsContent value="charts">
+            <section className="space-y-16">
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Data Visualization & Charts</Typography>
+              <Grid cols={1} gap="xl">
+                <div className="space-y-4">
+                  <Typography variant="h3">Single Chart</Typography>
+                  <ChartBlock />
+                </div>
+                <div className="space-y-4">
+                  <Typography variant="h3">Interactive Area Chart</Typography>
+                  <InteractiveAreaChart />
+                </div>
+                <div className="space-y-4">
+                  <Typography variant="h3">Charts Collection</Typography>
+                  <ChartCollectionBlock />
+                </div>
+              </Grid>
+            </section>
+          </TabsContent>
+
+          <TabsContent value="pages">
+            <section className="space-y-16">
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Example Pages</Typography>
+              <Grid cols={1} gap="xl">
+                <div className="space-y-4">
+                  <Typography variant="h3">Dashboard Analytics (v1)</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                    <Dashboard01Page />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Dashboard Overview (v2)</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                    <Dashboard02Page />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Checkout Page (Stripe)</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden h-[600px] relative">
+                    <div className="absolute inset-0 overflow-auto">
+                      <CheckoutPage />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Login Page</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden">
+                    <LoginPage />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Signup Page</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden">
+                    <SignupPage />
+                  </div>
+                </div>
+              </Grid>
             </section>
           </TabsContent>
         </Tabs>

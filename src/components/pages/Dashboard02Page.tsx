@@ -56,7 +56,7 @@ import {
 import { Avatar, AvatarFallback } from "../ui/Avatar"
 import { PromoCard } from "../ui/PromoCard"
 
-export function Dashboard02Block() {
+export function Dashboard02Page() {
   return (
     <SidebarProvider className="h-full">
       <Sidebar collapsible="icon" className="border-r border-border h-full">

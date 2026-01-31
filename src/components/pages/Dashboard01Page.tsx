@@ -39,7 +39,7 @@ import {
 import { Badge } from "../ui/Badge"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
 
-export function Dashboard01Block() {
+export function Dashboard01Page() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background text-text-primary">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b border-border bg-background px-4 md:px-6 z-10">

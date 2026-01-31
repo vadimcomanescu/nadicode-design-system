@@ -162,6 +162,15 @@ function App() {
                 <ColorCard name="Accent" hex={tokens.colors.accent.DEFAULT} className="bg-accent text-white" />
                 <ColorCard name="Destructive" hex={tokens.colors.destructive.DEFAULT} className="bg-destructive text-white" />
               </Grid>
+
+              <Typography variant="h3" className="mt-8 mb-4">Data Visualization Palette</Typography>
+              <Grid cols={5} gap="md">
+                <ColorCard name="Chart 1" hex="#4f46e5" className="bg-[rgb(var(--chart-1))]" />
+                <ColorCard name="Chart 2" hex="#0891b2" className="bg-[rgb(var(--chart-2))]" />
+                <ColorCard name="Chart 3" hex="#7c3aed" className="bg-[rgb(var(--chart-3))]" />
+                <ColorCard name="Chart 4" hex="#65a30d" className="bg-[rgb(var(--chart-4))]" />
+                <ColorCard name="Chart 5" hex="#db2777" className="bg-[rgb(var(--chart-5))]" />
+              </Grid>
             </section>
           </TabsContent>
 

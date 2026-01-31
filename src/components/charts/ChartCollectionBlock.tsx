@@ -40,12 +40,12 @@ const areaData = [
   { month: "Jun", desktop: 214, mobile: 140 },
 ]
 
-const pieData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+const chartData = [
+  { browser: "chrome", visitors: 275, fill: "rgb(var(--chart-1))" },
+  { browser: "safari", visitors: 200, fill: "rgb(var(--chart-2))" },
+  { browser: "firefox", visitors: 187, fill: "rgb(var(--chart-3))" },
+  { browser: "edge", visitors: 173, fill: "rgb(var(--chart-4))" },
+  { browser: "other", visitors: 90, fill: "rgb(var(--chart-5))" },
 ]
 
 const radarData = [
@@ -58,11 +58,11 @@ const radarData = [
 ]
 
 const radialData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+  { browser: "chrome", visitors: 275, fill: "rgb(var(--chart-1))" },
+  { browser: "safari", visitors: 200, fill: "rgb(var(--chart-2))" },
+  { browser: "firefox", visitors: 187, fill: "rgb(var(--chart-3))" },
+  { browser: "edge", visitors: 173, fill: "rgb(var(--chart-4))" },
+  { browser: "other", visitors: 90, fill: "rgb(var(--chart-5))" },
 ]
 
 const config = {
@@ -74,26 +74,11 @@ const config = {
     label: "Mobile",
     color: "rgb(var(--chart-2))",
   },
-  chrome: {
-    label: "Chrome",
-    color: "rgb(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "rgb(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "rgb(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "rgb(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "rgb(var(--chart-5))",
-  },
+  chrome: { label: "Chrome", color: "rgb(var(--chart-1))" },
+  safari: { label: "Safari", color: "rgb(var(--chart-2))" },
+  firefox: { label: "Firefox", color: "rgb(var(--chart-3))" },
+  edge: { label: "Edge", color: "rgb(var(--chart-4))" },
+  other: { label: "Other", color: "rgb(var(--chart-5))" },
 } satisfies ChartConfig
 
 export function ChartCollectionBlock() {
@@ -122,9 +107,9 @@ export function ChartCollectionBlock() {
               <Area
                 dataKey="desktop"
                 type="natural"
-                fill="var(--color-desktop)"
+                fill="rgb(var(--chart-1))"
                 fillOpacity={0.4}
-                stroke="var(--color-desktop)"
+                stroke="rgb(var(--chart-1))"
               />
             </AreaChart>
           </ChartContainer>
@@ -150,7 +135,7 @@ export function ChartCollectionBlock() {
                 tickFormatter={(value) => value.slice(0, 3)}
               />
               <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+              <Bar dataKey="desktop" fill="rgb(var(--chart-1))" radius={4} />
             </BarChart>
           </ChartContainer>
         </CardContent>
@@ -178,7 +163,7 @@ export function ChartCollectionBlock() {
               <Line
                 dataKey="desktop"
                 type="monotone"
-                stroke="var(--color-desktop)"
+                stroke="rgb(var(--chart-1))"
                 strokeWidth={2}
                 dot={false}
               />
@@ -192,15 +177,14 @@ export function ChartCollectionBlock() {
           <CardTitle>Pie Chart</CardTitle>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={config} className="h-[250px] w-full">
+          <ChartContainer config={config} className="mx-auto aspect-square max-h-[250px]">
             <PieChart>
-              <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
               <Pie
-                data={pieData}
+                data={chartData}
                 dataKey="visitors"
                 nameKey="browser"
                 innerRadius={60}
-                strokeWidth={5}
               />
             </PieChart>
           </ChartContainer>
@@ -222,7 +206,7 @@ export function ChartCollectionBlock() {
               <PolarAngleAxis dataKey="month" />
               <Radar
                 dataKey="desktop"
-                fill="var(--color-desktop)"
+                fill="rgb(var(--chart-1))"
                 fillOpacity={0.6}
               />
             </RadarChart>

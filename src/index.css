@@ -123,6 +123,8 @@
     --sidebar-border: 39 39 42;
     --sidebar-ring: 99 102 241;
     /* Electric Indigo */
+    --sidebar-width: 16rem;
+    --sidebar-width-icon: 3rem;
 
     /* Charts - Synthetic AI Palette (Dark Mode - Neon Glow) */
     --chart-1: 99 102 241;

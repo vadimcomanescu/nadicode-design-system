@@ -47,7 +47,7 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "flex justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-text-secondary [&_.recharts-cartesian-grid_line]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-secondary [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-secondary [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none w-full h-[300px]",
+          "flex justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-text-secondary [&_.recharts-cartesian-grid_line]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border/50 [&_.recharts-radial-bar-background-sector]:fill-secondary [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-secondary [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border/50 [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none w-full h-[300px]",
           className
         )}
         {...props}
@@ -79,14 +79,14 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
             ([theme, prefix]) => `
 ${prefix} [data-chart=${id}] {
 ${colorConfig
-  .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
-  })
-  .filter(Boolean)
-  .join("\n")}
+                .map(([key, itemConfig]) => {
+                  const color =
+                    itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
+                    itemConfig.color
+                  return color ? `  --color-${key}: ${color};` : null
+                })
+                .filter(Boolean)
+                .join("\n")}
 }
 `
           )
@@ -317,8 +317,8 @@ function getPayloadConfigFromPayload(
 
   const payloadPayload =
     "payload" in payload &&
-    typeof (payload as any).payload === "object" &&
-    (payload as any).payload !== null
+      typeof (payload as any).payload === "object" &&
+      (payload as any).payload !== null
       ? (payload as any).payload
       : undefined
 

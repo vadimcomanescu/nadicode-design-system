@@ -99,6 +99,7 @@ function App() {
             <TabsTrigger value="charts">Charts</TabsTrigger>
 
             <TabsTrigger value="pages">Pages</TabsTrigger>
+            <TabsTrigger value="settings">Settings (New)</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-16">
@@ -818,19 +819,13 @@ console.log(greet("World"));`}
                     </div>
                   </div>
                 </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">Settings Layout (Sidebar)</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden h-[600px] relative">
-                    <div className="absolute inset-0 overflow-auto">
-                      <SettingsLayout />
-                    </div>
-                  </div>
-                </div>
               </Grid>
             </section>
           </TabsContent>
 
+          <TabsContent value="settings">
+            <SettingsLayout />
+          </TabsContent>
         </Tabs>
 
       </Container>

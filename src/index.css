@@ -176,13 +176,13 @@
     /* Stronger glass for the "floating" box effect */
     @apply bg-surface/30 backdrop-blur-3xl border border-white/10;
 
-    /* Multi-layered physics-based shadows */
+    /* Multi-layered physics-based shadows - Slightly Softened */
     box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.4),
-      0 10px 15px -3px rgba(0, 0, 0, 0.5),
-      0 20px 25px -5px rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 10px 15px -3px rgba(0, 0, 0, 0.4),
+      0 20px 25px -5px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 
     background-image: linear-gradient(to bottom right,
         rgba(255, 255, 255, 0.05),
@@ -193,18 +193,18 @@
     /* "Levitation" effect - Distinct separation from background */
     @apply bg-surface/40 backdrop-blur-[40px] border border-white/20;
 
-    /* Heavy physical shadow stack */
+    /* Heavy physical shadow stack - Slightly Softened */
     box-shadow:
-      0 10px 20px rgba(0, 0, 0, 0.6),
-      0 30px 60px rgba(0, 0, 0, 0.8),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      0 10px 20px rgba(0, 0, 0, 0.5),
+      0 30px 60px rgba(0, 0, 0, 0.7),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15);
 
-    /* Subtle neon accent rim to enhance "glow" feel */
+    /* Subtle neon accent rim to enhance "glow" feel - Softened */
     &::after {
       content: '';
       @apply absolute inset-0 rounded-[inherit] pointer-events-none;
-      box-shadow: inset 0 0 10px 0 rgba(99, 102, 241, 0.15);
+      box-shadow: inset 0 0 10px 0 rgba(99, 102, 241, 0.1);
     }
   }
 

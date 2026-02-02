@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background text-text-primary py-12 relative overflow-hidden">
-      <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-40" />
+      <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-70" />
       <Container className="relative z-10">
         <header className="mb-12 flex items-start justify-between">
           <div>
@@ -102,44 +102,44 @@ function App() {
             <TabsTrigger value="settings">Settings (New)</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-16">
+          <TabsContent value="overview" className="mt-8 space-y-12">
             <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Core Principles</Typography>
-              <Grid cols={3} gap="lg">
+              <Typography variant="h2" className="mb-6 border-b border-border pb-2">Core Principles</Typography>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card variant="glass" className="h-full">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+                    <CardTitle className="flex items-center gap-2 text-primary">
+                      <div className="h-1.5 w-1.5 rounded-full bg-accent" />
                       Synthetic AI Aesthetics
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <Typography variant="body" className="text-text-secondary">
+                    <Typography variant="body" className="text-text-secondary text-base leading-relaxed">
                       Designed for the next generation of intelligence. Interfaces that feel alive, using deep blacks, subtle glows, and glassmorphism to create a futuristic yet professional environment.
                     </Typography>
                   </CardContent>
                 </Card>
                 <Card variant="glass" className="h-full">
                   <CardHeader>
-                    <CardTitle>Ultra-Realistic Depth</CardTitle>
+                    <CardTitle className="text-primary">Ultra-Realistic Depth</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <Typography variant="body" className="text-text-secondary">
+                    <Typography variant="body" className="text-text-secondary text-base leading-relaxed">
                       Moving beyond flat design. We use realistic shadows, borders, and lighting to create a tangible sense of depth and hierarchy, making the UI feel grounded and physical.
                     </Typography>
                   </CardContent>
                 </Card>
                 <Card variant="glass" className="h-full">
                   <CardHeader>
-                    <CardTitle>High-Contrast Accessibility</CardTitle>
+                    <CardTitle className="text-primary">High-Contrast Accessibility</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <Typography variant="body" className="text-text-secondary">
+                    <Typography variant="body" className="text-text-secondary text-base leading-relaxed">
                       Beauty does not compromise usability. We prioritize strict contrast ratios ensuring that our "dark mode" is legible, crisp, and accessible to everyone.
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </div>
             </section>
 
             <section>
@@ -773,53 +773,49 @@ console.log(greet("World"));`}
           <TabsContent value="pages">
             <section className="space-y-16">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Example Pages</Typography>
-              <Grid cols={1} gap="xl">
+              <div className="grid gap-12">
                 <div className="space-y-4">
                   <Typography variant="h3">Dashboard Analytics (v1)</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border">
                     <Dashboard01Page />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Dashboard Overview (v2)</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border">
                     <Dashboard02Page />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Checkout Page (Stripe)</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden h-[600px] relative">
-                    <div className="absolute inset-0 overflow-auto">
-                      <CheckoutPage />
-                    </div>
+                  <div className="h-[600px] overflow-auto rounded-lg shadow-2xl ring-1 ring-border">
+                    <CheckoutPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Login Page</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden">
                     <LoginPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Signup Page</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden">
                     <SignupPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Auth Layout (Split Glass)</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden h-[600px] relative">
-                    <div className="absolute inset-0 overflow-auto">
-                      <AuthLayout />
-                    </div>
+                  <div className="h-[600px] overflow-auto rounded-lg shadow-2xl ring-1 ring-border">
+                    <AuthLayout />
                   </div>
                 </div>
-              </Grid>
+              </div>
             </section>
           </TabsContent>
 

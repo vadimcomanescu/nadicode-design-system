@@ -20,16 +20,12 @@ export function PromoCard({
     return (
         <Card
             className={cn(
-                "relative overflow-hidden border-border bg-background/50 backdrop-blur-sm transition-all hover:shadow-md",
-                "before:absolute before:inset-0 before:-z-10 before:rounded-xl before:p-[1px]",
-                "before:bg-gradient-to-b before:from-primary/20 before:to-transparent",
-                "dark:before:from-primary/10 dark:before:to-transparent",
+                "relative overflow-hidden border border-border/50 shadow-sm bg-background/50 backdrop-blur-sm",
                 className
             )}
             {...props}
         >
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-50" />
-            <CardHeader className="p-4 pt-4 relative">
+            <CardHeader className="p-4 pt-4">
                 <CardTitle className="text-sm font-semibold tracking-tight text-foreground">
                     {title}
                 </CardTitle>
@@ -37,7 +33,7 @@ export function PromoCard({
                     {description}
                 </CardDescription>
             </CardHeader>
-            <CardContent className="p-4 pt-0 relative">
+            <CardContent className="p-4 pt-0">
                 <Button
                     size="sm"
                     className="w-full shadow-sm bg-primary text-primary-foreground hover:bg-primary/90"

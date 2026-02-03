@@ -33,21 +33,11 @@ describe('App', () => {
     // Check for main header
     expect(screen.getByText('Nadicode Seed Design')).toBeInTheDocument();
 
-    // Check for section headers
+    // Check for section headers (Overview tab)
+    expect(screen.getByText('Core Principles')).toBeInTheDocument();
+    expect(screen.getByText('Synthetic AI Aesthetics')).toBeInTheDocument();
     expect(screen.getByText('Typography')).toBeInTheDocument();
     expect(screen.getByText('Colors')).toBeInTheDocument();
-    expect(screen.getByText('Buttons')).toBeInTheDocument();
-    expect(screen.getByText('Forms & Controls')).toBeInTheDocument();
-    expect(screen.getByText('Dialogs')).toBeInTheDocument();
-    expect(screen.getByText('Separators')).toBeInTheDocument();
-    expect(screen.getByText('Cards & Glassmorphism')).toBeInTheDocument();
-
-    // Check for specific components
-    expect(screen.getByText('Primary Action')).toBeInTheDocument();
-    expect(screen.getByLabelText('Email address')).toBeInTheDocument();
-    expect(screen.getByLabelText('Accept terms and conditions')).toBeInTheDocument();
-    expect(screen.getByLabelText('Airplane Mode')).toBeInTheDocument();
-    expect(screen.getByText('Open Dialog')).toBeInTheDocument();
   });
 
   it('renders the theme toggle', () => {

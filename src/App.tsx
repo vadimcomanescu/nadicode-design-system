@@ -773,7 +773,7 @@ console.log(greet("World"));`}
           <TabsContent value="pages">
             <section className="space-y-16">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Example Pages</Typography>
-              <div className="grid gap-12">
+              <div className="grid gap-32">
                 <div className="space-y-4">
                   <Typography variant="h3">Dashboard Analytics (v1)</Typography>
                   <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border">
@@ -797,21 +797,21 @@ console.log(greet("World"));`}
 
                 <div className="space-y-4">
                   <Typography variant="h3">Login Page</Typography>
-                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-zinc-950/50">
                     <LoginPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Signup Page</Typography>
-                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-zinc-950/50">
                     <SignupPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Auth Layout (Split Glass)</Typography>
-                  <div className="h-[600px] overflow-auto rounded-lg shadow-2xl ring-1 ring-border">
+                  <div className="min-h-[800px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-zinc-950/50">
                     <AuthLayout />
                   </div>
                 </div>

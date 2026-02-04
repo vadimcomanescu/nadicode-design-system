@@ -34,7 +34,7 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-lg border border-border bg-surface",
+        "relative overflow-hidden rounded-lg glass-card",
         className
       )}
       {...props}

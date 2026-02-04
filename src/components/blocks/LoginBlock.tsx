@@ -50,7 +50,7 @@ export function LoginBlock({
                 {showSocial && (
                     <>
                         <div className="grid gap-4">
-                            <Button variant="outline" className="w-full flex items-center justify-center gap-2 border-border/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors py-6">
+                            <Button variant="outline" className="w-full flex items-center justify-center gap-2 border-border/50 transition-colors py-6">
                                 <GoogleIcon className="h-5 w-5" />
                                 <span className="text-sm font-medium">Continue with Google</span>
                             </Button>

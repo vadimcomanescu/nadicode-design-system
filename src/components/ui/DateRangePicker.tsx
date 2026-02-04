@@ -30,7 +30,7 @@ export function DatePickerWithRange({
                         id="date"
                         variant={"glass"} // Using our glass variant
                         className={cn(
-                            "w-[300px] justify-start text-left font-normal bg-background/50 backdrop-blur-md border-white/10 hover:bg-background/70 hover:border-white/20 transition-all",
+                            "w-[300px] justify-start text-left font-normal transition-all",
                             !date && "text-muted-foreground"
                         )}
                     >

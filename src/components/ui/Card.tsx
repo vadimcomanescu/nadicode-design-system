@@ -2,22 +2,33 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'glass' | 'outline';
+  variant?: 'default' | 'glass' | 'glass-atmospheric' | 'outline';
+  interactive?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'default', ...props }, ref) => {
+  ({ className, variant = 'default', interactive = false, ...props }, ref) => {
 
     const variants = {
       default: "bg-surface border border-border text-text-primary shadow-lg",
       glass: "glass-card text-text-primary",
+      "glass-atmospheric": "glass-atmospheric text-text-primary",
       outline: "bg-transparent border border-border text-text-primary",
     };
+
+    const interactiveStyles = interactive
+      ? "transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1"
+      : "";
 
     return (
       <div
         ref={ref}
-        className={cn("group relative rounded-lg p-6 overflow-hidden", variants[variant], className)}
+        className={cn(
+          "group relative rounded-lg p-6 overflow-hidden",
+          variants[variant],
+          interactiveStyles,
+          className
+        )}
         {...props}
       >
         <div className="relative z-20">

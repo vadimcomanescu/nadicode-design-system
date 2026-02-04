@@ -1,9 +1,5 @@
-import { LoginBlock } from "../blocks/LoginBlock"
+import { AuthLayout } from "../blocks/AuthLayout"
 
 export function LoginPage() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <LoginBlock />
-    </div>
-  )
+  return <AuthLayout mode="login" />
 }

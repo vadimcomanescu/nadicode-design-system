@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
 @config "../tailwind.config.js";
 
 @layer base {
@@ -208,6 +210,18 @@
     }
   }
 
+  .glass-atmospheric {
+    /* "Immersive" transparency for marketing blocks */
+    @apply bg-background/20 backdrop-blur-md border border-border/50 transition-colors duration-300;
+
+    /* Subtle shadow to separate from dynamic backgrounds */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-atmospheric:hover {
+    @apply bg-background/30;
+  }
+
   .glass-floating:hover {
     transform: translateY(-4px) scale(1.005);
     box-shadow:
@@ -243,4 +257,10 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-text-tertiary;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
 }

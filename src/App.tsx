@@ -50,6 +50,18 @@ import { DashboardBlock } from "./components/blocks/DashboardBlock";
 import { Dashboard01Page } from "./components/pages/Dashboard01Page";
 import { Dashboard02Page } from "./components/pages/Dashboard02Page";
 import { ChartCollectionBlock } from "./components/charts/ChartCollectionBlock";
+import { HeroCentered, HeroSplit } from "./components/blocks/HeroBlock";
+import { LogoCloud, Testimonials } from "./components/blocks/SocialProofBlock";
+import { FeatureGrid, FeatureList } from "./components/blocks/FeatureBlock";
+import { PricingTable } from "./components/blocks/PricingBlock";
+import { Footer } from "./components/blocks/FooterBlock";
+import Feature1 from "./components/features-1";
+import Feature2 from "./components/features-2";
+import Feature3 from "./components/features-3";
+import Integrations1 from "./components/integrations-1";
+import Stats from "./components/stats";
+import Team from "./components/team";
+import CallToAction from "./components/call-to-action";
 import { InteractiveAreaChart } from "./components/charts/InteractiveAreaChart";
 import { Combobox } from "./components/ui/Combobox";
 import { DatePicker } from "./components/ui/DatePicker";
@@ -67,8 +79,16 @@ import { MouseGlow } from "./components/ui/MouseEffect";
 import { StatsGeneric } from "./components/blocks/StatsGeneric";
 import { DataGridBlock } from "./components/blocks/DataGridBlock";
 import { AuthLayout } from "./components/blocks/AuthLayout";
+import { AnimatedBackground } from "./components/ui/AnimatedBackground";
 import { SettingsLayout } from "./components/blocks/SettingsLayout";
 import { DatePickerWithRange } from "./components/ui/DateRangePicker";
+import { UsageDonut } from "./components/charts/UsageDonut";
+import { VerificationPage } from "./components/pages/VerificationPage";
+// Lint fix: correct import style for ProfilePage/TeamPage
+import { ProfilePage } from "./components/pages/settings/ProfilePage";
+import { TeamPage } from "./components/pages/settings/TeamPage";
+import { HeroHeader } from "./components/header";
+import SimpleLoginForm from "./components/login"; // Ensure nothing is hidden
 
 function App() {
   const { toast } = useToast();
@@ -82,7 +102,7 @@ function App() {
       <Container className="relative z-10">
         <header className="mb-12 flex items-start justify-between">
           <div>
-            <Typography variant="h1" className="mb-4">Nadicode Seed Design</Typography>
+            <Typography variant="h1" className="mb-4">Nadicode System</Typography>
             <Typography variant="body" className="text-xl text-text-secondary max-w-2xl">
               A comprehensive design system for AI-integrated web applications.
               Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
@@ -94,12 +114,11 @@ function App() {
         <Tabs defaultValue="overview" className="space-y-8">
           <TabsList className="glass mb-8">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="components">Components</TabsTrigger>
-            <TabsTrigger value="blocks">Blocks</TabsTrigger>
-            <TabsTrigger value="charts">Charts</TabsTrigger>
-
+            <TabsTrigger value="primitives">Primitives</TabsTrigger>
+            <TabsTrigger value="website">Website</TabsTrigger>
+            <TabsTrigger value="application">Application</TabsTrigger>
+            <TabsTrigger value="charts">Data Viz</TabsTrigger>
             <TabsTrigger value="pages">Pages</TabsTrigger>
-            <TabsTrigger value="settings">Settings (New)</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="mt-8 space-y-12">
@@ -181,7 +200,7 @@ function App() {
             </section>
           </TabsContent>
 
-          <TabsContent value="components" className="space-y-16">
+          <TabsContent value="primitives" className="space-y-16">
             {/* BUTTONS & BADGES */}
             <section>
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Actions & Indicators</Typography>
@@ -511,10 +530,10 @@ function App() {
             </section>
           </TabsContent>
 
-          <TabsContent value="blocks">
+          <TabsContent value="application">
             <section className="space-y-16">
               <div>
-                <Typography variant="h2" className="mb-8 border-b border-border pb-2">Blocks & Layouts</Typography>
+                <Typography variant="h2" className="mb-8 border-b border-border pb-2">Application Components</Typography>
                 <Grid cols={1} gap="xl">
                   <div className="space-y-4">
                     <Typography variant="h3">Chat Interface</Typography>
@@ -745,6 +764,12 @@ console.log(greet("World"));`}
                     <Typography variant="h3">Data Grid (Advanced)</Typography>
                     <DataGridBlock />
                   </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Settings Layout</Typography>
+                    <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                      <SettingsLayout />
+                    </div>
+                  </div>
                 </Grid>
               </div>
             </section>
@@ -754,6 +779,10 @@ console.log(greet("World"));`}
             <section className="space-y-16">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Data Visualization & Charts</Typography>
               <Grid cols={1} gap="xl">
+                <div className="space-y-4">
+                  <Typography variant="h3">Usage Donut</Typography>
+                  <UsageDonut />
+                </div>
                 <div className="space-y-4">
                   <Typography variant="h3">Single Chart</Typography>
                   <ChartBlock />
@@ -776,14 +805,35 @@ console.log(greet("World"));`}
               <div className="grid gap-32">
                 <div className="space-y-4">
                   <Typography variant="h3">Dashboard Analytics (v1)</Typography>
-                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border">
+                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
                     <Dashboard01Page />
                   </div>
                 </div>
 
                 <div className="space-y-4">
+                  <Typography variant="h3">Verification Page</Typography>
+                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background">
+                    <VerificationPage />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Profile Settings</Typography>
+                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background">
+                    <ProfilePage />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Team Settings</Typography>
+                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background">
+                    <TeamPage />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
                   <Typography variant="h3">Dashboard Overview (v2)</Typography>
-                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border">
+                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
                     <Dashboard02Page />
                   </div>
                 </div>
@@ -810,6 +860,18 @@ console.log(greet("World"));`}
                 </div>
 
                 <div className="space-y-4">
+                  <Typography variant="h3">Simple Login Form (Alternative)</Typography>
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center relative">
+                    <div className="absolute inset-0 z-0">
+                      <AnimatedBackground />
+                    </div>
+                    <div className="relative z-10 w-full">
+                      <SimpleLoginForm />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
                   <Typography variant="h3">Auth Layout (Split Glass)</Typography>
                   <div className="min-h-[800px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-zinc-950/50">
                     <AuthLayout />
@@ -819,9 +881,125 @@ console.log(greet("World"));`}
             </section>
           </TabsContent>
 
-          <TabsContent value="settings">
-            <SettingsLayout />
+          <TabsContent value="website">
+            <section className="space-y-16">
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Marketing & Website Blocks</Typography>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Marketing Header</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative h-[100px] isolate [transform:translateZ(0)]">
+                  <HeroHeader />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Hero (Centered)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <HeroCentered />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Hero (Split)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <HeroSplit />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Logo Cloud</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <LogoCloud />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Testimonials (Masonry)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Testimonials />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Feature Grid</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <FeatureGrid />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Feature List (Split)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <FeatureList />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Feature (Bento Grid)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Feature1 />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Feature (Cards)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Feature2 />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Feature (List)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Feature3 />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Integrations</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Integrations1 />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Statistics / KPI</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Stats />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Team Members</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Team />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Pricing Table</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <PricingTable />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Call to Action</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <CallToAction />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Typography variant="h3">Footer (Multi-Column)</Typography>
+                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                  <Footer />
+                </div>
+              </div>
+            </section>
           </TabsContent>
+
+
         </Tabs>
 
       </Container>

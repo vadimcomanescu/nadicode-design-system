@@ -38,7 +38,7 @@ const data = [
 
 export function BarChart() {
     return (
-        <Card variant="glass" className="w-[500px]">
+        <Card variant="glass" className="w-full">
             <CardHeader>
                 <CardTitle>Token Usage</CardTitle>
                 <CardDescription>Monthly inference token consumption</CardDescription>
@@ -47,7 +47,7 @@ export function BarChart() {
                 <div className="h-[240px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <RechartsBarChart data={data}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.1)" />
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" opacity={0.5} />
                             <XAxis
                                 dataKey="name"
                                 stroke="var(--color-text-secondary)"
@@ -63,12 +63,12 @@ export function BarChart() {
                                 tickFormatter={(value) => `$${value}`}
                             />
                             <Tooltip
-                                cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                                cursor={{ fill: 'var(--color-muted)', opacity: 0.2 }}
                                 contentStyle={{
-                                    backgroundColor: 'rgba(5,5,5,0.9)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    backgroundColor: 'var(--color-background)',
+                                    borderColor: 'var(--color-border)',
                                     borderRadius: '8px',
-                                    color: 'white'
+                                    color: 'var(--color-text-primary)'
                                 }}
                             />
                             <Bar

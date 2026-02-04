@@ -1,20 +1,27 @@
 import { Sparkles } from "lucide-react";
 import { LoginBlock } from "./LoginBlock";
+import { AnimatedBackground } from "../ui/AnimatedBackground";
 
-export function AuthLayout() {
+interface AuthLayoutProps {
+    mode?: "login" | "signup";
+}
+
+export function AuthLayout({ mode = "login" }: AuthLayoutProps) {
     return (
         <div className="w-full min-h-screen lg:h-screen lg:min-h-[800px] grid lg:grid-cols-2 overflow-hidden bg-background">
             {/* Visual Side */}
             <div className="hidden lg:flex relative h-full w-full flex-col bg-muted text-white dark:border-r border-border/50">
                 <div className="absolute inset-0 bg-zinc-900" />
                 {/* Animated Background */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/40 via-background to-background" />
+                <div className="absolute inset-0">
+                    <AnimatedBackground />
+                </div>
+
                 <div className="relative z-20 flex items-center text-lg font-medium p-8">
                     <Sparkles className="mr-2 h-6 w-6 text-accent" />
-                    Nexus AI
+                    Nadicode
                 </div>
                 <div className="relative z-20 m-auto max-w-lg text-center space-y-4">
-                    <div className="h-64 w-64 bg-accent/20 rounded-full blur-[100px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                     <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 relative">
                         Build the future, faster.
                     </h1>
@@ -31,10 +38,13 @@ export function AuthLayout() {
 
             {/* Form Side */}
             <div className="flex items-center justify-center p-8 bg-background relative overflow-y-auto">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-accent/5 via-background to-background" />
+                {/* Subtle background for form side so it's not plain flat color */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background to-accent/5 pointer-events-none" />
+
                 <LoginBlock
                     variant="glass"
-                    className="relative z-10"
+                    className="relative z-10 w-full max-w-sm"
+                    type={mode === "signup" ? "signup" : "login"}
                 />
             </div>
         </div>

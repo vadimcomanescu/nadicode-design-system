@@ -55,8 +55,8 @@ export function ChatLayout() {
   }, [messages])
 
   return (
-    <div className="flex h-[500px] w-full flex-col overflow-hidden rounded-lg border border-border bg-background shadow-lg">
-      <div className="flex items-center justify-between border-b border-border p-4 bg-surface/50 backdrop-blur-md">
+    <div className="flex h-[500px] w-full flex-col overflow-hidden rounded-lg glass-card">
+      <div className="flex items-center justify-between border-b border-white/10 p-4">
         <div className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
             <AvatarImage src="/ai-avatar.png" />
@@ -81,7 +81,7 @@ export function ChatLayout() {
             >
               {message.role === "assistant" && (
                 <Avatar className="h-8 w-8 mt-1">
-                   <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
+                  <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
                 </Avatar>
               )}
               <div
@@ -95,8 +95,8 @@ export function ChatLayout() {
                 {message.content}
               </div>
               {message.role === "user" && (
-                 <Avatar className="h-8 w-8 mt-1">
-                   <AvatarFallback className="bg-secondary"><User className="h-4 w-4" /></AvatarFallback>
+                <Avatar className="h-8 w-8 mt-1">
+                  <AvatarFallback className="bg-secondary"><User className="h-4 w-4" /></AvatarFallback>
                 </Avatar>
               )}
             </div>
@@ -114,7 +114,7 @@ export function ChatLayout() {
           className="flex items-center gap-2"
         >
           <Button type="button" size="icon" variant="ghost">
-             <Mic className="h-4 w-4" />
+            <Mic className="h-4 w-4" />
           </Button>
           <Input
             placeholder="Type a message..."

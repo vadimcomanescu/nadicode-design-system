@@ -12,6 +12,7 @@ IGNORE_HEX_IN_FILES = {
     "src/components/ui/CheckoutFormDemo.tsx", # Stripe API requires hex
     "src/tokens.test.ts", # Tests contain specific checks
     "src/components/ui/Chart.tsx", # Targets Recharts default hex values for overrides
+    "src/components/ui/BrandIcons.tsx", # Brand colors are specific and should not be tokenized
 }
 
 def parse_css_variables(file_path):
@@ -65,6 +66,12 @@ def scan_files(source_dir, defined_vars):
                          # Ignore white/black often used in SVGs or specific non-token needs
                          if hex_code.lower() not in ['#fff', '#ffffff', '#000', '#000000']:
                             errors.append(f"[HARDCODED HEX] {file_path}:{line_num}: {hex_code} found. Should use a design token.")
+
+                # Check 3: Manual Hover on Cards (Design Rule: If it lifts, it clicks)
+                if "<Card" in line:
+                    if "hover:scale" in line or "hover:translate" in line or "hover:border" in line:
+                        # Allow interactive property which adds these classes internally, but ban manual addition
+                        errors.append(f"[DESIGN RULE] {file_path}:{line_num}: Manual hover styles found on <Card>. Use 'interactive' prop for clickable cards, or remove hover effects for static ones.")
 
     return errors
 

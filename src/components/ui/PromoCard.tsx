@@ -19,8 +19,9 @@ export function PromoCard({
 }: PromoCardProps) {
     return (
         <Card
+            variant="glass"
             className={cn(
-                "relative overflow-hidden border border-border/50 shadow-sm bg-background/50 backdrop-blur-sm",
+                "relative overflow-hidden shadow-sm",
                 className
             )}
             {...props}

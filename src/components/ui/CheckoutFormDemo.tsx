@@ -22,7 +22,7 @@ interface CheckoutFormDemoProps {
 export function CheckoutFormDemo({
     amount = 2000, // $20.00
 
-    productName = "Seed Design Pro",
+    productName = "Nadicode Pro",
     features = [
         "Unlimited components",
         "Advanced design tokens",

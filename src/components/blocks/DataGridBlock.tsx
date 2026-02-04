@@ -101,7 +101,7 @@ const data: Payment[] = [
         id: "123e1d42",
         amount: 550,
         status: "success",
-        email: "corporate@acme.inc",
+        email: "corporate@nadicode.inc",
     },
     {
         id: "999e1d42",

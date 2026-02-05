@@ -10,8 +10,8 @@ export default function Features() {
                     <h2 className="text-balance text-4xl font-semibold lg:text-5xl">Built to cover your needs</h2>
                     <p className="mt-4">Libero sapiente aliquam quibusdam aspernatur, praesentium iusto repellendus.</p>
                 </div>
-                <Card className="@min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 *:text-center md:mt-16">
-                    <div className="group shadow-zinc-950/5">
+                <Card className="lg:max-w-full lg:grid-cols-3 lg:divide-x lg:divide-y-0 mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-sm *:text-center md:mt-16">
+                    <div className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <Zap
@@ -28,7 +28,7 @@ export default function Features() {
                         </CardContent>
                     </div>
 
-                    <div className="group shadow-zinc-950/5">
+                    <div className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <Settings2
@@ -45,7 +45,7 @@ export default function Features() {
                         </CardContent>
                     </div>
 
-                    <div className="group shadow-zinc-950/5">
+                    <div className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <Sparkles

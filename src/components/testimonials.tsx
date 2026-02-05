@@ -93,7 +93,7 @@ export default function Testimonials() {
                             </blockquote>
                         </CardContent>
                     </Card>
-                    <Card className="card variant-mixed">
+                    <Card>
                         <CardContent className="h-full pt-6">
                             <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                                 <p>Great work on tailfolio template. This is one of the best personal website that I have seen so far!</p>

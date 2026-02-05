@@ -28,7 +28,7 @@ export default function Features() {
                         </CardContent>
                     </Card>
 
-                    <Card className="group shadow-zinc-950/5">
+                    <Card className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <Settings2
@@ -45,7 +45,7 @@ export default function Features() {
                         </CardContent>
                     </Card>
 
-                    <Card className="group shadow-zinc-950/5">
+                    <Card className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <Sparkles

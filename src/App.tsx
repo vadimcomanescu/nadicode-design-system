@@ -954,12 +954,7 @@ console.log(greet("World"));`}
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <Typography variant="h3">Feature (List)</Typography>
-                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
-                  <Feature3 />
-                </div>
-              </div>
+              EMPTY
 
               <div className="space-y-4">
                 <Typography variant="h3">Integrations</Typography>

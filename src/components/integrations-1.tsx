@@ -60,7 +60,7 @@ export default function IntegrationsSection() {
 
 const IntegrationCard = ({ title, description, children, link = 'https://github.com/meschacirung/cnblocks' }: { title: string; description: string; children: React.ReactNode; link?: string }) => {
     return (
-        <Card className="p-6">
+        <Card className="p-6" interactive>
             <div className="relative">
                 <div className="*:size-10">{children}</div>
 

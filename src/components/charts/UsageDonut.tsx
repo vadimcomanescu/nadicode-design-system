@@ -32,7 +32,7 @@ const chartConfig = {
 
 export function UsageDonut() {
     return (
-        <Card variant="glass" className="w-[350px]">
+        <Card variant="glass-panel" className="w-[350px]">
             <CardHeader>
                 <CardTitle>Storage</CardTitle>
                 <CardDescription>Distribution of data types</CardDescription>

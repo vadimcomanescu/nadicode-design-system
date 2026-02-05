@@ -71,7 +71,7 @@ export function TeamPage() {
             </div>
             <Separator />
 
-            <Card variant="glass">
+            <Card variant="glass-panel">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                     <div className="space-y-1">
                         <CardTitle>4 Active Members</CardTitle>
@@ -134,7 +134,7 @@ export function TeamPage() {
                                                     <MoreHorizontal className="h-4 w-4" />
                                                 </Button>
                                             </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end" className="glass-card">
+                                            <DropdownMenuContent align="end" className="glass-panel">
                                                 <DropdownMenuItem>
                                                     <Shield className="mr-2 h-4 w-4" /> Change Role
                                                 </DropdownMenuItem>

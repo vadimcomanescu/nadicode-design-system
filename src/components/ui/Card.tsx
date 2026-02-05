@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'glass' | 'glass-atmospheric' | 'outline';
+  variant?: 'default' | 'outline' | 'glass-panel' | 'glass-overlay';
   interactive?: boolean;
 }
 
@@ -11,8 +11,8 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
     const variants = {
       default: "bg-surface border border-border text-text-primary shadow-lg",
-      glass: "glass-card text-text-primary",
-      "glass-atmospheric": "glass-atmospheric text-text-primary",
+      "glass-panel": "glass-panel text-text-primary",
+      "glass-overlay": "glass-overlay text-text-primary",
       outline: "bg-transparent border border-border text-text-primary",
     };
 

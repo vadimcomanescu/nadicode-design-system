@@ -38,7 +38,7 @@ const data = [
 
 export function BarChart() {
     return (
-        <Card variant="glass" className="w-full">
+        <Card variant="glass-panel" className="w-full">
             <CardHeader>
                 <CardTitle>Token Usage</CardTitle>
                 <CardDescription>Monthly inference token consumption</CardDescription>

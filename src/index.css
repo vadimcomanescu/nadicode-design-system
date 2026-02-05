@@ -170,15 +170,13 @@
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-surface/40 backdrop-blur-xl border border-white/10 shadow-[0_4px_30px_#0000001A] shadow-[inset_0_1px_0_0_#ffffff1A];
-  }
+  /* .glass legacy class removed */
 
-  .glass-card {
-    /* Stronger glass for the "floating" box effect */
+  .glass-panel {
+    /* "Structural" material for Dashboards, Cards, Data (formerly .glass-card) */
     @apply bg-surface/30 backdrop-blur-3xl border border-white/10;
 
-    /* Multi-layered physics-based shadows - Slightly Softened */
+    /* Multi-layered physics-based shadows */
     box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.3),
       0 10px 15px -3px rgba(0, 0, 0, 0.4),
@@ -210,16 +208,28 @@
     }
   }
 
-  .glass-atmospheric {
-    /* "Immersive" transparency for marketing blocks */
-    @apply bg-background/20 backdrop-blur-md border border-border/50 transition-colors duration-300;
+  .glass-overlay {
+    /* "Transient" material for Marketing, Popovers, Toasts (formerly .glass-atmospheric) */
+    @apply bg-surface/30 backdrop-blur-md border border-white/10 transition-colors duration-300;
 
     /* Subtle shadow to separate from dynamic backgrounds */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   }
 
-  .glass-atmospheric:hover {
+  /* Light mode override for overlay glass */
+  :root[class~="light"] .glass-overlay {
+    @apply bg-surface/60 border-border/40;
+    box-shadow:
+      0 4px 20px -2px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .glass-overlay:hover {
     @apply bg-background/30;
+  }
+
+  :root[class~="light"] .glass-overlay:hover {
+    @apply bg-surface/80;
   }
 
   .glass-floating:hover {
@@ -231,7 +241,7 @@
   }
 
   /* In light mode, glass needs to be clearer */
-  :root[class~="light"] .glass-card {
+  :root[class~="light"] .glass-panel {
     @apply bg-surface/70 border-border/60 shadow-md;
     box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.1),

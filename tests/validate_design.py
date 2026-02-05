@@ -13,6 +13,8 @@ IGNORE_HEX_IN_FILES = {
     "src/tokens.test.ts", # Tests contain specific checks
     "src/components/ui/Chart.tsx", # Targets Recharts default hex values for overrides
     "src/components/ui/BrandIcons.tsx", # Brand colors are specific and should not be tokenized
+    "src/components/logos/", # Brand logos
+    "src/components/sign-up.tsx", # Social icons with brand hex
 }
 
 def parse_css_variables(file_path):
@@ -60,14 +62,32 @@ def scan_files(source_dir, defined_vars):
                              errors.append(f"[UNDEFINED VAR] {file_path}:{line_num}: {var} is used but not defined in {CSS_DEFINITION_FILE}")
 
                 # Check 2: Hardcoded Hex Codes
-                if file_path not in IGNORE_HEX_IN_FILES:
+                if not any(ign in file_path for ign in IGNORE_HEX_IN_FILES):
                     hexes = hex_pattern.findall(line)
                     for hex_code in hexes:
                          # Ignore white/black often used in SVGs or specific non-token needs
                          if hex_code.lower() not in ['#fff', '#ffffff', '#000', '#000000']:
                             errors.append(f"[HARDCODED HEX] {file_path}:{line_num}: {hex_code} found. Should use a design token.")
 
-                # Check 3: Manual Hover on Cards (Design Rule: If it lifts, it clicks)
+                # Check 3: Consistency & Non-Semantic Classes
+                forbidden_patterns = [
+                    r'bg-(?:zinc|gray|slate|neutral|stone|red|blue|green)-[0-9]+', # e.g. bg-zinc-950
+                    r'text-(?:zinc|gray|slate|neutral|stone|red|blue|green)-[0-9]+', # e.g. text-gray-500
+                    r'bg-(?:white|black)(?!\/)', 
+                    
+                    # FORBIDDEN: Legacy Material Names (These no longer exist in code)
+                    r'variant=["\']glass["\']', 
+                    r'variant=["\']glass-atmospheric["\']',
+                    r'class.*glass-card',
+                    r'class.*glass-atmospheric',
+                ]
+                
+                for pattern in forbidden_patterns:
+                    if re.search(pattern, line):
+                        if "validate_design.py" not in file_path:
+                             errors.append(f"[FORBIDDEN PATTERN] {file_path}:{line_num}: Found forbidden pattern '{pattern}'. This logic has been deleted. Use 'glass-panel' or 'glass-overlay'.")
+
+                # Check 4: Manual Hover on Cards (Design Rule: If it lifts, it clicks)
                 if "<Card" in line:
                     if "hover:scale" in line or "hover:translate" in line or "hover:border" in line:
                         # Allow interactive property which adds these classes internally, but ban manual addition

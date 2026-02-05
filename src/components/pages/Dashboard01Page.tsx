@@ -163,7 +163,7 @@ export function Dashboard01Page() {
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          <Card variant="glass">
+          <Card variant="glass-panel">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Total Revenue
@@ -177,7 +177,7 @@ export function Dashboard01Page() {
               </p>
             </CardContent>
           </Card>
-          <Card variant="glass">
+          <Card variant="glass-panel">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Subscriptions
@@ -191,7 +191,7 @@ export function Dashboard01Page() {
               </p>
             </CardContent>
           </Card>
-          <Card variant="glass">
+          <Card variant="glass-panel">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Sales</CardTitle>
               <CreditCard className="h-4 w-4 text-text-secondary" />
@@ -203,7 +203,7 @@ export function Dashboard01Page() {
               </p>
             </CardContent>
           </Card>
-          <Card variant="glass">
+          <Card variant="glass-panel">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Active Now</CardTitle>
               <Activity className="h-4 w-4 text-text-secondary" />
@@ -217,7 +217,7 @@ export function Dashboard01Page() {
           </Card>
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-          <Card variant="glass" className="xl:col-span-2">
+          <Card variant="glass-panel" className="xl:col-span-2">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle>Transactions</CardTitle>
@@ -294,7 +294,7 @@ export function Dashboard01Page() {
               </Table>
             </CardContent>
           </Card>
-          <Card variant="glass">
+          <Card variant="glass-panel">
             <CardHeader>
               <CardTitle>Recent Sales</CardTitle>
             </CardHeader>

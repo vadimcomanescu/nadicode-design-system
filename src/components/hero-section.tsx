@@ -33,7 +33,7 @@ export default function HeroSection() {
                                         asChild
                                         size="lg"
                                         variant="ghost"
-                                        className="h-12 rounded-full px-5 text-base hover:bg-zinc-950/5 dark:hover:bg-white/5">
+                                        className="h-12 rounded-full px-5 text-base hover:bg-surface-active/5 dark:hover:bg-white/5">
                                         <Link to="#link">
                                             <span className="text-nowrap">Request a demo</span>
                                         </Link>
@@ -41,7 +41,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="aspect-2/3 absolute inset-1 -z-10 overflow-hidden rounded-3xl border border-black/10 lg:aspect-video lg:rounded-[3rem] dark:border-white/5">
+                        <div className="aspect-2/3 absolute inset-1 -z-10 overflow-hidden rounded-3xl border border-border lg:aspect-video lg:rounded-[3rem] dark:border-white/5">
                             <video
                                 autoPlay
                                 loop

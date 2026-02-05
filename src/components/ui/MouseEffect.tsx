@@ -44,7 +44,8 @@ export function MouseGlow({ className }: { className?: string }) {
   return (
     <motion.div
       className={cn(
-        "pointer-events-none fixed inset-0 z-0 hidden dark:block", // Hidden in light mode
+        "pointer-events-none fixed inset-0 z-0",
+        "opacity-40 dark:opacity-70 transition-opacity duration-500", // Subtle but visible in light mode
         className
       )}
       style={{
@@ -52,14 +53,27 @@ export function MouseGlow({ className }: { className?: string }) {
         WebkitMaskImage: maskImage
       }}
     >
-      {/* Structural Grid & Tiny Dots Pattern - Intensified */}
+      {/* Structural Grid & Tiny Dots Pattern */}
       <div
         className="absolute inset-0 h-full w-full"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(99, 102, 241, 0.6)' stroke-width='1.0'/%3E%3Ccircle cx='12' cy='12' r='1.0' fill='rgba(99, 102, 241, 1.0)'/%3E%3C/svg%3E")`,
+          // Use CSS variables for color: Indigo in dark, Acid Lime in light
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='var(--mouse-grid-color)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='var(--mouse-dot-color)'/%3E%3C/svg%3E")`,
           backgroundSize: "24px 24px"
         }}
       />
+
+      {/* Dynamic CSS variables injected directly to avoid complex logic in data URI */}
+      <style>{`
+        :root {
+          --mouse-grid-color: rgba(101, 163, 13, 0.5);   /* Acid Lime - Visible Grid */
+          --mouse-dot-color: rgba(101, 163, 13, 0.8);    /* Acid Lime - Stronger Dots */
+        }
+        .dark {
+          --mouse-grid-color: rgba(99, 102, 241, 0.4);   /* Electric Indigo */
+          --mouse-dot-color: rgba(99, 102, 241, 0.8);    /* Electric Indigo */
+        }
+      `}</style>
     </motion.div>
   )
 }

@@ -185,17 +185,17 @@ export function Dashboard02Page() {
         </header>
         <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
-            <Card variant="glass">
+            <Card variant="glass-panel">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Orders</CardTitle>
                 <ShoppingCart className="h-4 w-4 text-text-secondary" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">1,234</div>
-                <p className="text-xs text-green-500">+12% from last week</p>
+                <p className="text-xs text-chart-4">+12% from last week</p>
               </CardContent>
             </Card>
-            <Card variant="glass">
+            <Card variant="glass-panel">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Revenue</CardTitle>
                 <CreditCard className="h-4 w-4 text-text-secondary" />
@@ -206,7 +206,7 @@ export function Dashboard02Page() {
               </CardContent>
             </Card>
           </div>
-          <Card variant="glass">
+          <Card variant="glass-panel">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle>Recent Orders</CardTitle>

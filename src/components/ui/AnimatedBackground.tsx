@@ -19,7 +19,7 @@ export const AnimatedBackground = ({ className }: { className?: string }) => {
                 <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-accent/30 rounded-full mix-blend-screen animate-blob animation-delay-2000" />
 
                 {/* Secondary Orb - Moving bottom-left */}
-                <div className="absolute bottom-[-20%] left-[20%] w-[45vw] h-[45vw] bg-blue-500/30 rounded-full mix-blend-screen animate-blob animation-delay-4000" />
+                <div className="absolute bottom-[-20%] left-[20%] w-[45vw] h-[45vw] bg-chart-2/30 rounded-full mix-blend-screen animate-blob animation-delay-4000" />
             </div>
 
             {/* 4. Noise Texture for Realism */}

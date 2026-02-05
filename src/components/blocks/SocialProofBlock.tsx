@@ -70,7 +70,7 @@ export function Testimonials() {
                 </h2>
                 <div className="flex flex-wrap justify-center gap-6">
                     {testimonials.map((t, i) => (
-                        <Card key={i} variant="glass-atmospheric" className="w-full max-w-md">
+                        <Card key={i} variant="glass-overlay" className="w-full max-w-md">
                             <CardContent className="p-6">
                                 <p className="mb-4 text-lg text-text-secondary leading-relaxed">"{t.quote}"</p>
                                 <div className="flex items-center gap-3">

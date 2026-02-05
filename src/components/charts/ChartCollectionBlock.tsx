@@ -84,7 +84,7 @@ const config = {
 export function ChartCollectionBlock() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <Card variant="glass">
+      <Card variant="glass-panel">
         <CardHeader>
           <CardTitle>Area Chart</CardTitle>
           <CardDescription>Usage overview</CardDescription>
@@ -116,7 +116,7 @@ export function ChartCollectionBlock() {
         </CardContent>
       </Card>
 
-      <Card variant="glass">
+      <Card variant="glass-panel">
         <CardHeader>
           <CardTitle>Bar Chart</CardTitle>
         </CardHeader>
@@ -141,7 +141,7 @@ export function ChartCollectionBlock() {
         </CardContent>
       </Card>
 
-      <Card variant="glass">
+      <Card variant="glass-panel">
         <CardHeader>
           <CardTitle>Line Chart</CardTitle>
         </CardHeader>
@@ -172,7 +172,7 @@ export function ChartCollectionBlock() {
         </CardContent>
       </Card>
 
-      <Card variant="glass">
+      <Card variant="glass-panel">
         <CardHeader>
           <CardTitle>Pie Chart</CardTitle>
         </CardHeader>
@@ -191,7 +191,7 @@ export function ChartCollectionBlock() {
         </CardContent>
       </Card>
 
-      <Card variant="glass">
+      <Card variant="glass-panel">
         <CardHeader>
           <CardTitle>Radar Chart</CardTitle>
         </CardHeader>
@@ -214,7 +214,7 @@ export function ChartCollectionBlock() {
         </CardContent>
       </Card>
 
-      <Card variant="glass">
+      <Card variant="glass-panel">
         <CardHeader>
           <CardTitle>Radial Chart</CardTitle>
         </CardHeader>

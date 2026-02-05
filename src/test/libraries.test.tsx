@@ -9,8 +9,8 @@ describe('Utility Libraries', () => {
     const button = cva('base', {
       variants: {
         intent: {
-          primary: 'bg-blue-500',
-          secondary: 'bg-gray-500',
+          primary: 'bg-primary',
+          secondary: 'bg-muted',
         },
       },
       defaultVariants: {
@@ -18,8 +18,8 @@ describe('Utility Libraries', () => {
       },
     });
 
-    expect(button({ intent: 'secondary' })).toContain('bg-gray-500');
-    expect(button()).toContain('bg-blue-500');
+    expect(button({ intent: 'secondary' })).toContain('bg-muted');
+    expect(button()).toContain('bg-primary');
   });
 
   it('radix-ui/react-slot works', () => {

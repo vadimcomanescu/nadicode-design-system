@@ -127,7 +127,7 @@ function App() {
             <section>
               <Typography variant="h2" className="mb-6 border-b border-border pb-2">Core Principles</Typography>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card variant="glass" className="h-full">
+                <Card variant="glass-panel" className="h-full">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-primary">
                       <div className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -140,7 +140,7 @@ function App() {
                     </Typography>
                   </CardContent>
                 </Card>
-                <Card variant="glass" className="h-full">
+                <Card variant="glass-panel" className="h-full">
                   <CardHeader>
                     <CardTitle className="text-primary">Ultra-Realistic Depth</CardTitle>
                   </CardHeader>
@@ -150,7 +150,7 @@ function App() {
                     </Typography>
                   </CardContent>
                 </Card>
-                <Card variant="glass" className="h-full">
+                <Card variant="glass-panel" className="h-full">
                   <CardHeader>
                     <CardTitle className="text-primary">High-Contrast Accessibility</CardTitle>
                   </CardHeader>
@@ -431,7 +431,7 @@ function App() {
                 </div>
 
                 <div className="space-y-4">
-                  <Card variant="glass">
+                  <Card variant="glass-panel">
                     <CardHeader>
                       <CardTitle>Notifications</CardTitle>
                       <CardDescription>You have 3 unread messages.</CardDescription>
@@ -485,7 +485,7 @@ function App() {
                         {Array.from({ length: 5 }).map((_, index) => (
                           <CarouselItem key={index}>
                             <div className="p-1">
-                              <Card variant="glass">
+                              <Card variant="glass-panel">
                                 <CardContent className="flex aspect-square items-center justify-center p-6">
                                   <span className="text-4xl font-semibold">{index + 1}</span>
                                 </CardContent>
@@ -556,7 +556,7 @@ console.log(greet("World"));`}
 
                   <div className="space-y-4">
                     <Typography variant="h3">Audio Visualizer</Typography>
-                    <Card variant="glass">
+                    <Card variant="glass-panel">
                       <CardContent className="flex flex-col items-center justify-center p-12 gap-6">
                         <AudioVisualizer isPlaying={true} />
                         <Button variant="outline">Play Voice Sample</Button>
@@ -853,14 +853,14 @@ console.log(greet("World"));`}
 
                 <div className="space-y-4">
                   <Typography variant="h3">Login Page</Typography>
-                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-zinc-950/50">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-background/50">
                     <LoginPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Signup Page</Typography>
-                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-zinc-950/50">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-background/50">
                     <SignupPage />
                   </div>
                 </div>
@@ -879,7 +879,7 @@ console.log(greet("World"));`}
 
                 <div className="space-y-4">
                   <Typography variant="h3">Auth Layout (Split Glass)</Typography>
-                  <div className="min-h-[800px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-zinc-950/50">
+                  <div className="min-h-[800px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background/50">
                     <AuthLayout />
                   </div>
                 </div>
@@ -893,112 +893,112 @@ console.log(greet("World"));`}
 
               <div className="space-y-4">
                 <Typography variant="h3">Marketing Header</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative h-[100px] isolate [transform:translateZ(0)]">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative h-[100px] isolate [transform:translateZ(0)]">
                   <HeroHeader />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Hero (Centered)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <HeroCentered />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Hero (Split)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <HeroSplit />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Logo Cloud</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <LogoCloud />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Testimonials (Masonry)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Testimonials />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Feature Grid</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <FeatureGrid />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Feature List (Split)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <FeatureList />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Feature (Bento Grid)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Feature1 />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Feature (Cards)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Feature2 />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Feature (List)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Feature3 />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Integrations</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Integrations1 />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Statistics / KPI</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Stats />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Team Members</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Team />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Pricing Table</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <PricingTable />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Call to Action</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <CallToAction />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <Typography variant="h3">Footer (Multi-Column)</Typography>
-                <div className="rounded-lg border border-border bg-black/50 overflow-hidden relative">
+                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
                   <Footer />
                 </div>
               </div>

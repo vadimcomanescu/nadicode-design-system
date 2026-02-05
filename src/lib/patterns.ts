@@ -147,10 +147,10 @@ export const gridPatterns: Pattern[] = [
     badge: "2026",
     description: "Interactive drifting starfield (CSS Box Shadow).",
     style: {
-      backgroundColor: "#050505",
-      backgroundImage: "radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%)",
+      backgroundColor: "rgb(var(--color-background))",
+      backgroundImage: "radial-gradient(ellipse at bottom, rgb(var(--color-surface)), rgb(var(--color-background)))",
     },
-    code: `<div className="w-full min-h-screen bg-black relative overflow-hidden">
+    code: `<div className="w-full min-h-screen bg-background relative overflow-hidden">
         <style>{\`
           @keyframes animStar {
             from { transform: translateY(0px); }

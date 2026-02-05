@@ -74,36 +74,35 @@ export function HeroCentered({
                     </Button>
                 </div>
 
-                {/* Abstract Tech Visual */}
                 <div className="mt-20">
-                    <Card variant="glass-atmospheric" className="mx-auto max-w-5xl rounded-xl p-2 lg:rounded-2xl lg:p-4">
-                        <div className="aspect-[16/9] overflow-hidden rounded-lg border border-border bg-zinc-950 shadow-inner relative">
+                    <Card variant="glass-overlay" className="mx-auto max-w-5xl rounded-xl p-2 lg:rounded-2xl lg:p-4">
+                        <div className="aspect-[16/9] overflow-hidden rounded-lg border border-border glass-panel shadow-inner relative">
                             {/* Fake UI Content */}
                             <div className="absolute inset-0 flex flex-col">
                                 {/* Fake Toolbar */}
-                                <div className="h-12 border-b border-white/10 flex items-center px-4 gap-4 bg-white/5">
+                                <div className="h-12 border-b border-border flex items-center px-4 gap-4 bg-muted/30">
                                     <div className="flex gap-2">
-                                        <div className="h-3 w-3 rounded-full bg-red-500/50" />
-                                        <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
-                                        <div className="h-3 w-3 rounded-full bg-green-500/50" />
+                                        <div className="h-3 w-3 rounded-full bg-destructive/50" />
+                                        <div className="h-3 w-3 rounded-full bg-chart-5/50" />
+                                        <div className="h-3 w-3 rounded-full bg-chart-4/50" />
                                     </div>
-                                    <div className="h-6 w-full max-w-sm rounded bg-white/5" />
+                                    <div className="h-6 w-full max-w-sm rounded bg-muted" />
                                 </div>
                                 {/* Fake Body */}
                                 <div className="flex-1 flex">
-                                    <div className="w-64 border-r border-white/10 p-4 space-y-4 bg-white/5 hidden md:block">
-                                        <div className="h-4 w-24 rounded bg-white/10" />
-                                        <div className="h-4 w-32 rounded bg-white/5" />
-                                        <div className="h-4 w-20 rounded bg-white/5" />
-                                        <div className="h-4 w-28 rounded bg-white/5" />
+                                    <div className="w-64 border-r border-border p-4 space-y-4 bg-muted/10 hidden md:block">
+                                        <div className="h-4 w-24 rounded bg-muted" />
+                                        <div className="h-4 w-32 rounded bg-muted/50" />
+                                        <div className="h-4 w-20 rounded bg-muted/50" />
+                                        <div className="h-4 w-28 rounded bg-muted/50" />
                                     </div>
                                     <div className="flex-1 p-6 space-y-6">
                                         <div className="flex gap-4">
-                                            <div className="h-32 flex-1 rounded-lg border border-white/10 bg-white/5" />
-                                            <div className="h-32 flex-1 rounded-lg border border-white/10 bg-white/5" />
-                                            <div className="h-32 flex-1 rounded-lg border border-white/10 bg-white/5" />
+                                            <div className="h-32 flex-1 rounded-lg border border-border bg-muted/20" />
+                                            <div className="h-32 flex-1 rounded-lg border border-border bg-muted/20" />
+                                            <div className="h-32 flex-1 rounded-lg border border-border bg-muted/20" />
                                         </div>
-                                        <div className="h-64 rounded-lg border border-white/10 bg-white/5" />
+                                        <div className="h-64 rounded-lg border border-border bg-muted/10" />
                                     </div>
                                 </div>
                             </div>
@@ -169,24 +168,24 @@ export function HeroSplit({
                 {/* Right Visual (Mock UI) */}
                 <div className="relative lg:ml-auto w-full max-w-md">
                     <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-primary to-accent opacity-20 blur-2xl" />
-                    <Card variant="glass-atmospheric" interactive className="relative w-full border-border/50">
+                    <Card variant="glass-overlay" interactive className="relative w-full border-border/50">
                         <CardHeader className="border-b border-border/50 pb-4">
                             <div className="flex items-center justify-between">
                                 <div className="flex space-x-2">
                                     <div className="h-3 w-3 rounded-full bg-destructive/50" />
-                                    <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
-                                    <div className="h-3 w-3 rounded-full bg-green-500/50" />
+                                    <div className="h-3 w-3 rounded-full bg-chart-5/50" />
+                                    <div className="h-3 w-3 rounded-full bg-chart-4/50" />
                                 </div>
                                 <div className="text-xs text-muted-foreground font-mono">terminal.tsx</div>
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-4 p-6 font-mono text-sm">
-                            <div className="flex items-center gap-2 text-green-400">
+                            <div className="flex items-center gap-2 text-chart-4">
                                 <ChevronRight className="h-4 w-4" />
                                 <span>npm install @nadicode/core</span>
                             </div>
                             <div className="text-text-secondary">
-                                <span className="text-blue-400">✔</span> Added 124 packages
+                                <span className="text-chart-2">✔</span> Added 124 packages
                             </div>
                             <div className="flex items-center gap-2 text-text-primary">
                                 <ChevronRight className="h-4 w-4 text-text-tertiary" />
@@ -208,7 +207,7 @@ export function HeroSplit({
                     <div className="absolute -bottom-6 -left-6 max-w-[200px]">
                         <Card variant="default" className="border-border/50 shadow-xl">
                             <CardContent className="p-3 flex items-center gap-3">
-                                <div className="h-8 w-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
+                                <div className="h-8 w-8 rounded-full bg-chart-4/20 flex items-center justify-center text-chart-4">
                                     <Zap className="h-4 w-4" />
                                 </div>
                                 <div>

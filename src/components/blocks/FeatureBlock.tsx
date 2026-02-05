@@ -52,7 +52,7 @@ export function FeatureGrid() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((feature, i) => (
-                        <Card key={i} variant="glass-atmospheric" interactive>
+                        <Card key={i} variant="glass-overlay" interactive>
                             <CardHeader className="pb-2">
                                 <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary">
                                     <feature.icon className="h-5 w-5" />
@@ -98,17 +98,17 @@ export function FeatureList() {
                     </div>
                     <div className="relative">
                         <div className="absolute -inset-4 bg-accent/10 blur-3xl rounded-full" />
-                        <Card variant="glass" className="p-0 overflow-hidden border-border/50">
+                        <Card variant="glass-panel" className="p-0 overflow-hidden border-border/50">
                             <div className="p-4 border-b border-border/50 flex items-center gap-2">
                                 <div className="h-3 w-3 rounded-full bg-destructive/50" />
                                 <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
-                                <div className="h-3 w-3 rounded-full bg-green-500/50" />
+                                <div className="h-3 w-3 rounded-full bg-chart-4/50" />
                             </div>
                             <div className="p-8 h-[300px] flex items-center justify-center bg-background/50">
                                 <div className="grid grid-cols-2 gap-4 w-full opacity-80">
-                                    <div className="h-24 bg-surface rounded-lg border border-border animate-pulse" />
-                                    <div className="h-24 bg-surface-active rounded-lg border border-primary/20" />
-                                    <div className="h-24 bg-surface rounded-lg border border-border" />
+                                    <div className="h-24 bg-surface/50 rounded-lg border border-border animate-pulse" />
+                                    <div className="h-24 bg-surface-active/50 rounded-lg border border-primary/20" />
+                                    <div className="h-24 bg-surface/50 rounded-lg border border-border" />
                                     <div className="h-24 bg-surface rounded-lg border border-border" />
                                 </div>
                             </div>
@@ -120,11 +120,11 @@ export function FeatureList() {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="order-2 lg:order-1 relative">
                         <div className="absolute -inset-4 bg-primary/10 blur-3xl rounded-full" />
-                        <Card variant="glass" className="p-0 overflow-hidden border-border/50">
-                            <div className="glass-atmospheric p-6 h-[350px] relative overflow-hidden flex flex-col items-center justify-center">
+                        <Card variant="glass-panel" className="p-0 overflow-hidden border-border/50">
+                            <div className="glass-overlay p-6 h-[350px] relative overflow-hidden flex flex-col items-center justify-center">
                                 <Cloud className="h-24 w-24 text-primary opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                                <div className="z-10 glass-card p-4 rounded-lg flex items-center gap-4 w-64 shadow-lg">
-                                    <div className="h-8 w-8 rounded bg-green-500/20 text-green-500 flex items-center justify-center">
+                                <div className="z-10 glass-panel p-4 rounded-lg flex items-center gap-4 w-64 shadow-lg">
+                                    <div className="h-8 w-8 rounded bg-chart-4/20 text-chart-4 flex items-center justify-center">
                                         <Key className="h-4 w-4" />
                                     </div>
                                     <div className="flex-1">
@@ -132,8 +132,8 @@ export function FeatureList() {
                                         <div className="h-2 w-full bg-text-primary/10 rounded" />
                                     </div>
                                 </div>
-                                <div className="z-10 glass-card p-4 rounded-lg flex items-center gap-4 w-64 mt-4 translate-x-4 shadow-lg">
-                                    <div className="h-8 w-8 rounded bg-blue-500/20 text-blue-500 flex items-center justify-center">
+                                <div className="z-10 glass-panel p-4 rounded-lg flex items-center gap-4 w-64 mt-4 translate-x-4 shadow-lg">
+                                    <div className="h-8 w-8 rounded bg-chart-2/20 text-chart-2 flex items-center justify-center">
                                         <Laptop className="h-4 w-4" />
                                     </div>
                                     <div className="flex-1">

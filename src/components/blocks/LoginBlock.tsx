@@ -15,7 +15,7 @@ import { cn } from "../../lib/utils"
 
 interface LoginBlockProps {
     className?: string
-    variant?: "default" | "glass" | "outline"
+    variant?: "default" | "glass-panel" | "outline" | "glass-overlay"
     type?: "login" | "signup"
     showSocial?: boolean
     title?: string

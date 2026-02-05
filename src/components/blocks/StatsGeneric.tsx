@@ -6,7 +6,7 @@ import { ArrowDownRight, ArrowUpRight, DollarSign, Users, Activity, CreditCard }
 export function StatsGeneric() {
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card variant="glass">
+            <Card variant="glass-panel">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium text-text-secondary">
                         Total Revenue
@@ -22,7 +22,7 @@ export function StatsGeneric() {
                     </p>
                 </CardContent>
             </Card>
-            <Card variant="glass">
+            <Card variant="glass-panel">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium text-text-secondary">
                         Subscriptions
@@ -38,7 +38,7 @@ export function StatsGeneric() {
                     </p>
                 </CardContent>
             </Card>
-            <Card variant="glass">
+            <Card variant="glass-panel">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium text-text-secondary">Sales</CardTitle>
                     <CreditCard className="h-4 w-4 text-text-tertiary" />
@@ -52,7 +52,7 @@ export function StatsGeneric() {
                     </p>
                 </CardContent>
             </Card>
-            <Card variant="glass">
+            <Card variant="glass-panel">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium text-text-secondary">
                         Active Now

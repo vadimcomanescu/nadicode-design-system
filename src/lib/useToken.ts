@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 /**
  * Hook to retrieve CSS variable values, useful for syncing 2D theme with 3D uniforms.
- * Returns the resolved value (e.g., "rgb(255, 0, 0)" or "#ff0000").
+ * Returns the resolved value (e.g., "rgb(255, 0, 0)").
  */
 export function useToken(variableName: string, defaultValue: string = "#ffffff") {
     const [value, setValue] = useState(defaultValue);

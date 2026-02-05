@@ -89,6 +89,7 @@ import { ProfilePage } from "./components/pages/settings/ProfilePage";
 import { TeamPage } from "./components/pages/settings/TeamPage";
 import { HeroHeader } from "./components/header";
 import SimpleLoginForm from "./components/login"; // Ensure nothing is hidden
+import { PatternsPage } from "./components/pages/PatternsPage";
 
 function App() {
   const { toast } = useToast();
@@ -119,6 +120,7 @@ function App() {
             <TabsTrigger value="application">Application</TabsTrigger>
             <TabsTrigger value="charts">Data Viz</TabsTrigger>
             <TabsTrigger value="pages">Pages</TabsTrigger>
+            <TabsTrigger value="patterns">Patterns</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="mt-8 space-y-12">
@@ -797,6 +799,10 @@ console.log(greet("World"));`}
                 </div>
               </Grid>
             </section>
+          </TabsContent>
+
+          <TabsContent value="patterns">
+            <PatternsPage />
           </TabsContent>
 
           <TabsContent value="pages">

@@ -25,7 +25,6 @@ interface LoginBlockProps {
 
 export function LoginBlock({
     className,
-    variant = "default",
     type = "login",
     showSocial = true,
     title,
@@ -39,7 +38,7 @@ export function LoginBlock({
     const buttonText = type === "login" ? "Sign In" : "Sign Up"
 
     return (
-        <Card variant={variant} className={cn("w-full max-w-[400px] border-border/50", className)}>
+        <Card className={cn("w-full max-w-[400px] border-border/50", className)}>
             <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl text-center">{title || defaultTitle}</CardTitle>
                 <CardDescription className="text-center">

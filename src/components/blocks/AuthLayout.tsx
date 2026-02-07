@@ -42,7 +42,7 @@ export function AuthLayout({ mode = "login" }: AuthLayoutProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background to-accent/5 pointer-events-none" />
 
                 <LoginBlock
-                    variant="glass-panel"
+                    
                     className="relative z-10 w-full max-w-sm"
                     type={mode === "signup" ? "signup" : "login"}
                 />

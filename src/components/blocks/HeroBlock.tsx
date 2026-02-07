@@ -75,7 +75,7 @@ export function HeroCentered({
                 </div>
 
                 <div className="mt-20">
-                    <Card variant="glass-overlay" className="mx-auto max-w-5xl rounded-xl p-2 lg:rounded-2xl lg:p-4">
+                    <Card className="mx-auto max-w-5xl rounded-xl p-2 lg:rounded-2xl lg:p-4">
                         <div className="aspect-[16/9] overflow-hidden rounded-lg border border-border glass-panel shadow-inner relative">
                             {/* Fake UI Content */}
                             <div className="absolute inset-0 flex flex-col">
@@ -168,7 +168,7 @@ export function HeroSplit({
                 {/* Right Visual (Mock UI) */}
                 <div className="relative lg:ml-auto w-full max-w-md">
                     <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-primary to-accent opacity-20 blur-2xl" />
-                    <Card variant="glass-overlay" interactive className="relative w-full border-border/50">
+                    <Card interactive className="relative w-full border-border/50">
                         <CardHeader className="border-b border-border/50 pb-4">
                             <div className="flex items-center justify-between">
                                 <div className="flex space-x-2">
@@ -205,7 +205,7 @@ export function HeroSplit({
 
                     {/* Floating Element */}
                     <div className="absolute -bottom-6 -left-6 max-w-[200px]">
-                        <Card variant="default" className="border-border/50 shadow-xl">
+                        <Card className="border-border/50 shadow-xl">
                             <CardContent className="p-3 flex items-center gap-3">
                                 <div className="h-8 w-8 rounded-full bg-chart-4/20 flex items-center justify-center text-chart-4">
                                     <Zap className="h-4 w-4" />

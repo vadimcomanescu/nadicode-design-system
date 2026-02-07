@@ -26,7 +26,7 @@ const heatmapConfig = {
 
 export function HeatmapBlock() {
     return (
-        <Card variant="glass-panel" className="w-full">
+        <Card  className="w-full">
             <CardHeader>
                 <CardTitle>User Activity Heatmap</CardTitle>
                 <CardDescription>Intensity of user interactions by Day and Time</CardDescription>

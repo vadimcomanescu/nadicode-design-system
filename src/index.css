@@ -3,7 +3,32 @@
 @custom-variant dark (&:is(.dark *));
 @config "../tailwind.config.js";
 
+@font-face {
+  font-family: 'GeistPixel';
+  src: url('/fonts/geist-pixel/GeistPixel-Square.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GeistPixelGrid';
+  src: url('/fonts/geist-pixel/GeistPixel-Grid.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GeistPixelLine';
+  src: url('/fonts/geist-pixel/GeistPixel-Line.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
+
 
   /* Light theme (default) */
   :root {
@@ -283,5 +308,42 @@
 
   to {
     transform: translateY(-2000px);
+  }
+}
+
+@keyframes pixel-shimmer {
+
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes pixel-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-2%, -2%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Replaces data-rain with a mask scan */
+@keyframes pixel-scan {
+  0% {
+    mask-position: 0% 0%;
+  }
+
+  100% {
+    mask-position: 0% 100%;
   }
 }

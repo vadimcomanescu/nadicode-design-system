@@ -1,20 +1,15 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
+import { PixelBackground } from './PixelBackground';
+import type { PixelTheme } from './PixelBackground';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'outline' | 'glass-panel' | 'glass-overlay';
   interactive?: boolean;
+  pixelTheme?: PixelTheme;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'default', interactive = false, ...props }, ref) => {
-
-    const variants = {
-      default: "bg-surface border border-border text-text-primary shadow-lg",
-      "glass-panel": "glass-panel text-text-primary",
-      "glass-overlay": "glass-overlay text-text-primary",
-      outline: "bg-transparent border border-border text-text-primary",
-    };
+  ({ className, interactive = false, pixelTheme = "cyber", ...props }, ref) => {
 
     const interactiveStyles = interactive
       ? "transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1"
@@ -25,12 +20,21 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={cn(
           "group relative rounded-lg p-6 overflow-hidden",
-          variants[variant],
+          "glass-panel", // Restored premium glass effect (emboss, shadows, noise)
           interactiveStyles,
           className
         )}
         {...props}
       >
+        {/* Mandated Pixel Background - Super Mega Futuristic */}
+        <PixelBackground theme={pixelTheme} />
+
+        {/* Mandated Corner Accents - Kept crisp */}
+        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/40" />
+        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/40" />
+        <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/40" />
+        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary/40" />
+
         <div className="relative z-20">
           {props.children}
         </div>

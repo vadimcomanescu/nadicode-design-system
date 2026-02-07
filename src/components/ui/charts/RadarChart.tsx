@@ -5,7 +5,6 @@ import {
     RadarChart as RechartsRadarChart,
     PolarGrid,
     PolarAngleAxis,
-    PolarRadiusAxis,
     ResponsiveContainer
 } from "recharts"
 
@@ -26,7 +25,6 @@ interface RadarChartProps {
     className?: string
     showLegend?: boolean
     gridShape?: 'polygon' | 'circle'
-    height?: number | string
 }
 
 export function RadarChart({
@@ -37,14 +35,13 @@ export function RadarChart({
     className,
     showLegend = true,
     gridShape = 'circle',
-    height = 300
 }: RadarChartProps) {
 
     const seriesKeys = series || Object.keys(config).filter(key => key !== indexKey)
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={height}>
+            <ResponsiveContainer width="100%" height={300}>
                 <RechartsRadarChart data={data} outerRadius="80%">
                     <PolarGrid gridType={gridShape} stroke="var(--color-border)" strokeOpacity={0.5} />
                     <PolarAngleAxis

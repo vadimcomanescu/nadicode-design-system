@@ -87,6 +87,9 @@ export const tokens = {
   typography: {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
+      pixel: ['GeistPixel', 'monospace'],
+      'pixel-grid': ['GeistPixelGrid', 'monospace'],
+      'pixel-line': ['GeistPixelLine', 'monospace'],
     },
     sizes: {
       xs: '12px',

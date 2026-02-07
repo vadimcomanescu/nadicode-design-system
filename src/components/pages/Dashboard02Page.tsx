@@ -13,6 +13,7 @@ import {
 
 import { Badge } from "../ui/Badge"
 import { Button } from "../ui/Button"
+import { PixelReveal } from "../ui/PixelReveal"
 import {
   Card,
   CardContent,
@@ -92,7 +93,7 @@ export function Dashboard02Page() {
                   <SidebarMenuButton tooltip="Orders">
                     <ShoppingCart />
                     <span>Orders</span>
-                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full" variant="secondary">
+                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full" variant="pixel">
                       6
                     </Badge>
                   </SidebarMenuButton>
@@ -141,6 +142,9 @@ export function Dashboard02Page() {
                   placeholder="Search products..."
                   className="pl-8 sm:w-[300px]"
                 />
+                <div className="absolute right-2.5 top-2.5 hidden sm:block">
+                  <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-border bg-surface px-1.5 font-pixel text-[10px] font-medium text-text-secondary opacity-100">⌘K</kbd>
+                </div>
               </div>
             </form>
             <Sheet>
@@ -185,28 +189,33 @@ export function Dashboard02Page() {
         </header>
         <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
-            <Card variant="glass-panel">
+            <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Orders</CardTitle>
                 <ShoppingCart className="h-4 w-4 text-text-secondary" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">1,234</div>
+                <div className="text-2xl font-bold">
+                  <PixelReveal text="1,234" />
+                </div>
                 <p className="text-xs text-chart-4">+12% from last week</p>
               </CardContent>
             </Card>
-            <Card variant="glass-panel">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <Card className="col-span-1">
+              <div className="flex flex-row items-center justify-between space-y-0 pb-2 mb-2">
                 <CardTitle className="text-sm font-medium">Revenue</CardTitle>
                 <CreditCard className="h-4 w-4 text-text-secondary" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">$12,234</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold">
+                  <span className="mr-1">$</span>
+                  <PixelReveal text="12,234" />
+                </div>
                 <p className="text-xs text-text-secondary">+19% growth</p>
-              </CardContent>
+              </div>
             </Card>
           </div>
-          <Card variant="glass-panel">
+          <Card>
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle>Recent Orders</CardTitle>

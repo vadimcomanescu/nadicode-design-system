@@ -42,7 +42,7 @@ const chartConfig = {
 
 export function BarChart() {
     return (
-        <Card variant="glass-panel" className="w-full">
+        <Card className="w-full">
             <CardHeader>
                 <CardTitle>Token Usage</CardTitle>
                 <CardDescription>Monthly inference token consumption</CardDescription>
@@ -53,8 +53,7 @@ export function BarChart() {
                     config={chartConfig}
                     indexKey="name"
                     bars={["total", "prediction"]}
-                    stacked
-                    height={240}
+                    stacked={true}
                 />
             </CardContent>
         </Card>

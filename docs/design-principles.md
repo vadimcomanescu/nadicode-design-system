@@ -23,16 +23,17 @@ We follow a strict affordance hierarchy to distinguish between interactive and p
 ### Golden Rules
 
 > [!IMPORTANT]
-> **Do not mix affordances.** A card that lifts but is not clickable creates frustration. A clickable card that doesn't lift feels dead.
+> **There is only one Card style.** Do not use variants.
 
-*   **Interactive Cards**: `<Card variant="glass" interactive>...</Card>`
-*   **Static Cards**: `<Card variant="glass">...</Card>`
-*   **Forbidden**: `<Card className="hover:scale-105">` (Do not style interactions manually).
+*   **Standard Card**: `<Card>...</Card>` (Automatically renders Pixel Glass aesthetic).
+*   **Interactive**: `<Card interactive>...</Card>` (Adds lift and glow).
+*   **Forbidden**: `<Card variant="...">`, `<Card className="hover:...">`.
 
 ## Aesthetic Guidelines
 
-### Glassmorphism
-*   **Depth**: Use `variant="glass"` for standard depth.
+### Glassmorphism & Pixelation
+*   **The Standard**: All cards use the **Premium Pixel Glass** style (Glass Utility + Pixel Overlay).
+*   **Depth**: Enforced automatically by the `Card` component.
 *   **Floating**: Use `glass-floating` utility only for elements that need to appear detached from the surface (e.g., modals, floating toolbars).
 
 ### Borders

@@ -26,7 +26,7 @@ export function ProfilePage() {
                 </div>
 
                 <div className="space-y-6">
-                    <Card variant="glass-panel">
+                    <Card >
                         <CardHeader>
                             <CardTitle>Personal Information</CardTitle>
                             <CardDescription>
@@ -49,7 +49,7 @@ export function ProfilePage() {
                         </CardContent>
                     </Card>
 
-                    <Card variant="glass-panel">
+                    <Card >
                         <CardHeader>
                             <CardTitle>Email & Notifications</CardTitle>
                         </CardHeader>

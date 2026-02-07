@@ -65,11 +65,10 @@ export function PricingTable() {
                     {plans.map((plan) => (
                         <Card
                             key={plan.name}
-                            variant={plan.popular ? "glass-overlay" : "default"}
                             interactive
                             className={cn(
-                                "relative flex flex-col",
-                                plan.popular && "border-accent/50 shadow-glow-accent ring-1 ring-accent/20"
+                                "flex flex-col relative overflow-hidden transition-all duration-300",
+                                plan.popular ? "border-primary/50 shadow-lg scale-105 z-10" : "border-border/50 hover:border-border"
                             )}
                         >
                             {plan.popular && (

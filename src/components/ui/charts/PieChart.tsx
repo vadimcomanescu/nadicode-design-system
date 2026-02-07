@@ -1,10 +1,6 @@
-"use client"
-
-import * as React from "react"
 import {
     Pie,
     PieChart as RechartsPieChart,
-    ResponsiveContainer,
     Cell
 } from "recharts"
 
@@ -28,7 +24,6 @@ interface PieChartProps {
     showLegend?: boolean
     innerRadius?: number | string
     outerRadius?: number | string
-    height?: number | string
     label?: boolean
 }
 
@@ -42,7 +37,6 @@ export function PieChart({
     showLegend = true,
     innerRadius,
     outerRadius = "80%",
-    height = 300,
     label = false
 }: PieChartProps) {
 

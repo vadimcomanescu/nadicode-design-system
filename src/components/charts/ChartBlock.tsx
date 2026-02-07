@@ -41,7 +41,7 @@ const chartConfig = {
 
 export function ChartBlock() {
   return (
-    <Card variant="glass-panel">
+    <Card >
       <CardHeader>
         <CardTitle>Analytics</CardTitle>
         <CardDescription>January - June 2024</CardDescription>

@@ -52,7 +52,7 @@ export function FeatureGrid() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((feature, i) => (
-                        <Card key={i} variant="glass-overlay" interactive>
+                        <Card key={i} interactive>
                             <CardHeader className="pb-2">
                                 <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary">
                                     <feature.icon className="h-5 w-5" />
@@ -98,7 +98,7 @@ export function FeatureList() {
                     </div>
                     <div className="relative">
                         <div className="absolute -inset-4 bg-accent/10 blur-3xl rounded-full" />
-                        <Card variant="glass-panel" className="p-0 overflow-hidden border-border/50">
+                        <Card className="p-0 overflow-hidden border-border/50">
                             <div className="p-4 border-b border-border/50 flex items-center gap-2">
                                 <div className="h-3 w-3 rounded-full bg-destructive/50" />
                                 <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
@@ -120,7 +120,7 @@ export function FeatureList() {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="order-2 lg:order-1 relative">
                         <div className="absolute -inset-4 bg-primary/10 blur-3xl rounded-full" />
-                        <Card variant="glass-panel" className="p-0 overflow-hidden border-border/50">
+                        <Card className="p-0 overflow-hidden border-border/50">
                             <div className="glass-overlay p-6 h-[350px] relative overflow-hidden flex flex-col items-center justify-center">
                                 <Cloud className="h-24 w-24 text-primary opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                                 <div className="z-10 glass-panel p-4 rounded-lg flex items-center gap-4 w-64 shadow-lg">

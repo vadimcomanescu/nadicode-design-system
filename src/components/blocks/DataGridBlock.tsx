@@ -119,7 +119,7 @@ const data: Payment[] = [
 
 export function DataGridBlock() {
     return (
-        <Card variant="glass-panel" className="w-full">
+        <Card  className="w-full">
             <CardHeader>
                 <CardTitle>Recent Transactions</CardTitle>
                 <CardDescription>A sophisticated data grid with filtering and actions.</CardDescription>

@@ -25,7 +25,6 @@ interface RadialBarChartProps {
     showLegend?: boolean
     innerRadius?: number | string
     outerRadius?: number | string
-    height?: number | string
     maxAngle?: number // 360 for full circle, 180 for semi-circle
 }
 
@@ -38,13 +37,12 @@ export function RadialBarChart({
     showLegend = true,
     innerRadius = "20%",
     outerRadius = "100%",
-    height = 300,
     maxAngle = 360
 }: RadialBarChartProps) {
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={height}>
+            <ResponsiveContainer width="100%" height={300}>
                 <RechartsRadialBarChart
                     data={data}
                     innerRadius={innerRadius}

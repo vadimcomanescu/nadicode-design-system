@@ -4,11 +4,22 @@ This document is the definitive guide for agents and developers working on the `
 
 ## 1. Design Philosophy
 
-The system aims for a **premium, ultra-realistic aesthetic**. Key characteristics:
--   **Deep Blacks**: Dark mode uses `#050505` (RGB `5 5 5`) background, not pure black, to create depth.
--   **Glassmorphism**: Extensive use of backdrop blur (`backdrop-blur-md`, `backdrop-blur-xl`) and subtle gradients.
--   **Subtle Gradients**: Interfaces should feel "alive" with micro-interactions and soft glows (e.g., Mouse Glow effect).
--   **High Contrast**: Text and interactive elements must maintain accessibility while preserving the "moody" look.
+The system is **OPINIONATED** and **PREMIUM**.
+- **Opinionated != Simple**: "One Way" does not mean the *simplest* way. It means the **Best, Most Premium** way.
+- **No Compromise**: Never trade visual fidelity for code simplicity. The default component must look expensive, layered, and high-fidelity.
+- **Premium Pixel Glass**: All containers and cards MUST use the **Hybrid Aesthetic**:
+    1.  **Glass Base**: High-quality blur, noise, emboss, and shadows (`.glass-panel`).
+    2.  **Pixel Overlay**: Subtle grid texture (low opacity) + corner accents.
+
+Key characteristics:
+-   **Deep Blacks**: Dark mode uses `#050505` (RGB `5 5 5`).
+-   **Rich Texture**: Always prioritize depth (layers, borders, noise) over flat surfaces.
+-   **Glassmorphism**: Extensive use of backdrop blur.
+
+## 1.1. Critical Constraints (DO NOT IGNORE)
+> [!CAUTION]
+> **NEVER FLATTEN THE DESIGN.**
+> When enforcing "opinionated" rules, do NOT strip away the glassmorphism, noise, or emboss effects. The "Opinionated" choice is always the **highest fidelity** choice.
 
 ## 2. Color System & Tokens
 

@@ -19,7 +19,7 @@ export function PromoCard({
 }: PromoCardProps) {
     return (
         <Card
-            variant="glass-panel"
+            
             className={cn(
                 "relative overflow-hidden shadow-sm",
                 className

@@ -32,7 +32,7 @@ const chartConfig = {
 
 export function UsageDonut() {
     return (
-        <Card variant="glass-panel" className="w-[350px]">
+        <Card className="w-[350px]">
             <CardHeader>
                 <CardTitle>Storage</CardTitle>
                 <CardDescription>Distribution of data types</CardDescription>
@@ -46,7 +46,6 @@ export function UsageDonut() {
                         nameKey="name"
                         innerRadius={60}
                         outerRadius={80}
-                        height={240}
                         showLegend={false}
                         className="mx-auto aspect-square max-h-[240px]"
                     />

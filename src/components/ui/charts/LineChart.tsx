@@ -27,7 +27,6 @@ interface LineChartProps {
     showLegend?: boolean
     showYAxis?: boolean
     yAxisWidth?: number
-    height?: number | string
 }
 
 export function LineChart({
@@ -39,14 +38,13 @@ export function LineChart({
     showLegend = true,
     showYAxis = false,
     yAxisWidth = 40,
-    height = 300
 }: LineChartProps) {
     // If lines are not provided, derive them from config keys
     const lineKeys = lines || Object.keys(config).filter(key => key !== indexKey)
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={height}>
+            <ResponsiveContainer width="100%" height={300}>
                 <RechartsLineChart
                     data={data}
                     margin={{

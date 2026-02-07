@@ -17,7 +17,7 @@ import { Skeleton } from "./components/ui/Skeleton";
 import { Textarea } from "./components/ui/Textarea";
 import { RadioGroup, RadioGroupItem } from "./components/ui/RadioGroup";
 import { ToggleGroup, ToggleGroupItem } from "./components/ui/ToggleGroup";
-import { Bold, Italic, Underline, Package, Users, Settings, Zap } from "lucide-react";
+import { Bold, Italic, Underline, Package, Users, Settings } from "lucide-react";
 import { Slider } from "./components/ui/Slider";
 import { Progress } from "./components/ui/Progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./components/ui/Accordion";
@@ -57,7 +57,6 @@ import { PricingTable } from "./components/blocks/PricingBlock";
 import { Footer } from "./components/blocks/FooterBlock";
 import Feature1 from "./components/features-1";
 import Feature2 from "./components/features-2";
-import Feature3 from "./components/features-3";
 import Integrations1 from "./components/integrations-1";
 import Stats from "./components/stats";
 import Team from "./components/team";
@@ -158,7 +157,7 @@ function DocsPage() {
             <section>
               <Typography variant="h2" className="mb-6 border-b border-border pb-2">Core Principles</Typography>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card variant="glass-panel" className="h-full">
+                <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-primary">
                       <div className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -171,7 +170,7 @@ function DocsPage() {
                     </Typography>
                   </CardContent>
                 </Card>
-                <Card variant="glass-panel" className="h-full">
+                <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="text-primary">Ultra-Realistic Depth</CardTitle>
                   </CardHeader>
@@ -181,7 +180,7 @@ function DocsPage() {
                     </Typography>
                   </CardContent>
                 </Card>
-                <Card variant="glass-panel" className="h-full">
+                <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="text-primary">High-Contrast Accessibility</CardTitle>
                   </CardHeader>
@@ -462,7 +461,7 @@ function DocsPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <Card variant="glass-panel">
+                  <Card >
                     <CardHeader>
                       <CardTitle>Notifications</CardTitle>
                       <CardDescription>You have 3 unread messages.</CardDescription>
@@ -516,7 +515,7 @@ function DocsPage() {
                         {Array.from({ length: 5 }).map((_, index) => (
                           <CarouselItem key={index}>
                             <div className="p-1">
-                              <Card variant="glass-panel">
+                              <Card >
                                 <CardContent className="flex aspect-square items-center justify-center p-6">
                                   <span className="text-4xl font-semibold">{index + 1}</span>
                                 </CardContent>
@@ -587,7 +586,7 @@ console.log(greet("World"));`}
 
                   <div className="space-y-4">
                     <Typography variant="h3">Audio Visualizer</Typography>
-                    <Card variant="glass-panel">
+                    <Card >
                       <CardContent className="flex flex-col items-center justify-center p-12 gap-6">
                         <AudioVisualizer isPlaying={true} />
                         <Button variant="outline">Play Voice Sample</Button>
@@ -848,31 +847,31 @@ console.log(greet("World"));`}
                   <Typography variant="h3">Vanta.js Login Pages</Typography>
                   <Typography variant="muted"> immersive 3D backgrounds with branding colors.</Typography>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/birds'}>
+                    <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/birds'}>
                       <CardHeader><CardTitle className="text-lg">Birds (Dark)</CardTitle></CardHeader>
                       <CardContent><Typography variant="small" className="text-text-secondary">Flocking simulation with Cyan/Indigo gradient.</Typography></CardContent>
                     </Card>
-                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/globe'}>
+                    <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/globe'}>
                       <CardHeader><CardTitle className="text-lg">Globe (Dark)</CardTitle></CardHeader>
                       <CardContent><Typography variant="small" className="text-text-secondary">Connected world with Pink accents.</Typography></CardContent>
                     </Card>
-                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/net'}>
+                    <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/net'}>
                       <CardHeader><CardTitle className="text-lg">Net (Dark)</CardTitle></CardHeader>
                       <CardContent><Typography variant="small" className="text-text-secondary">Neural network mesh topology.</Typography></CardContent>
                     </Card>
-                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/topology'}>
+                    <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/topology'}>
                       <CardHeader><CardTitle className="text-lg">Topology (Dark)</CardTitle></CardHeader>
                       <CardContent><Typography variant="small" className="text-text-secondary">Complex structural mapping.</Typography></CardContent>
                     </Card>
-                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/cells'}>
+                    <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/cells'}>
                       <CardHeader><CardTitle className="text-lg">Cells (Light)</CardTitle></CardHeader>
                       <CardContent><Typography variant="small" className="text-text-secondary">Organic diffusion pattern.</Typography></CardContent>
                     </Card>
-                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/trunk'}>
+                    <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/trunk'}>
                       <CardHeader><CardTitle className="text-lg">Trunk (Light)</CardTitle></CardHeader>
                       <CardContent><Typography variant="small" className="text-text-secondary">Chaotic growth algorithm.</Typography></CardContent>
                     </Card>
-                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/dots'}>
+                    <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/dots'}>
                       <CardHeader><CardTitle className="text-lg">Dots (Light)</CardTitle></CardHeader>
                       <CardContent><Typography variant="small" className="text-text-secondary">Grid of connected points.</Typography></CardContent>
                     </Card>
@@ -881,35 +880,35 @@ console.log(greet("World"));`}
 
                 <div className="space-y-4">
                   <Typography variant="h3">Dashboard Analytics (v1)</Typography>
-                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
+                  <div className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
                     <Dashboard01Page />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Verification Page</Typography>
-                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background">
+                  <div className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border bg-background">
                     <VerificationPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Profile Settings</Typography>
-                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background">
+                  <div className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border bg-background">
                     <ProfilePage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Team Settings</Typography>
-                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background">
+                  <div className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border bg-background">
                     <TeamPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Dashboard Overview (v2)</Typography>
-                  <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
+                  <div className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
                     <Dashboard02Page />
                   </div>
                 </div>
@@ -923,21 +922,21 @@ console.log(greet("World"));`}
 
                 <div className="space-y-4">
                   <Typography variant="h3">Login Page</Typography>
-                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-background/50">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-y-auto min-h-[600px] max-h-[800px] flex items-center justify-center bg-background/50">
                     <LoginPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Signup Page</Typography>
-                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center bg-background/50">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-y-auto min-h-[600px] max-h-[800px] flex items-center justify-center bg-background/50">
                     <SignupPage />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <Typography variant="h3">Simple Login Form (Alternative)</Typography>
-                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-hidden min-h-[600px] flex items-center justify-center relative">
+                  <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-y-auto min-h-[600px] max-h-[800px] flex items-center justify-center relative">
                     <div className="absolute inset-0 z-0">
                       <AnimatedBackground />
                     </div>
@@ -949,7 +948,7 @@ console.log(greet("World"));`}
 
                 <div className="space-y-4">
                   <Typography variant="h3">Auth Layout (Split Glass)</Typography>
-                  <div className="min-h-[800px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border bg-background/50">
+                  <div className="h-[800px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border bg-background/50">
                     <AuthLayout />
                   </div>
                 </div>

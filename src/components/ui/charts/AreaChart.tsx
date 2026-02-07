@@ -28,7 +28,6 @@ interface AreaChartProps {
     showLegend?: boolean
     showYAxis?: boolean
     yAxisWidth?: number
-    height?: number | string
 }
 
 export function AreaChart({
@@ -41,13 +40,12 @@ export function AreaChart({
     showLegend = true,
     showYAxis = false,
     yAxisWidth = 40,
-    height = 300
 }: AreaChartProps) {
     const areaKeys = areas || Object.keys(config).filter(key => key !== indexKey)
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={height}>
+            <ResponsiveContainer width="100%" height={300}>
                 <RechartsAreaChart
                     data={data}
                     margin={{

@@ -13,14 +13,19 @@ export function VantaWrapper({ children, effect, config, className }: VantaWrapp
     const [vantaEffect, setVantaEffect] = useState<any>(null)
 
     useEffect(() => {
-        if (!vantaEffect && vantaRef.current && effect) {
+        let instance: any = null;
+        let timeoutId: any;
+
+        const initVanta = () => {
+            if (!vantaRef.current || !effect) return;
+
             try {
                 // Vanta requires THREE to be on window
                 if (typeof window !== 'undefined' && !(window as any).THREE) {
                     (window as any).THREE = THREE;
                 }
 
-                const instance = effect({
+                instance = effect({
                     el: vantaRef.current,
                     THREE: THREE, // Pass THREE instance explicitly
                     mouseControls: true,
@@ -36,12 +41,21 @@ export function VantaWrapper({ children, effect, config, className }: VantaWrapp
             } catch (error) {
                 console.error("Failed to initialize Vanta effect:", error)
             }
+        };
+
+        // Cleanup previous effect first
+        if (vantaEffect) {
+            vantaEffect.destroy();
+            setVantaEffect(null);
         }
 
+        // Small delay to ensure DOM/Canvas is ready and previous instance is fully gone
+        timeoutId = setTimeout(initVanta, 10);
+
         return () => {
-            if (vantaEffect) {
-                vantaEffect.destroy()
-                setVantaEffect(null)
+            clearTimeout(timeoutId);
+            if (instance) {
+                instance.destroy()
             }
         }
     }, [effect, config])

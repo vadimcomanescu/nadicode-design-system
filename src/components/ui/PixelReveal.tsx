@@ -14,7 +14,7 @@ const PIXEL_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
 export function PixelReveal({
     text,
     className,
-    duration = 3000, // Slower for visibility
+    duration = 300, // Fast for snappy feel
     delay = 0,
     as: Component = "span",
 }: PixelRevealProps) {

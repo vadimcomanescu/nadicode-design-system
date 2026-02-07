@@ -1,4 +1,3 @@
-
 import { VantaWrapper } from '../../ui/vanta/VantaWrapper'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '../../ui/Card'
 import { Button } from '../../ui/Button'
@@ -7,6 +6,7 @@ import { Label } from '../../ui/Label'
 import { Checkbox } from '../../ui/Checkbox'
 import { Zap } from 'lucide-react'
 import { GoogleIcon } from '../../ui/BrandIcons'
+import { useTheme } from '../../../lib/ThemeProvider'
 
 // @ts-ignore
 import BIRDS from 'vanta/dist/vanta.birds.min'
@@ -42,12 +42,12 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
         <div className="flex items-center justify-center min-h-screen relative">
             <Button
                 variant="ghost"
-                className="absolute top-4 left-4 z-50 text-white/50 hover:text-white"
+                className="absolute top-4 left-4 z-50 text-foreground/50 hover:text-foreground"
                 onClick={() => window.location.href = '/?tab=pages'}
             >
                 ← Back to Pages
             </Button>
-            <Card  className="w-full max-w-md">
+            <Card className="w-full max-w-md" disablePixelBackground={true}>
                 <CardHeader className="space-y-1 text-center">
                     <div className="flex justify-center mb-4">
                         <div className={`p-3 rounded-full ${isDark ? 'bg-primary/10' : 'bg-primary/5'}`}>
@@ -103,16 +103,19 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
     )
 }
 
-// --- Dark Variants ---
+// --- Adaptive Components ---
 
 export function LoginBirdsDark() {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     return (
         <VantaWrapper
             effect={BIRDS}
             config={{
-                backgroundColor: COLORS.darkBg,
-                color1: COLORS.primary, // Indigo
-                color2: COLORS.secondary, // Cyan
+                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+                color1: isDark ? COLORS.primary : COLORS.primaryDark,
+                color2: isDark ? COLORS.secondary : COLORS.secondaryDark,
                 colorMode: "lerpGradient",
                 birdSize: 1.50,
                 wingSpan: 30.00,
@@ -120,113 +123,129 @@ export function LoginBirdsDark() {
                 separation: 50.00,
                 alignment: 50.00,
                 cohesion: 50.00,
-                quantity: 3.00
+                quantity: 3.00,
+                backgroundAlpha: 1.0 // Ensure full coverage
             }}
         >
-            <LoginPageLayout title="Welcome Back" description="Enter your credentials to access the system" isDark={true} />
+            <LoginPageLayout title="Welcome Back" description="Enter your credentials to access the system" isDark={isDark} />
         </VantaWrapper>
     )
 }
 
 export function LoginGlobeDark() {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     return (
         <VantaWrapper
             effect={GLOBE}
             config={{
-                backgroundColor: COLORS.darkBg,
-                color: COLORS.primary, // Indigo
-                color2: COLORS.accent, // Pink
+                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+                color: isDark ? COLORS.primary : COLORS.primaryDark,
+                color2: isDark ? COLORS.accent : COLORS.accent, // Pink looks good on both
                 size: 1.2,
                 showDots: true
             }}
         >
-            <LoginPageLayout title="Global Access" description="Connect to the worldwide network" isDark={true} />
+            <LoginPageLayout title="Global Access" description="Connect to the worldwide network" isDark={isDark} />
         </VantaWrapper>
     )
 }
 
 export function LoginNetDark() {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     return (
         <VantaWrapper
             effect={NET}
             config={{
-                backgroundColor: COLORS.darkBg,
-                color: COLORS.secondary, // Cyan (Net looks better with Cyan on black)
+                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+                color: isDark ? COLORS.secondary : COLORS.primaryDark,
                 points: 12.00,
                 maxDistance: 22.00,
                 spacing: 18.00,
                 showDots: true
             }}
         >
-            <LoginPageLayout title="Neural Interface" description="Secure connection established" isDark={true} />
+            <LoginPageLayout title="Neural Interface" description="Secure connection established" isDark={isDark} />
         </VantaWrapper>
     )
 }
 
-// --- Light Variants ---
-
 export function LoginCellsLight() {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     return (
         <VantaWrapper
             effect={CELLS}
             config={{
-                color1: COLORS.secondaryDark, // Dark Cyan
-                color2: COLORS.primary, // Indigo
+                color1: isDark ? COLORS.secondary : COLORS.secondaryDark,
+                color2: isDark ? COLORS.primary : COLORS.primary,
                 size: 1.5,
                 speed: 1,
                 minHeight: 200.00,
                 minWidth: 200.00
             }}
         >
-            <LoginPageLayout title="Cellular Login" description="Organic authentication systems" isDark={false} />
+            <LoginPageLayout title="Cellular Login" description="Organic authentication systems" isDark={isDark} />
         </VantaWrapper>
     )
 }
 
 export function LoginTrunkLight() {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     return (
         <VantaWrapper
             effect={TRUNK}
             config={{
-                backgroundColor: COLORS.lightBg,
-                color: COLORS.primaryDark, // Darker Indigo for visibility on light bg
+                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+                color: isDark ? COLORS.secondary : COLORS.primaryDark,
                 spacing: 2.0,
-                chaos: 4.0 // High chaos for organic feel
+                chaos: 4.0
             }}
         >
-            <LoginPageLayout title="Growth Platform" description="Scale your business with us" isDark={false} />
+            <LoginPageLayout title="Growth Platform" description="Scale your business with us" isDark={isDark} />
         </VantaWrapper>
     )
 }
 
 export function LoginDotsLight() {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     return (
         <VantaWrapper
             effect={DOTS}
             config={{
-                backgroundColor: COLORS.lightBg,
-                color: COLORS.primaryDark, // Dark Indigo
-                color2: COLORS.secondaryDark, // Dark Cyan
+                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+                color: isDark ? COLORS.primary : COLORS.primaryDark,
+                color2: isDark ? COLORS.secondary : COLORS.secondaryDark,
                 size: 3.0,
                 spacing: 35.0
             }}
         >
-            <LoginPageLayout title="Connected Systems" description="Join the grid" isDark={false} />
+            <LoginPageLayout title="Connected Systems" description="Join the grid" isDark={isDark} />
         </VantaWrapper>
     )
 }
 
-// --- Topology (Extra as requested) ---
 export function LoginTopologyDark() {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     return (
         <VantaWrapper
             effect={TOPOLOGY}
             config={{
-                backgroundColor: COLORS.darkBg,
-                color: COLORS.secondary, // Cyan for better visibility
+                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+                color: isDark ? COLORS.secondary : COLORS.primaryDark,
             }}
         >
-            <LoginPageLayout title="Topology View" description="Structural mapping login" isDark={true} />
+            <LoginPageLayout title="Topology View" description="Structural mapping login" isDark={isDark} />
         </VantaWrapper>
     )
 }

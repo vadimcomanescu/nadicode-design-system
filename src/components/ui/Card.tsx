@@ -6,10 +6,11 @@ import type { PixelTheme } from './PixelBackground';
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   interactive?: boolean;
   pixelTheme?: PixelTheme;
+  disablePixelBackground?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, interactive = false, pixelTheme = "cyber", ...props }, ref) => {
+  ({ className, interactive = false, pixelTheme = "cyber", disablePixelBackground = false, ...props }, ref) => {
 
     const interactiveStyles = interactive
       ? "transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1"
@@ -27,7 +28,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {...props}
       >
         {/* Mandated Pixel Background - Super Mega Futuristic */}
-        <PixelBackground theme={pixelTheme} />
+        {!disablePixelBackground && <PixelBackground theme={pixelTheme} />}
 
         {/* Mandated Corner Accents - Kept crisp */}
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/40" />

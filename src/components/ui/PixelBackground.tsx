@@ -22,15 +22,17 @@ export function PixelBackground({
         switch (theme) {
             case "encryption":
                 // Density: High. Content: Numbers, Slashed 0 (ss04), Glyphs.
-                return Array.from({ length: 200 }) // Reduced from 400
+                // Refined: Removed heavy blocks for elegance.
+                return Array.from({ length: 200 })
                     .map((_, i) => {
                         const r = (i * 1337) % 100;
-                        if (r > 90) return "█";
-                        if (r > 80) return "▓";
-                        if (r > 70) return "▒";
-                        if (r > 60) return "░";
+                        if (r > 90) return "1";
+                        if (r > 80) return "0";
+                        if (r > 70) return "+";
+                        if (r > 60) return "-";
+                        if (r > 50) return "_";
                         if (r > 40) return "0"; // Will be slashed via CSS
-                        return "1";
+                        return " "; // More negative space
                     })
                     .join("");
 
@@ -63,7 +65,7 @@ export function PixelBackground({
             case "encryption":
                 return {
                     fontFeatureSettings: '"ss04" on',
-                    opacity: 0.04, // Drastic reduction: Subliminal texture
+                    // Opacity handled via className for light/dark mode
                     animation: "pixel-scan 20s linear infinite",
                     maskImage: "linear-gradient(to bottom, transparent, black 10%, black 70%, transparent)",
                     maskSize: "100% 200%",
@@ -71,7 +73,7 @@ export function PixelBackground({
             case "void":
                 return {
                     fontFeatureSettings: '"ss02" on, "ss06" on',
-                    opacity: 0.03, // Drastic reduction
+                    // Opacity handled via className for light/dark mode
                     animation: "pixel-drift 60s ease-in-out infinite",
                     maskImage: "radial-gradient(circle at center, black 30%, transparent 85%)",
                 };
@@ -79,10 +81,22 @@ export function PixelBackground({
             default:
                 return {
                     fontFeatureSettings: '"ss02" on, "ss06" on',
-                    opacity: 0.01, // Almost invisible
+                    // Opacity handled via className for light/dark mode
                     // Removed animation for zero distraction
                     maskImage: "linear-gradient(135deg, black 0%, transparent 60%)",
                 };
+        }
+    }, [theme]);
+
+    const opacityClass = useMemo(() => {
+        switch (theme) {
+            case "encryption":
+                return "opacity-[0.08] dark:opacity-[0.04]";
+            case "void":
+                return "opacity-[0.06] dark:opacity-[0.03]";
+            case "cyber":
+            default:
+                return "opacity-[0.03] dark:opacity-[0.01]";
         }
     }, [theme]);
 
@@ -90,6 +104,7 @@ export function PixelBackground({
         <div
             className={cn(
                 "absolute inset-0 pointer-events-none overflow-hidden select-none",
+                opacityClass,
                 className
             )}
             aria-hidden="true"

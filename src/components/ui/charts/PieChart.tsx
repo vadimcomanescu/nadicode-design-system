@@ -1,0 +1,85 @@
+"use client"
+
+import * as React from "react"
+import {
+    Pie,
+    PieChart as RechartsPieChart,
+    ResponsiveContainer,
+    Cell
+} from "recharts"
+
+import {
+    ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
+    ChartTooltip,
+    ChartTooltipContent,
+    type ChartConfig,
+} from "../../ui/Chart"
+import { cn } from "@/lib/utils"
+
+interface PieChartProps {
+    data: any[]
+    config: ChartConfig
+    dataKey: string
+    nameKey: string
+    variant?: "pie" | "donut"
+    className?: string
+    showLegend?: boolean
+    innerRadius?: number | string
+    outerRadius?: number | string
+    height?: number | string
+    label?: boolean
+}
+
+export function PieChart({
+    data,
+    config,
+    dataKey,
+    nameKey,
+    variant = "donut",
+    className,
+    showLegend = true,
+    innerRadius,
+    outerRadius = "80%",
+    height = 300,
+    label = false
+}: PieChartProps) {
+
+    // Default radii
+    const finalInnerRadius = innerRadius ?? (variant === "donut" ? "60%" : 0)
+
+    return (
+        <ChartContainer config={config} className={cn("mx-auto aspect-square max-h-[300px]", className)}>
+            <RechartsPieChart>
+                <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent hideLabel />}
+                />
+                <Pie
+                    data={data}
+                    dataKey={dataKey}
+                    nameKey={nameKey}
+                    innerRadius={finalInnerRadius}
+                    outerRadius={outerRadius}
+                    strokeWidth={0} // Remove default stroke for cleaner look
+                    label={label}
+                >
+                    {data.map((entry, index) => {
+                        const key = entry[nameKey]
+                        const configColor = config[key]?.color
+
+                        return (
+                            <Cell
+                                key={`cell-${index}`}
+                                fill={entry.fill || configColor || `var(--color-${key})`}
+                                stroke="rgba(0,0,0,0)"
+                            />
+                        )
+                    })}
+                </Pie>
+                {showLegend && <ChartLegend content={<ChartLegendContent />} className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center" />}
+            </RechartsPieChart>
+        </ChartContainer>
+    )
+}

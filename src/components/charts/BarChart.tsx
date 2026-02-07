@@ -1,6 +1,5 @@
-"use client"
-
-import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts"
+import { BarChart as BarChartPrimitive } from "../ui/charts/BarChart"
+import { type ChartConfig } from "../ui/Chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
 
 const data = [
@@ -36,6 +35,11 @@ const data = [
     },
 ]
 
+const chartConfig = {
+    total: { label: "Total", color: "hsl(var(--chart-1))" },
+    prediction: { label: "Prediction", color: "hsl(var(--chart-2))" },
+} satisfies ChartConfig
+
 export function BarChart() {
     return (
         <Card variant="glass-panel" className="w-full">
@@ -44,49 +48,14 @@ export function BarChart() {
                 <CardDescription>Monthly inference token consumption</CardDescription>
             </CardHeader>
             <CardContent className="pb-4">
-                <div className="h-[240px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <RechartsBarChart data={data}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" opacity={0.5} />
-                            <XAxis
-                                dataKey="name"
-                                stroke="var(--color-text-secondary)"
-                                fontSize={12}
-                                tickLine={false}
-                                axisLine={false}
-                            />
-                            <YAxis
-                                stroke="var(--color-text-secondary)"
-                                fontSize={12}
-                                tickLine={false}
-                                axisLine={false}
-                                tickFormatter={(value) => `$${value}`}
-                            />
-                            <Tooltip
-                                cursor={{ fill: 'var(--color-muted)', opacity: 0.2 }}
-                                contentStyle={{
-                                    backgroundColor: 'var(--color-background)',
-                                    borderColor: 'var(--color-border)',
-                                    borderRadius: '8px',
-                                    color: 'var(--color-text-primary)'
-                                }}
-                            />
-                            <Bar
-                                dataKey="prediction"
-                                stackId="a"
-                                fill="var(--chart-2)"
-                                radius={[0, 0, 4, 4]}
-                                className="opacity-70"
-                            />
-                            <Bar
-                                dataKey="total"
-                                stackId="a"
-                                fill="var(--chart-1)"
-                                radius={[4, 4, 0, 0]}
-                            />
-                        </RechartsBarChart>
-                    </ResponsiveContainer>
-                </div>
+                <BarChartPrimitive
+                    data={data}
+                    config={chartConfig}
+                    indexKey="name"
+                    bars={["total", "prediction"]}
+                    stacked
+                    height={240}
+                />
             </CardContent>
         </Card>
     )

@@ -16,6 +16,7 @@ import {
   RadialBar,
   RadialBarChart,
 } from "recharts"
+import { HeatmapBlock } from "./HeatmapBlock"
 
 import {
   Card,
@@ -232,6 +233,7 @@ export function ChartCollectionBlock() {
           </ChartContainer>
         </CardContent>
       </Card>
+      <HeatmapBlock />
     </div>
   )
 }

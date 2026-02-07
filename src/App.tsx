@@ -17,7 +17,7 @@ import { Skeleton } from "./components/ui/Skeleton";
 import { Textarea } from "./components/ui/Textarea";
 import { RadioGroup, RadioGroupItem } from "./components/ui/RadioGroup";
 import { ToggleGroup, ToggleGroupItem } from "./components/ui/ToggleGroup";
-import { Bold, Italic, Underline, Package, Users, Settings } from "lucide-react";
+import { Bold, Italic, Underline, Package, Users, Settings, Zap } from "lucide-react";
 import { Slider } from "./components/ui/Slider";
 import { Progress } from "./components/ui/Progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./components/ui/Accordion";
@@ -91,11 +91,35 @@ import { HeroHeader } from "./components/header";
 import SimpleLoginForm from "./components/login"; // Ensure nothing is hidden
 import { PatternsPage } from "./components/pages/PatternsPage";
 
-function App() {
+
+
+// Router Imports
+import { Routes, Route } from "react-router-dom";
+import {
+  LoginBirdsDark,
+  LoginGlobeDark,
+  LoginNetDark,
+  LoginCellsLight,
+  LoginTrunkLight,
+  LoginDotsLight,
+  LoginTopologyDark
+} from "./components/pages/auth/VantaLoginPages";
+
+
+import { useSearchParams } from "react-router-dom";
+
+function DocsPage() {
   const { toast } = useToast();
   const [date, setDate] = useState<Date | undefined>(new Date());
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [progress, _setProgress] = useState(13);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentTab = searchParams.get("tab") || "overview";
+
+  const handleTabChange = (value: string) => {
+    setSearchParams({ tab: value });
+  };
 
   return (
     <div className="min-h-screen bg-background text-text-primary py-12 relative overflow-hidden">
@@ -112,18 +136,25 @@ function App() {
           <ThemeToggle />
         </header>
 
-        <Tabs defaultValue="overview" className="space-y-8">
+        <Tabs
+          value={currentTab}
+          onValueChange={handleTabChange}
+          className="space-y-8"
+        >
           <TabsList className="glass mb-8">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="primitives">Primitives</TabsTrigger>
             <TabsTrigger value="website">Website</TabsTrigger>
             <TabsTrigger value="application">Application</TabsTrigger>
             <TabsTrigger value="charts">Data Viz</TabsTrigger>
+
             <TabsTrigger value="pages">Pages</TabsTrigger>
             <TabsTrigger value="patterns">Patterns</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="mt-8 space-y-12">
+
+
             <section>
               <Typography variant="h2" className="mb-6 border-b border-border pb-2">Core Principles</Typography>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -801,6 +832,8 @@ console.log(greet("World"));`}
             </section>
           </TabsContent>
 
+
+
           <TabsContent value="patterns">
             <PatternsPage />
           </TabsContent>
@@ -809,6 +842,43 @@ console.log(greet("World"));`}
             <section className="space-y-16">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Example Pages</Typography>
               <div className="grid gap-32">
+
+                {/* Vanta Pages Section */}
+                <div className="space-y-4">
+                  <Typography variant="h3">Vanta.js Login Pages</Typography>
+                  <Typography variant="muted"> immersive 3D backgrounds with branding colors.</Typography>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/birds'}>
+                      <CardHeader><CardTitle className="text-lg">Birds (Dark)</CardTitle></CardHeader>
+                      <CardContent><Typography variant="small" className="text-text-secondary">Flocking simulation with Cyan/Indigo gradient.</Typography></CardContent>
+                    </Card>
+                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/globe'}>
+                      <CardHeader><CardTitle className="text-lg">Globe (Dark)</CardTitle></CardHeader>
+                      <CardContent><Typography variant="small" className="text-text-secondary">Connected world with Pink accents.</Typography></CardContent>
+                    </Card>
+                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/net'}>
+                      <CardHeader><CardTitle className="text-lg">Net (Dark)</CardTitle></CardHeader>
+                      <CardContent><Typography variant="small" className="text-text-secondary">Neural network mesh topology.</Typography></CardContent>
+                    </Card>
+                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/topology'}>
+                      <CardHeader><CardTitle className="text-lg">Topology (Dark)</CardTitle></CardHeader>
+                      <CardContent><Typography variant="small" className="text-text-secondary">Complex structural mapping.</Typography></CardContent>
+                    </Card>
+                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/cells'}>
+                      <CardHeader><CardTitle className="text-lg">Cells (Light)</CardTitle></CardHeader>
+                      <CardContent><Typography variant="small" className="text-text-secondary">Organic diffusion pattern.</Typography></CardContent>
+                    </Card>
+                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/trunk'}>
+                      <CardHeader><CardTitle className="text-lg">Trunk (Light)</CardTitle></CardHeader>
+                      <CardContent><Typography variant="small" className="text-text-secondary">Chaotic growth algorithm.</Typography></CardContent>
+                    </Card>
+                    <Card variant="glass-panel" className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/login/vanta/dots'}>
+                      <CardHeader><CardTitle className="text-lg">Dots (Light)</CardTitle></CardHeader>
+                      <CardContent><Typography variant="small" className="text-text-secondary">Grid of connected points.</Typography></CardContent>
+                    </Card>
+                  </div>
+                </div>
+
                 <div className="space-y-4">
                   <Typography variant="h3">Dashboard Analytics (v1)</Typography>
                   <div className="h-[600px] overflow-hidden rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
@@ -954,7 +1024,7 @@ console.log(greet("World"));`}
                 </div>
               </div>
 
-              EMPTY
+
 
               <div className="space-y-4">
                 <Typography variant="h3">Integrations</Typography>
@@ -1018,6 +1088,25 @@ function ColorCard({ name, hex, className }: { name: string, hex: string, classN
         <Typography variant="small" className="text-text-secondary font-mono">{hex}</Typography>
       </div>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<DocsPage />} />
+
+      {/* Vanta Login Pages - Dark */}
+      <Route path="/login/vanta/birds" element={<LoginBirdsDark />} />
+      <Route path="/login/vanta/globe" element={<LoginGlobeDark />} />
+      <Route path="/login/vanta/net" element={<LoginNetDark />} />
+      <Route path="/login/vanta/topology" element={<LoginTopologyDark />} />
+
+      {/* Vanta Login Pages - Light */}
+      <Route path="/login/vanta/cells" element={<LoginCellsLight />} />
+      <Route path="/login/vanta/trunk" element={<LoginTrunkLight />} />
+      <Route path="/login/vanta/dots" element={<LoginDotsLight />} />
+    </Routes>
   )
 }
 

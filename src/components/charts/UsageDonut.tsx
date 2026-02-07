@@ -1,8 +1,8 @@
 "use client"
 
-import { Pie, PieChart, Cell } from "recharts"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "../ui/Chart"
+import { PieChart as PieChartPrimitive } from "../ui/charts/PieChart"
+import { type ChartConfig } from "../ui/Chart"
 
 const data = [
     { name: "Vector DB", value: 400, fill: "rgb(var(--chart-1))" },
@@ -39,28 +39,17 @@ export function UsageDonut() {
             </CardHeader>
             <CardContent className="pb-4">
                 <div className="h-[240px] relative">
-                    <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[240px]">
-                        <PieChart>
-                            <Pie
-                                data={data}
-                                cx="50%"
-                                cy="50%"
-                                innerRadius={60}
-                                outerRadius={80}
-                                paddingAngle={5}
-                                dataKey="value"
-                                stroke="none"
-                            >
-                                {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                                ))}
-                            </Pie>
-                            <ChartTooltip
-                                cursor={false}
-                                content={<ChartTooltipContent hideLabel />}
-                            />
-                        </PieChart>
-                    </ChartContainer>
+                    <PieChartPrimitive
+                        data={data}
+                        config={chartConfig}
+                        dataKey="value"
+                        nameKey="name"
+                        innerRadius={60}
+                        outerRadius={80}
+                        height={240}
+                        showLegend={false}
+                        className="mx-auto aspect-square max-h-[240px]"
+                    />
                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                         <span className="text-3xl font-bold text-text-primary">1.2<span className="text-lg text-text-secondary">GB</span></span>
                         <span className="text-xs text-text-tertiary uppercase tracking-wider">Used</span>

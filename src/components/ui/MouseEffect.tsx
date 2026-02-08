@@ -45,7 +45,7 @@ export function MouseGlow({ className }: { className?: string }) {
     <motion.div
       className={cn(
         "pointer-events-none fixed inset-0 z-0",
-        "opacity-40 dark:opacity-70 transition-opacity duration-500", // Subtle but visible in light mode
+        "opacity-80 dark:opacity-100 transition-opacity duration-500", // Subtle but visible in light mode
         className
       )}
       style={{
@@ -59,10 +59,10 @@ export function MouseGlow({ className }: { className?: string }) {
       <style>{`
         .mouse-grid-pattern {
           background-size: 24px 24px;
-          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(101, 163, 13, 0.4)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(101, 163, 13, 0.7)'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(101, 163, 13, 0.6)' stroke-width='1'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(101, 163, 13, 0.9)'/%3E%3C/svg%3E");
         }
         .dark .mouse-grid-pattern {
-          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(99, 102, 241, 0.4)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(99, 102, 241, 0.7)'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(99, 102, 241, 0.6)' stroke-width='1'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(99, 102, 241, 0.9)'/%3E%3C/svg%3E");
         }
       `}</style>
     </motion.div>

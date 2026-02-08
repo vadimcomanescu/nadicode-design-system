@@ -1,4 +1,4 @@
-import { LogoIcon } from '@/components/logo'
+import { LogoIcon } from '@/components/ui/Logo'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'

@@ -40,6 +40,12 @@ Tokens are split into `base` (Light) and `.dark` (Dark) layers in `src/index.css
 -   **Light Mode**: Neutral grays (`250 250 250`), standard whites (`255 255 255`).
 -   **Dark Mode**: Deep grays (`5 5 5`, `23 23 26`), blue accents (`59 130 246`).
 
+### 2.3. Typography
+**Font Family**: `Satoshi` (via Fontshare CDN).
+-   **Usage**: The default sans-serif font for the entire application.
+-   **Styles**: Geometric sans-serif with a modern, technical feel.
+-   **Implementation**: Imported in `src/index.css`.
+
 ## 3. Layout Patterns
 
 ### 3.1. Sidebar Component (Preferred)

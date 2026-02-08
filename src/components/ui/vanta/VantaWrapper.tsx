@@ -3,21 +3,22 @@ import * as THREE from 'three'
 
 interface VantaWrapperProps {
     children: React.ReactNode
-    effect: (props: any) => any // The specific Vanta effect function
+    effectImporter: () => Promise<any> // Function that imports the Vanta effect
     config?: any // Configuration object for the effect
     className?: string
 }
 
-export function VantaWrapper({ children, effect, config, className }: VantaWrapperProps) {
+export function VantaWrapper({ children, effectImporter, config, className }: VantaWrapperProps) {
     const vantaRef = useRef<HTMLDivElement>(null)
     const [vantaEffect, setVantaEffect] = useState<any>(null)
 
     useEffect(() => {
         let instance: any = null;
         let timeoutId: any;
+        let isMounted = true;
 
-        const initVanta = () => {
-            if (!vantaRef.current || !effect) return;
+        const initVanta = async () => {
+            if (!vantaRef.current) return;
 
             try {
                 // Vanta requires THREE to be on window
@@ -25,7 +26,13 @@ export function VantaWrapper({ children, effect, config, className }: VantaWrapp
                     (window as any).THREE = THREE;
                 }
 
-                instance = effect({
+                // Dynamically import the effect
+                const vantaModule = await effectImporter();
+                const effectRequest = vantaModule.default || vantaModule;
+
+                if (!isMounted) return;
+
+                instance = effectRequest({
                     el: vantaRef.current,
                     THREE: THREE, // Pass THREE instance explicitly
                     mouseControls: true,
@@ -53,12 +60,13 @@ export function VantaWrapper({ children, effect, config, className }: VantaWrapp
         timeoutId = setTimeout(initVanta, 10);
 
         return () => {
+            isMounted = false;
             clearTimeout(timeoutId);
             if (instance) {
                 instance.destroy()
             }
         }
-    }, [effect, config])
+    }, [effectImporter, config]) // Depend on importer instead of effect object
 
     return (
         <div ref={vantaRef} className={`relative w-full h-screen overflow-hidden ${className}`}>

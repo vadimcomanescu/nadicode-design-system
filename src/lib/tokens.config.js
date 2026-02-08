@@ -86,7 +86,7 @@ export const tokens = {
   colors: colorTokens.dark,
   typography: {
     fontFamily: {
-      sans: ['Inter', 'sans-serif'],
+      sans: ['Satoshi', 'sans-serif'],
       pixel: ['GeistPixel', 'monospace'],
       'pixel-grid': ['GeistPixelGrid', 'monospace'],
       'pixel-line': ['GeistPixelLine', 'monospace'],

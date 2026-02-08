@@ -53,25 +53,16 @@ export function MouseGlow({ className }: { className?: string }) {
         WebkitMaskImage: maskImage
       }}
     >
-      {/* Structural Grid & Tiny Dots Pattern */}
-      <div
-        className="absolute inset-0 h-full w-full"
-        style={{
-          // Use CSS variables for color: Indigo in dark, Acid Lime in light
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='var(--mouse-grid-color)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='var(--mouse-dot-color)'/%3E%3C/svg%3E")`,
-          backgroundSize: "24px 24px"
-        }}
-      />
+      <div className="absolute inset-0 h-full w-full mouse-grid-pattern" />
 
-      {/* Dynamic CSS variables injected directly to avoid complex logic in data URI */}
+      {/* Dynamic styles to handle theme-aware background SVG colors */}
       <style>{`
-        :root {
-          --mouse-grid-color: rgba(101, 163, 13, 0.5);   /* Acid Lime - Visible Grid */
-          --mouse-dot-color: rgba(101, 163, 13, 0.8);    /* Acid Lime - Stronger Dots */
+        .mouse-grid-pattern {
+          background-size: 24px 24px;
+          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(101, 163, 13, 0.4)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(101, 163, 13, 0.7)'/%3E%3C/svg%3E");
         }
-        .dark {
-          --mouse-grid-color: rgba(99, 102, 241, 0.4);   /* Electric Indigo */
-          --mouse-dot-color: rgba(99, 102, 241, 0.8);    /* Electric Indigo */
+        .dark .mouse-grid-pattern {
+          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(99, 102, 241, 0.4)' stroke-width='0.5'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(99, 102, 241, 0.7)'/%3E%3C/svg%3E");
         }
       `}</style>
     </motion.div>

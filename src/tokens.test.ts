@@ -13,7 +13,7 @@ describe('Tokens', () => {
   });
 
   it('has typography defined', () => {
-    expect(tokens.typography.fontFamily.sans).toContain('Inter');
+    expect(tokens.typography.fontFamily.sans).toContain('Satoshi');
     expect(tokens.typography.sizes).toHaveProperty('base');
   });
 

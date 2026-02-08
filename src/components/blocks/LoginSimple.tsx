@@ -1,4 +1,4 @@
-import { LogoIcon } from '@/components/logo'
+import { LogoIcon } from '@/components/ui/Logo'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'
@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 export default function SimpleLoginForm() {
     return (
         <section className="flex min-h-screen items-center justify-center p-4 bg-transparent">
-            <Card  className="w-full max-w-sm border-border/50">
+            <Card className="w-full max-w-sm border-border/50">
                 <CardHeader className="text-center pb-2">
                     <div className="flex justify-center mb-4">
                         <LogoIcon className="h-10 w-10" />

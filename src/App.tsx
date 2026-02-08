@@ -47,7 +47,8 @@ import { SignupPage } from "./components/pages/SignupPage";
 import CheckoutPage from "./components/pages/CheckoutPage";
 import { OTPBlock } from "./components/blocks/OTPBlock";
 import { DashboardBlock } from "./components/blocks/DashboardBlock";
-import { Dashboard01Page } from "./components/pages/Dashboard01Page";
+// import { Dashboard01Page } from "./components/pages/Dashboard01Page";
+import { DashboardPage } from "./components/pages/DashboardPage";
 import { Dashboard02Page } from "./components/pages/Dashboard02Page";
 import { ChartCollectionBlock } from "./components/charts/ChartCollectionBlock";
 import { HeroCentered, HeroSplit } from "./components/blocks/HeroBlock";
@@ -55,12 +56,16 @@ import { LogoCloud, Testimonials } from "./components/blocks/SocialProofBlock";
 import { FeatureGrid, FeatureList } from "./components/blocks/FeatureBlock";
 import { PricingTable } from "./components/blocks/PricingBlock";
 import { Footer } from "./components/blocks/FooterBlock";
-import Feature1 from "./components/features-1";
-import Feature2 from "./components/features-2";
-import Integrations1 from "./components/integrations-1";
-import Stats from "./components/stats";
-import Team from "./components/team";
-import CallToAction from "./components/call-to-action";
+import { HeroHeader } from "./components/blocks/Header";
+import SimpleLoginForm from "./components/blocks/LoginSimple"; // Ensure nothing is hidden
+import { PatternsPage } from "./components/pages/PatternsPage";
+import Feature1 from "./components/blocks/Feature1";
+import Feature2 from "./components/blocks/Feature2";
+import Integrations1 from "./components/blocks/Integrations1";
+import Stats from "./components/blocks/Stats";
+import Team from "./components/blocks/Team";
+import CallToAction from "./components/blocks/CallToAction";
+import { WizardBlock } from "./components/blocks/WizardBlock";
 import { InteractiveAreaChart } from "./components/charts/InteractiveAreaChart";
 import { Combobox } from "./components/ui/Combobox";
 import { DatePicker } from "./components/ui/DatePicker";
@@ -86,9 +91,6 @@ import { VerificationPage } from "./components/pages/VerificationPage";
 // Lint fix: correct import style for ProfilePage/TeamPage
 import { ProfilePage } from "./components/pages/settings/ProfilePage";
 import { TeamPage } from "./components/pages/settings/TeamPage";
-import { HeroHeader } from "./components/header";
-import SimpleLoginForm from "./components/login"; // Ensure nothing is hidden
-import { PatternsPage } from "./components/pages/PatternsPage";
 
 
 
@@ -149,6 +151,7 @@ function DocsPage() {
 
             <TabsTrigger value="pages">Pages</TabsTrigger>
             <TabsTrigger value="patterns">Patterns</TabsTrigger>
+            <TabsTrigger value="wizards">Wizards</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="mt-8 space-y-12">
@@ -833,6 +836,13 @@ console.log(greet("World"));`}
 
 
 
+          <TabsContent value="wizards" className="space-y-8 mt-8">
+            <Typography variant="h2" className="border-b border-border pb-2">Multi-Step Wizards</Typography>
+            <div className="flex justify-center py-12 bg-muted/10 rounded-xl border border-dashed">
+              <WizardBlock />
+            </div>
+          </TabsContent>
+
           <TabsContent value="patterns">
             <PatternsPage />
           </TabsContent>
@@ -879,9 +889,15 @@ console.log(greet("World"));`}
                 </div>
 
                 <div className="space-y-4">
-                  <Typography variant="h3">Dashboard Analytics (v1)</Typography>
-                  <div className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
-                    <Dashboard01Page />
+                  <Typography variant="h3">Unified Dashboard</Typography>
+                  <Typography variant="muted">The new consolidated dashboard view.</Typography>
+                  <div
+                    className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)] cursor-pointer hover:ring-primary/50 transition-all"
+                    onClick={() => window.location.href = '/dashboard'}
+                  >
+                    <div className="pointer-events-none">
+                      <DashboardPage />
+                    </div>
                   </div>
                 </div>
 
@@ -1084,7 +1100,7 @@ function ColorCard({ name, hex, className }: { name: string, hex: string, classN
       <div className={`h-24 w-full ${className}`}></div>
       <div className="p-3 bg-surface flex items-center justify-between">
         <Typography variant="small" className="font-semibold text-text-primary">{name}</Typography>
-        <Typography variant="small" className="text-text-secondary font-mono">{hex}</Typography>
+        <Typography variant="small" className="text-text-secondary font-sans">{hex}</Typography>
       </div>
     </div>
   )
@@ -1094,6 +1110,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<DocsPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
 
       {/* Vanta Login Pages - Dark */}
       <Route path="/login/vanta/birds" element={<LoginBirdsDark />} />

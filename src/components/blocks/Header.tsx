@@ -1,6 +1,6 @@
 'use client'
 import { Link } from 'react-router-dom'
-import { Logo } from '@/components/logo'
+import { Logo } from '@/components/ui/Logo'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import React from 'react'

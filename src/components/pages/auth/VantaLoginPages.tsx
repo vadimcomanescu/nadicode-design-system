@@ -8,20 +8,8 @@ import { Zap } from 'lucide-react'
 import { GoogleIcon } from '../../ui/BrandIcons'
 import { useTheme } from '../../../lib/ThemeProvider'
 
-// @ts-ignore
-import BIRDS from 'vanta/dist/vanta.birds.min'
-// @ts-ignore
-import GLOBE from 'vanta/dist/vanta.globe.min'
-// @ts-ignore
-import NET from 'vanta/dist/vanta.net.min'
-// @ts-ignore
-import CELLS from 'vanta/dist/vanta.cells.min'
-// @ts-ignore
-import TRUNK from 'vanta/dist/vanta.trunk.min'
-// @ts-ignore
-import DOTS from 'vanta/dist/vanta.dots.min'
-// @ts-ignore
-import TOPOLOGY from 'vanta/dist/vanta.topology.min'
+// Note: Vanta effects are now lazy-loaded via effectImporter to avoid bundle bloat.
+// No top-level imports of vanta/dist/*.min.js
 
 // --- Colors ---
 const COLORS = {
@@ -111,7 +99,8 @@ export function LoginBirdsDark() {
 
     return (
         <VantaWrapper
-            effect={BIRDS}
+            // @ts-ignore
+            effectImporter={() => import('vanta/dist/vanta.birds.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
                 color1: isDark ? COLORS.primary : COLORS.primaryDark,
@@ -138,7 +127,8 @@ export function LoginGlobeDark() {
 
     return (
         <VantaWrapper
-            effect={GLOBE}
+            // @ts-ignore
+            effectImporter={() => import('vanta/dist/vanta.globe.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
                 color: isDark ? COLORS.primary : COLORS.primaryDark,
@@ -158,7 +148,8 @@ export function LoginNetDark() {
 
     return (
         <VantaWrapper
-            effect={NET}
+            // @ts-ignore
+            effectImporter={() => import('vanta/dist/vanta.net.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
                 color: isDark ? COLORS.secondary : COLORS.primaryDark,
@@ -179,7 +170,8 @@ export function LoginCellsLight() {
 
     return (
         <VantaWrapper
-            effect={CELLS}
+            // @ts-ignore
+            effectImporter={() => import('vanta/dist/vanta.cells.min')}
             config={{
                 color1: isDark ? COLORS.secondary : COLORS.secondaryDark,
                 color2: isDark ? COLORS.primary : COLORS.primary,
@@ -200,7 +192,8 @@ export function LoginTrunkLight() {
 
     return (
         <VantaWrapper
-            effect={TRUNK}
+            // @ts-ignore
+            effectImporter={() => import('vanta/dist/vanta.trunk.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
                 color: isDark ? COLORS.secondary : COLORS.primaryDark,
@@ -219,7 +212,8 @@ export function LoginDotsLight() {
 
     return (
         <VantaWrapper
-            effect={DOTS}
+            // @ts-ignore
+            effectImporter={() => import('vanta/dist/vanta.dots.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
                 color: isDark ? COLORS.primary : COLORS.primaryDark,
@@ -239,7 +233,8 @@ export function LoginTopologyDark() {
 
     return (
         <VantaWrapper
-            effect={TOPOLOGY}
+            // @ts-ignore
+            effectImporter={() => import('vanta/dist/vanta.topology.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
                 color: isDark ? COLORS.secondary : COLORS.primaryDark,

@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
-import { HeroHeader } from './header'
+import { HeroHeader } from './Header'
 import { InfiniteSlider } from '@/components/ui/infinite-slider'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { ChevronRight } from 'lucide-react'

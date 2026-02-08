@@ -1,27 +1,13 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 @config "../tailwind.config.js";
 
-@font-face {
-  font-family: 'GeistPixel';
-  src: url('/fonts/geist-pixel/GeistPixel-Square.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 
 @font-face {
   font-family: 'GeistPixelGrid';
   src: url('/fonts/geist-pixel/GeistPixel-Grid.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'GeistPixelLine';
-  src: url('/fonts/geist-pixel/GeistPixel-Line.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -33,6 +19,7 @@
   /* Light theme (default) */
   :root {
     color-scheme: light;
+
 
     /* Background */
     --color-background: 250 250 250;

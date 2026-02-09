@@ -1,72 +1,109 @@
 import * as React from "react"
-import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion"
+import { createPortal } from "react-dom"
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion"
 import { cn } from "../../lib/utils"
 
-export function MouseGlow({ className }: { className?: string }) {
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+interface MouseGlowProps {
+  className?: string
+  dotColor?: string
+  overlayColor?: string
+  gap?: number
+  maskRadius?: number
+  overlayRadius?: number
+}
 
-  // Smooth the mouse movement
-  const springX = useSpring(mouseX, { damping: 20, stiffness: 150 })
-  const springY = useSpring(mouseY, { damping: 20, stiffness: 150 })
-
-  function handleMouseMove(e: React.MouseEvent | MouseEvent) {
-    const isGlobal = className?.includes("fixed") || className?.includes("absolute")
-    if (isGlobal) {
-      mouseX.set(e.clientX)
-      mouseY.set(e.clientY)
-    } else {
-      const target = e.currentTarget as HTMLElement
-      if (target && target.getBoundingClientRect) {
-        const { left, top } = target.getBoundingClientRect()
-        mouseX.set(e.clientX - left)
-        mouseY.set(e.clientY - top)
-      }
-    }
-  }
+export function MouseGlow({
+  className,
+  dotColor = "rgba(255, 255, 255, 0.5)",
+  overlayColor = "rgba(99, 102, 241, 0.95)",
+  gap = 24,
+  maskRadius = 300,
+  overlayRadius = 220,
+}: MouseGlowProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const overlayRef = React.useRef<HTMLDivElement>(null)
+  const [opacity, setOpacity] = React.useState(0)
+  const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
-    const isGlobal = className?.includes("fixed") || className?.includes("absolute")
-    if (!isGlobal) return
+    setMounted(true)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX
+      const y = e.clientY
+      setOpacity(1)
+
+      if (containerRef.current) {
+        containerRef.current.style.setProperty("--mx", `${x}px`)
+        containerRef.current.style.setProperty("--my", `${y}px`)
+      }
+      if (overlayRef.current) {
+        overlayRef.current.style.setProperty("--mx", `${x}px`)
+        overlayRef.current.style.setProperty("--my", `${y}px`)
+      }
+    }
+
+    const handleMouseOut = () => setOpacity(0)
 
     window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [className])
+    window.addEventListener("mouseout", handleMouseOut)
+    window.addEventListener("mouseleave", handleMouseOut)
 
-  // Mask image: Radial gradient that is transparent at edges and opaque at center
-  // revealed at mouse position. Reduced radius for tighter focus.
-  const maskImage = useMotionTemplate`radial-gradient(
-    300px circle at ${springX}px ${springY}px,
-    black,
-    transparent 100%
-  )`
+    return () => {
+      setMounted(false)
+      window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("mouseout", handleMouseOut)
+      window.removeEventListener("mouseleave", handleMouseOut)
+    }
+  }, [])
 
-  return (
-    <motion.div
-      className={cn(
-        "pointer-events-none fixed inset-0 z-0",
-        "opacity-80 dark:opacity-100 transition-opacity duration-500", // Subtle but visible in light mode
-        className
-      )}
+  const gapPx = `${gap}px`
+
+  const element = (
+    <div
+      ref={containerRef}
+      className={cn("pointer-events-none fixed inset-0 z-0", className)}
       style={{
-        maskImage,
-        WebkitMaskImage: maskImage
+        width: "100vw",
+        height: "100vh",
+        transition: "opacity 0.25s ease",
+        opacity,
+        maskImage: `radial-gradient(circle ${maskRadius}px at var(--mx, -9999px) var(--my, -9999px), black 0%, transparent 100%)`,
+        WebkitMaskImage: `radial-gradient(circle ${maskRadius}px at var(--mx, -9999px) var(--my, -9999px), black 0%, transparent 100%)`,
       }}
     >
-      <div className="absolute inset-0 h-full w-full mouse-grid-pattern" />
+      {/* Base dot layer */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `radial-gradient(${dotColor} 1px, transparent 0)`,
+          backgroundSize: `${gapPx} ${gapPx}`,
+          backgroundRepeat: "repeat",
+        }}
+      />
 
-      {/* Dynamic styles to handle theme-aware background SVG colors */}
-      <style>{`
-        .mouse-grid-pattern {
-          background-size: 24px 24px;
-          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(101, 163, 13, 0.6)' stroke-width='1'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(101, 163, 13, 0.9)'/%3E%3C/svg%3E");
-        }
-        .dark .mouse-grid-pattern {
-          background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12H24M12 0V24' stroke='rgba(99, 102, 241, 0.6)' stroke-width='1'/%3E%3Ccircle cx='12' cy='12' r='0.8' fill='rgba(99, 102, 241, 0.9)'/%3E%3C/svg%3E");
-        }
-      `}</style>
-    </motion.div>
+      {/* Colored overlay dot layer with tighter mask */}
+      <div
+        ref={overlayRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `radial-gradient(${overlayColor} 1px, transparent 0)`,
+          backgroundSize: `${gapPx} ${gapPx}`,
+          backgroundRepeat: "repeat",
+          maskImage: `radial-gradient(circle ${overlayRadius}px at var(--mx, -9999px) var(--my, -9999px), black 0%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle ${overlayRadius}px at var(--mx, -9999px) var(--my, -9999px), black 0%, transparent 100%)`,
+        }}
+      />
+    </div>
   )
+
+  if (typeof document !== "undefined" && mounted) {
+    return createPortal(element, document.body)
+  }
+
+  return element
 }
 
 export function MouseSpotlight({ children, className }: { children?: React.ReactNode, className?: string }) {
@@ -80,8 +117,8 @@ export function MouseSpotlight({ children, className }: { children?: React.React
   }
 
   const bgImage = useMotionTemplate`radial-gradient(
-    250px circle at ${mouseX}px ${mouseY}px, 
-    rgba(255,255,255,0.06), 
+    250px circle at ${mouseX}px ${mouseY}px,
+    rgba(255,255,255,0.06),
     transparent 80%
   )`
 

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion"
+import { motion, useMotionValue, useMotionTemplate } from "motion/react"
 import { cn } from "../../lib/utils"
 
 interface MouseGlowProps {

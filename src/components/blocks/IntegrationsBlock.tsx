@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ChevronRight } from 'lucide-react'
-import { AnimatedIcon } from '@/components/ui/AnimatedIcon'
 import { Link } from 'react-router-dom'
 import * as React from 'react'
 import { Gemini, Replit, MagicUI, VSCodium, MediaWiki, GooglePaLM } from '@/components/logos'
@@ -78,7 +77,7 @@ const IntegrationCard = ({ title, description, children, link = 'https://github.
                         className="gap-1 pr-2 shadow-none">
                         <Link to={link}>
                             Learn More
-                            <AnimatedIcon icon={ChevronRight} className="ml-0 !size-3.5 opacity-50" />
+                            <ChevronRight className="ml-0 !size-3.5 opacity-50" />
                         </Link>
                     </Button>
                 </div>

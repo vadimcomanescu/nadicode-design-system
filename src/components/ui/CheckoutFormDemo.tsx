@@ -6,8 +6,9 @@ import {
 } from "@stripe/react-stripe-js"
 import { Button } from "./Button"
 import { Alert, AlertDescription, AlertTitle } from "./Alert"
-import { Loader2, Check, ShieldCheck } from "lucide-react"
-import { AnimatedIcon } from "./AnimatedIcon"
+import { Loader2 } from "lucide-react"
+import { CheckIcon } from "./icons/check"
+import { ShieldCheckIcon } from "./icons/shield-check"
 import { useTheme } from "../../lib/ThemeProvider"
 import { Typography } from "./Typography"
 import { Input } from "./Input"
@@ -114,7 +115,7 @@ export function CheckoutFormDemo({
                         <ul className="space-y-4">
                             {features.map((feature, i) => (
                                 <li key={i} className="flex items-start">
-                                    <AnimatedIcon icon={Check} className="h-5 w-5 text-accent mr-3 shrink-0" />
+                                    <CheckIcon size={20} className="text-accent mr-3 shrink-0" />
                                     <Typography variant="body" className="text-sm">{feature}</Typography>
                                 </li>
                             ))}
@@ -165,7 +166,7 @@ export function CheckoutFormDemo({
                         </div>
 
                         <div className="pt-2 flex items-center space-x-2 text-xs text-text-tertiary">
-                            <AnimatedIcon icon={ShieldCheck} className="h-4 w-4" />
+                            <ShieldCheckIcon size={16} />
                             <span>Payments are secure and encrypted.</span>
                         </div>
                     </div>
@@ -189,7 +190,7 @@ export function CheckoutFormDemo({
                     >
                         {isLoading ? (
                             <>
-                                <AnimatedIcon icon={Loader2} animation="rotate" className="mr-2 h-5 w-5 animate-spin" />
+                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                                 Processing...
                             </>
                         ) : (

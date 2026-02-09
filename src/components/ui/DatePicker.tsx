@@ -10,7 +10,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/Popover"
-import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 export function DatePicker() {
   const [date, setDate] = React.useState<Date>()
@@ -25,7 +24,7 @@ export function DatePicker() {
             !date && "text-muted-foreground"
           )}
         >
-          <AnimatedIcon icon={CalendarIcon} animation="pulse" className="mr-2 h-4 w-4" />
+          <CalendarIcon className="mr-2 h-4 w-4" />
           {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>

@@ -1,0 +1,29 @@
+// Animated icons (lucide-animated pattern)
+// Each icon has real SVG path animations on hover, not just container transforms.
+export { BellIcon } from "./bell";
+export { BoldIcon } from "./bold";
+export { CheckIcon } from "./check";
+export { CopyIcon } from "./copy";
+export { GithubIcon } from "./github";
+export { ItalicIcon } from "./italic";
+export { KeyIcon } from "./key";
+export { LayersIcon } from "./layers";
+export { LinkedinIcon } from "./linkedin";
+export { LockIcon } from "./lock";
+export { MicIcon } from "./mic";
+export { MoonIcon } from "./moon";
+export { PlusIcon } from "./plus";
+export { RocketIcon } from "./rocket";
+export { SearchIcon } from "./search";
+export { SettingsIcon } from "./settings";
+export { ShieldCheckIcon } from "./shield-check";
+export { SparklesIcon } from "./sparkles";
+export { SunIcon } from "./sun";
+export { TerminalIcon } from "./terminal";
+export { TwitterIcon } from "./twitter";
+export { UnderlineIcon } from "./underline";
+export { UploadIcon } from "./upload";
+export { UserIcon } from "./user";
+export { UsersIcon } from "./users";
+export { XIcon } from "./x";
+export { ZapIcon } from "./zap";

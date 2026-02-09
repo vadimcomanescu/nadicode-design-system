@@ -2,7 +2,6 @@ import * as React from "react"
 import * as MenubarPrimitive from "@radix-ui/react-menubar"
 import { Check, ChevronRight, Circle } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 const Menubar = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Root>,
@@ -52,7 +51,7 @@ const MenubarSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <AnimatedIcon icon={ChevronRight} className="ml-auto h-4 w-4 text-text-tertiary" />
+    <ChevronRight className="ml-auto h-4 w-4 text-text-tertiary" />
   </MenubarPrimitive.SubTrigger>
 ))
 MenubarSubTrigger.displayName = MenubarPrimitive.SubTrigger.displayName
@@ -116,7 +115,7 @@ const MenubarItem = React.forwardRef<
     )}
     {/* Submenu indicator */}
     {inset && !shortcut && (
-      <AnimatedIcon icon={ChevronRight} className="ml-auto h-4 w-4 text-text-tertiary" />
+      <ChevronRight className="ml-auto h-4 w-4 text-text-tertiary" />
     )}
   </MenubarPrimitive.Item>
 ))
@@ -137,7 +136,7 @@ const MenubarCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <AnimatedIcon icon={Check} className="h-2 w-2 fill-current" />
+        <Check className="h-2 w-2 fill-current" />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}
@@ -159,7 +158,7 @@ const MenubarRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <AnimatedIcon icon={Circle} className="h-2 w-2 fill-current" />
+        <Circle className="h-2 w-2 fill-current" />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}

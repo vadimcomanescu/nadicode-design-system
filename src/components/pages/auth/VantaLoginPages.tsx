@@ -4,10 +4,9 @@ import { Button } from '../../ui/Button'
 import { Input } from '../../ui/Input'
 import { Label } from '../../ui/Label'
 import { Checkbox } from '../../ui/Checkbox'
-import { Zap } from 'lucide-react'
 import { GoogleIcon } from '../../ui/BrandIcons'
 import { useTheme } from '../../../lib/ThemeProvider'
-import { AnimatedIcon } from '../../ui/AnimatedIcon'
+import { ZapIcon } from '../../ui/icons/zap'
 
 // Note: Vanta effects are now lazy-loaded via effectImporter to avoid bundle bloat.
 // No top-level imports of vanta/dist/*.min.js
@@ -40,7 +39,7 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
                 <CardHeader className="space-y-1 text-center">
                     <div className="flex justify-center mb-4">
                         <div className={`p-3 rounded-full ${isDark ? 'bg-primary/10' : 'bg-primary/5'}`}>
-                            <AnimatedIcon icon={Zap} className="w-10 h-10 text-primary" />
+                            <ZapIcon size={40} className="text-primary" />
                         </div>
                     </div>
                     <div className="mb-2 text-primary font-semibold tracking-widest uppercase text-xs">Nadicode System</div>

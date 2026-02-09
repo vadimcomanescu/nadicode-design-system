@@ -1,6 +1,5 @@
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import { Monitor, Smartphone } from "lucide-react"
-import { AnimatedIcon } from "../ui/AnimatedIcon"
 
 import {
   Card,
@@ -31,12 +30,12 @@ const chartConfig = {
   desktop: {
     label: "Desktop",
     color: "rgb(var(--chart-1))",
-    icon: ({ ...props }) => <AnimatedIcon icon={Monitor} {...props} />,
+    icon: ({ ...props }) => <Monitor {...props} />,
   },
   mobile: {
     label: "Mobile",
     color: "rgb(var(--chart-2))",
-    icon: ({ ...props }) => <AnimatedIcon icon={Smartphone} {...props} />,
+    icon: ({ ...props }) => <Smartphone {...props} />,
   },
 } satisfies ChartConfig
 

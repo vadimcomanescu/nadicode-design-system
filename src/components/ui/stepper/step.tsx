@@ -1,8 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useStepper } from "./stepper"
-import { Check } from "lucide-react"
-import { AnimatedIcon } from "../AnimatedIcon"
+import { CheckIcon } from "../icons/check"
 
 interface StepProps extends React.HTMLAttributes<HTMLDivElement> {
     index: number
@@ -48,7 +47,7 @@ export function Step({
                     )}
                 >
                     {isCompleted ? (
-                        <AnimatedIcon icon={Check} className="h-4 w-4" />
+                        <CheckIcon size={16} />
                     ) : icon ? (
                         icon
                     ) : (

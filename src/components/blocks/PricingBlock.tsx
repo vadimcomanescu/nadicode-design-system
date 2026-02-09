@@ -1,5 +1,4 @@
-import { Check } from "lucide-react"
-import { AnimatedIcon } from "../ui/AnimatedIcon"
+import { CheckIcon } from "../ui/icons/check"
 import { useState } from "react"
 import { Button } from "../ui/Button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/Card"
@@ -90,7 +89,7 @@ export function PricingTable() {
                                     {plan.features.map((feature) => (
                                         <li key={feature} className="flex items-center gap-3 text-sm text-text-secondary">
                                             <div className={cn("flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-primary")}>
-                                                <AnimatedIcon icon={Check} className="h-3 w-3" />
+                                                <CheckIcon size={12} />
                                             </div>
                                             {feature}
                                         </li>

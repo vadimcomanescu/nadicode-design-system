@@ -17,8 +17,12 @@ import { Skeleton } from "./components/ui/Skeleton";
 import { Textarea } from "./components/ui/Textarea";
 import { RadioGroup, RadioGroupItem } from "./components/ui/RadioGroup";
 import { ToggleGroup, ToggleGroupItem } from "./components/ui/ToggleGroup";
-import { Bold, Italic, Underline, Package, Users, Settings } from "lucide-react";
-import { AnimatedIcon } from "./components/ui/AnimatedIcon";
+import { Package } from "lucide-react";
+import { BoldIcon } from "./components/ui/icons/bold";
+import { ItalicIcon } from "./components/ui/icons/italic";
+import { UnderlineIcon } from "./components/ui/icons/underline";
+import { UsersIcon } from "./components/ui/icons/users";
+import { SettingsIcon } from "./components/ui/icons/settings";
 import { Slider } from "./components/ui/Slider";
 import { Progress } from "./components/ui/Progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./components/ui/Accordion";
@@ -344,13 +348,13 @@ function DocsPage() {
                     <Label>Text Style</Label>
                     <ToggleGroup type="multiple">
                       <ToggleGroupItem value="bold" aria-label="Toggle bold">
-                        <AnimatedIcon icon={Bold} className="h-4 w-4" />
+                        <BoldIcon size={16} />
                       </ToggleGroupItem>
                       <ToggleGroupItem value="italic" aria-label="Toggle italic">
-                        <AnimatedIcon icon={Italic} className="h-4 w-4" />
+                        <ItalicIcon size={16} />
                       </ToggleGroupItem>
                       <ToggleGroupItem value="underline" aria-label="Toggle underline">
-                        <AnimatedIcon icon={Underline} className="h-4 w-4" />
+                        <UnderlineIcon size={16} />
                       </ToggleGroupItem>
                     </ToggleGroup>
                   </div>
@@ -617,13 +621,13 @@ console.log(greet("World"));`}
                           <div className="flex h-full flex-col p-4 bg-surface gap-2">
                             <div className="p-2 font-semibold text-text-primary mb-2">My App</div>
                             <Button variant="ghost" className="justify-start w-full">
-                              <AnimatedIcon icon={Users} className="mr-2 h-4 w-4" /> Team
+                              <UsersIcon size={16} className="mr-2" /> Team
                             </Button>
                             <Button variant="ghost" className="justify-start w-full bg-surface-active">
-                              <AnimatedIcon icon={Package} className="mr-2 h-4 w-4" /> Projects
+                              <Package className="mr-2 h-4 w-4" /> Projects
                             </Button>
                             <Button variant="ghost" className="justify-start w-full">
-                              <AnimatedIcon icon={Settings} className="mr-2 h-4 w-4" /> Settings
+                              <SettingsIcon size={16} className="mr-2" /> Settings
                             </Button>
                           </div>
                         </ResponsivePanel>
@@ -674,7 +678,7 @@ console.log(greet("World"));`}
                       <Typography variant="h3">Items & Lists</Typography>
                       <ItemGroup className="max-w-md border border-border rounded-lg p-2 bg-surface">
                         <Item variant="outline">
-                          <ItemMedia variant="icon"><AnimatedIcon icon={Users} /></ItemMedia>
+                          <ItemMedia variant="icon"><UsersIcon /></ItemMedia>
                           <ItemContent>
                             <ItemTitle>Team Members</ItemTitle>
                             <ItemDescription>Manage your team access.</ItemDescription>
@@ -683,7 +687,7 @@ console.log(greet("World"));`}
                         </Item>
                         <ItemSeparator />
                         <Item variant="default">
-                          <ItemMedia variant="icon"><AnimatedIcon icon={Settings} /></ItemMedia>
+                          <ItemMedia variant="icon"><SettingsIcon /></ItemMedia>
                           <ItemContent>
                             <ItemTitle>General Settings</ItemTitle>
                             <ItemDescription>Global preferences and configurations.</ItemDescription>
@@ -754,7 +758,7 @@ console.log(greet("World"));`}
                     <Typography variant="h3">Empty State</Typography>
                     <Empty>
                       <EmptyIcon>
-                        <AnimatedIcon icon={Package} className="h-6 w-6" />
+                        <Package className="h-6 w-6" />
                       </EmptyIcon>
                       <EmptyTitle>No projects found</EmptyTitle>
                       <EmptyDescription>You haven't created any projects yet. Get started by creating a new one.</EmptyDescription>

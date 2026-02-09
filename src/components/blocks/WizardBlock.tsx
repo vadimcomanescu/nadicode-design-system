@@ -4,16 +4,18 @@ import { Button } from "@/components/ui/Button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Input } from "@/components/ui/Input"
 import { Label } from "@/components/ui/Label"
-import { Rocket, User, Settings, CreditCard } from "lucide-react"
-import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
+import { CreditCard } from "lucide-react"
+import { RocketIcon } from "@/components/ui/icons/rocket"
+import { UserIcon } from "@/components/ui/icons/user"
+import { SettingsIcon } from "@/components/ui/icons/settings"
 
 export function WizardBlock() {
     const [activeStep, setActiveStep] = useState(0)
     const steps = [
-        { title: "Account", description: "Setup your account", icon: <AnimatedIcon icon={User} className="size-4" /> },
-        { title: "Profile", description: "Add personal info", icon: <AnimatedIcon icon={Settings} className="size-4" /> },
-        { title: "Plan", description: "Choose a plan", icon: <AnimatedIcon icon={CreditCard} className="size-4" /> },
-        { title: "Launch", description: "Ready to go", icon: <AnimatedIcon icon={Rocket} className="size-4" /> },
+        { title: "Account", description: "Setup your account", icon: <UserIcon size={16} /> },
+        { title: "Profile", description: "Add personal info", icon: <SettingsIcon size={16} /> },
+        { title: "Plan", description: "Choose a plan", icon: <CreditCard className="size-4" /> },
+        { title: "Launch", description: "Ready to go", icon: <RocketIcon size={16} /> },
     ]
 
     const handleNext = () => setActiveStep((p) => Math.min(p + 1, steps.length - 1))
@@ -80,7 +82,7 @@ export function WizardBlock() {
                     )}
                     {activeStep === 3 && (
                         <div className="text-center space-y-4 py-8">
-                            <AnimatedIcon icon={Rocket} className="size-16 mx-auto text-primary animate-bounce" />
+                            <RocketIcon size={64} className="mx-auto text-primary animate-bounce" />
                             <h3 className="text-xl font-bold">Ready to Launch!</h3>
                             <p className="text-muted-foreground">Review your settings and click Finish to deploy.</p>
                         </div>

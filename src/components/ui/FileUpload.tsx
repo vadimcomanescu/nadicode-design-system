@@ -1,8 +1,8 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Upload, File, X } from "lucide-react"
-import { AnimatedIcon } from "./AnimatedIcon"
+import { File, X } from "lucide-react"
+import { UploadIcon } from "./icons/upload"
 
 const fileUploadVariants = cva(
   "relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors cursor-pointer",
@@ -131,7 +131,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
             onChange={(e) => handleFiles(e.target.files)}
             disabled={disabled}
           />
-          <AnimatedIcon icon={Upload} className="h-6 w-6 text-text-tertiary" />
+          <UploadIcon size={24} className="text-text-tertiary" />
           <div className="text-center">
             <p className="text-sm text-text-primary">
               <span className="font-medium text-accent">Click to upload</span> or drag and drop

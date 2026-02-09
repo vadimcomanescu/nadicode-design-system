@@ -8,7 +8,6 @@ import { Button } from "./Button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./Card"
 import { Alert, AlertDescription, AlertTitle } from "./Alert"
 import { Loader2 } from "lucide-react"
-import { AnimatedIcon } from "./AnimatedIcon"
 
 interface CheckoutFormProps {
     amount?: number
@@ -82,7 +81,7 @@ export function CheckoutForm({ amount = 2000, currency = "usd" }: CheckoutFormPr
                     >
                         {isLoading ? (
                             <>
-                                <AnimatedIcon icon={Loader2} animation="rotate" className="mr-2 h-4 w-4 animate-spin" />
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                 Processing...
                             </>
                         ) : (

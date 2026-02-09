@@ -9,8 +9,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "../ui/Breadcrumb"
-import { Terminal } from "lucide-react"
-import { AnimatedIcon } from "../ui/AnimatedIcon"
+import { TerminalIcon } from "../ui/icons/terminal"
 import { CheckoutFormDemo } from "../ui/CheckoutFormDemo"
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -46,7 +45,7 @@ export default function CheckoutPage() {
 
                     {/* Contextual Alert - Example of usage */}
                     <Alert>
-                        <AnimatedIcon icon={Terminal} className="h-4 w-4" />
+                        <TerminalIcon size={16} />
                         <AlertTitle>Upgrade to Pro</AlertTitle>
                         <AlertDescription>
                             You are currently on the Free plan. Upgrade now to unlock unlimited AI generations.

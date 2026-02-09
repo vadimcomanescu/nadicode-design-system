@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Check, Copy } from "lucide-react"
-import { AnimatedIcon } from "../ui/AnimatedIcon"
+import { CheckIcon } from "../ui/icons/check"
+import { CopyIcon } from "../ui/icons/copy"
 import Prism from "prismjs"
 import "prismjs/themes/prism-tomorrow.css"
 
@@ -52,7 +52,7 @@ export function CodeBlock({
           className="absolute right-2 top-2 h-6 w-6 text-text-tertiary hover:bg-surface-active hover:text-text-primary"
           onClick={onCopy}
         >
-          {copied ? <AnimatedIcon icon={Check} className="h-3 w-3" /> : <AnimatedIcon icon={Copy} className="h-3 w-3" />}
+          {copied ? <CheckIcon size={12} /> : <CopyIcon size={12} />}
           <span className="sr-only">Copy code</span>
         </Button>
         <div className="overflow-x-auto p-4">

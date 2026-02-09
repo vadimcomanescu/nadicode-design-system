@@ -385,6 +385,37 @@
   }
 }
 
+/* Agent Avatar animations */
+@keyframes agent-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes agent-speaking-ring {
+  0% { box-shadow: 0 0 0 0 rgb(var(--color-accent) / 0.6); }
+  50% { box-shadow: 0 0 0 8px rgb(var(--color-accent) / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(var(--color-accent) / 0); }
+}
+
+@keyframes agent-listening-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(var(--color-primary) / 0.3); }
+  50% { box-shadow: 0 0 0 4px rgb(var(--color-primary) / 0); }
+}
+
+.agent-avatar-breathe {
+  animation: agent-breathe 4s ease-in-out infinite;
+}
+
+.agent-avatar-speaking {
+  animation: agent-speaking-ring 1.5s ease-in-out infinite;
+  border-radius: 9999px;
+}
+
+.agent-avatar-listening {
+  animation: agent-listening-pulse 2s ease-in-out infinite;
+  border-radius: 9999px;
+}
+
 /* Accessibility: respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,

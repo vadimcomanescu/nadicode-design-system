@@ -3,7 +3,6 @@ import { OTPInput, OTPInputContext } from "input-otp"
 import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,
@@ -63,7 +62,7 @@ const InputOTPSeparator = React.forwardRef<
 >(({ ...props }, ref) => (
   <div ref={ref} role="separator"    {...props}
   >
-    <AnimatedIcon icon={Dot} />
+    <Dot />
   </div>
 ))
 InputOTPSeparator.displayName = "InputOTPSeparator"

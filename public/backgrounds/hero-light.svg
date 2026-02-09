@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="bg-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAFAF9"/>
+      <stop offset="40%" stop-color="#F5F5F4"/>
+      <stop offset="100%" stop-color="#FAFAF9"/>
+    </linearGradient>
+    <radialGradient id="glow-rose" cx="70%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#E11D48" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#E11D48" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-teal-l" cx="20%" cy="70%" r="35%">
+      <stop offset="0%" stop-color="#0D9488" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#0D9488" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots-light" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1" fill="#78716C" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg-light)"/>
+  <rect width="1920" height="1080" fill="url(#glow-rose)"/>
+  <rect width="1920" height="1080" fill="url(#glow-teal-l)"/>
+  <rect width="1920" height="1080" fill="url(#dots-light)"/>
+</svg>

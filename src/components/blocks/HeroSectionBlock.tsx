@@ -5,7 +5,6 @@ import { HeroHeader } from './HeaderBlock'
 import { InfiniteSlider } from '@/components/ui/InfiniteSlider'
 import { ProgressiveBlur } from '@/components/ui/ProgressiveBlur'
 import { ChevronRight } from 'lucide-react'
-import { AnimatedIcon } from '@/components/ui/AnimatedIcon'
 
 export default function HeroSection() {
     return (
@@ -26,7 +25,7 @@ export default function HeroSection() {
                                         className="h-12 rounded-full pl-5 pr-3 text-base">
                                         <Link to="#link">
                                             <span className="text-nowrap">Start Building</span>
-                                            <AnimatedIcon icon={ChevronRight} className="ml-1" />
+                                            <ChevronRight className="ml-1" />
                                         </Link>
                                     </Button>
                                     <Button

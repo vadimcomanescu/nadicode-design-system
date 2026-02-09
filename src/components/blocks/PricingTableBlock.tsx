@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
-import { Check } from 'lucide-react'
-import { AnimatedIcon } from '@/components/ui/AnimatedIcon'
+import { CheckIcon } from '@/components/ui/icons/check'
 
 export default function Pricing() {
     return (
@@ -29,7 +28,7 @@ export default function Pricing() {
                                     <li
                                         key={index}
                                         className="flex items-center gap-2">
-                                        <AnimatedIcon icon={Check} className="size-3" />
+                                        <CheckIcon size={12} />
                                         {item}
                                     </li>
                                 ))}
@@ -63,7 +62,7 @@ export default function Pricing() {
                                         <li
                                             key={index}
                                             className="flex items-center gap-2">
-                                            <AnimatedIcon icon={Check} className="size-3" />
+                                            <CheckIcon size={12} />
                                             {item}
                                         </li>
                                     ))}
@@ -95,7 +94,7 @@ export default function Pricing() {
                                     <li
                                         key={index}
                                         className="flex items-center gap-2">
-                                        <AnimatedIcon icon={Check} className="size-3" />
+                                        <CheckIcon size={12} />
                                         {item}
                                     </li>
                                 ))}

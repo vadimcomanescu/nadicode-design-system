@@ -1,7 +1,8 @@
 import { useRef, useState } from "react"
-import { Upload, X, User } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
+import { UploadIcon } from "@/components/ui/icons/upload"
+import { XIcon } from "@/components/ui/icons/x"
+import { UserIcon } from "@/components/ui/icons/user"
 import { MouseSpotlight } from "./MouseEffect"
 
 interface AvatarUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -64,7 +65,7 @@ export function AvatarUpload({ className, value, onChange, ...props }: AvatarUpl
                                 className="h-full w-full object-cover transition-opacity group-hover:opacity-50"
                             />
                             <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                <AnimatedIcon icon={Upload} animation="pulse" className="w-6 h-6 mb-1" />
+                                <UploadIcon size={24} className="mb-1" />
                                 <span className="text-xs font-medium text-center">Change</span>
                             </div>
                             {preview && (
@@ -74,15 +75,15 @@ export function AvatarUpload({ className, value, onChange, ...props }: AvatarUpl
                                     className="absolute top-0 right-0 p-1 m-1 bg-destructive text-destructive-foreground rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-destructive/90"
                                     title="Remove image"
                                 >
-                                    <AnimatedIcon icon={X} animation="rotate" className="w-3 h-3" />
+                                    <XIcon size={12} />
                                 </button>
                             )}
                         </>
                     ) : (
                         <div className="flex flex-col items-center gap-1 text-text-secondary transition-colors group-hover:text-accent">
-                            <AnimatedIcon icon={User} animation="wiggle" className="h-10 w-10" strokeWidth={1.5} />
+                            <UserIcon size={40} />
                             <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                <AnimatedIcon icon={Upload} animation="pulse" className="w-6 h-6 mb-1" />
+                                <UploadIcon size={24} className="mb-1" />
                                 <span className="text-xs font-medium text-center">Upload</span>
                             </div>
                         </div>

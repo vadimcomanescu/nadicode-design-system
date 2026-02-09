@@ -1,8 +1,12 @@
 import React from "react";
 
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider } from "../ui/Sidebar";
-import { User, Settings, Lock, Bell, CreditCard, LayoutDashboard, Users } from "lucide-react";
-import { AnimatedIcon } from "../ui/AnimatedIcon";
+import { CreditCard, LayoutDashboard } from "lucide-react";
+import { SettingsIcon } from "../ui/icons/settings";
+import { UserIcon } from "../ui/icons/user";
+import { UsersIcon } from "../ui/icons/users";
+import { BellIcon } from "../ui/icons/bell";
+import { LockIcon } from "../ui/icons/lock";
 import { ProfilePage } from "../pages/settings/ProfilePage";
 import { TeamPage } from "../pages/settings/TeamPage";
 import { Badge } from "../ui/Badge";
@@ -11,28 +15,28 @@ export function SettingsLayout() {
     const links = [
         {
             label: "General",
-            icon: <AnimatedIcon icon={Settings} className="h-4 w-4" />,
+            icon: <SettingsIcon size={16} />,
         },
         {
             label: "Profile",
-            icon: <AnimatedIcon icon={User} className="h-4 w-4" />,
+            icon: <UserIcon size={16} />,
         },
         {
             label: "Team",
-            icon: <AnimatedIcon icon={Users} className="h-4 w-4" />,
+            icon: <UsersIcon size={16} />,
             badge: "New"
         },
         {
             label: "Notifications",
-            icon: <AnimatedIcon icon={Bell} className="h-4 w-4" />,
+            icon: <BellIcon size={16} />,
         },
         {
             label: "Security",
-            icon: <AnimatedIcon icon={Lock} className="h-4 w-4" />,
+            icon: <LockIcon size={16} />,
         },
         {
             label: "Billing",
-            icon: <AnimatedIcon icon={CreditCard} className="h-4 w-4" />,
+            icon: <CreditCard className="h-4 w-4" />,
         },
     ];
 
@@ -45,7 +49,7 @@ export function SettingsLayout() {
                     <SidebarHeader className="p-4">
                         <div className="flex items-center gap-3 px-2">
                             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-glow">
-                                <AnimatedIcon icon={LayoutDashboard} className="size-4" />
+                                <LayoutDashboard className="size-4" />
                             </div>
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-semibold">Nadicode</span>

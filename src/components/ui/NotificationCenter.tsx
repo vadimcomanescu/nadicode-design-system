@@ -1,8 +1,8 @@
 import * as React from "react"
 import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Bell, X } from "lucide-react"
-import { AnimatedIcon } from "./AnimatedIcon"
+import { X } from "lucide-react"
+import { BellIcon } from "./icons/bell"
 
 const notificationVariants = cva(
   "flex gap-3 rounded-lg border p-3 transition-all",
@@ -66,7 +66,7 @@ const NotificationCenter = React.forwardRef<HTMLDivElement, NotificationCenterPr
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3">
           <div className="flex items-center gap-2">
-            <AnimatedIcon icon={Bell} className="h-4 w-4 text-text-secondary" />
+            <BellIcon size={16} className="text-text-secondary" />
             <span className="text-sm font-medium text-text-primary">Notifications</span>
             {unreadCount > 0 && (
               <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1.5 text-[10px] font-bold text-accent-foreground">

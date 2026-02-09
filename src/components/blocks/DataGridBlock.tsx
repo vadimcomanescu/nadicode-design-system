@@ -4,7 +4,6 @@ import { DataTable } from "../ui/DataTable"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "../ui/Badge"
 import { MoreHorizontal } from "lucide-react"
-import { AnimatedIcon } from "../ui/AnimatedIcon"
 import { Button } from "../ui/Button"
 import {
     DropdownMenu,
@@ -65,7 +64,7 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <AnimatedIcon icon={MoreHorizontal} className="h-4 w-4" />
+                            <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">

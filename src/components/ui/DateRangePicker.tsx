@@ -13,7 +13,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/Popover"
-import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 export function DatePickerWithRange({
     className,
@@ -35,7 +34,7 @@ export function DatePickerWithRange({
                             !date && "text-muted-foreground"
                         )}
                     >
-                        <AnimatedIcon icon={CalendarIcon} animation="pulse" className="mr-2 h-4 w-4" />
+                        <CalendarIcon className="mr-2 h-4 w-4" />
                         {date?.from ? (
                             date.to ? (
                                 <>

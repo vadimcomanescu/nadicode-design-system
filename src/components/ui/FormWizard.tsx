@@ -2,8 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Button } from "./Button"
-import { Check } from "lucide-react"
-import { AnimatedIcon } from "./AnimatedIcon"
+import { CheckIcon } from "./icons/check"
 
 const formWizardVariants = cva(
   "flex flex-col",
@@ -131,7 +130,7 @@ const FormWizard = React.forwardRef<HTMLDivElement, FormWizardProps>(
                 <div className="flex items-center gap-2">
                   <div className={cn(stepIndicatorVariants({ state }))}>
                     {state === "complete" ? (
-                      <AnimatedIcon icon={Check} className="h-3.5 w-3.5" />
+                      <CheckIcon size={14} />
                     ) : (
                       index + 1
                     )}

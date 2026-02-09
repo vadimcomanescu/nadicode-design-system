@@ -1,6 +1,7 @@
 import * as React from "react"
-import { Send, Bot, User, Mic } from "lucide-react"
-import { AnimatedIcon } from "../ui/AnimatedIcon"
+import { Send, Bot } from "lucide-react"
+import { UserIcon } from "../ui/icons/user"
+import { MicIcon } from "../ui/icons/mic"
 
 import { cn } from "../../lib/utils"
 import { Button } from "../ui/Button"
@@ -61,7 +62,7 @@ export function ChatLayout() {
         <div className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
             <AvatarImage src="/ai-avatar.png" />
-            <AvatarFallback className="bg-accent text-white"><AnimatedIcon icon={Bot} className="h-4 w-4" /></AvatarFallback>
+            <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
           </Avatar>
           <div>
             <p className="text-sm font-medium">AI Assistant</p>
@@ -82,7 +83,7 @@ export function ChatLayout() {
             >
               {message.role === "assistant" && (
                 <Avatar className="h-8 w-8 mt-1">
-                  <AvatarFallback className="bg-accent text-white"><AnimatedIcon icon={Bot} className="h-4 w-4" /></AvatarFallback>
+                  <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
                 </Avatar>
               )}
               <div
@@ -97,7 +98,7 @@ export function ChatLayout() {
               </div>
               {message.role === "user" && (
                 <Avatar className="h-8 w-8 mt-1">
-                  <AvatarFallback className="bg-secondary"><AnimatedIcon icon={User} className="h-4 w-4" /></AvatarFallback>
+                  <AvatarFallback className="bg-secondary"><UserIcon size={16} /></AvatarFallback>
                 </Avatar>
               )}
             </div>
@@ -115,7 +116,7 @@ export function ChatLayout() {
           className="flex items-center gap-2"
         >
           <Button type="button" size="icon" variant="ghost">
-            <AnimatedIcon icon={Mic} className="h-4 w-4" />
+            <MicIcon size={16} />
           </Button>
           <Input
             placeholder="Type a message..."
@@ -124,7 +125,7 @@ export function ChatLayout() {
             className="flex-1"
           />
           <Button type="submit" size="icon" disabled={!input.trim()}>
-            <AnimatedIcon icon={Send} className="h-4 w-4" />
+            <Send className="h-4 w-4" />
           </Button>
         </form>
       </div>

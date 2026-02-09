@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { X } from 'lucide-react'
 import { cn } from '../../lib/utils'
-import { AnimatedIcon } from './AnimatedIcon'
+import { XIcon } from './icons/x'
 
 const bannerVariants = cva(
   'relative flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium',
@@ -52,7 +51,7 @@ export function AnnouncementBanner({
         className="absolute right-2 top-1/2 -translate-y-1/2 rounded-sm p-1 opacity-70 hover:opacity-100 transition-opacity"
         aria-label="Dismiss announcement"
       >
-        <AnimatedIcon icon={X} className="size-4" />
+        <XIcon size={16} />
       </button>
     </div>
   )

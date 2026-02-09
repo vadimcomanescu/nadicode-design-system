@@ -16,7 +16,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/Tooltip"
-import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -263,7 +262,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <AnimatedIcon icon={PanelLeft} />
+      <PanelLeft />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

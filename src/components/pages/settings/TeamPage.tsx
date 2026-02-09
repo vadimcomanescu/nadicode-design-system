@@ -1,5 +1,5 @@
-import { MoreHorizontal, Search, Trash2, Shield } from "lucide-react"
-import { AnimatedIcon } from "../../ui/AnimatedIcon"
+import { MoreHorizontal, Trash2, Shield } from "lucide-react"
+import { SearchIcon } from "../../ui/icons/search"
 import { Badge } from "../../ui/Badge"
 import { Button } from "../../ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card"
@@ -81,7 +81,7 @@ export function TeamPage() {
                         </CardDescription>
                     </div>
                     <div className="relative w-64">
-                        <AnimatedIcon icon={Search} className="absolute left-2 top-2.5 h-4 w-4 text-text-tertiary" />
+                        <SearchIcon size={16} className="absolute left-2 top-2.5 text-text-tertiary" />
                         <Input placeholder="Search members..." className="pl-8" />
                     </div>
                 </CardHeader>
@@ -132,15 +132,15 @@ export function TeamPage() {
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100">
-                                                    <AnimatedIcon icon={MoreHorizontal} className="h-4 w-4" />
+                                                    <MoreHorizontal className="h-4 w-4" />
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end" className="glass-panel">
                                                 <DropdownMenuItem>
-                                                    <AnimatedIcon icon={Shield} className="mr-2 h-4 w-4" /> Change Role
+                                                    <Shield className="mr-2 h-4 w-4" /> Change Role
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem className="text-destructive focus:text-destructive">
-                                                    <AnimatedIcon icon={Trash2} className="mr-2 h-4 w-4" /> Remove User
+                                                    <Trash2 className="mr-2 h-4 w-4" /> Remove User
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>

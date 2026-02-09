@@ -3,12 +3,11 @@ import {
   Home,
   LayoutDashboard,
   MoreHorizontal,
-  Settings,
   Star,
   Trash2,
-  Users,
 } from "lucide-react"
-import { AnimatedIcon } from "../ui/AnimatedIcon"
+import { UsersIcon } from "../ui/icons/users"
+import { SettingsIcon } from "../ui/icons/settings"
 
 import {
   DropdownMenu,
@@ -32,26 +31,23 @@ import {
 
 const data = {
   nav: [
-    { name: "Home", icon: Home, isActive: true },
-    { name: "Dashboard", icon: LayoutDashboard },
-    { name: "Team", icon: Users },
-    { name: "Settings", icon: Settings },
+    { name: "Home", icon: <Home className="h-4 w-4" />, isActive: true },
+    { name: "Dashboard", icon: <LayoutDashboard className="h-4 w-4" /> },
+    { name: "Team", icon: <UsersIcon size={16} /> },
+    { name: "Settings", icon: <SettingsIcon size={16} /> },
   ],
   projects: [
     {
       name: "Design Engineering",
       url: "#",
-      icon: Folder,
     },
     {
       name: "Sales & Marketing",
       url: "#",
-      icon: Folder,
     },
     {
       name: "Travel",
       url: "#",
-      icon: Folder,
     },
   ],
 }
@@ -69,7 +65,7 @@ export function DirectoryBlock() {
                   {data.nav.map((item) => (
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton isActive={item.isActive}>
-                        <AnimatedIcon icon={item.icon} className="h-4 w-4" />
+                        {item.icon}
                         <span>{item.name}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -85,14 +81,14 @@ export function DirectoryBlock() {
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton asChild>
                         <a href={item.url}>
-                          <AnimatedIcon icon={item.icon} className="h-4 w-4" />
+                          <Folder className="h-4 w-4" />
                           <span>{item.name}</span>
                         </a>
                       </SidebarMenuButton>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <SidebarMenuAction showOnHover>
-                            <AnimatedIcon icon={MoreHorizontal} className="h-4 w-4" />
+                            <MoreHorizontal className="h-4 w-4" />
                             <span className="sr-only">More</span>
                           </SidebarMenuAction>
                         </DropdownMenuTrigger>
@@ -102,16 +98,16 @@ export function DirectoryBlock() {
                           align="end"
                         >
                           <DropdownMenuItem>
-                            <AnimatedIcon icon={Folder} className="h-4 w-4 text-muted-foreground" />
+                            <Folder className="h-4 w-4 text-muted-foreground" />
                             <span>View Project</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem>
-                            <AnimatedIcon icon={Star} className="h-4 w-4 text-muted-foreground" />
+                            <Star className="h-4 w-4 text-muted-foreground" />
                             <span>Add to Favorites</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem>
-                            <AnimatedIcon icon={Trash2} className="h-4 w-4 text-muted-foreground" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                             <span>Delete Project</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>

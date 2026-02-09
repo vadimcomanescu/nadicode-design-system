@@ -1,8 +1,8 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Search, CornerDownLeft } from "lucide-react"
-import { AnimatedIcon } from "./AnimatedIcon"
+import { CornerDownLeft } from "lucide-react"
+import { SearchIcon } from "./icons/search"
 
 const searchCommandVariants = cva(
   "flex flex-col rounded-xl border bg-surface overflow-hidden",
@@ -113,7 +113,7 @@ const SearchCommand = React.forwardRef<HTMLDivElement, SearchCommandProps>(
         {...props}
       >
         <div className="flex items-center gap-2 border-b border-border px-3">
-          <AnimatedIcon icon={Search} className="h-4 w-4 shrink-0 text-text-tertiary" />
+          <SearchIcon size={16} className="shrink-0 text-text-tertiary" />
           <input
             ref={inputRef}
             className="flex-1 bg-transparent py-3 text-sm text-text-primary placeholder:text-text-tertiary outline-none"

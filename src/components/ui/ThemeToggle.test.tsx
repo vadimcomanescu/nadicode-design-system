@@ -1,4 +1,5 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ThemeToggle } from './ThemeToggle';
 import { ThemeProvider } from '../../lib/ThemeProvider';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -27,49 +28,32 @@ describe('ThemeToggle', () => {
     })));
   });
 
-  it('renders as a button', () => {
+  it('renders as a button with accessible name', () => {
     renderWithTheme();
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /toggle theme/i })).toBeInTheDocument();
   });
 
-  it('has accessible label', () => {
-    renderWithTheme('light');
-    const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('aria-label', expect.stringContaining('Light mode'));
+  it('opens dropdown menu on click', async () => {
+    const user = userEvent.setup();
+    renderWithTheme();
+    const button = screen.getByRole('button', { name: /toggle theme/i });
+    await user.click(button);
+    expect(screen.getByText('Light')).toBeInTheDocument();
+    expect(screen.getByText('Dark')).toBeInTheDocument();
+    expect(screen.getByText('System')).toBeInTheDocument();
   });
 
-  it('cycles through themes on click: system -> light -> dark -> system', () => {
-    renderWithTheme('system');
-    const button = screen.getByRole('button');
-
-    // Initial state: system
-    expect(button).toHaveAttribute('aria-label', expect.stringContaining('System theme'));
-
-    // Click 1: system -> light
-    act(() => {
-      button.click();
-    });
-    expect(button).toHaveAttribute('aria-label', expect.stringContaining('Light mode'));
+  it('sets theme to light when Light option is selected', async () => {
+    const user = userEvent.setup();
+    renderWithTheme('dark');
+    await user.click(screen.getByRole('button', { name: /toggle theme/i }));
+    await user.click(screen.getByText('Light'));
     expect(localStorage.getItem('design-system-theme')).toBe('light');
-
-    // Click 2: light -> dark
-    act(() => {
-      button.click();
-    });
-    expect(button).toHaveAttribute('aria-label', expect.stringContaining('Dark mode'));
-    expect(localStorage.getItem('design-system-theme')).toBe('dark');
-
-    // Click 3: dark -> system
-    act(() => {
-      button.click();
-    });
-    expect(button).toHaveAttribute('aria-label', expect.stringContaining('System theme'));
-    expect(localStorage.getItem('design-system-theme')).toBe('system');
   });
 
   it('is keyboard accessible', () => {
     renderWithTheme('light');
-    const button = screen.getByRole('button');
+    const button = screen.getByRole('button', { name: /toggle theme/i });
     expect(button).not.toHaveAttribute('tabIndex', '-1');
   });
 
@@ -79,7 +63,7 @@ describe('ThemeToggle', () => {
         <ThemeToggle className="custom-class" />
       </ThemeProvider>
     );
-    const button = screen.getByRole('button');
+    const button = screen.getByRole('button', { name: /toggle theme/i });
     expect(button).toHaveClass('custom-class');
   });
 });

@@ -6,9 +6,11 @@ const Skeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
     return (
       <div
         ref={ref}
-        className={cn("animate-pulse rounded-md bg-secondary/50", className)}
+        className={cn("relative overflow-hidden rounded-md bg-secondary/50", className)}
         {...props}
-      />
+      >
+        <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </div>
     )
   }
 )

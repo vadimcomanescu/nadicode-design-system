@@ -1,13 +1,16 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 import { ThemeProvider } from './lib/ThemeProvider';
 
 function renderApp() {
   return render(
-    <ThemeProvider defaultTheme="dark">
-      <App />
-    </ThemeProvider>
+    <MemoryRouter initialEntries={['/']}>
+      <ThemeProvider defaultTheme="dark">
+        <App />
+      </ThemeProvider>
+    </MemoryRouter>
   );
 }
 
@@ -30,10 +33,7 @@ describe('App', () => {
   it('renders the design system showcase', () => {
     renderApp();
 
-    // Check for main header
-    expect(screen.getByText('Nadicode Seed Design')).toBeInTheDocument();
-
-    // Check for section headers (Overview tab)
+    expect(screen.getByText('Nadicode System')).toBeInTheDocument();
     expect(screen.getByText('Core Principles')).toBeInTheDocument();
     expect(screen.getByText('Synthetic AI Aesthetics')).toBeInTheDocument();
     expect(screen.getByText('Typography')).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe('App', () => {
 
   it('renders the theme toggle', () => {
     renderApp();
-    const themeToggle = screen.getByRole('button', { name: /theme/i });
+    const themeToggle = screen.getByRole('button', { name: /toggle theme/i });
     expect(themeToggle).toBeInTheDocument();
   });
 });

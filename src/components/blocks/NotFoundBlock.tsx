@@ -1,0 +1,51 @@
+import { Button } from "../ui/Button"
+import { Typography } from "../ui/Typography"
+import { MeteorShower } from "../ui/MeteorShower"
+import { AnimatedGradientText } from "../ui/AnimatedGradientText"
+import { Link } from "react-router-dom"
+import { ArrowLeft } from "lucide-react"
+import { cn } from "../../lib/utils"
+
+interface NotFoundBlockProps {
+  title?: string
+  description?: string
+  backHref?: string
+  backLabel?: string
+  className?: string
+}
+
+export function NotFoundBlock({
+  title = "404",
+  description = "The page you're looking for doesn't exist or has been moved.",
+  backHref = "/",
+  backLabel = "Back home",
+  className,
+}: NotFoundBlockProps) {
+  return (
+    <div className={cn("relative flex min-h-[60vh] items-center justify-center overflow-hidden", className)}>
+      <MeteorShower className="absolute inset-0" />
+
+      <div className="relative z-10 mx-auto max-w-md px-6 text-center">
+        <div className="glass-panel rounded-2xl border border-border/50 p-10 shadow-2xl">
+          <AnimatedGradientText className="text-8xl font-extrabold tracking-tighter sm:text-9xl">
+            {title}
+          </AnimatedGradientText>
+
+          <Typography variant="h3" className="mt-4 text-text-primary">
+            Page not found
+          </Typography>
+          <Typography variant="body" className="mt-2 text-text-secondary">
+            {description}
+          </Typography>
+
+          <Button asChild size="lg" variant="accent" className="mt-8">
+            <Link to={backHref}>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {backLabel}
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}

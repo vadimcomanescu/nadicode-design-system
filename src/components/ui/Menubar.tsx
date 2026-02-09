@@ -1,7 +1,8 @@
 import * as React from "react"
 import * as MenubarPrimitive from "@radix-ui/react-menubar"
 import { Check, ChevronRight, Circle } from "lucide-react"
-import { cn } from "../../lib/utils"
+import { cn } from "@/lib/utils"
+import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 const Menubar = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Root>,
@@ -51,7 +52,7 @@ const MenubarSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <ChevronRight className="ml-auto h-4 w-4" />
+    <AnimatedIcon icon={ChevronRight} className="ml-auto h-4 w-4 text-text-tertiary" />
   </MenubarPrimitive.SubTrigger>
 ))
 MenubarSubTrigger.displayName = MenubarPrimitive.SubTrigger.displayName
@@ -95,8 +96,9 @@ const MenubarItem = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Item> & {
     inset?: boolean
+    shortcut?: string
   }
->(({ className, inset, ...props }, ref) => (
+>(({ className, inset, children, shortcut, ...props }, ref) => (
   <MenubarPrimitive.Item
     ref={ref}
     className={cn(
@@ -105,7 +107,18 @@ const MenubarItem = React.forwardRef<
       className
     )}
     {...props}
-  />
+  >
+    {children}
+    {shortcut && (
+      <span className="ml-auto text-xs tracking-widest text-text-tertiary">
+        {shortcut}
+      </span>
+    )}
+    {/* Submenu indicator */}
+    {inset && !shortcut && (
+      <AnimatedIcon icon={ChevronRight} className="ml-auto h-4 w-4 text-text-tertiary" />
+    )}
+  </MenubarPrimitive.Item>
 ))
 MenubarItem.displayName = MenubarPrimitive.Item.displayName
 
@@ -124,7 +137,7 @@ const MenubarCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <Check className="h-4 w-4" />
+        <AnimatedIcon icon={Check} className="h-2 w-2 fill-current" />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}
@@ -146,7 +159,7 @@ const MenubarRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <Circle className="h-2 w-2 fill-current" />
+        <AnimatedIcon icon={Circle} className="h-2 w-2 fill-current" />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}

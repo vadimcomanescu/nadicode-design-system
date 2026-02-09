@@ -14,6 +14,7 @@ import {
 import { ChevronLeft, ChevronRight, Settings2 } from "lucide-react"
 
 import { Button } from "./Button"
+import { AnimatedIcon } from "./AnimatedIcon"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -86,7 +87,7 @@ export function DataTable<TData, TValue>({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              <Settings2 className="mr-2 h-4 w-4" />
+              <AnimatedIcon icon={Settings2} animation="rotate" className="mr-2 h-4 w-4" />
               View
             </Button>
           </DropdownMenuTrigger>
@@ -122,9 +123,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}
@@ -173,7 +174,7 @@ export function DataTable<TData, TValue>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <ChevronLeft className="h-4 w-4" />
+            <AnimatedIcon icon={ChevronLeft} className="h-4 w-4" />
             Previous
           </Button>
           <Button
@@ -183,7 +184,7 @@ export function DataTable<TData, TValue>({
             disabled={!table.getCanNextPage()}
           >
             Next
-            <ChevronRight className="h-4 w-4" />
+            <AnimatedIcon icon={ChevronRight} className="h-4 w-4" />
           </Button>
         </div>
       </div>

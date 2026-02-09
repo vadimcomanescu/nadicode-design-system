@@ -1,10 +1,10 @@
 
 import { SettingsLayout } from "../blocks/SettingsLayout";
 import { AuthLayout } from "../blocks/AuthLayout";
-import { StatsGeneric } from "../blocks/StatsGeneric";
+import { StatsGeneric } from "../blocks/StatsBlock";
 import { DataGridBlock } from "../blocks/DataGridBlock";
-import { BarChart } from "../charts/BarChart";
-import { UsageDonut } from "../charts/UsageDonut";
+import { BarChart } from "../blocks/BarChartBlock";
+import { UsageDonut } from "../blocks/UsageDonutBlock";
 import { Typography } from "../ui/Typography";
 
 export function VerificationPage() {

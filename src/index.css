@@ -51,6 +51,21 @@
     --color-destructive: 220 38 38;
     --color-destructive-foreground: 255 255 255;
 
+    /* Success */
+    --color-success: 5 150 105;
+    --color-success-foreground: 255 255 255;
+
+    /* Warning */
+    --color-warning: 217 119 6;
+    --color-warning-foreground: 0 0 0;
+
+    /* Info */
+    --color-info: 37 99 235;
+    --color-info-foreground: 255 255 255;
+
+    /* Overlay */
+    --color-overlay: 0 0 0;
+
     /* Muted */
     --color-muted: 245 245 245;
     --color-muted-foreground: 115 115 115;
@@ -116,6 +131,21 @@
     /* Destructive */
     --color-destructive: 239 68 68;
     --color-destructive-foreground: 255 255 255;
+
+    /* Success */
+    --color-success: 16 185 129;
+    --color-success-foreground: 255 255 255;
+
+    /* Warning */
+    --color-warning: 245 158 11;
+    --color-warning-foreground: 0 0 0;
+
+    /* Info */
+    --color-info: 59 130 246;
+    --color-info-foreground: 255 255 255;
+
+    /* Overlay */
+    --color-overlay: 0 0 0;
 
     /* Muted */
     --color-muted: 39 39 39;

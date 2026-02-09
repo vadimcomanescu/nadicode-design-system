@@ -40,6 +40,19 @@ export default {
           DEFAULT: 'rgb(var(--color-destructive) / <alpha-value>)',
           foreground: 'rgb(var(--color-destructive-foreground) / <alpha-value>)',
         },
+        success: {
+          DEFAULT: 'rgb(var(--color-success) / <alpha-value>)',
+          foreground: 'rgb(var(--color-success-foreground) / <alpha-value>)',
+        },
+        warning: {
+          DEFAULT: 'rgb(var(--color-warning) / <alpha-value>)',
+          foreground: 'rgb(var(--color-warning-foreground) / <alpha-value>)',
+        },
+        info: {
+          DEFAULT: 'rgb(var(--color-info) / <alpha-value>)',
+          foreground: 'rgb(var(--color-info-foreground) / <alpha-value>)',
+        },
+        overlay: 'rgb(var(--color-overlay) / <alpha-value>)',
         muted: {
           DEFAULT: 'rgb(var(--color-muted) / <alpha-value>)',
           foreground: 'rgb(var(--color-muted-foreground) / <alpha-value>)',

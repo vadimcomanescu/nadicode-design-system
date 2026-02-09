@@ -27,7 +27,7 @@ export function PromoCard({
             {...props}
         >
             <CardHeader className="p-4 pt-4">
-                <CardTitle className="text-sm font-semibold tracking-tight text-foreground">
+                <CardTitle className="text-sm font-semibold tracking-tight text-text-primary">
                     {title}
                 </CardTitle>
                 <CardDescription className="text-xs text-muted-foreground mt-1">

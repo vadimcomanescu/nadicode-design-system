@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Send, Bot, User, Mic } from "lucide-react"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 
 import { cn } from "../../lib/utils"
 import { Button } from "../ui/Button"
@@ -60,7 +61,7 @@ export function ChatLayout() {
         <div className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
             <AvatarImage src="/ai-avatar.png" />
-            <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
+            <AvatarFallback className="bg-accent text-white"><AnimatedIcon icon={Bot} className="h-4 w-4" /></AvatarFallback>
           </Avatar>
           <div>
             <p className="text-sm font-medium">AI Assistant</p>
@@ -81,7 +82,7 @@ export function ChatLayout() {
             >
               {message.role === "assistant" && (
                 <Avatar className="h-8 w-8 mt-1">
-                  <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
+                  <AvatarFallback className="bg-accent text-white"><AnimatedIcon icon={Bot} className="h-4 w-4" /></AvatarFallback>
                 </Avatar>
               )}
               <div
@@ -96,7 +97,7 @@ export function ChatLayout() {
               </div>
               {message.role === "user" && (
                 <Avatar className="h-8 w-8 mt-1">
-                  <AvatarFallback className="bg-secondary"><User className="h-4 w-4" /></AvatarFallback>
+                  <AvatarFallback className="bg-secondary"><AnimatedIcon icon={User} className="h-4 w-4" /></AvatarFallback>
                 </Avatar>
               )}
             </div>
@@ -114,7 +115,7 @@ export function ChatLayout() {
           className="flex items-center gap-2"
         >
           <Button type="button" size="icon" variant="ghost">
-            <Mic className="h-4 w-4" />
+            <AnimatedIcon icon={Mic} className="h-4 w-4" />
           </Button>
           <Input
             placeholder="Type a message..."
@@ -123,7 +124,7 @@ export function ChatLayout() {
             className="flex-1"
           />
           <Button type="submit" size="icon" disabled={!input.trim()}>
-            <Send className="h-4 w-4" />
+            <AnimatedIcon icon={Send} className="h-4 w-4" />
           </Button>
         </form>
       </div>

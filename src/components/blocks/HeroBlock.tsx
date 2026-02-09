@@ -1,4 +1,5 @@
 import { ArrowRight, ChevronRight, Sparkles, Terminal, Zap } from "lucide-react"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 import { Button } from "../ui/Button"
 import { Badge } from "../ui/Badge"
 import { MouseGlow } from "../ui/MouseEffect"
@@ -47,7 +48,7 @@ export function HeroCentered({
                         </Badge>
                         <span className="flex items-center gap-1">
                             {announcement.text}
-                            <ChevronRight className="h-3 w-3" />
+                            <AnimatedIcon icon={ChevronRight} className="h-3 w-3" />
                         </span>
                     </a>
                 </div>
@@ -67,7 +68,7 @@ export function HeroCentered({
                 <div className="mt-10 flex items-center justify-center gap-4">
                     <Button size="lg" variant="primary" onClick={primaryAction.onClick}>
                         {primaryAction.label}
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                        <AnimatedIcon icon={ArrowRight} className="ml-2 h-4 w-4" />
                     </Button>
                     <Button size="lg" variant="outline" onClick={secondaryAction.onClick}>
                         {secondaryAction.label}
@@ -134,7 +135,7 @@ export function HeroSplit({
                 {/* Left Content */}
                 <div className="relative z-10">
                     <div className="inline-flex items-center rounded-lg border border-border bg-surface px-3 py-1 mb-6">
-                        <Sparkles className="mr-2 h-4 w-4 text-accent" />
+                        <AnimatedIcon icon={Sparkles} className="mr-2 h-4 w-4 text-accent" />
                         <span className="text-sm font-medium text-text-secondary">AI-Powered Components</span>
                     </div>
                     <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-6xl mb-6">
@@ -146,7 +147,7 @@ export function HeroSplit({
                     <div className="flex flex-wrap gap-4">
                         <Button size="lg" variant="accent" onClick={primaryAction.onClick}>
                             {primaryAction.label}
-                            <Zap className="ml-2 h-4 w-4" />
+                            <AnimatedIcon icon={Zap} className="ml-2 h-4 w-4" />
                         </Button>
                         <Button size="lg" variant="ghost">
                             Documentation
@@ -181,19 +182,19 @@ export function HeroSplit({
                         </CardHeader>
                         <CardContent className="space-y-4 p-6 font-mono text-sm">
                             <div className="flex items-center gap-2 text-chart-4">
-                                <ChevronRight className="h-4 w-4" />
+                                <AnimatedIcon icon={ChevronRight} className="h-4 w-4" />
                                 <span>npm install @nadicode/core</span>
                             </div>
                             <div className="text-text-secondary">
                                 <span className="text-chart-2">✔</span> Added 124 packages
                             </div>
                             <div className="flex items-center gap-2 text-text-primary">
-                                <ChevronRight className="h-4 w-4 text-text-tertiary" />
+                                <AnimatedIcon icon={ChevronRight} className="h-4 w-4 text-text-tertiary" />
                                 <span>npx nadicode init</span>
                             </div>
                             <div className="bg-surface/50 p-3 rounded border border-border/50 text-xs text-text-secondary mt-4">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <Terminal className="h-3 w-3" />
+                                    <AnimatedIcon icon={Terminal} className="h-3 w-3" />
                                     <span>Initializing project...</span>
                                 </div>
                                 <div className="h-1 w-full bg-border rounded-full overflow-hidden">
@@ -208,7 +209,7 @@ export function HeroSplit({
                         <Card className="border-border/50 shadow-xl">
                             <CardContent className="p-3 flex items-center gap-3">
                                 <div className="h-8 w-8 rounded-full bg-chart-4/20 flex items-center justify-center text-chart-4">
-                                    <Zap className="h-4 w-4" />
+                                    <AnimatedIcon icon={Zap} className="h-4 w-4" />
                                 </div>
                                 <div>
                                     <div className="text-xs font-bold text-text-primary">Deployment</div>

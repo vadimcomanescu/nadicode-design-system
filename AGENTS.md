@@ -1,127 +1,326 @@
 # Seed Design System Agent Guide
 
-This document is the definitive guide for agents and developers working on the `seed-design-system`. It outlines the core philosophy, technical constraints, and patterns required to maintain the system's "ultra-realistic" aesthetic and stability.
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| Stack | React 19, TypeScript, Vite, Tailwind CSS 4, Radix UI, CVA |
+| Components | 96 UI primitives, 35 blocks, 10 pages, 7 chart primitives |
+| Tokens | `src/lib/tokens.config.js` -> `src/index.css` -> `tailwind.config.js` |
+| Theme | Light + Dark via CSS variables, `darkMode: 'class'` |
+| Tests | Vitest + Testing Library, co-located `*.test.tsx` |
+| Dev | `npm run dev` (port 5173) |
+| Type check | `npx tsc -b` |
+| Test | `npm run test` |
+| Lint | `npm run lint` |
 
 ## 1. Design Philosophy
 
 The system is **OPINIONATED** and **PREMIUM**.
-- **Opinionated != Simple**: "One Way" does not mean the *simplest* way. It means the **Best, Most Premium** way.
 - **No Compromise**: Never trade visual fidelity for code simplicity. The default component must look expensive, layered, and high-fidelity.
-- **Premium Pixel Glass**: All containers and cards MUST use the **Hybrid Aesthetic**:
-    1.  **Glass Base**: High-quality blur, noise, emboss, and shadows (`.glass-panel`).
-    2.  **Pixel Overlay**: Subtle grid texture (low opacity) + corner accents.
+- **Premium Pixel Glass**: All containers use the **Hybrid Aesthetic**: glass base (blur, noise, emboss, shadows via `.glass-panel`) + pixel overlay (subtle grid texture).
 
 Key characteristics:
--   **Deep Blacks**: Dark mode uses `#050505` (RGB `5 5 5`).
--   **Rich Texture**: Always prioritize depth (layers, borders, noise) over flat surfaces.
--   **Glassmorphism**: Extensive use of backdrop blur.
+- **Deep Blacks**: Dark mode uses `#050505` (RGB `5 5 5`).
+- **Rich Texture**: Always prioritize depth (layers, borders, noise) over flat surfaces.
+- **Glassmorphism**: Extensive use of backdrop blur.
 
-## 1.1. Critical Constraints (DO NOT IGNORE)
+### 1.1. Critical Constraints (DO NOT IGNORE)
 > [!CAUTION]
 > **NEVER FLATTEN THE DESIGN.**
 > When enforcing "opinionated" rules, do NOT strip away the glassmorphism, noise, or emboss effects. The "Opinionated" choice is always the **highest fidelity** choice.
 
-## 2. Color System & Tokens
+### 1.2. Iconography (STRICT)
+> [!IMPORTANT]
+> **ALWAYS use `AnimatedIcon`.**
+> Never use static `lucide-react` icons directly (e.g., `<Home />`). Use `<AnimatedIcon icon={Home} />` for a living, premium feel.
+> - The component auto-selects contextual animations per icon (arrows slide, settings rotate, bell rings).
+> - Override with `animation` prop: `"scale" | "rotate" | "wiggle" | "shake" | "pulse" | "slideRight" | "slideLeft" | "ring"`.
+> - Default fallback: `"scale"`.
 
-### 2.1. Variable Format (CRITICAL)
-Due to `tailwind.config.js` configuration, CSS variables must follow strict formatting generally, but with a specific caveat for the Sidebar:
+## 2. Token Architecture
 
-*   **Standard Colors**: Defined in `src/index.css` as **SPACE-SEPARATED RGB values**.
-    *   Example: `--color-background: 250 250 250;`
-    *   Usage in Tailwind: `rgb(var(--color-background) / <alpha>)`
+### 2.1. Three-File Flow
 
-*   **Sidebar Colors**: ALSO defined as **SPACE-SEPARATED RGB values**.
-    *   **Reason**: Previous HSL formats (`hsl(...)`) caused rendering issues (Yellow Sidebar bug) when Tailwind config incorrectly wrapped them or browser interpretation failed.
-    *   **Rule**: ALWAYS use RGB values for consistency.
-    *   Example: `--sidebar-background: 5 5 5;` (NOT `hsl(240 5% 10%)`)
-
-### 2.2. Theme Token Structure
-Tokens are split into `base` (Light) and `.dark` (Dark) layers in `src/index.css`.
--   **Light Mode**: Neutral grays (`250 250 250`), standard whites (`255 255 255`).
--   **Dark Mode**: Deep grays (`5 5 5`, `23 23 26`), blue accents (`59 130 246`).
-
-### 2.3. Typography
-**Font Family**: `Satoshi` (via Fontshare CDN).
--   **Usage**: The default sans-serif font for the entire application.
--   **Styles**: Geometric sans-serif with a modern, technical feel.
--   **Implementation**: Imported in `src/index.css`.
-
-## 3. Layout Patterns
-
-### 3.1. Sidebar Component (Preferred)
-The `src/components/ui/Sidebar.tsx` component is the **standard** for application shells.
--   **Responsiveness**: AUTOMATIC. It uses `SidebarProvider` to detect mobile state and renders a `Sheet` instead of a sidebar on small screens.
--   **Usage**: Use `<Sidebar>` within a `<SidebarProvider>`.
-
-### 3.2. Resizable Panels (Advanced)
-Use `react-resizable-panels` (`src/components/ui/Resizable.tsx`) for custom, complex layouts (e.g., IDE-like panels).
--   **Responsiveness**: MANUAL. The library does not handle responsiveness automatically.
--   **Pattern**: To hide a panel on mobile, apply utility classes directly to the `ResizablePanel`.
-    *   Example: `className="hidden md:flex"`
-    *   *Note*: Ensure strictly one panel remains visible at all times to prevent layout collapse.
-
-### 3.2. Glass Cards
-Use the `glass` or `glass-card` utilities for containers to achieve the frosted glass effect.
--   `<Card variant="glass">` is a common pattern.
-
-## 4. Component Extension
-
-When creating new components:
-1.  **Check `tokens.ts`**: Ensure you are using semantic tokens (`bg-surface`, `text-muted`) rather than hardcoded hex values.
-2.  **Interactive States**: All interactive elements must have `:hover` and `:active` states defined via tokens (e.g., `bg-surface-hover`).
-3.  **Mouse Effects**: Wrap global layouts in standard containers but ensure `MouseGlow` (in `App.tsx`) is present for the background ambient effect.
-
-## 5. Key Files
-
--   `src/index.css`: **The Truth**. All CSS variables and base styles.
--   `tailwind.config.js`: Maps CSS variables to Tailwind classes. **Check this before adding new colors.**
--   `src/tokens.ts`: TypeScript definition of tokens for JS usage (sync visually with CSS).
--   `src/components/ui/MouseEffect.tsx`: Controls the global mouse glow (Dot pattern in Dark mode).
-
-## 6. Known Issues / "Gotchas"
-
--   **Yellow Sidebar**: Caused by HSL variables being interpreted as RGB in Tailwind config. **Fix**: Use RGB values in `index.css`.
--   **Violet Glow**: Often caused by mixed color spaces in gradients. Stick to the defined `--color-accent` variables.
--   **Mobile Overflow**: `ResizablePanelGroup` needs explicit hiding on mobile to prevent sidebars from crushing content.
-
-## 7. Verification Protocols
-
-**Strict Rule**: When modifying the design system, you MUST verify integrity using TWO methods:
-
-### 7.1. Color Palette Validation
-Run the validation script to ensure no hardcoded colors or undefined variables exist. This script now also checks for non-semantic Tailwind classes.
-```bash
-python3 seed-design-system/tests/validate_design.py
+```
+tokens.config.js (master definition, both light/dark palettes)
+        |
+        v
+  index.css (CSS custom properties on :root and .dark)
+        |
+        v
+  tailwind.config.js (maps CSS vars to Tailwind classes)
 ```
 
-### 7.2. Visual Verification (CRITICAL)
-**You must verify all changes visually.**
-1.  Run the local server (`npm run dev`).
-2.  Use the `browser_subagent` tool to visit the running app (usually `http://localhost:5173`).
-3.  **Toggle Light/Dark Mode**: You MUST verify components in BOTH modes.
-    -   **Light Mode**: Check for washed-out text, invisible glass cards, or hardcoded dark backgrounds.
-    -   **Dark Mode**: Check for proper glows and contrast.
-4.  **Screenshots**: Take screenshots of the new components to confirm.
-**Do not trust code updates alone.** CSS issues often pass build but fail at runtime.
+**Rule**: Never define colors directly in components. Always reference tokens via Tailwind classes.
 
-## 8. Anti-Regression Rules (PROTECTION)
-To prevent "cycling" breakage:
-1.  **NEVER hardcode grayscale colors** (e.g., `bg-zinc-950`, `text-gray-500`, `bg-white`). ALWAYS use semantic tokens (`bg-surface`, `text-muted`, `section-background`).
-2.  **Glassmorphism requires overrides**: If you use `.glass-atmospheric` or similar, ensure it has a light-mode override in `index.css` if it's not visible on white.
-3.  **Testimonials & Cards**: Always check card visibility on the default background of the theme.
+### 2.2. Semantic Color Tokens
 
+| Token | Tailwind Class | Purpose |
+|-------|---------------|---------|
+| background | `bg-background` | Page background |
+| surface | `bg-surface` | Card/panel backgrounds |
+| surface-hover | `bg-surface-hover` | Hover state for surfaces |
+| border | `border-border` | Default borders |
+| primary | `bg-primary`, `text-primary` | Primary actions/text |
+| secondary | `bg-secondary` | Secondary elements |
+| accent | `bg-accent`, `text-accent` | Brand accent (Electric Indigo) |
+| destructive | `bg-destructive`, `text-destructive` | Danger/delete actions |
+| success | `bg-success`, `text-success` | Success states |
+| warning | `bg-warning`, `text-warning` | Warning states |
+| info | `bg-info`, `text-info` | Informational states |
+| overlay | `bg-overlay/80` | Modal/dialog overlays |
+| muted | `bg-muted` | Subdued backgrounds |
+| muted-foreground | `text-muted-foreground` | Subdued text |
+| text-primary | `text-text-primary` | Primary body text |
+| text-secondary | `text-text-secondary` | Secondary body text |
+| text-tertiary | `text-text-tertiary` | Tertiary/placeholder text |
 
-## 9. MANDATORY VISUAL VERIFICATION (NO EXCEPTIONS)
-**STOP AND READ:** You are NOT allowed to submit changes without visual proof. Code validation is NOT enough.
+### 2.3. CSS Variable Format
+Variables use **space-separated RGB values** (not hex, not HSL):
+```css
+--color-background: 250 250 250;  /* Light */
+--color-background: 5 5 5;        /* Dark */
+```
 
-**For EVERY change, you MUST:**
-1.  **Toggle Themes**: Switch between Light and Dark mode.
-2.  **Verify Contrast**: Ensure text is readable and containers are visible in BOTH modes.
-3.  **Capture Evidence**: Take screenshots of the affected area in BOTH Light and Dark modes.
-4.  **Check Regressions**: Look at surrounding elements. Did a global CSS change break a different component?
+### 2.4. Typography
+**Font**: `Satoshi` (Fontshare CDN), geometric sans-serif.
+**Pixel fonts**: `GeistPixel`, `GeistPixelGrid`, `GeistPixelLine` for decorative use.
+
+## 3. Component Patterns (Golden Pattern)
+
+Every component follows the **Radix UI + CVA + forwardRef** pattern:
+
+```tsx
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "@radix-ui/react-slot"
+import { cn } from "@/lib/utils"
+
+const componentVariants = cva(
+  "base-classes-here",
+  {
+    variants: {
+      variant: { default: "...", outline: "..." },
+      size: { sm: "...", default: "...", lg: "..." },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+)
+
+interface ComponentProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof componentVariants> {
+  asChild?: boolean
+}
+
+const Component = React.forwardRef<HTMLDivElement, ComponentProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "div"
+    return (
+      <Comp
+        ref={ref}
+        className={cn(componentVariants({ variant, size, className }))}
+        {...props}
+      />
+    )
+  }
+)
+Component.displayName = "Component"
+
+export { Component, componentVariants }
+```
+
+**Rules**:
+1. Use `cn()` (from `@/lib/utils`) for all class merging. Never concatenate strings.
+2. Use CVA for any component with variants.
+3. Use `forwardRef` on all components.
+4. Use `asChild` + `Slot` for polymorphic components.
+5. Export both the component and its variants for composition.
+
+## 4. File Structure
+
+```
+src/
+  components/
+    ui/           # Core primitives (Button, Input, Dialog, etc.)
+    ui/charts/    # Chart primitives (AreaChart, BarChart, etc.)
+    ui/stepper/   # Multi-step stepper components
+    blocks/       # Composed UI blocks (*Block.tsx naming)
+    pages/        # Full page compositions
+    layout/       # Layout components (Grid)
+  lib/
+    tokens.config.js  # Master token definitions
+    utils.ts          # cn() helper
+    ThemeProvider.tsx  # Theme context + toggle logic
+    useToken.ts       # Runtime token access hook
+  tokens.ts           # TypeScript re-export of tokens
+  App.tsx             # Component Lab (dev preview)
+```
+
+**Naming conventions**:
+- UI primitives: PascalCase (`Button.tsx`, `Dialog.tsx`)
+- Blocks: PascalCase with `Block` suffix (`HeroBlock.tsx`, `PricingBlock.tsx`)
+- Tests: Co-located (`Button.test.tsx` next to `Button.tsx`)
+
+## 5. Component Inventory
+
+### UI Primitives (96)
+
+**Forms**: Accordion, Button, ButtonGroup, Calendar, Checkbox, Combobox, Command, DatePicker, DateRangePicker, Field, Form, Input, InputGroup, InputOTP, Label, NativeSelect, RadioGroup, Select, Slider, Switch, Textarea, Toggle, ToggleGroup
+
+**Display**: Alert, AlertDialog, Avatar, AvatarUpload, Badge, Breadcrumb, Card, Carousel, Collapsible, ContextMenu, DataTable, Dialog, Drawer, DropdownMenu, Empty, HoverCard, Kbd, Menubar, NavigationMenu, Pagination, Popover, Progress, PromoCard, RoleBadge, ScrollArea, Separator, Sheet, Sidebar, Skeleton, Spinner, Table, Tabs, Toast, Toaster, Tooltip, Typography
+
+**Effects**: AnimatedBackground, AnimatedIcon, InfiniteSlider, MouseEffect, PixelBackground, PixelReveal, ProgressiveBlur
+
+**Charts** (in `ui/charts/`): AreaChart, BarChart, HeatmapChart, LineChart, PieChart, RadarChart, RadialBarChart
+
+**AI / Voice Agent**: AgentStatus, AudioWaveform, ConversationThread, FileUpload, FormWizard, NotificationCenter, SearchCommand, StreamingText
+
+**Other**: BrandIcons, Chart (recharts wrapper), CheckoutForm, CheckoutFormDemo, Logo, Resizable, Responsive, Sonner, ThemeToggle
+
+### Blocks (35)
+
+**Marketing**: HeroBlock, HeroSectionBlock, FeatureBlock, FeatureGridBlock, IntegrationsBlock, PricingBlock, PricingTableBlock, CallToActionBlock, TestimonialsBlock, SocialProofBlock, FooterBlock, HeaderBlock, LogoCloud
+
+**Auth**: AuthLayout, LoginBlock, LoginSimpleBlock, SignUpBlock, OTPBlock
+
+**Dashboard**: StatsBlock, StatsMarketingBlock, DataGridBlock, DirectoryBlock, ChartBlock, ChartCollectionBlock, BarChartBlock, HeatmapChartBlock, InteractiveAreaChartBlock, UsageDonutBlock
+
+**Application**: ChatLayout, CodeBlock, CreateBlock, SettingsLayout, WizardBlock, AudioVisualizerBlock
+
+**User**: InviteUserModal (in `blocks/user/`)
+
+### Pages (10)
+
+CheckoutPage, DashboardPage, IconsPage, LoginPage, PatternsPage, SignupPage, VerificationPage, VantaLoginPages (auth/), ProfilePage (settings/), TeamPage (settings/)
+
+## 6. Testing Standards
+
+**Framework**: Vitest + jsdom + @testing-library/react + @testing-library/jest-dom
+
+**Commands**:
+```bash
+npm run test          # Run all tests once
+npx vitest            # Watch mode
+npx vitest Button     # Run specific test
+```
+
+**Test template**:
+```tsx
+import { describe, it, expect } from "vitest"
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { Component } from "./Component"
+
+describe("Component", () => {
+  it("renders with default props", () => {
+    render(<Component>Content</Component>)
+    expect(screen.getByText("Content")).toBeInTheDocument()
+  })
+
+  it("applies variant classes", () => {
+    render(<Component variant="outline">Content</Component>)
+    expect(screen.getByText("Content")).toHaveClass("border")
+  })
+
+  it("forwards ref", () => {
+    const ref = { current: null }
+    render(<Component ref={ref}>Content</Component>)
+    expect(ref.current).toBeInstanceOf(HTMLElement)
+  })
+
+  it("has accessible role", () => {
+    render(<Component role="button">Click</Component>)
+    expect(screen.getByRole("button")).toBeInTheDocument()
+  })
+})
+```
+
+## 7. Code Cookbook
+
+### Adding a new UI component
+```bash
+# 1. Create file
+touch src/components/ui/MyComponent.tsx
+
+# 2. Follow Golden Pattern (Section 3)
+# 3. Create co-located test
+touch src/components/ui/MyComponent.test.tsx
+
+# 4. Export from the component file (no barrel needed)
+# 5. Import in App.tsx for preview
+```
+
+### Using overlay tokens (modals, drawers)
+```tsx
+// Always use bg-overlay/80, never bg-black/80
+<div className="fixed inset-0 bg-overlay/80" />
+```
+
+### Using status tokens (alerts, badges)
+```tsx
+<Badge className="bg-success text-success-foreground">Active</Badge>
+<Badge className="bg-warning text-warning-foreground">Pending</Badge>
+<Badge className="bg-destructive text-destructive-foreground">Error</Badge>
+```
+
+### Creating a new block
+```bash
+# Blocks compose UI primitives into reusable sections
+# Always use *Block.tsx suffix
+touch src/components/blocks/MyFeatureBlock.tsx
+```
+
+### Theme-aware glass effects
+```tsx
+// Three glass tiers:
+// .glass-panel   - Structural (cards, dashboards)
+// .glass-floating - Elevated (popovers, modals)
+// .glass-overlay  - Transient (toasts, marketing)
+<Card className="glass-panel">...</Card>
+```
+
+## 8. Layout Patterns
+
+### Sidebar (Preferred for app shells)
+`Sidebar.tsx` uses `SidebarProvider` for responsive behavior (auto-switches to Sheet on mobile).
+
+### Resizable Panels (Advanced)
+`Resizable.tsx` wraps `react-resizable-panels`. Responsiveness is MANUAL (hide panels with `className="hidden md:flex"`).
+
+## 9. Verification Protocols
+
+**Strict Rule**: When modifying the design system, verify using TWO methods:
+
+### 9.1. Automated Validation
+```bash
+npx tsc -b                                    # Zero type errors
+npm run test                                   # All tests pass
+npm run lint                                   # Clean lint
+python3 seed-design-system/tests/validate_design.py  # Token validation
+```
+
+### 9.2. Visual Verification (CRITICAL)
+1. Run `npm run dev`.
+2. Toggle Light/Dark Mode. Verify components in BOTH modes.
+3. Check for: washed-out text, invisible glass cards, hardcoded dark backgrounds, proper glows and contrast.
 
 > [!WARNING]
 > If you think "it's just a small CSS change, I don't need to check," **YOU ARE WRONG.** Small changes cause the biggest breakages. **ALWAYS VERIFY VISUALLY.**
 
----
-*Generated by Antigravity Agent*
+## 10. Anti-Regression Rules
+
+1. **NEVER hardcode grayscale colors** (e.g., `bg-zinc-950`, `text-gray-500`). ALWAYS use semantic tokens.
+2. **Glassmorphism requires light-mode overrides** in `index.css`.
+3. **Test card visibility** on the default background of both themes.
+4. **NEVER use `text-foreground`** (undefined). Use `text-text-primary` instead.
+5. **NEVER use `bg-black/80`** for overlays. Use `bg-overlay/80`.
+6. **NEVER use `border-error`** (undefined). Use `border-destructive`.
+
+## 11. Known Issues
+
+- **Yellow Sidebar**: Caused by HSL variables. Fix: Use RGB values in `index.css`.
+- **Violet Glow**: Mixed color spaces in gradients. Stick to `--color-accent` variables.
+- **Mobile Overflow**: `ResizablePanelGroup` needs explicit hiding on mobile.
+- **ThemeToggle tests**: 4 pre-existing test failures in ThemeToggle.test.tsx (aria-label mismatch).

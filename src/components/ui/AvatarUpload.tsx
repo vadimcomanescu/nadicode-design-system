@@ -1,6 +1,7 @@
-import * as React from "react"
-import { Upload, User } from "lucide-react"
-import { cn } from "../../lib/utils"
+import { useRef, useState } from "react"
+import { Upload, X, User } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 import { MouseSpotlight } from "./MouseEffect"
 
 interface AvatarUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -9,8 +10,8 @@ interface AvatarUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "
 }
 
 export function AvatarUpload({ className, value, onChange, ...props }: AvatarUploadProps) {
-    const [preview, setPreview] = React.useState<string | undefined>(value)
-    const inputRef = React.useRef<HTMLInputElement>(null)
+    const [preview, setPreview] = useState<string | undefined>(value)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -31,6 +32,15 @@ export function AvatarUpload({ className, value, onChange, ...props }: AvatarUpl
         }
     }
 
+    const handleRemove = (e: React.MouseEvent) => {
+        e.stopPropagation() // Prevent triggering the file input click
+        setPreview(undefined)
+        if (inputRef.current) {
+            inputRef.current.value = "" // Clear the file input
+        }
+        onChange?.(null as unknown as File) // Pass null or undefined to indicate removal
+    }
+
     return (
         <div
             className={cn("group relative flex flex-col items-center gap-4", className)}
@@ -47,21 +57,36 @@ export function AvatarUpload({ className, value, onChange, ...props }: AvatarUpl
                     )}
                 >
                     {preview ? (
-                        <img
-                            src={preview}
-                            alt="Avatar"
-                            className="h-full w-full object-cover transition-opacity group-hover:opacity-50"
-                        />
+                        <>
+                            <img
+                                src={preview}
+                                alt="Avatar"
+                                className="h-full w-full object-cover transition-opacity group-hover:opacity-50"
+                            />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <AnimatedIcon icon={Upload} animation="pulse" className="w-6 h-6 mb-1" />
+                                <span className="text-xs font-medium text-center">Change</span>
+                            </div>
+                            {preview && (
+                                <button
+                                    type="button"
+                                    onClick={handleRemove}
+                                    className="absolute top-0 right-0 p-1 m-1 bg-destructive text-destructive-foreground rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-destructive/90"
+                                    title="Remove image"
+                                >
+                                    <AnimatedIcon icon={X} animation="rotate" className="w-3 h-3" />
+                                </button>
+                            )}
+                        </>
                     ) : (
                         <div className="flex flex-col items-center gap-1 text-text-secondary transition-colors group-hover:text-accent">
-                            <User className="h-10 w-10" strokeWidth={1.5} />
+                            <AnimatedIcon icon={User} animation="wiggle" className="h-10 w-10" strokeWidth={1.5} />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <AnimatedIcon icon={Upload} animation="pulse" className="w-6 h-6 mb-1" />
+                                <span className="text-xs font-medium text-center">Upload</span>
+                            </div>
                         </div>
                     )}
-
-                    {/* Overlay Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <Upload className="h-8 w-8 text-white drop-shadow-md" />
-                    </div>
 
                     <input
                         ref={inputRef}

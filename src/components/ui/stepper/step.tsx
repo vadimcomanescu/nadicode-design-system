@@ -2,6 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useStepper } from "./stepper"
 import { Check } from "lucide-react"
+import { AnimatedIcon } from "../AnimatedIcon"
 
 interface StepProps extends React.HTMLAttributes<HTMLDivElement> {
     index: number
@@ -43,11 +44,11 @@ export function Step({
                             ? "border-primary bg-primary text-primary-foreground shadow-[0_0_10px_2px_rgba(var(--primary),0.3)]"
                             : isCompleted
                                 ? "border-primary bg-primary text-primary-foreground"
-                                : "border-muted-foreground/30 bg-background text-muted-foreground"
+                                : "border-text-tertiary/30 bg-background text-text-tertiary"
                     )}
                 >
                     {isCompleted ? (
-                        <Check className="h-4 w-4" />
+                        <AnimatedIcon icon={Check} className="h-4 w-4" />
                     ) : icon ? (
                         icon
                     ) : (
@@ -56,7 +57,7 @@ export function Step({
                 </div>
                 <div className="flex flex-col">
                     {title && <span className={cn("text-sm font-medium leading-none", isActive && "text-primary")}>{title}</span>}
-                    {description && <span className="text-xs text-muted-foreground">{description}</span>}
+                    {description && <span className="text-xs text-text-tertiary">{description}</span>}
                 </div>
             </div>
             {/* Connector Line (Horizontal) - Only render if not the last step */}

@@ -4,6 +4,7 @@ import { DataTable } from "../ui/DataTable"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "../ui/Badge"
 import { MoreHorizontal } from "lucide-react"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 import { Button } from "../ui/Button"
 import {
     DropdownMenu,
@@ -64,7 +65,7 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
+                            <AnimatedIcon icon={MoreHorizontal} className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -119,7 +120,7 @@ const data: Payment[] = [
 
 export function DataGridBlock() {
     return (
-        <Card  className="w-full">
+        <Card className="w-full">
             <CardHeader>
                 <CardTitle>Recent Transactions</CardTitle>
                 <CardDescription>A sophisticated data grid with filtering and actions.</CardDescription>

@@ -28,18 +28,18 @@ export default function Testimonials() {
                                 <div className="grid grid-cols-[auto_1fr] items-center gap-3">
                                     <Avatar className="size-12">
                                         <AvatarImage
-                                            src="https://tailus.io/images/reviews/shekinah.webp"
-                                            alt="Shekinah Tshiokufila"
+                                            src="https://avatars.githubusercontent.com/u/47919550?v=4"
+                                            alt="Méschac Irung"
                                             height="400"
                                             width="400"
                                             loading="lazy"
                                         />
-                                        <AvatarFallback>ST</AvatarFallback>
+                                        <AvatarFallback>MI</AvatarFallback>
                                     </Avatar>
 
                                     <div>
-                                        <cite className="text-sm font-medium">Shekinah Tshiokufila</cite>
-                                        <span className="text-muted-foreground block text-sm">Software Ingineer</span>
+                                        <cite className="text-sm font-medium">Méschac Irung</cite>
+                                        <span className="text-muted-foreground block text-sm">Creator</span>
                                     </div>
                                 </div>
                             </blockquote>
@@ -53,17 +53,17 @@ export default function Testimonials() {
                                 <div className="grid grid-cols-[auto_1fr] items-center gap-3">
                                     <Avatar className="size-12">
                                         <AvatarImage
-                                            src="https://tailus.io/images/reviews/jonathan.webp"
-                                            alt="Jonathan Yombo"
+                                            src="https://avatars.githubusercontent.com/u/68236786?v=4"
+                                            alt="Théo Balick"
                                             height="400"
                                             width="400"
                                             loading="lazy"
                                         />
-                                        <AvatarFallback>JY</AvatarFallback>
+                                        <AvatarFallback>TB</AvatarFallback>
                                     </Avatar>
                                     <div>
-                                        <cite className="text-sm font-medium">Jonathan Yombo</cite>
-                                        <span className="text-muted-foreground block text-sm">Software Ingineer</span>
+                                        <cite className="text-sm font-medium">Théo Balick</cite>
+                                        <span className="text-muted-foreground block text-sm">Frontend Dev</span>
                                     </div>
                                 </div>
                             </blockquote>
@@ -77,17 +77,17 @@ export default function Testimonials() {
                                 <div className="grid items-center gap-3 [grid-template-columns:auto_1fr]">
                                     <Avatar className="size-12">
                                         <AvatarImage
-                                            src="https://tailus.io/images/reviews/yucel.webp"
-                                            alt="Yucel Faruksahan"
+                                            src="https://avatars.githubusercontent.com/u/99137927?v=4"
+                                            alt="Glodie Lukose"
                                             height="400"
                                             width="400"
                                             loading="lazy"
                                         />
-                                        <AvatarFallback>YF</AvatarFallback>
+                                        <AvatarFallback>GL</AvatarFallback>
                                     </Avatar>
                                     <div>
-                                        <cite className="text-sm font-medium">Yucel Faruksahan</cite>
-                                        <span className="text-muted-foreground block text-sm">Creator, Tailkits</span>
+                                        <cite className="text-sm font-medium">Glodie Lukose</cite>
+                                        <span className="text-muted-foreground block text-sm">Frontend Dev</span>
                                     </div>
                                 </div>
                             </blockquote>
@@ -101,17 +101,17 @@ export default function Testimonials() {
                                 <div className="grid grid-cols-[auto_1fr] gap-3">
                                     <Avatar className="size-12">
                                         <AvatarImage
-                                            src="https://tailus.io/images/reviews/rodrigo.webp"
-                                            alt="Rodrigo Aguilar"
+                                            src="https://avatars.githubusercontent.com/u/31113941?v=4"
+                                            alt="Bernard Ngandu"
                                             height="400"
                                             width="400"
                                             loading="lazy"
                                         />
-                                        <AvatarFallback>YF</AvatarFallback>
+                                        <AvatarFallback>BN</AvatarFallback>
                                     </Avatar>
                                     <div>
-                                        <p className="text-sm font-medium">Rodrigo Aguilar</p>
-                                        <span className="text-muted-foreground block text-sm">Creator, TailwindAwesome</span>
+                                        <p className="text-sm font-medium">Bernard Ngandu</p>
+                                        <span className="text-muted-foreground block text-sm">Backend Dev</span>
                                     </div>
                                 </div>
                             </blockquote>

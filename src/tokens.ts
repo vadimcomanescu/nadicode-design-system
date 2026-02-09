@@ -29,10 +29,23 @@ export interface TokenColors {
     DEFAULT: string;
     foreground: string;
   };
+  success: {
+    DEFAULT: string;
+    foreground: string;
+  };
+  warning: {
+    DEFAULT: string;
+    foreground: string;
+  };
+  info: {
+    DEFAULT: string;
+    foreground: string;
+  };
   muted: {
     DEFAULT: string;
     foreground: string;
   };
+  overlay: string;
   text: {
     primary: string;
     secondary: string;

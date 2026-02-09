@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { Settings2, Sparkles, Zap } from 'lucide-react'
+import { AnimatedIcon } from '@/components/ui/AnimatedIcon'
 import type { ReactNode } from 'react'
 
 export default function Features() {
@@ -14,10 +15,7 @@ export default function Features() {
                     <div className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Zap
-                                    className="size-6"
-                                    aria-hidden
-                                />
+                                <AnimatedIcon icon={Zap} className="size-6" aria-hidden />
                             </CardDecorator>
 
                             <h3 className="mt-6 font-medium">Customizable</h3>
@@ -31,10 +29,7 @@ export default function Features() {
                     <div className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Settings2
-                                    className="size-6"
-                                    aria-hidden
-                                />
+                                <AnimatedIcon icon={Settings2} className="size-6" aria-hidden />
                             </CardDecorator>
 
                             <h3 className="mt-6 font-medium">You have full control</h3>
@@ -48,10 +43,7 @@ export default function Features() {
                     <div className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Sparkles
-                                    className="size-6"
-                                    aria-hidden
-                                />
+                                <AnimatedIcon icon={Sparkles} className="size-6" aria-hidden />
                             </CardDecorator>
 
                             <h3 className="mt-6 font-medium">Powered By AI</h3>

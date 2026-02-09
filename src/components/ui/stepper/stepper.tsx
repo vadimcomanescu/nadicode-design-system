@@ -1,4 +1,5 @@
 import * as React from "react"
+import { cn } from "../../../lib/utils"
 
 interface StepperContextValue {
     activeStep: number
@@ -28,6 +29,7 @@ export function useStepper() {
 
 interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
     initialStep?: number
+    activeStep?: number
     onStepChange?: (step: number) => void
     orientation?: "horizontal" | "vertical"
     children: React.ReactNode
@@ -35,25 +37,32 @@ interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Stepper({
     initialStep = 0,
+    activeStep: controlledActiveStep,
     onStepChange,
     orientation = "horizontal",
     children,
     className,
     ...props
 }: StepperProps) {
-    const [activeStep, setActiveStep] = React.useState(initialStep)
+    const [internalStep, setInternalStep] = React.useState(initialStep)
+    const isControlled = controlledActiveStep !== undefined
+    const activeStep = isControlled ? controlledActiveStep : internalStep
     const [steps, setSteps] = React.useState(0)
 
     const nextStep = () => {
-        setActiveStep((prev) => Math.min(prev + 1, steps - 1))
+        const next = Math.min(activeStep + 1, steps - 1)
+        if (!isControlled) setInternalStep(next)
+        onStepChange?.(next)
     }
 
     const prevStep = () => {
-        setActiveStep((prev) => Math.max(prev - 1, 0))
+        const prev = Math.max(activeStep - 1, 0)
+        if (!isControlled) setInternalStep(prev)
+        onStepChange?.(prev)
     }
 
     const handleStepChange = (step: number) => {
-        setActiveStep(step)
+        if (!isControlled) setInternalStep(step)
         onStepChange?.(step)
     }
 
@@ -69,8 +78,11 @@ export function Stepper({
             }}
         >
             <div
-                className={`flex w-full gap-4 ${orientation === "vertical" ? "flex-col" : "flex-row"
-                    } ${className}`}
+                className={cn(
+                    "flex w-full gap-4",
+                    orientation === "vertical" ? "flex-col" : "flex-row",
+                    className
+                )}
                 {...props}
             >
                 {children}

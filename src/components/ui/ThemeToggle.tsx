@@ -1,23 +1,14 @@
 import * as React from 'react';
-import { Sun, Moon, Monitor } from 'lucide-react';
-import { Button } from './Button';
-import { useTheme } from '../../lib/ThemeProvider';
-
-type Theme = 'light' | 'dark' | 'system';
-
-const themeOrder: Theme[] = ['system', 'light', 'dark'];
-
-const themeIcons: Record<Theme, typeof Sun> = {
-  light: Sun,
-  dark: Moon,
-  system: Monitor,
-};
-
-const themeLabels: Record<Theme, string> = {
-  light: 'Light mode',
-  dark: 'Dark mode',
-  system: 'System theme',
-};
+import { Moon, Sun } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/DropdownMenu";
+import { useTheme } from "../../lib/ThemeProvider";
+import { AnimatedIcon } from "@/components/ui/AnimatedIcon";
 
 export interface ThemeToggleProps {
   className?: string;
@@ -25,27 +16,29 @@ export interface ThemeToggleProps {
 
 export const ThemeToggle = React.forwardRef<HTMLButtonElement, ThemeToggleProps>(
   ({ className }, ref) => {
-    const { theme, setTheme } = useTheme();
-
-    const cycleTheme = () => {
-      const currentIndex = themeOrder.indexOf(theme);
-      const nextIndex = (currentIndex + 1) % themeOrder.length;
-      setTheme(themeOrder[nextIndex]);
-    };
-
-    const Icon = themeIcons[theme];
+    const { setTheme } = useTheme(); // 'theme' state is not directly used for icon display anymore
 
     return (
-      <Button
-        ref={ref}
-        variant="ghost"
-        size="icon"
-        onClick={cycleTheme}
-        className={className}
-        aria-label={`Current theme: ${themeLabels[theme]}. Click to change.`}
-      >
-        <Icon className="h-5 w-5" />
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon" ref={ref} className={className}>
+            <AnimatedIcon icon={Sun} animation="rotate" className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <AnimatedIcon icon={Moon} animation="rotate" className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => setTheme("light")}>
+            Light
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("dark")}>
+            Dark
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("system")}>
+            System
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     );
   }
 );

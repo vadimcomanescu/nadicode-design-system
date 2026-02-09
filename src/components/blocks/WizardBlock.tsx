@@ -5,14 +5,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/Input"
 import { Label } from "@/components/ui/Label"
 import { Rocket, User, Settings, CreditCard } from "lucide-react"
+import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 export function WizardBlock() {
     const [activeStep, setActiveStep] = useState(0)
     const steps = [
-        { title: "Account", description: "Setup your account", icon: <User className="size-4" /> },
-        { title: "Profile", description: "Add personal info", icon: <Settings className="size-4" /> },
-        { title: "Plan", description: "Choose a plan", icon: <CreditCard className="size-4" /> },
-        { title: "Launch", description: "Ready to go", icon: <Rocket className="size-4" /> },
+        { title: "Account", description: "Setup your account", icon: <AnimatedIcon icon={User} className="size-4" /> },
+        { title: "Profile", description: "Add personal info", icon: <AnimatedIcon icon={Settings} className="size-4" /> },
+        { title: "Plan", description: "Choose a plan", icon: <AnimatedIcon icon={CreditCard} className="size-4" /> },
+        { title: "Launch", description: "Ready to go", icon: <AnimatedIcon icon={Rocket} className="size-4" /> },
     ]
 
     const handleNext = () => setActiveStep((p) => Math.min(p + 1, steps.length - 1))
@@ -26,7 +27,7 @@ export function WizardBlock() {
             </CardHeader>
             <CardContent className="space-y-8">
                 {/* Stepper Header */}
-                <Stepper initialStep={activeStep} activeStep={activeStep} className="justify-between">
+                <Stepper activeStep={activeStep} onStepChange={setActiveStep} className="justify-between">
                     {steps.map((step, index) => (
                         <Step
                             key={index}
@@ -34,6 +35,7 @@ export function WizardBlock() {
                             title={step.title}
                             description={step.description}
                             icon={step.icon}
+                            completed={index < activeStep}
                         />
                     ))}
                 </Stepper>
@@ -78,7 +80,7 @@ export function WizardBlock() {
                     )}
                     {activeStep === 3 && (
                         <div className="text-center space-y-4 py-8">
-                            <Rocket className="size-16 mx-auto text-primary animate-bounce" />
+                            <AnimatedIcon icon={Rocket} className="size-16 mx-auto text-primary animate-bounce" />
                             <h3 className="text-xl font-bold">Ready to Launch!</h3>
                             <p className="text-muted-foreground">Review your settings and click Finish to deploy.</p>
                         </div>

@@ -7,6 +7,7 @@ import { Checkbox } from '../../ui/Checkbox'
 import { Zap } from 'lucide-react'
 import { GoogleIcon } from '../../ui/BrandIcons'
 import { useTheme } from '../../../lib/ThemeProvider'
+import { AnimatedIcon } from '../../ui/AnimatedIcon'
 
 // Note: Vanta effects are now lazy-loaded via effectImporter to avoid bundle bloat.
 // No top-level imports of vanta/dist/*.min.js
@@ -30,7 +31,7 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
         <div className="flex items-center justify-center min-h-screen relative">
             <Button
                 variant="ghost"
-                className="absolute top-4 left-4 z-50 text-foreground/50 hover:text-foreground"
+                className="absolute top-4 left-4 z-50 text-text-primary/50 hover:text-text-primary"
                 onClick={() => window.location.href = '/?tab=pages'}
             >
                 ← Back to Pages
@@ -39,7 +40,7 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
                 <CardHeader className="space-y-1 text-center">
                     <div className="flex justify-center mb-4">
                         <div className={`p-3 rounded-full ${isDark ? 'bg-primary/10' : 'bg-primary/5'}`}>
-                            <Zap className="w-10 h-10 text-primary" />
+                            <AnimatedIcon icon={Zap} className="w-10 h-10 text-primary" />
                         </div>
                     </div>
                     <div className="mb-2 text-primary font-semibold tracking-widest uppercase text-xs">Nadicode System</div>
@@ -105,15 +106,15 @@ export function LoginBirdsDark() {
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
                 color1: isDark ? COLORS.primary : COLORS.primaryDark,
                 color2: isDark ? COLORS.secondary : COLORS.secondaryDark,
-                colorMode: "lerpGradient",
+                colorMode: "varianceGradient",
                 birdSize: 1.50,
                 wingSpan: 30.00,
                 speedLimit: 4.00,
                 separation: 50.00,
                 alignment: 50.00,
                 cohesion: 50.00,
-                quantity: 3.00,
-                backgroundAlpha: 1.0 // Ensure full coverage
+                quantity: 4.00, // Reduced slightly from 5 for performance
+                // backgroundAlpha: 1.0 // Removing to test visibility
             }}
         >
             <LoginPageLayout title="Welcome Back" description="Enter your credentials to access the system" isDark={isDark} />
@@ -213,17 +214,18 @@ export function LoginDotsLight() {
     return (
         <VantaWrapper
             // @ts-ignore
-            effectImporter={() => import('vanta/dist/vanta.dots.min')}
+            effectImporter={() => import('vanta/dist/vanta.net.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
-                color: isDark ? COLORS.primary : COLORS.primaryDark,
-                color2: isDark ? COLORS.secondary : COLORS.secondaryDark,
-                size: 3.0,
-                spacing: 35.0
+                color: isDark ? COLORS.secondary : COLORS.primaryDark,
+                points: 15.0,
+                maxDistance: 22.0,
+                spacing: 18.0,
+                showDots: true
             }}
         >
             <LoginPageLayout title="Connected Systems" description="Join the grid" isDark={isDark} />
-        </VantaWrapper>
+        </VantaWrapper >
     )
 }
 

@@ -1,4 +1,5 @@
 import { Github, Twitter, Linkedin } from "lucide-react"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 import { Button } from "../ui/Button"
 import { Input } from "../ui/Input"
 import { Separator } from "../ui/Separator"
@@ -64,13 +65,13 @@ export function Footer() {
                     </p>
                     <div className="flex gap-4">
                         <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover">
-                            <Twitter className="h-4 w-4" />
+                            <AnimatedIcon icon={Twitter} className="h-4 w-4" />
                         </Button>
                         <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover">
-                            <Github className="h-4 w-4" />
+                            <AnimatedIcon icon={Github} className="h-4 w-4" />
                         </Button>
                         <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover">
-                            <Linkedin className="h-4 w-4" />
+                            <AnimatedIcon icon={Linkedin} className="h-4 w-4" />
                         </Button>
                     </div>
                 </div>

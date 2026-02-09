@@ -10,6 +10,7 @@ import {
     BreadcrumbSeparator,
 } from "../ui/Breadcrumb"
 import { Terminal } from "lucide-react"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 import { CheckoutFormDemo } from "../ui/CheckoutFormDemo"
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -18,7 +19,7 @@ const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx")
 
 export default function CheckoutPage() {
     return (
-        <div className="min-h-screen bg-background text-foreground flex flex-col">
+        <div className="min-h-screen bg-background text-text-primary flex flex-col">
             {/* Header / Breadcrumb Section */}
             <div className="border-b border-border bg-surface/50 backdrop-blur-sm sticky top-0 z-10">
                 <div className="max-w-5xl mx-auto px-6 py-4">
@@ -45,7 +46,7 @@ export default function CheckoutPage() {
 
                     {/* Contextual Alert - Example of usage */}
                     <Alert>
-                        <Terminal className="h-4 w-4" />
+                        <AnimatedIcon icon={Terminal} className="h-4 w-4" />
                         <AlertTitle>Upgrade to Pro</AlertTitle>
                         <AlertDescription>
                             You are currently on the Free plan. Upgrade now to unlock unlimited AI generations.

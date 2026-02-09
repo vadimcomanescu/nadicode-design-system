@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { Plus, Mail, Check } from "lucide-react"
+import { AnimatedIcon } from "../../ui/AnimatedIcon"
 
 import { Button } from "../../ui/Button"
 import { Input } from "../../ui/Input"
@@ -64,7 +65,7 @@ export function InviteUserModal() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button variant="accent" className="gap-2">
-                    <Plus className="h-4 w-4" />
+                    <AnimatedIcon icon={Plus} className="h-4 w-4" />
                     Invite User
                 </Button>
             </DialogTrigger>
@@ -81,7 +82,7 @@ export function InviteUserModal() {
                     <div className="space-y-2">
                         <Label htmlFor="email">Email Address</Label>
                         <div className="relative">
-                            <Mail className="absolute left-3 top-2.5 h-4 w-4 text-text-tertiary" />
+                            <AnimatedIcon icon={Mail} className="absolute left-3 top-2.5 h-4 w-4 text-text-tertiary" />
                             <Input
                                 id="email"
                                 placeholder="colleague@company.com"
@@ -142,7 +143,7 @@ export function InviteUserModal() {
                                 <>Sending...</>
                             ) : (
                                 <>
-                                    <Check className="mr-2 h-4 w-4" /> Send Invite
+                                    <AnimatedIcon icon={Check} className="mr-2 h-4 w-4" /> Send Invite
                                 </>
                             )}
                         </Button>

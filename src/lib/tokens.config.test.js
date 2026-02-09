@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { tokens } from './tokens.config.js';
+import { tokens, colorTokens } from './tokens.config.js';
 
 describe('Token Configuration', () => {
   it('should define color tokens', () => {
@@ -9,9 +9,23 @@ describe('Token Configuration', () => {
     expect(tokens.colors.accent.DEFAULT).toBe('#3B82F6');
   });
 
+  it('should define semantic status tokens in dark theme', () => {
+    expect(colorTokens.dark.success.DEFAULT).toBe('#10B981');
+    expect(colorTokens.dark.warning.DEFAULT).toBe('#F59E0B');
+    expect(colorTokens.dark.info.DEFAULT).toBe('#3B82F6');
+    expect(colorTokens.dark.overlay).toBe('#000000');
+  });
+
+  it('should define semantic status tokens in light theme', () => {
+    expect(colorTokens.light.success.DEFAULT).toBe('#059669');
+    expect(colorTokens.light.warning.DEFAULT).toBe('#D97706');
+    expect(colorTokens.light.info.DEFAULT).toBe('#2563EB');
+    expect(colorTokens.light.overlay).toBe('#000000');
+  });
+
   it('should define typography tokens', () => {
     expect(tokens.typography).toBeDefined();
-    expect(tokens.typography.fontFamily.sans).toContain('Inter');
+    expect(tokens.typography.fontFamily.sans).toContain('Satoshi');
     expect(tokens.typography.sizes.base).toBe('16px');
   });
 

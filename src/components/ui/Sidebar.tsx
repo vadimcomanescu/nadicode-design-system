@@ -3,19 +3,20 @@ import { Slot } from "@radix-ui/react-slot"
 import { type VariantProps, cva } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
 
-import { useIsMobile } from "../../hooks/use-mobile"
-import { cn } from "../../lib/utils"
-import { Button } from "./Button"
-import { Input } from "./Input"
-import { Separator } from "./Separator"
-import { Sheet, SheetContent } from "./Sheet"
-import { Skeleton } from "./Skeleton"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/Button"
+import { Input } from "@/components/ui/Input"
+import { Separator } from "@/components/ui/Separator"
+import { Sheet, SheetContent } from "@/components/ui/Sheet"
+import { Skeleton } from "@/components/ui/Skeleton"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./Tooltip"
+} from "@/components/ui/Tooltip"
+import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -262,7 +263,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <PanelLeft />
+      <AnimatedIcon icon={PanelLeft} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

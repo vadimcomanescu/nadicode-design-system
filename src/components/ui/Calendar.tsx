@@ -1,8 +1,10 @@
 import * as React from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
 
-import { cn } from "../../lib/utils"
-import { buttonVariants } from "./Button"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/Button"
+import { AnimatedIcon } from "@/components/ui/AnimatedIcon"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
@@ -51,6 +53,12 @@ function Calendar({
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         hidden: "invisible",
         ...classNames,
+      }}
+      components={{
+        Chevron: ({ orientation, ...props }) => {
+          const Icon = orientation === "left" ? ChevronLeft : ChevronRight
+          return <AnimatedIcon icon={Icon} className="h-4 w-4" {...props} />
+        },
       }}
       {...props}
     />

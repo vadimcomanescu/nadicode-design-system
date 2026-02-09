@@ -29,10 +29,23 @@ export const colorTokens = {
       DEFAULT: '#EF4444',
       foreground: '#FFFFFF',
     },
+    success: {
+      DEFAULT: '#10B981',
+      foreground: '#FFFFFF',
+    },
+    warning: {
+      DEFAULT: '#F59E0B',
+      foreground: '#000000',
+    },
+    info: {
+      DEFAULT: '#3B82F6',
+      foreground: '#FFFFFF',
+    },
     muted: {
       DEFAULT: '#272727',
       foreground: '#A1A1A1',
     },
+    overlay: '#000000',
     text: {
       primary: '#F2F2F2',
       secondary: '#A1A1A1',
@@ -68,10 +81,23 @@ export const colorTokens = {
       DEFAULT: '#DC2626',
       foreground: '#FFFFFF',
     },
+    success: {
+      DEFAULT: '#059669',
+      foreground: '#FFFFFF',
+    },
+    warning: {
+      DEFAULT: '#D97706',
+      foreground: '#000000',
+    },
+    info: {
+      DEFAULT: '#2563EB',
+      foreground: '#FFFFFF',
+    },
     muted: {
       DEFAULT: '#F5F5F5',
       foreground: '#737373',
     },
+    overlay: '#000000',
     text: {
       primary: '#0A0A0A',
       secondary: '#737373',

@@ -1,8 +1,27 @@
 import * as React from 'react';
+import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from '../../lib/utils';
 import { Label } from './Label';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+const inputVariants = cva(
+  "flex w-full rounded-md border border-border bg-surface shadow-sm transition-colors file:border-0 file:bg-transparent file:font-medium placeholder:text-text-tertiary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-50 text-text-primary",
+  {
+    variants: {
+      size: {
+        sm: "h-8 px-2.5 py-0.5 text-xs file:text-xs",
+        default: "h-9 px-3 py-1 text-sm file:text-sm",
+        lg: "h-11 px-4 py-2 text-base file:text-base",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  }
+)
+
+export interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
+  VariantProps<typeof inputVariants> {
   label?: React.ReactNode;
   error?: string | boolean;
   startIcon?: React.ReactNode;
@@ -10,7 +29,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, label, error, startIcon, endIcon, id, ...props }, ref) => {
+  ({ className, type, label, error, startIcon, endIcon, id, size, ...props }, ref) => {
     const generatedId = React.useId();
     const inputId = id || generatedId;
 
@@ -27,7 +46,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type={type}
             id={inputId}
             className={cn(
-              "flex h-9 w-full rounded-md border border-border bg-surface px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-text-tertiary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-50 text-text-primary",
+              inputVariants({ size }),
               startIcon && "pl-10",
               endIcon && "pr-10",
               error && "border-destructive focus-visible:ring-destructive",
@@ -50,3 +69,5 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   }
 );
 Input.displayName = "Input";
+
+export { inputVariants }

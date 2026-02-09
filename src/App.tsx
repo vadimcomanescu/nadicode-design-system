@@ -18,6 +18,7 @@ import { Textarea } from "./components/ui/Textarea";
 import { RadioGroup, RadioGroupItem } from "./components/ui/RadioGroup";
 import { ToggleGroup, ToggleGroupItem } from "./components/ui/ToggleGroup";
 import { Bold, Italic, Underline, Package, Users, Settings } from "lucide-react";
+import { AnimatedIcon } from "./components/ui/AnimatedIcon";
 import { Slider } from "./components/ui/Slider";
 import { Progress } from "./components/ui/Progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./components/ui/Accordion";
@@ -37,36 +38,34 @@ import { ResizablePanel, ResizablePanelGroup } from "./components/ui/Resizable";
 import { ResponsiveHandle, ResponsivePanel } from "./components/ui/Responsive";
 import { useState } from "react";
 import { CodeBlock } from "./components/blocks/CodeBlock";
-import { AudioVisualizer } from "./components/blocks/AudioVisualizer";
+import { AudioVisualizer } from "./components/blocks/AudioVisualizerBlock";
 import { ChatLayout } from "./components/blocks/ChatLayout";
-import { ChartBlock } from "./components/charts/ChartBlock";
+import { ChartBlock } from "./components/blocks/ChartBlock";
 import { DirectoryBlock } from "./components/blocks/DirectoryBlock";
 import { CreateBlock } from "./components/blocks/CreateBlock";
 import { LoginPage } from "./components/pages/LoginPage";
 import { SignupPage } from "./components/pages/SignupPage";
 import CheckoutPage from "./components/pages/CheckoutPage";
 import { OTPBlock } from "./components/blocks/OTPBlock";
-import { DashboardBlock } from "./components/blocks/DashboardBlock";
+
 // import { Dashboard01Page } from "./components/pages/Dashboard01Page";
 import { DashboardPage } from "./components/pages/DashboardPage";
-import { Dashboard02Page } from "./components/pages/Dashboard02Page";
-import { ChartCollectionBlock } from "./components/charts/ChartCollectionBlock";
+import { ChartCollectionBlock } from "./components/blocks/ChartCollectionBlock";
 import { HeroCentered, HeroSplit } from "./components/blocks/HeroBlock";
 import { LogoCloud, Testimonials } from "./components/blocks/SocialProofBlock";
 import { FeatureGrid, FeatureList } from "./components/blocks/FeatureBlock";
 import { PricingTable } from "./components/blocks/PricingBlock";
 import { Footer } from "./components/blocks/FooterBlock";
-import { HeroHeader } from "./components/blocks/Header";
-import SimpleLoginForm from "./components/blocks/LoginSimple"; // Ensure nothing is hidden
+import { HeroHeader } from "./components/blocks/HeaderBlock";
+import SimpleLoginForm from "./components/blocks/LoginSimpleBlock";
 import { PatternsPage } from "./components/pages/PatternsPage";
-import Feature1 from "./components/blocks/Feature1";
-import Feature2 from "./components/blocks/Feature2";
-import Integrations1 from "./components/blocks/Integrations1";
-import Stats from "./components/blocks/Stats";
-import Team from "./components/blocks/Team";
-import CallToAction from "./components/blocks/CallToAction";
+import Integrations1 from "./components/blocks/IntegrationsBlock";
+import Stats from "./components/blocks/StatsMarketingBlock";
+import Team from "./components/blocks/TeamBlock";
+import CallToAction from "./components/blocks/CallToActionBlock";
+import { IconsPage } from "./components/pages/IconsPage";
 import { WizardBlock } from "./components/blocks/WizardBlock";
-import { InteractiveAreaChart } from "./components/charts/InteractiveAreaChart";
+import { InteractiveAreaChart } from "./components/blocks/InteractiveAreaChartBlock";
 import { Combobox } from "./components/ui/Combobox";
 import { DatePicker } from "./components/ui/DatePicker";
 import { DataTable } from "./components/ui/DataTable";
@@ -79,14 +78,22 @@ import { Kbd } from "./components/ui/Kbd";
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "./components/ui/Field";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "./components/ui/Item";
 
+import { StreamingText } from "./components/ui/StreamingText";
+import { AgentStatus } from "./components/ui/AgentStatus";
+import { AudioWaveform } from "./components/ui/AudioWaveform";
+import { ConversationThread } from "./components/ui/ConversationThread";
+import { NotificationCenter } from "./components/ui/NotificationCenter";
+import { FileUpload } from "./components/ui/FileUpload";
+import { SearchCommand } from "./components/ui/SearchCommand";
+import { FormWizard } from "./components/ui/FormWizard";
 import { MouseGlow } from "./components/ui/MouseEffect";
-import { StatsGeneric } from "./components/blocks/StatsGeneric";
+import { StatsGeneric } from "./components/blocks/StatsBlock";
 import { DataGridBlock } from "./components/blocks/DataGridBlock";
 import { AuthLayout } from "./components/blocks/AuthLayout";
 import { AnimatedBackground } from "./components/ui/AnimatedBackground";
 import { SettingsLayout } from "./components/blocks/SettingsLayout";
 import { DatePickerWithRange } from "./components/ui/DateRangePicker";
-import { UsageDonut } from "./components/charts/UsageDonut";
+import { UsageDonut } from "./components/blocks/UsageDonutBlock";
 import { VerificationPage } from "./components/pages/VerificationPage";
 // Lint fix: correct import style for ProfilePage/TeamPage
 import { ProfilePage } from "./components/pages/settings/ProfilePage";
@@ -148,6 +155,7 @@ function DocsPage() {
             <TabsTrigger value="website">Website</TabsTrigger>
             <TabsTrigger value="application">Application</TabsTrigger>
             <TabsTrigger value="charts">Data Viz</TabsTrigger>
+            <TabsTrigger value="icons">Icons</TabsTrigger>
 
             <TabsTrigger value="pages">Pages</TabsTrigger>
             <TabsTrigger value="patterns">Patterns</TabsTrigger>
@@ -336,13 +344,13 @@ function DocsPage() {
                     <Label>Text Style</Label>
                     <ToggleGroup type="multiple">
                       <ToggleGroupItem value="bold" aria-label="Toggle bold">
-                        <Bold className="h-4 w-4" />
+                        <AnimatedIcon icon={Bold} className="h-4 w-4" />
                       </ToggleGroupItem>
                       <ToggleGroupItem value="italic" aria-label="Toggle italic">
-                        <Italic className="h-4 w-4" />
+                        <AnimatedIcon icon={Italic} className="h-4 w-4" />
                       </ToggleGroupItem>
                       <ToggleGroupItem value="underline" aria-label="Toggle underline">
-                        <Underline className="h-4 w-4" />
+                        <AnimatedIcon icon={Underline} className="h-4 w-4" />
                       </ToggleGroupItem>
                     </ToggleGroup>
                   </div>
@@ -565,6 +573,10 @@ function DocsPage() {
             </section>
           </TabsContent>
 
+          <TabsContent value="icons">
+            <IconsPage />
+          </TabsContent>
+
           <TabsContent value="application">
             <section className="space-y-16">
               <div>
@@ -605,13 +617,13 @@ console.log(greet("World"));`}
                           <div className="flex h-full flex-col p-4 bg-surface gap-2">
                             <div className="p-2 font-semibold text-text-primary mb-2">My App</div>
                             <Button variant="ghost" className="justify-start w-full">
-                              <Users className="mr-2 h-4 w-4" /> Team
+                              <AnimatedIcon icon={Users} className="mr-2 h-4 w-4" /> Team
                             </Button>
                             <Button variant="ghost" className="justify-start w-full bg-surface-active">
-                              <Package className="mr-2 h-4 w-4" /> Projects
+                              <AnimatedIcon icon={Package} className="mr-2 h-4 w-4" /> Projects
                             </Button>
                             <Button variant="ghost" className="justify-start w-full">
-                              <Settings className="mr-2 h-4 w-4" /> Settings
+                              <AnimatedIcon icon={Settings} className="mr-2 h-4 w-4" /> Settings
                             </Button>
                           </div>
                         </ResponsivePanel>
@@ -662,7 +674,7 @@ console.log(greet("World"));`}
                       <Typography variant="h3">Items & Lists</Typography>
                       <ItemGroup className="max-w-md border border-border rounded-lg p-2 bg-surface">
                         <Item variant="outline">
-                          <ItemMedia variant="icon"><Users /></ItemMedia>
+                          <ItemMedia variant="icon"><AnimatedIcon icon={Users} /></ItemMedia>
                           <ItemContent>
                             <ItemTitle>Team Members</ItemTitle>
                             <ItemDescription>Manage your team access.</ItemDescription>
@@ -671,7 +683,7 @@ console.log(greet("World"));`}
                         </Item>
                         <ItemSeparator />
                         <Item variant="default">
-                          <ItemMedia variant="icon"><Settings /></ItemMedia>
+                          <ItemMedia variant="icon"><AnimatedIcon icon={Settings} /></ItemMedia>
                           <ItemContent>
                             <ItemTitle>General Settings</ItemTitle>
                             <ItemDescription>Global preferences and configurations.</ItemDescription>
@@ -742,7 +754,7 @@ console.log(greet("World"));`}
                     <Typography variant="h3">Empty State</Typography>
                     <Empty>
                       <EmptyIcon>
-                        <Package className="h-6 w-6" />
+                        <AnimatedIcon icon={Package} className="h-6 w-6" />
                       </EmptyIcon>
                       <EmptyTitle>No projects found</EmptyTitle>
                       <EmptyDescription>You haven't created any projects yet. Get started by creating a new one.</EmptyDescription>
@@ -766,12 +778,7 @@ console.log(greet("World"));`}
                     />
                   </div>
 
-                  <div className="space-y-4">
-                    <Typography variant="h3">Dashboard (Complex)</Typography>
-                    <div className="border border-border rounded-lg overflow-hidden">
-                      <DashboardBlock />
-                    </div>
-                  </div>
+
 
                   <div className="space-y-4">
                     <Typography variant="h3">Directory (Sidebar + Menu)</Typography>
@@ -799,6 +806,160 @@ console.log(greet("World"));`}
                     <Typography variant="h3">Data Grid (Advanced)</Typography>
                     <DataGridBlock />
                   </div>
+                  <div className="space-y-8">
+                    <Typography variant="h2" className="mb-8 border-b border-border pb-2">Voice Agent / AI Primitives</Typography>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Streaming Text</Typography>
+                      <Card>
+                        <CardContent className="p-6 space-y-4">
+                          <StreamingText
+                            text="The agent is analyzing your codebase and generating a comprehensive review of all components, patterns, and potential improvements..."
+                            speed={2}
+                            interval={25}
+                          />
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Agent Status</Typography>
+                      <div className="flex flex-wrap gap-4">
+                        <AgentStatus status="idle" />
+                        <AgentStatus status="thinking" />
+                        <AgentStatus status="streaming" />
+                        <AgentStatus status="error" />
+                        <AgentStatus status="complete" />
+                        <AgentStatus status="thinking" label="Processing query..." size="lg" />
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Audio Waveform</Typography>
+                      <Card>
+                        <CardContent className="p-6 space-y-4">
+                          <div className="space-y-2">
+                            <Typography variant="small" className="text-text-secondary">Active (accent)</Typography>
+                            <AudioWaveform active variant="accent" bars={32} />
+                          </div>
+                          <div className="space-y-2">
+                            <Typography variant="small" className="text-text-secondary">Inactive</Typography>
+                            <AudioWaveform bars={32} />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Conversation Thread</Typography>
+                      <Card>
+                        <CardContent className="p-6">
+                          <ConversationThread
+                            showTimestamps
+                            messages={[
+                              { id: "1", role: "user", content: "Can you review the token system?", timestamp: "10:24 AM" },
+                              { id: "2", role: "assistant", content: "I'll analyze the token architecture. The three-file flow (tokens.config.js -> index.css -> tailwind.config.js) looks solid. Let me check for any violations.", timestamp: "10:24 AM" },
+                              { id: "3", role: "system", content: "Agent started code analysis" },
+                              { id: "4", role: "assistant", content: "Found 3 hardcoded colors that should use semantic tokens. I'll fix those now.", timestamp: "10:25 AM" },
+                            ]}
+                          />
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Notification Center</Typography>
+                      <div className="max-w-sm">
+                        <NotificationCenter
+                          notifications={[
+                            { id: "1", title: "Build succeeded", description: "Production deployment complete", type: "success", read: false, timestamp: "2 min ago" },
+                            { id: "2", title: "PR review requested", description: "alice requested your review on #142", type: "info", read: false, timestamp: "15 min ago" },
+                            { id: "3", title: "Disk usage warning", description: "Storage at 90% capacity", type: "warning", read: true, timestamp: "1 hour ago" },
+                          ]}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">File Upload</Typography>
+                      <div className="max-w-md">
+                        <FileUpload
+                          helperText="PDF, PNG, JPG up to 10MB"
+                          maxSize={10 * 1024 * 1024}
+                          files={[
+                            { name: "design-tokens.json", size: 4200, type: "application/json" },
+                            { name: "screenshot.png", size: 1240000, type: "image/png" },
+                          ]}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Search Command</Typography>
+                      <SearchCommand
+                        value="dash"
+                        results={[
+                          { id: "1", title: "Dashboard", description: "Main analytics view", category: "Pages" },
+                          { id: "2", title: "DashboardPage.tsx", description: "src/components/pages/", category: "Files" },
+                          { id: "3", title: "DataGridBlock", description: "Advanced data table", category: "Components" },
+                        ]}
+                      />
+                    </div>
+
+                    <div className="space-y-4">
+                      <Typography variant="h3">Form Wizard</Typography>
+                      <FormWizard
+                        variant="card"
+                        steps={[
+                          {
+                            id: "account",
+                            title: "Account",
+                            description: "Basic info",
+                            content: (
+                              <div className="space-y-4">
+                                <div className="space-y-2">
+                                  <Label>Email</Label>
+                                  <Input placeholder="you@example.com" />
+                                </div>
+                                <div className="space-y-2">
+                                  <Label>Password</Label>
+                                  <Input type="password" placeholder="Create a password" />
+                                </div>
+                              </div>
+                            ),
+                          },
+                          {
+                            id: "profile",
+                            title: "Profile",
+                            description: "Your details",
+                            content: (
+                              <div className="space-y-4">
+                                <div className="space-y-2">
+                                  <Label>Display Name</Label>
+                                  <Input placeholder="John Doe" />
+                                </div>
+                                <div className="space-y-2">
+                                  <Label>Bio</Label>
+                                  <Textarea placeholder="Tell us about yourself" />
+                                </div>
+                              </div>
+                            ),
+                          },
+                          {
+                            id: "review",
+                            title: "Review",
+                            content: (
+                              <div className="text-center py-8 space-y-2">
+                                <Typography variant="h4">All set!</Typography>
+                                <Typography variant="muted">Review your details and click Complete.</Typography>
+                              </div>
+                            ),
+                          },
+                        ]}
+                      />
+                    </div>
+                  </div>
+
                   <div className="space-y-4">
                     <Typography variant="h3">Settings Layout</Typography>
                     <div className="border border-border rounded-lg overflow-hidden h-[600px]">
@@ -923,13 +1084,6 @@ console.log(greet("World"));`}
                 </div>
 
                 <div className="space-y-4">
-                  <Typography variant="h3">Dashboard Overview (v2)</Typography>
-                  <div className="h-[600px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border isolate [transform:translateZ(0)]">
-                    <Dashboard02Page />
-                  </div>
-                </div>
-
-                <div className="space-y-4">
                   <Typography variant="h3">Checkout Page (Stripe)</Typography>
                   <div className="h-[600px] overflow-auto rounded-lg shadow-2xl ring-1 ring-border">
                     <CheckoutPage />
@@ -1024,22 +1178,6 @@ console.log(greet("World"));`}
                   <FeatureList />
                 </div>
               </div>
-
-              <div className="space-y-4">
-                <Typography variant="h3">Feature (Bento Grid)</Typography>
-                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
-                  <Feature1 />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <Typography variant="h3">Feature (Cards)</Typography>
-                <div className="rounded-lg border border-border bg-background overflow-hidden relative">
-                  <Feature2 />
-                </div>
-              </div>
-
-
 
               <div className="space-y-4">
                 <Typography variant="h3">Integrations</Typography>

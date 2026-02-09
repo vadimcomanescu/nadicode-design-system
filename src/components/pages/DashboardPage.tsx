@@ -32,10 +32,11 @@ import {
     DropdownMenuTrigger,
 } from "../ui/DropdownMenu"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
-import { StatsGeneric } from "../blocks/StatsGeneric"
+import { StatsGeneric } from "../blocks/StatsBlock"
 // BarChart unused in this snippet, removing or keeping if intended for future use
 // import { BarChart } from "../ui/charts/BarChart"
 import { AreaChart } from "../ui/charts/AreaChart"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 
 const chartData = [
     { month: "January", desktop: 186, mobile: 80 },
@@ -66,7 +67,7 @@ export function DashboardPage() {
                         href="#"
                         className="flex items-center gap-2 text-lg font-semibold md:text-base"
                     >
-                        <Package2 className="h-6 w-6" />
+                        <AnimatedIcon icon={Package2} className="h-6 w-6" />
                         <span className="sr-only">Nadicode</span>
                     </a>
                     <a
@@ -103,7 +104,7 @@ export function DashboardPage() {
                 <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
                     <form className="ml-auto flex-1 sm:flex-initial">
                         <div className="relative">
-                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-text-tertiary" />
+                            <AnimatedIcon icon={Search} className="absolute left-2.5 top-2.5 h-4 w-4 text-text-tertiary" />
                             <Input
                                 type="search"
                                 placeholder="Search products..."
@@ -245,7 +246,7 @@ export function DashboardPage() {
                             <Button asChild size="sm" className="ml-auto gap-1">
                                 <a href="#">
                                     View All
-                                    <ArrowUpRight className="h-4 w-4" />
+                                    <AnimatedIcon icon={ArrowUpRight} className="h-4 w-4" />
                                 </a>
                             </Button>
                         </CardHeader>

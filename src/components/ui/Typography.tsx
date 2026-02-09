@@ -13,7 +13,7 @@ const typographyVariants = cva(
         h4: "scroll-m-20 text-xl font-semibold tracking-tight text-primary",
         body: "leading-7 text-text-primary [&:not(:first-child)]:mt-6",
         small: "text-sm font-medium leading-none text-text-secondary",
-        muted: "text-sm text-muted-foreground text-text-tertiary",
+        muted: "text-sm text-text-tertiary",
       },
     },
     defaultVariants: {

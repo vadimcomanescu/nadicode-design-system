@@ -16,7 +16,7 @@ import {
   RadialBar,
   RadialBarChart,
 } from "recharts"
-import { HeatmapBlock } from "./HeatmapBlock"
+import { HeatmapBlock } from "./HeatmapChartBlock"
 
 import {
   Card,

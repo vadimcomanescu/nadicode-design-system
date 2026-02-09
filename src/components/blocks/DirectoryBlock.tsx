@@ -8,6 +8,7 @@ import {
   Trash2,
   Users,
 } from "lucide-react"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 
 import {
   DropdownMenu,
@@ -68,7 +69,7 @@ export function DirectoryBlock() {
                   {data.nav.map((item) => (
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton isActive={item.isActive}>
-                        <item.icon />
+                        <AnimatedIcon icon={item.icon} className="h-4 w-4" />
                         <span>{item.name}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -84,14 +85,14 @@ export function DirectoryBlock() {
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton asChild>
                         <a href={item.url}>
-                          <item.icon />
+                          <AnimatedIcon icon={item.icon} className="h-4 w-4" />
                           <span>{item.name}</span>
                         </a>
                       </SidebarMenuButton>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <SidebarMenuAction showOnHover>
-                            <MoreHorizontal />
+                            <AnimatedIcon icon={MoreHorizontal} className="h-4 w-4" />
                             <span className="sr-only">More</span>
                           </SidebarMenuAction>
                         </DropdownMenuTrigger>
@@ -101,16 +102,16 @@ export function DirectoryBlock() {
                           align="end"
                         >
                           <DropdownMenuItem>
-                            <Folder className="text-muted-foreground" />
+                            <AnimatedIcon icon={Folder} className="h-4 w-4 text-muted-foreground" />
                             <span>View Project</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem>
-                            <Star className="text-muted-foreground" />
+                            <AnimatedIcon icon={Star} className="h-4 w-4 text-muted-foreground" />
                             <span>Add to Favorites</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem>
-                            <Trash2 className="text-muted-foreground" />
+                            <AnimatedIcon icon={Trash2} className="h-4 w-4 text-muted-foreground" />
                             <span>Delete Project</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>

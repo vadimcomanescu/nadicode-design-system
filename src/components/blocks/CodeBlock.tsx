@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Check, Copy } from "lucide-react"
+import { AnimatedIcon } from "../ui/AnimatedIcon"
 import Prism from "prismjs"
 import "prismjs/themes/prism-tomorrow.css"
 
@@ -34,7 +35,7 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-lg glass-card",
+        "relative overflow-hidden rounded-lg glass-panel !bg-neutral-950/80 border-white/10",
         className
       )}
       {...props}
@@ -51,7 +52,7 @@ export function CodeBlock({
           className="absolute right-2 top-2 h-6 w-6 text-text-tertiary hover:bg-surface-active hover:text-text-primary"
           onClick={onCopy}
         >
-          {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+          {copied ? <AnimatedIcon icon={Check} className="h-3 w-3" /> : <AnimatedIcon icon={Copy} className="h-3 w-3" />}
           <span className="sr-only">Copy code</span>
         </Button>
         <div className="overflow-x-auto p-4">

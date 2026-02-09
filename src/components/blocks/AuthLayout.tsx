@@ -1,6 +1,7 @@
 import { Sparkles } from "lucide-react";
 import { LoginBlock } from "./LoginBlock";
 import { AnimatedBackground } from "../ui/AnimatedBackground";
+import { AnimatedIcon } from "../ui/AnimatedIcon";
 
 interface AuthLayoutProps {
     mode?: "login" | "signup";
@@ -18,7 +19,7 @@ export function AuthLayout({ mode = "login" }: AuthLayoutProps) {
                 </div>
 
                 <div className="relative z-20 flex items-center text-lg font-medium p-8">
-                    <Sparkles className="mr-2 h-6 w-6 text-accent" />
+                    <AnimatedIcon icon={Sparkles} className="mr-2 h-6 w-6 text-accent" />
                     Nadicode
                 </div>
                 <div className="relative z-20 m-auto max-w-lg text-center space-y-4">
@@ -42,7 +43,7 @@ export function AuthLayout({ mode = "login" }: AuthLayoutProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background to-accent/5 pointer-events-none" />
 
                 <LoginBlock
-                    
+
                     className="relative z-10 w-full max-w-sm"
                     type={mode === "signup" ? "signup" : "login"}
                 />

@@ -27,20 +27,20 @@ export const gridPatterns: Pattern[] = [
       backgroundColor: "rgb(var(--color-background))",
       backgroundImage: `
         ${noise},
-        radial-gradient(at 0% 0%, rgb(var(--color-accent) / 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgb(var(--chart-2) / 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgb(var(--chart-5) / 0.15) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgb(var(--chart-1) / 0.15) 0px, transparent 50%)
+        radial-gradient(at 0% 0%, rgb(var(--chart-1) / 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgb(var(--chart-2) / 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgb(var(--chart-5) / 0.12) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgb(var(--chart-4) / 0.12) 0px, transparent 50%)
       `,
     },
     code: `<div className="w-full min-h-dvh" style={{
       backgroundColor: "rgb(var(--color-background))",
       backgroundImage: \`
         url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
-        radial-gradient(at 0% 0%, rgba(var(--color-accent), 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(var(--chart-2), 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(var(--chart-5), 0.15) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(var(--chart-1), 0.15) 0px, transparent 50%)
+        radial-gradient(at 0% 0%, rgba(var(--chart-1), 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(var(--chart-2), 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(var(--chart-5), 0.12) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(var(--chart-4), 0.12) 0px, transparent 50%)
       \`
     }} />`,
   },
@@ -81,7 +81,7 @@ export const gridPatterns: Pattern[] = [
       backgroundColor: "rgb(var(--color-background))",
       backgroundImage: `
             ${noise},
-            radial-gradient(circle at 50% 50%, rgb(var(--color-accent) / 0.2) 0%, transparent 60%),
+            radial-gradient(circle at 50% 50%, rgb(var(--chart-1) / 0.15) 0%, transparent 60%),
             radial-gradient(circle at 80% 20%, rgb(var(--chart-5) / 0.15) 0%, transparent 40%)
           `
     },
@@ -89,7 +89,7 @@ export const gridPatterns: Pattern[] = [
         backgroundColor: "rgb(var(--color-background))",
         backgroundImage: \`
           url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
-          radial-gradient(circle at 50% 50%, rgba(var(--color-accent), 0.2) 0%, transparent 60%),
+          radial-gradient(circle at 50% 50%, rgba(var(--chart-1), 0.15) 0%, transparent 60%),
           radial-gradient(circle at 80% 20%, rgba(var(--chart-5), 0.15) 0%, transparent 40%)
         \`
       }} />`

@@ -4,7 +4,7 @@ import { tokens } from './tokens';
 describe('Tokens', () => {
   it('has correct color structure', () => {
     expect(tokens.colors).toHaveProperty('background');
-    expect(tokens.colors.background).toBe('#050505');
+    expect(tokens.colors.background).toBe('#0F1114');
     expect(tokens.colors).toHaveProperty('primary');
   });
 

@@ -1,5 +1,19 @@
-import { tokens } from './src/lib/tokens.config.js';
+import { tokens, colorScales } from './src/lib/tokens.config.js';
 import tailwindAnimate from 'tailwindcss-animate';
+
+// Generate scale-based Tailwind utilities from 12-step color scales
+// Produces e.g. gray-1 through gray-12, teal-1 through teal-12, etc.
+function buildScaleColors(scales) {
+  const result = {};
+  for (const [name, steps] of Object.entries(scales)) {
+    if (name === 'grayAlpha') continue; // alpha scales use rgba, skip for now
+    result[name] = {};
+    for (const [step, hex] of Object.entries(steps)) {
+      result[name][step] = hex;
+    }
+  }
+  return result;
+}
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,6 +25,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        // 12-step scale colors (static, from dark theme; override per-theme via CSS vars)
+        ...buildScaleColors(colorScales.dark),
+
         // CSS variable-based colors for theming
         background: 'rgb(var(--color-background) / <alpha-value>)',
         surface: {

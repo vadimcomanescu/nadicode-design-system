@@ -58,7 +58,7 @@ export function HeroCentered({
                 {/* Headlines */}
                 <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-text-primary sm:text-7xl">
                     <span className="block">{headline.split(" ").slice(0, 3).join(" ")}</span>
-                    <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-primary to-text-secondary bg-clip-text text-transparent">
                         {headline.split(" ").slice(3).join(" ")}
                     </span>
                 </h1>
@@ -114,7 +114,7 @@ export function HeroCentered({
                             <div className="absolute inset-0 flex h-full w-full items-center justify-center pointer-events-none">
                                 <div className="grid grid-cols-2 gap-8 opacity-20">
                                     <div className="h-32 w-32 rounded-full border border-primary/50 blur-3xl animate-pulse" />
-                                    <div className="h-32 w-32 rounded-full border border-accent/50 blur-3xl animate-pulse delay-1000" />
+                                    <div className="h-32 w-32 rounded-full border border-primary/50 blur-3xl animate-pulse delay-1000" />
                                 </div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ export function HeroSplit({
 
                 {/* Right Visual (Mock UI) */}
                 <div className="relative lg:ml-auto w-full max-w-md">
-                    <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-primary to-accent opacity-20 blur-2xl" />
+                    <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-primary to-text-secondary opacity-20 blur-2xl" />
                     <Card interactive className="relative w-full border-border/50">
                         <CardHeader className="border-b border-border/50 pb-4">
                             <div className="flex items-center justify-between">

@@ -17,6 +17,7 @@ export default {
           DEFAULT: 'rgb(var(--color-surface) / <alpha-value>)',
           hover: 'rgb(var(--color-surface-hover) / <alpha-value>)',
           active: 'rgb(var(--color-surface-active) / <alpha-value>)',
+          raised: 'rgb(var(--color-surface-raised) / <alpha-value>)',
         },
         border: {
           DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
@@ -62,6 +63,13 @@ export default {
           secondary: 'rgb(var(--color-text-secondary) / <alpha-value>)',
           tertiary: 'rgb(var(--color-text-tertiary) / <alpha-value>)',
         },
+        'focus-ring': 'rgb(var(--color-focus-ring) / <alpha-value>)',
+        link: 'rgb(var(--color-link) / <alpha-value>)',
+        input: 'rgb(var(--color-input) / <alpha-value>)',
+        disabled: {
+          DEFAULT: 'rgb(var(--color-disabled) / <alpha-value>)',
+          foreground: 'rgb(var(--color-disabled-foreground) / <alpha-value>)',
+        },
         sidebar: {
           DEFAULT: 'rgb(var(--sidebar-background))',
           foreground: 'rgb(var(--sidebar-foreground))',
@@ -78,6 +86,7 @@ export default {
           3: 'rgb(var(--chart-3))',
           4: 'rgb(var(--chart-4))',
           5: 'rgb(var(--chart-5))',
+          6: 'rgb(var(--chart-6))',
         },
       },
       fontFamily: tokens.typography.fontFamily,
@@ -85,6 +94,31 @@ export default {
       borderRadius: tokens.radius,
       spacing: tokens.spacing,
       boxShadow: tokens.shadows,
+      zIndex: {
+        base: '0',
+        dropdown: '50',
+        sticky: '100',
+        overlay: '200',
+        modal: '300',
+        popover: '400',
+        toast: '500',
+        max: '999',
+      },
+      transitionTimingFunction: {
+        'out-quad': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        'out-cubic': 'cubic-bezier(0.215, 0.61, 0.355, 1)',
+        'out-quart': 'cubic-bezier(0.165, 0.84, 0.44, 1)',
+        'out-quint': 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'in-out-cubic': 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+        'in-out-quart': 'cubic-bezier(0.77, 0, 0.175, 1)',
+      },
+      transitionDuration: {
+        micro: '100ms',
+        fast: '150ms',
+        normal: '200ms',
+        moderate: '250ms',
+        slow: '300ms',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -94,10 +128,33 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "fade-in-up": {
+          from: { opacity: "0", transform: "translateY(8px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in-down": {
+          from: { opacity: "0", transform: "translateY(-8px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
+        "slide-in-right": {
+          from: { transform: "translateX(100%)" },
+          to: { transform: "translateX(0)" },
+        },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-down": "accordion-down 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "accordion-up": "accordion-up 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "fade-in": "fade-in 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "fade-in-up": "fade-in-up 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "scale-in": "scale-in 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
       },
     },
   },

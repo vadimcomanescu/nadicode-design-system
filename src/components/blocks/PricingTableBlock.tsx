@@ -17,7 +17,7 @@ export default function Pricing() {
                     <Card className="flex flex-col" interactive>
                         <CardHeader>
                             <CardTitle className="font-medium">Free</CardTitle>
-                            <span className="my-3 block text-2xl font-semibold">$0 / mo</span>
+                            <span className="my-3 block text-2xl font-semibold tabular-nums">$0 / mo</span>
                             <CardDescription className="text-sm">Per editor</CardDescription>
                         </CardHeader>
 
@@ -52,7 +52,7 @@ export default function Pricing() {
                         <div className="flex flex-col">
                             <CardHeader>
                                 <CardTitle className="font-medium">Pro</CardTitle>
-                                <span className="my-3 block text-2xl font-semibold">$19 / mo</span>
+                                <span className="my-3 block text-2xl font-semibold tabular-nums">$19 / mo</span>
                                 <CardDescription className="text-sm">Per editor</CardDescription>
                             </CardHeader>
 
@@ -83,7 +83,7 @@ export default function Pricing() {
                     <Card className="flex flex-col" interactive>
                         <CardHeader>
                             <CardTitle className="font-medium">Startup</CardTitle>
-                            <span className="my-3 block text-2xl font-semibold">$29 / mo</span>
+                            <span className="my-3 block text-2xl font-semibold tabular-nums">$29 / mo</span>
                             <CardDescription className="text-sm">Per editor</CardDescription>
                         </CardHeader>
 

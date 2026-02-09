@@ -130,7 +130,7 @@ function DocsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-text-primary py-12 relative overflow-hidden">
+    <div className="min-h-dvh bg-background text-text-primary py-12 relative overflow-hidden">
       <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-70" />
       <Container className="relative z-10">
         <header className="mb-12 flex items-start justify-between">

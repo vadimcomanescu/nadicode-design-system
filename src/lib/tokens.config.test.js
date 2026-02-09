@@ -6,21 +6,34 @@ describe('Token Configuration', () => {
     expect(tokens.colors).toBeDefined();
     expect(tokens.colors.background).toBe('#050505');
     expect(tokens.colors.primary.DEFAULT).toBe('#FFFFFF');
-    expect(tokens.colors.accent.DEFAULT).toBe('#3B82F6');
+    expect(tokens.colors.accent.DEFAULT).toBe('#FB7185');
   });
 
   it('should define semantic status tokens in dark theme', () => {
-    expect(colorTokens.dark.success.DEFAULT).toBe('#10B981');
-    expect(colorTokens.dark.warning.DEFAULT).toBe('#F59E0B');
-    expect(colorTokens.dark.info.DEFAULT).toBe('#3B82F6');
+    expect(colorTokens.dark.success.DEFAULT).toBe('#34D399');
+    expect(colorTokens.dark.warning.DEFAULT).toBe('#FBBF24');
+    expect(colorTokens.dark.info.DEFAULT).toBe('#2DD4BF');
     expect(colorTokens.dark.overlay).toBe('#000000');
   });
 
   it('should define semantic status tokens in light theme', () => {
-    expect(colorTokens.light.success.DEFAULT).toBe('#059669');
+    expect(colorTokens.light.success.DEFAULT).toBe('#16A34A');
     expect(colorTokens.light.warning.DEFAULT).toBe('#D97706');
-    expect(colorTokens.light.info.DEFAULT).toBe('#2563EB');
+    expect(colorTokens.light.info.DEFAULT).toBe('#0D9488');
     expect(colorTokens.light.overlay).toBe('#000000');
+  });
+
+  it('should define new interactive tokens', () => {
+    expect(colorTokens.dark.focusRing).toBe('#FB7185');
+    expect(colorTokens.dark.link).toBe('#FB7185');
+    expect(colorTokens.dark.disabled).toBe('#404040');
+    expect(colorTokens.light.focusRing).toBe('#E11D48');
+    expect(colorTokens.light.link).toBe('#E11D48');
+  });
+
+  it('should define surface.raised token', () => {
+    expect(colorTokens.dark.surface.raised).toBe('#222222');
+    expect(colorTokens.light.surface.raised).toBe('#FFFFFF');
   });
 
   it('should define typography tokens', () => {
@@ -42,5 +55,6 @@ describe('Token Configuration', () => {
   it('should define shadow tokens', () => {
     expect(tokens.shadows).toBeDefined();
     expect(tokens.shadows['glow']).toBeDefined();
+    expect(tokens.shadows['glow-accent']).toContain('251, 113, 133');
   });
 });

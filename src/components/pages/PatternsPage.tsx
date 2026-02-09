@@ -27,7 +27,7 @@ export function PatternsPage() {
     };
 
     return (
-        <div className="space-y-8 p-8 min-h-screen bg-background text-text-primary">
+        <div className="space-y-8 p-8 min-h-dvh bg-background text-text-primary">
             <div className="flex flex-col gap-4">
                 <Typography variant="h1">Pattern Gallery ({gridPatterns.length})</Typography>
                 <div className="flex gap-2 flex-wrap">

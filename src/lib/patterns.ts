@@ -33,7 +33,7 @@ export const gridPatterns: Pattern[] = [
         radial-gradient(at 0% 100%, rgb(var(--chart-1) / 0.15) 0px, transparent 50%)
       `,
     },
-    code: `<div className="w-full min-h-screen" style={{
+    code: `<div className="w-full min-h-dvh" style={{
       backgroundColor: "rgb(var(--color-background))",
       backgroundImage: \`
         url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
@@ -60,7 +60,7 @@ export const gridPatterns: Pattern[] = [
         radial-gradient(at 100% 0%, rgb(var(--chart-4) / 0.1) 0px, transparent 40%)
       `,
     },
-    code: `<div className="w-full min-h-screen" style={{
+    code: `<div className="w-full min-h-dvh" style={{
       backgroundColor: "rgb(var(--color-background))",
       backgroundImage: \`
         url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
@@ -85,7 +85,7 @@ export const gridPatterns: Pattern[] = [
             radial-gradient(circle at 80% 20%, rgb(var(--chart-5) / 0.15) 0%, transparent 40%)
           `
     },
-    code: `<div className="w-full min-h-screen" style={{
+    code: `<div className="w-full min-h-dvh" style={{
         backgroundColor: "rgb(var(--color-background))",
         backgroundImage: \`
           url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
@@ -108,7 +108,7 @@ export const gridPatterns: Pattern[] = [
           `,
       backgroundSize: "40px 40px, 40px 40px, 100% 100%"
     },
-    code: `<div className="w-full min-h-screen" style={{
+    code: `<div className="w-full min-h-dvh" style={{
        backgroundColor: "rgb(var(--color-background))",
        backgroundImage: \`
          linear-gradient(rgba(var(--color-border), 0.1) 1px, transparent 1px),
@@ -131,7 +131,7 @@ export const gridPatterns: Pattern[] = [
              radial-gradient(at 0% 100%, rgb(var(--color-border) / 0.5) 0px, transparent 50%)
           `
     },
-    code: `<div className="w-full min-h-screen bg-surface relative overflow-hidden">
+    code: `<div className="w-full min-h-dvh bg-surface relative overflow-hidden">
           <div className="absolute inset-0 opacity-30" 
               style={{
                   backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
@@ -150,7 +150,7 @@ export const gridPatterns: Pattern[] = [
       backgroundColor: "rgb(var(--color-background))",
       backgroundImage: "radial-gradient(ellipse at bottom, rgb(var(--color-surface)), rgb(var(--color-background)))",
     },
-    code: `<div className="w-full min-h-screen bg-background relative overflow-hidden">
+    code: `<div className="w-full min-h-dvh bg-background relative overflow-hidden">
         <style>{\`
           @keyframes animStar {
             from { transform: translateY(0px); }
@@ -175,7 +175,7 @@ export const gridPatterns: Pattern[] = [
     style: {
       backgroundColor: "rgb(var(--color-background))",
     },
-    code: `<div className="w-full min-h-screen relative bg-background">
+    code: `<div className="w-full min-h-dvh relative bg-background">
       <svg className="opacity-20 fixed inset-0 w-full h-full pointer-events-none">
         <filter id="noise">
             <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />

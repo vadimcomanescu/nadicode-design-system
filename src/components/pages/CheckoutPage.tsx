@@ -19,7 +19,7 @@ const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx")
 
 export default function CheckoutPage() {
     return (
-        <div className="min-h-screen bg-background text-text-primary flex flex-col">
+        <div className="min-h-dvh bg-background text-text-primary flex flex-col">
             {/* Header / Breadcrumb Section */}
             <div className="border-b border-border bg-surface/50 backdrop-blur-sm sticky top-0 z-10">
                 <div className="max-w-5xl mx-auto px-6 py-4">

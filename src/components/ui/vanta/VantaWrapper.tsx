@@ -69,7 +69,7 @@ export function VantaWrapper({ children, effectImporter, config, className }: Va
     }, [effectImporter, config]) // Depend on importer instead of effect object
 
     return (
-        <div ref={vantaRef} className={`relative w-full h-screen overflow-hidden ${className}`}>
+        <div ref={vantaRef} className={`relative w-full h-dvh overflow-hidden ${className}`}>
             <div className="relative z-10 w-full h-full pointer-events-none">
                 {/* Content container - pointer events re-enabled for interactive children */}
                 <div className="w-full h-full pointer-events-auto">

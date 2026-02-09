@@ -6,6 +6,7 @@ export interface TokenColors {
     DEFAULT: string;
     hover: string;
     active: string;
+    raised: string;
   };
   border: {
     DEFAULT: string;
@@ -51,6 +52,11 @@ export interface TokenColors {
     secondary: string;
     tertiary: string;
   };
+  focusRing: string;
+  link: string;
+  input: string;
+  disabled: string;
+  disabledForeground: string;
 }
 
 export interface TokenTypography {

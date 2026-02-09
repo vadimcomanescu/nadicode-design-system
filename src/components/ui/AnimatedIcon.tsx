@@ -3,6 +3,7 @@ import type { Variants } from "framer-motion";
 import type { LucideIcon, LucideProps } from "lucide-react";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { useReducedMotion } from "../../hooks/use-reduced-motion";
 
 // --- Animation Variants ---
 
@@ -173,6 +174,8 @@ interface AnimatedIconProps extends LucideProps {
 
 export const AnimatedIcon = forwardRef<SVGSVGElement, AnimatedIconProps>(
     ({ icon: Icon, animation, className, ...props }, ref) => {
+        const reducedMotion = useReducedMotion();
+
         // Resolve animation: explicit prop > icon-aware default > scale fallback
         const iconName = Icon.displayName || Icon.name || "";
         const resolvedAnimation = animation || ICON_ANIMATION_MAP[iconName] || "scale";
@@ -181,7 +184,7 @@ export const AnimatedIcon = forwardRef<SVGSVGElement, AnimatedIconProps>(
         return (
             <motion.div
                 initial="rest"
-                whileHover="hover"
+                whileHover={reducedMotion ? undefined : "hover"}
                 variants={variants}
                 className={cn("inline-flex items-center justify-center", className)}
             >

@@ -83,7 +83,7 @@ export function PricingTable() {
                             </CardHeader>
                             <CardContent className="flex-1">
                                 <div className="mb-8 flex items-baseline">
-                                    <span className="text-4xl font-extrabold text-text-primary">{plan.price}</span>
+                                    <span className="text-4xl font-extrabold text-text-primary tabular-nums">{plan.price}</span>
                                     <span className="ml-1 text-text-tertiary">{plan.period}</span>
                                 </div>
                                 <ul className="space-y-4">

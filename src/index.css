@@ -20,7 +20,6 @@
   :root {
     color-scheme: light;
 
-
     /* Background */
     --color-background: 250 250 250;
 
@@ -28,6 +27,7 @@
     --color-surface: 255 255 255;
     --color-surface-hover: 245 245 245;
     --color-surface-active: 232 232 232;
+    --color-surface-raised: 255 255 255;
 
     /* Border */
     --color-border: 229 229 229;
@@ -43,24 +43,24 @@
     --color-secondary: 245 245 245;
     --color-secondary-foreground: 10 10 10;
 
-    /* Accent */
-    --color-accent: 99 102 241;
+    /* Accent - Rose-600 (4.6:1 on white) */
+    --color-accent: 225 29 72;
     --color-accent-foreground: 255 255 255;
 
     /* Destructive */
     --color-destructive: 220 38 38;
     --color-destructive-foreground: 255 255 255;
 
-    /* Success */
-    --color-success: 5 150 105;
+    /* Success - Green-600 */
+    --color-success: 22 163 74;
     --color-success-foreground: 255 255 255;
 
     /* Warning */
     --color-warning: 217 119 6;
-    --color-warning-foreground: 0 0 0;
+    --color-warning-foreground: 5 5 5;
 
-    /* Info */
-    --color-info: 37 99 235;
+    /* Info - Teal-600 */
+    --color-info: 13 148 136;
     --color-info-foreground: 255 255 255;
 
     /* Overlay */
@@ -72,8 +72,15 @@
 
     /* Text */
     --color-text-primary: 10 10 10;
-    --color-text-secondary: 115 115 115;
-    --color-text-tertiary: 163 163 163;
+    --color-text-secondary: 82 82 82;
+    --color-text-tertiary: 115 115 115;
+
+    /* Interactive */
+    --color-focus-ring: 225 29 72;
+    --color-link: 225 29 72;
+    --color-input: 245 245 245;
+    --color-disabled: 212 212 212;
+    --color-disabled-foreground: 163 163 163;
 
     /* Sidebar */
     --sidebar-background: 250 250 250;
@@ -83,19 +90,15 @@
     --sidebar-accent: 244 244 245;
     --sidebar-accent-foreground: 23 23 26;
     --sidebar-border: 228 228 231;
-    --sidebar-ring: 99 102 241;
+    --sidebar-ring: 225 29 72;
 
-    /* Charts - Synthetic AI Palette (Light Mode - High Contrast) */
-    --chart-1: 79 70 229;
-    /* Electric Indigo-600 */
-    --chart-2: 8 145 178;
-    /* Fluorescent Cyan-600 */
-    --chart-3: 124 58 237;
-    /* Deep Violet-600 */
+    /* Charts - Synthetic Coral Palette (Light Mode) */
+    --chart-1: 225 29 72;
+    --chart-2: 13 148 136;
+    --chart-3: 217 119 6;
     --chart-4: 101 163 13;
-    /* Acid Lime-600 (Replaces Emerald) */
-    --chart-5: 219 39 119;
-    /* Plasma Pink-600 (Replaces Amber) */
+    --chart-5: 37 99 235;
+    --chart-6: 192 38 211;
   }
 
   /* Dark theme */
@@ -106,13 +109,14 @@
     --color-background: 5 5 5;
 
     /* Surface */
-    --color-surface: 15 15 15;
-    --color-surface-hover: 20 20 20;
+    --color-surface: 12 12 12;
+    --color-surface-hover: 18 18 18;
     --color-surface-active: 26 26 26;
+    --color-surface-raised: 34 34 34;
 
     /* Border */
-    --color-border: 39 39 39;
-    --color-border-hover: 63 63 63;
+    --color-border: 38 38 38;
+    --color-border-hover: 58 58 58;
     --color-border-subtle: 255 255 255 / 0.05;
     --color-border-subtle-hover: 255 255 255 / 0.1;
 
@@ -121,76 +125,72 @@
     --color-primary-foreground: 0 0 0;
 
     /* Secondary */
-    --color-secondary: 39 39 39;
+    --color-secondary: 38 38 38;
     --color-secondary-foreground: 255 255 255;
 
-    /* Accent - Electric Indigo */
-    --color-accent: 99 102 241;
+    /* Accent - Synthetic Coral */
+    --color-accent: 251 113 133;
     --color-accent-foreground: 255 255 255;
 
     /* Destructive */
     --color-destructive: 239 68 68;
     --color-destructive-foreground: 255 255 255;
 
-    /* Success */
-    --color-success: 16 185 129;
-    --color-success-foreground: 255 255 255;
+    /* Success - Emerald-400 (WCAG 7.8:1 on dark) */
+    --color-success: 52 211 153;
+    --color-success-foreground: 5 5 5;
 
-    /* Warning */
-    --color-warning: 245 158 11;
-    --color-warning-foreground: 0 0 0;
+    /* Warning - Amber-400 */
+    --color-warning: 251 191 36;
+    --color-warning-foreground: 5 5 5;
 
-    /* Info */
-    --color-info: 59 130 246;
-    --color-info-foreground: 255 255 255;
+    /* Info - Teal-400 (complements coral) */
+    --color-info: 45 212 191;
+    --color-info-foreground: 5 5 5;
 
     /* Overlay */
     --color-overlay: 0 0 0;
 
     /* Muted */
-    --color-muted: 39 39 39;
+    --color-muted: 38 38 38;
     --color-muted-foreground: 163 163 163;
-    /* Lighter from 161 to 163 for better contrast */
 
     /* Text */
     --color-text-primary: 250 250 250;
-    /* Brighter white */
     --color-text-secondary: 163 163 163;
-    /* Lighter gray for readability */
     --color-text-tertiary: 115 115 115;
+
+    /* Interactive */
+    --color-focus-ring: 251 113 133;
+    --color-link: 251 113 133;
+    --color-input: 38 38 38;
+    --color-disabled: 64 64 64;
+    --color-disabled-foreground: 115 115 115;
 
     /* Sidebar */
     --sidebar-background: 5 5 5;
     --sidebar-foreground: 244 244 245;
-    --sidebar-primary: 99 102 241;
-    /* Electric Indigo */
+    --sidebar-primary: 251 113 133;
     --sidebar-primary-foreground: 255 255 255;
     --sidebar-accent: 39 39 42;
     --sidebar-accent-foreground: 244 244 245;
     --sidebar-border: 39 39 42;
-    --sidebar-ring: 115 115 115;
-    /* Neutral text-tertiary scale */
+    --sidebar-ring: 251 113 133;
     --sidebar-width: 16rem;
     --sidebar-width-icon: 3rem;
 
-    /* Charts - Synthetic AI Palette (Dark Mode - Neon Glow) */
-    --chart-1: 99 102 241;
-    /* Electric Indigo-400 */
-    --chart-2: 34 211 238;
-    /* Fluorescent Cyan-400 */
-    --chart-3: 139 92 246;
-    /* Deep Violet-400 */
+    /* Charts - Synthetic Coral Palette (Dark Mode) */
+    --chart-1: 251 113 133;
+    --chart-2: 45 212 191;
+    --chart-3: 251 191 36;
     --chart-4: 132 204 22;
-    /* Acid Lime-500 */
-    --chart-5: 236 72 153;
-    /* Plasma Pink-500 */
-    --chart-6: 124 58 237;
-    /* Extra chart color for variety */
-
+    --chart-5: 96 165 250;
+    --chart-6: 232 121 249;
   }
 
   body {
-    @apply bg-background text-text-primary antialiased min-h-screen transition-colors duration-300;
+    @apply bg-background text-text-primary antialiased min-h-dvh transition-colors duration-300;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     font-feature-settings: "rlig" 1, "calt" 1;
     background-image:
       radial-gradient(at 0% 0%, rgb(var(--color-accent) / 0.08) 0px, transparent 50%),
@@ -242,11 +242,11 @@
       inset 0 0 0 1px rgba(255, 255, 255, 0.08),
       inset 0 1px 1px rgba(255, 255, 255, 0.15);
 
-    /* Subtle neon accent rim to enhance "glow" feel - Softened */
+    /* Subtle accent rim glow */
     &::after {
       content: '';
       @apply absolute inset-0 rounded-[inherit] pointer-events-none;
-      box-shadow: inset 0 0 10px 0 rgba(99, 102, 241, 0.1);
+      box-shadow: inset 0 0 10px 0 rgb(var(--color-accent) / 0.1);
     }
   }
 
@@ -292,6 +292,26 @@
     background-image: linear-gradient(to bottom right,
         rgba(255, 255, 255, 0.6),
         rgba(255, 255, 255, 0.2));
+  }
+
+  :root[class~="light"] .glass-floating {
+    @apply bg-surface/60 border-border/40;
+    box-shadow:
+      0 10px 25px rgba(0, 0, 0, 0.12),
+      0 20px 40px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+  }
+
+  :root[class~="light"] .glass-floating:hover {
+    transform: translateY(-4px) scale(1.005);
+    box-shadow:
+      0 15px 35px rgba(0, 0, 0, 0.15),
+      0 25px 50px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+  }
+
+  :root[class~="light"] .glass-floating::after {
+    box-shadow: inset 0 0 10px 0 rgb(var(--color-accent) / 0.06);
   }
 }
 
@@ -362,5 +382,17 @@
 
   100% {
     mask-position: 0% 100%;
+  }
+}
+
+/* Accessibility: respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

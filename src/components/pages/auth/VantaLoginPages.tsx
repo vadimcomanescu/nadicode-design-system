@@ -14,11 +14,11 @@ import { AnimatedIcon } from '../../ui/AnimatedIcon'
 
 // --- Colors ---
 const COLORS = {
-    primary: 0x6366f1,      // Indigo 500 (Brand Primary)
-    primaryDark: 0x4338ca,  // Indigo 700 (High contrast for light mode)
-    secondary: 0x22d3ee,    // Cyan 400 (Dark mode glow)
-    secondaryDark: 0x0891b2,// Cyan 600 (Light mode contrast)
-    accent: 0xdb2777,       // Pink 600
+    primary: 0xFB7185,      // Coral (Brand Primary)
+    primaryDark: 0xE11D48,  // Rose-600 (High contrast for light mode)
+    secondary: 0x2DD4BF,    // Teal-400 (Dark mode glow)
+    secondaryDark: 0x0D9488,// Teal-600 (Light mode contrast)
+    accent: 0xFBBF24,       // Amber-400
     darkBg: 0x050505,       // Deep Black
     lightBg: 0xFAFAFA,      // Off-white
     white: 0xffffff,
@@ -28,7 +28,7 @@ const COLORS = {
 // --- Shared Layout ---
 function LoginPageLayout({ title, description, isDark }: { title: string, description: string, isDark: boolean }) {
     return (
-        <div className="flex items-center justify-center min-h-screen relative">
+        <div className="flex items-center justify-center min-h-dvh relative">
             <Button
                 variant="ghost"
                 className="absolute top-4 left-4 z-50 text-text-primary/50 hover:text-text-primary"

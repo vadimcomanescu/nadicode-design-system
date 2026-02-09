@@ -15,7 +15,7 @@ interface MouseGlowProps {
 export function MouseGlow({
   className,
   dotColor = "rgba(255, 255, 255, 0.5)",
-  overlayColor = "rgba(99, 102, 241, 0.95)",
+  overlayColor = "rgba(251, 113, 133, 0.95)",
   gap = 24,
   maskRadius = 300,
   overlayRadius = 220,

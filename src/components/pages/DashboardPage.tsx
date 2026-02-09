@@ -60,7 +60,7 @@ const chartConfig = {
 
 export function DashboardPage() {
     return (
-        <div className="flex min-h-screen w-full flex-col bg-background">
+        <div className="flex min-h-dvh w-full flex-col bg-background">
             <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-border bg-background px-4 md:px-6">
                 <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
                     <a

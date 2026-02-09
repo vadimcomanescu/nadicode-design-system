@@ -9,7 +9,7 @@ interface AuthLayoutProps {
 
 export function AuthLayout({ mode = "login" }: AuthLayoutProps) {
     return (
-        <div className="w-full min-h-screen lg:h-screen lg:min-h-[800px] grid lg:grid-cols-2 overflow-hidden bg-background">
+        <div className="w-full min-h-dvh lg:h-dvh lg:min-h-[800px] grid lg:grid-cols-2 overflow-hidden bg-background">
             {/* Visual Side */}
             <div className="hidden lg:flex relative h-full w-full flex-col bg-muted text-white dark:border-r border-border/50">
                 <div className="absolute inset-0 bg-surface-active" />

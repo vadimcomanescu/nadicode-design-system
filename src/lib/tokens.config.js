@@ -3,13 +3,14 @@ export const colorTokens = {
   dark: {
     background: '#050505',
     surface: {
-      DEFAULT: '#0F0F0F',
-      hover: '#141414',
+      DEFAULT: '#0C0C0C',
+      hover: '#121212',
       active: '#1A1A1A',
+      raised: '#222222',
     },
     border: {
-      DEFAULT: '#272727',
-      hover: '#3F3F3F',
+      DEFAULT: '#262626',
+      hover: '#3A3A3A',
       subtle: 'rgba(255, 255, 255, 0.05)',
       'subtle-hover': 'rgba(255, 255, 255, 0.1)',
     },
@@ -18,11 +19,11 @@ export const colorTokens = {
       foreground: '#000000',
     },
     secondary: {
-      DEFAULT: '#272727',
+      DEFAULT: '#262626',
       foreground: '#FFFFFF',
     },
     accent: {
-      DEFAULT: '#3B82F6',
+      DEFAULT: '#FB7185',
       foreground: '#FFFFFF',
     },
     destructive: {
@@ -30,27 +31,32 @@ export const colorTokens = {
       foreground: '#FFFFFF',
     },
     success: {
-      DEFAULT: '#10B981',
-      foreground: '#FFFFFF',
+      DEFAULT: '#34D399',
+      foreground: '#050505',
     },
     warning: {
-      DEFAULT: '#F59E0B',
-      foreground: '#000000',
+      DEFAULT: '#FBBF24',
+      foreground: '#050505',
     },
     info: {
-      DEFAULT: '#3B82F6',
-      foreground: '#FFFFFF',
+      DEFAULT: '#2DD4BF',
+      foreground: '#050505',
     },
     muted: {
-      DEFAULT: '#272727',
-      foreground: '#A1A1A1',
+      DEFAULT: '#262626',
+      foreground: '#A3A3A3',
     },
     overlay: '#000000',
     text: {
-      primary: '#F2F2F2',
-      secondary: '#A1A1A1',
-      tertiary: '#525252',
+      primary: '#FAFAFA',
+      secondary: '#A3A3A3',
+      tertiary: '#737373',
     },
+    focusRing: '#FB7185',
+    link: '#FB7185',
+    input: '#262626',
+    disabled: '#404040',
+    disabledForeground: '#737373',
   },
   light: {
     background: '#FAFAFA',
@@ -58,6 +64,7 @@ export const colorTokens = {
       DEFAULT: '#FFFFFF',
       hover: '#F5F5F5',
       active: '#E8E8E8',
+      raised: '#FFFFFF',
     },
     border: {
       DEFAULT: '#E5E5E5',
@@ -74,7 +81,7 @@ export const colorTokens = {
       foreground: '#0A0A0A',
     },
     accent: {
-      DEFAULT: '#3B82F6',
+      DEFAULT: '#E11D48',
       foreground: '#FFFFFF',
     },
     destructive: {
@@ -82,15 +89,15 @@ export const colorTokens = {
       foreground: '#FFFFFF',
     },
     success: {
-      DEFAULT: '#059669',
+      DEFAULT: '#16A34A',
       foreground: '#FFFFFF',
     },
     warning: {
       DEFAULT: '#D97706',
-      foreground: '#000000',
+      foreground: '#050505',
     },
     info: {
-      DEFAULT: '#2563EB',
+      DEFAULT: '#0D9488',
       foreground: '#FFFFFF',
     },
     muted: {
@@ -100,9 +107,14 @@ export const colorTokens = {
     overlay: '#000000',
     text: {
       primary: '#0A0A0A',
-      secondary: '#737373',
-      tertiary: '#A3A3A3',
+      secondary: '#525252',
+      tertiary: '#737373',
     },
+    focusRing: '#E11D48',
+    link: '#E11D48',
+    input: '#F5F5F5',
+    disabled: '#D4D4D4',
+    disabledForeground: '#A3A3A3',
   },
 };
 
@@ -140,6 +152,6 @@ export const tokens = {
   },
   shadows: {
     'glow': '0 0 20px -5px rgba(255, 255, 255, 0.1)',
-    'glow-accent': '0 0 20px -5px rgba(59, 130, 246, 0.3)',
+    'glow-accent': '0 0 20px -5px rgba(251, 113, 133, 0.3)',
   }
 };

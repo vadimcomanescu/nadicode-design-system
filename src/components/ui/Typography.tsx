@@ -7,11 +7,11 @@ const typographyVariants = cva(
   {
     variants: {
       variant: {
-        h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-primary",
-        h2: "scroll-m-20 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-primary",
-        h3: "scroll-m-20 text-2xl font-semibold tracking-tight text-primary",
-        h4: "scroll-m-20 text-xl font-semibold tracking-tight text-primary",
-        body: "leading-7 text-text-primary [&:not(:first-child)]:mt-6",
+        h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-primary text-balance",
+        h2: "scroll-m-20 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-primary text-balance",
+        h3: "scroll-m-20 text-2xl font-semibold tracking-tight text-primary text-balance",
+        h4: "scroll-m-20 text-xl font-semibold tracking-tight text-primary text-balance",
+        body: "leading-7 text-text-primary [&:not(:first-child)]:mt-6 text-pretty",
         small: "text-sm font-medium leading-none text-text-secondary",
         muted: "text-sm text-text-tertiary",
       },

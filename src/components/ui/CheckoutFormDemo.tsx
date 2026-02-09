@@ -105,7 +105,7 @@ export function CheckoutFormDemo({
                         <Typography variant="muted" className="uppercase tracking-wider text-xs font-semibold">Subscribe to</Typography>
                         <Typography variant="h2">{productName}</Typography>
                         <div className="flex items-baseline space-x-1">
-                            <span className="text-4xl font-bold tracking-tight">${amount / 100}</span>
+                            <span className="text-4xl font-bold tracking-tight tabular-nums">${amount / 100}</span>
                             <span className="text-text-secondary">/month</span>
                         </div>
                     </div>
@@ -125,15 +125,15 @@ export function CheckoutFormDemo({
                 <div className="mt-8 pt-6 border-t border-border space-y-4">
                     <div className="flex justify-between items-center text-sm">
                         <span className="text-text-secondary">Subtotal</span>
-                        <span>${(amount / 100).toFixed(2)}</span>
+                        <span className="tabular-nums">${(amount / 100).toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                         <span className="text-text-secondary">Tax</span>
-                        <span>$0.00</span>
+                        <span className="tabular-nums">$0.00</span>
                     </div>
                     <div className="flex justify-between items-center text-lg font-bold pt-2 border-t border-border">
                         <span>Total due today</span>
-                        <span>${(amount / 100).toFixed(2)}</span>
+                        <span className="tabular-nums">${(amount / 100).toFixed(2)}</span>
                     </div>
                 </div>
             </div>

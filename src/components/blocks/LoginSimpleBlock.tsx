@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 export default function SimpleLoginForm() {
     return (
-        <section className="flex min-h-screen items-center justify-center p-4 bg-transparent">
+        <section className="flex min-h-dvh items-center justify-center p-4 bg-transparent">
             <Card className="w-full max-w-sm border-border/50">
                 <CardHeader className="text-center pb-2">
                     <div className="flex justify-center mb-4">

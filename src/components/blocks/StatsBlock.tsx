@@ -16,7 +16,7 @@ export function StatsGeneric() {
                     <AnimatedIcon icon={DollarSign} className="h-4 w-4 text-text-tertiary" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-text-primary">
+                    <div className="text-2xl font-bold text-text-primary tabular-nums">
                         $<PixelReveal text="45,231.89" delay={200} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">
@@ -34,7 +34,7 @@ export function StatsGeneric() {
                     <AnimatedIcon icon={Users} className="h-4 w-4 text-text-tertiary" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-text-primary">
+                    <div className="text-2xl font-bold text-text-primary tabular-nums">
                         +<PixelReveal text="2350" delay={400} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">
@@ -50,7 +50,7 @@ export function StatsGeneric() {
                     <AnimatedIcon icon={CreditCard} className="h-4 w-4 text-text-tertiary" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-text-primary">
+                    <div className="text-2xl font-bold text-text-primary tabular-nums">
                         +<PixelReveal text="12,234" delay={600} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">
@@ -68,7 +68,7 @@ export function StatsGeneric() {
                     <AnimatedIcon icon={Activity} className="h-4 w-4 text-text-tertiary" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-text-primary">
+                    <div className="text-2xl font-bold text-text-primary tabular-nums">
                         +<PixelReveal text="573" delay={800} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">

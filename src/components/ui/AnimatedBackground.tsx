@@ -4,7 +4,7 @@ export const AnimatedBackground = ({ className }: { className?: string }) => {
     return (
         <div className={cn("relative w-full h-full overflow-hidden bg-background", className)}>
             {/* 1. Deep Space/Dark Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/20 via-background to-background opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-background to-background opacity-80" />
 
             {/* 2. Grid Overlay - Perspective Distorted */}
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay" />

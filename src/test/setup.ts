@@ -16,6 +16,23 @@ class MockPointerEvent extends Event {
 }
 
 if (typeof window !== 'undefined') {
+  // Mock matchMedia for useReducedMotion and similar hooks
+  if (!window.matchMedia) {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: (query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }),
+    });
+  }
+
   if (!window.PointerEvent) {
     window.PointerEvent = MockPointerEvent as unknown as typeof PointerEvent;
   }

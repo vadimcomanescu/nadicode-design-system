@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function LoginPage() {
     return (
-        <section className="flex min-h-screen bg-background px-4 py-16 md:py-32 dark:bg-transparent">
+        <section className="flex min-h-dvh bg-background px-4 py-16 md:py-32 dark:bg-transparent">
             <form
                 action=""
                 className="bg-card m-auto h-fit w-full max-w-sm rounded-[calc(var(--radius)+.125rem)] border p-0.5 shadow-md dark:[--color-muted:var(--color-surface)]">

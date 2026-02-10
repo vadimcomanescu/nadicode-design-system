@@ -43,7 +43,7 @@ function useStripeAppearance(): Appearance {
     }
 }
 
-export default function CheckoutPage() {
+export function CheckoutPage() {
     const appearance = useStripeAppearance()
 
     return (

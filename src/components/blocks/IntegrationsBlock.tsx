@@ -7,7 +7,7 @@ import { Gemini, Replit, MagicUI, VSCodium, MediaWiki, GooglePaLM } from '@/comp
 import { ScrollFadeIn } from '@/components/ui/ScrollFadeIn'
 import { StaggerChildren } from '@/components/ui/StaggerChildren'
 
-export default function IntegrationsSection() {
+export function IntegrationsSection() {
     return (
         <ScrollFadeIn>
         <section>

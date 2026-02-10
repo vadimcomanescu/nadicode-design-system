@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'
 import { Link } from 'react-router-dom'
 
-export default function LoginPage() {
+export function LoginPage() {
     return (
         <section className="flex min-h-dvh bg-background px-4 py-16 md:py-32 dark:bg-transparent">
             <form

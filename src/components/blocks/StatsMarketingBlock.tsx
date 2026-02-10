@@ -1,7 +1,7 @@
 import { StaggerChildren } from "../ui/StaggerChildren"
 import { CountingNumber } from "@/components/animate-ui/primitives/texts/counting-number"
 
-export default function StatsSection() {
+export function StatsSection() {
     return (
         <section className="py-12 md:py-20">
             <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">

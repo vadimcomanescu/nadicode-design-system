@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { motion } from "motion/react"
 import { StaggerChildren } from '@/components/ui/StaggerChildren'
 
-export default function SimpleLoginForm() {
+export function SimpleLoginForm() {
     return (
         <section className="flex min-h-dvh items-center justify-center p-4 bg-transparent">
             <motion.div

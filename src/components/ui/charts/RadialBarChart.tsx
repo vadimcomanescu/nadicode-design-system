@@ -1,5 +1,3 @@
-"use client"
-
 import {
     RadialBar,
     RadialBarChart as RechartsRadialBarChart,

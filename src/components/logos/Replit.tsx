@@ -1,6 +1,6 @@
 import { type SVGProps } from 'react'
 
-export default function Replit(props: SVGProps<SVGSVGElement>) {
+export function Replit(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             width="1em"

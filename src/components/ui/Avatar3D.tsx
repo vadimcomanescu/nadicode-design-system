@@ -144,7 +144,7 @@ export const Avatar3D = React.forwardRef<HTMLDivElement, Avatar3DProps>(
             />
 
             {/* Hover overlay */}
-            <div className="absolute inset-0 rounded-full bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none" />
+            <div className="absolute inset-0 rounded-full bg-overlay/0 group-hover:bg-overlay/10 transition-colors pointer-events-none" />
           </div>
         </motion.div>
       </div>

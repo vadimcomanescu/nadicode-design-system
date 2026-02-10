@@ -1,5 +1,5 @@
 import { motion } from "motion/react"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { cn } from "../../lib/utils"
 
 export interface AudioVisualizerProps {
@@ -14,6 +14,11 @@ export function AudioVisualizer({
   isPlaying = false,
 }: AudioVisualizerProps) {
   const [heights, setHeights] = useState<number[]>(Array(bars).fill(10))
+
+  const opacityOffsets = useMemo(
+    () => Array.from({ length: bars }, () => Math.random() * 0.5),
+    [bars]
+  )
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>
@@ -37,7 +42,7 @@ export function AudioVisualizer({
           className="w-1 rounded-full bg-accent"
           animate={{
             height: `${Math.max(10, height)}%`,
-            opacity: isPlaying ? 0.5 + Math.random() * 0.5 : 0.3,
+            opacity: isPlaying ? 0.5 + opacityOffsets[i] : 0.3,
           }}
           transition={{
             type: "spring",

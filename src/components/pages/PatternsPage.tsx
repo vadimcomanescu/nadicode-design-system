@@ -57,7 +57,7 @@ export function PatternsPage() {
                         <div className="h-48 w-full relative overflow-hidden border-b border-border/50">
                             <div className="absolute inset-0" style={pattern.style} />
                             {/* Label Overlay */}
-                            <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/60 backdrop-blur-sm transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <div className="absolute bottom-0 left-0 right-0 p-3 bg-overlay/60 backdrop-blur-sm transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                                 <Typography variant="small" className="text-white font-mono text-xs truncate">
                                     {pattern.name}
                                 </Typography>

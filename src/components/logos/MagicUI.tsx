@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react'
 
-export default function MagicUI(props: SVGProps<SVGSVGElement>) {
+export function MagicUI(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             width="1em"

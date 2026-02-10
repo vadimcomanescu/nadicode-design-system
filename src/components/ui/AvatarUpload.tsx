@@ -64,7 +64,7 @@ export function AvatarUpload({ className, value, onChange, ...props }: AvatarUpl
                                 alt="Avatar"
                                 className="h-full w-full object-cover transition-opacity group-hover:opacity-50"
                             />
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-overlay/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                 <UploadIcon size={24} className="mb-1" />
                                 <span className="text-xs font-medium text-center">Change</span>
                             </div>
@@ -82,7 +82,7 @@ export function AvatarUpload({ className, value, onChange, ...props }: AvatarUpl
                     ) : (
                         <div className="flex flex-col items-center gap-1 text-text-secondary transition-colors group-hover:text-accent">
                             <UserIcon size={40} />
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-white bg-overlay/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                 <UploadIcon size={24} className="mb-1" />
                                 <span className="text-xs font-medium text-center">Upload</span>
                             </div>

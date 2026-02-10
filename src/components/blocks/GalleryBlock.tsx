@@ -23,7 +23,7 @@ interface GalleryBlockProps {
 const defaultImages: GalleryImage[] = [
   { src: "https://picsum.photos/seed/a/600/400", alt: "Abstract gradient", caption: "Design exploration #1" },
   { src: "https://picsum.photos/seed/b/600/600", alt: "Dark interface", caption: "Dashboard concept" },
-  { src: "https://picsum.photos/seed/c/600/400", alt: "Color study", caption: "Coral palette study" },
+  { src: "https://picsum.photos/seed/c/600/400", alt: "Color study", caption: "Arctic Glow palette study" },
   { src: "https://picsum.photos/seed/d/600/500", alt: "Typography layout", caption: "Type specimen" },
   { src: "https://picsum.photos/seed/e/600/400", alt: "Component grid", caption: "Component inventory" },
   { src: "https://picsum.photos/seed/f/600/600", alt: "Icon set", caption: "Animated icons showcase" },

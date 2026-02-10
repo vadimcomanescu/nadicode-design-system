@@ -1,5 +1,3 @@
-"use client"
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
 import { HeatmapChart } from "../ui/charts/HeatmapChart"
 import { type ChartConfig } from "../ui/Chart"

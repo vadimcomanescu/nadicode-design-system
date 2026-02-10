@@ -24,7 +24,7 @@ const members = [
     },
 ]
 
-export default function TeamSection() {
+export function TeamSection() {
     return (
         <ScrollFadeIn>
         <section className="py-12 md:py-32">

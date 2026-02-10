@@ -4,7 +4,7 @@ import { ZapIcon } from '@/components/ui/icons/zap'
 import { SparklesIcon } from '@/components/ui/icons/sparkles'
 import type { ReactNode } from 'react'
 
-export default function Features() {
+export function Features() {
     return (
         <section className="bg-background py-16 md:py-32 dark:bg-transparent">
             <div className="@container mx-auto max-w-5xl px-6">

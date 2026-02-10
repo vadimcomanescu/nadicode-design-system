@@ -1,6 +1,6 @@
 import { type SVGProps } from 'react'
 
-export default function Gemini(props: SVGProps<SVGSVGElement>) {
+export function Gemini(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             height="1em"

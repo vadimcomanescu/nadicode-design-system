@@ -57,7 +57,7 @@ const defaultEntries: ChangelogEntry[] = [
     version: "2.0.0",
     date: "Feb 1, 2026",
     changes: [
-      { type: "added", text: "Synthetic Coral palette replacing indigo" },
+      { type: "added", text: "Arctic Glow palette replacing Synthetic Coral" },
       { type: "added", text: "Light and dark theme support via CSS custom properties" },
       { type: "fixed", text: "WCAG contrast ratios for all semantic colors" },
       { type: "changed", text: "Migrated from Tailwind CSS 3 to 4" },

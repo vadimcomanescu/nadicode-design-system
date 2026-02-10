@@ -6,7 +6,7 @@ import { InfiniteSlider } from '@/components/ui/InfiniteSlider'
 import { ProgressiveBlur } from '@/components/ui/ProgressiveBlur'
 import { ChevronRightIcon } from '@/components/ui/icons'
 
-export default function HeroSection() {
+export function HeroSection() {
     return (
         <>
             <HeroHeader />

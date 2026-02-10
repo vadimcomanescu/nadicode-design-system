@@ -1,5 +1,3 @@
-"use client"
-
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
 import { PixelReveal } from "../ui/PixelReveal"
 import { ArrowDownRightIcon, ArrowUpRightIcon, DollarSignIcon, ActivityIcon, CreditCardIcon } from "@/components/ui/icons"

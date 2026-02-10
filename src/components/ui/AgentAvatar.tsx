@@ -68,7 +68,7 @@ const AgentAvatar = forwardRef<HTMLButtonElement, AgentAvatarProps>(
           />
 
           {/* Subtle overlay on hover */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200 rounded-full" />
+          <div className="absolute inset-0 bg-overlay/0 group-hover:bg-overlay/10 transition-colors duration-200 rounded-full" />
         </div>
       </button>
     );

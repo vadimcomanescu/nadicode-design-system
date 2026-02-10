@@ -1,4 +1,4 @@
-export default function LogoCloud() {
+export function LogoCloud() {
     return (
         <section className="bg-background py-16">
             <div className="mx-auto max-w-5xl px-6">

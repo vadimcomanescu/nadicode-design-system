@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { StaggerChildren } from '../ui/StaggerChildren'
 import { ShimmeringText } from '@/components/animate-ui/primitives/texts/shimmering'
 
-export default function CallToAction() {
+export function CallToAction() {
     return (
         <section className="py-16 md:py-32">
             <div className="mx-auto max-w-5xl px-6">

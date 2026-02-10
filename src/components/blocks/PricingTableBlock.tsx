@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
 import { CheckIcon } from '@/components/ui/icons/check'
 
-export default function Pricing() {
+export function Pricing() {
     return (
         <section className="py-16 md:py-32">
             <div className="mx-auto max-w-6xl px-6">

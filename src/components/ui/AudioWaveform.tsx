@@ -48,6 +48,11 @@ const AudioWaveform = React.forwardRef<HTMLDivElement, AudioWaveformProps>(
     },
     ref
   ) => {
+    const randomOffsets = React.useMemo(
+      () => Array.from({ length: bars }, () => Math.random() * 20),
+      [bars]
+    )
+
     return (
       <div
         ref={ref}
@@ -66,7 +71,7 @@ const AudioWaveform = React.forwardRef<HTMLDivElement, AudioWaveformProps>(
             style={{
               width: barWidth,
               height: active
-                ? `${20 + Math.sin(i * 0.7) * 60 + Math.random() * 20}%`
+                ? `${20 + Math.sin(i * 0.7) * 60 + randomOffsets[i]}%`
                 : "15%",
               opacity: active ? 0.6 + Math.sin(i * 0.5) * 0.4 : 0.3,
               animationDelay: `${i * 75}ms`,

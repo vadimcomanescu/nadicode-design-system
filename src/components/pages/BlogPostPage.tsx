@@ -100,18 +100,18 @@ export function BlogPostPage() {
                 filename="tokens.config.js"
                 code={`export const colorTokens = {
   dark: {
-    background: "5 5 5",
-    surface: "15 15 15",
-    primary: "251 113 133",     // Synthetic Coral
-    accent: "251 113 133",
-    success: "52 211 153",      // Emerald-400
+    background: "15 17 20",
+    surface: "25 28 33",
+    primary: "225 231 237",     // Arctic Glow gray.12
+    accent: "56 189 184",       // Arctic Glow teal.9
+    success: "61 214 140",      // Green.9
   },
   light: {
-    background: "255 255 255",
-    surface: "250 250 250",
-    primary: "225 29 72",       // Rose-600
-    accent: "225 29 72",
-    success: "22 163 74",       // Green-600
+    background: "251 252 253",
+    surface: "240 243 246",
+    primary: "26 34 48",        // Gray.12
+    accent: "26 143 136",       // Teal.9
+    success: "27 148 80",       // Green.9
   },
 }`}
               />
@@ -131,13 +131,13 @@ export function BlogPostPage() {
               <CodeBlock
                 filename="index.css"
                 code={`:root {
-  --background: 255 255 255;
-  --primary: 225 29 72;
+  --background: 251 252 253;
+  --primary: 26 34 48;
 }
 
 .dark {
-  --background: 5 5 5;
-  --primary: 251 113 133;
+  --background: 15 17 20;
+  --primary: 225 231 237;
 }`}
               />
             </ScrollFadeIn>

@@ -1,5 +1,3 @@
-"use client"
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
 import { PieChart as PieChartPrimitive } from "../ui/charts/PieChart"
 import { type ChartConfig } from "../ui/Chart"

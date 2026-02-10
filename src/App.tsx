@@ -62,6 +62,15 @@ import { LoginPage } from "./components/pages/LoginPage";
 import { SignupPage } from "./components/pages/SignupPage";
 import { CheckoutPage } from "./components/pages/CheckoutPage";
 import { OTPBlock } from "./components/blocks/OTPBlock";
+import { ForgotPasswordBlock } from "./components/blocks/ForgotPasswordBlock";
+import { ResetPasswordBlock } from "./components/blocks/ResetPasswordBlock";
+import { PasswordChangedBlock } from "./components/blocks/PasswordChangedBlock";
+import { CheckEmailBlock } from "./components/blocks/CheckEmailBlock";
+import { EmailVerifiedBlock } from "./components/blocks/EmailVerifiedBlock";
+import { TwoFactorSetupBlock } from "./components/blocks/TwoFactorSetupBlock";
+import { TwoFactorChallengeBlock } from "./components/blocks/TwoFactorChallengeBlock";
+import { AccountLockedBlock } from "./components/blocks/AccountLockedBlock";
+import { MagicLinkBlock } from "./components/blocks/MagicLinkBlock";
 
 // import { Dashboard01Page } from "./components/pages/Dashboard01Page";
 import { DashboardPage } from "./components/pages/DashboardPage";
@@ -1241,6 +1250,61 @@ function DocsPage() {
                   </div>
                 </div>
               </ScrollFadeIn>
+            </section>
+
+            {/* AUTHENTICATION */}
+            <section className="space-y-8">
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Authentication</Typography>
+              <Grid cols={1} gap="xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Forgot Password</Typography>
+                    <ForgotPasswordBlock />
+                  </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Magic Link</Typography>
+                    <MagicLinkBlock />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Reset Password</Typography>
+                    <ResetPasswordBlock />
+                  </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Password Changed</Typography>
+                    <PasswordChangedBlock />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Check Email</Typography>
+                    <CheckEmailBlock email="user@example.com" type="verification" />
+                  </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Email Verified</Typography>
+                    <EmailVerifiedBlock />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <Typography variant="h3">2FA Challenge</Typography>
+                    <TwoFactorChallengeBlock />
+                  </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Account Locked</Typography>
+                    <AccountLockedBlock reason="too_many_attempts" unlockMinutes={15} />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">2FA Setup</Typography>
+                  <TwoFactorSetupBlock />
+                </div>
+              </Grid>
             </section>
 
             {/* APPLICATION */}

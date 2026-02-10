@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
-import { Settings2 } from 'lucide-react'
+import { SettingsIcon } from '@/components/ui/icons/settings'
 import { ZapIcon } from '@/components/ui/icons/zap'
 import { SparklesIcon } from '@/components/ui/icons/sparkles'
 import type { ReactNode } from 'react'
@@ -30,7 +30,7 @@ export default function Features() {
                     <div className="group shadow-sm">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Settings2 className="size-6" aria-hidden />
+                                <SettingsIcon size={24} aria-hidden />
                             </CardDecorator>
 
                             <h3 className="mt-6 font-medium">You have full control</h3>

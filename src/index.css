@@ -413,6 +413,37 @@
   border-radius: 9999px;
 }
 
+/* Avatar3D animations */
+@keyframes avatar-3d-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.05); }
+}
+
+@keyframes avatar-3d-speaking-ring {
+  0% { box-shadow: 0 0 0 0 rgb(var(--color-accent) / 0.3), 0 0 15px rgb(var(--color-accent) / 0.1); }
+  50% { box-shadow: 0 0 0 10px rgb(var(--color-accent) / 0), 0 0 25px 5px rgb(var(--color-accent) / 0.05); }
+  100% { box-shadow: 0 0 0 0 rgb(var(--color-accent) / 0), 0 0 15px rgb(var(--color-accent) / 0); }
+}
+
+@keyframes avatar-3d-listening-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(var(--color-primary) / 0.2); }
+  50% { box-shadow: 0 0 0 6px rgb(var(--color-primary) / 0); }
+}
+
+.avatar-3d-glow {
+  animation: avatar-3d-glow 4s ease-in-out infinite;
+}
+
+.avatar-3d-speaking {
+  animation: avatar-3d-speaking-ring 1.5s ease-in-out infinite;
+  border-radius: 9999px;
+}
+
+.avatar-3d-listening {
+  animation: avatar-3d-listening-pulse 2s ease-in-out infinite;
+  border-radius: 9999px;
+}
+
 /* Accessibility: respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,

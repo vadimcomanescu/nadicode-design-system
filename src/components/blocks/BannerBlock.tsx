@@ -2,7 +2,8 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Button } from "../ui/Button"
 import { Typography } from "../ui/Typography"
-import { X, Info, AlertTriangle } from "lucide-react"
+import { Info, AlertTriangle } from "lucide-react"
+import { XIcon } from "@/components/ui/icons/x"
 import { cn } from "../../lib/utils"
 
 interface BannerBlockProps {
@@ -67,7 +68,7 @@ export function BannerBlock({
               onClick={handleDismiss}
               aria-label="Dismiss"
             >
-              <X className="h-3.5 w-3.5" />
+              <XIcon size={14} />
             </Button>
           )}
         </motion.div>

@@ -1,7 +1,8 @@
 import { Badge } from "../ui/Badge"
 import { Typography } from "../ui/Typography"
 import { ScrollFadeIn } from "../ui/ScrollFadeIn"
-import { Plus, Wrench, RefreshCw } from "lucide-react"
+import { Wrench, RefreshCw } from "lucide-react"
+import { PlusIcon } from "@/components/ui/icons/plus"
 import { cn } from "../../lib/utils"
 
 interface ChangelogChange {
@@ -26,7 +27,7 @@ const typeConfig: Record<
   { icon: React.ReactNode; label: string; color: string }
 > = {
   added: {
-    icon: <Plus className="h-3 w-3" />,
+    icon: <PlusIcon size={12} />,
     label: "Added",
     color: "text-success bg-success/10",
   },

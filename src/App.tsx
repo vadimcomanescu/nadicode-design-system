@@ -120,6 +120,7 @@ import { NotFoundPage } from "./components/pages/NotFoundPage";
 import { LandingPage } from "./components/pages/LandingPage";
 import { PricingPage } from "./components/pages/PricingPage";
 import { OnboardingPage } from "./components/pages/OnboardingPage";
+import { VoiceAgentsPage } from "./components/pages/VoiceAgentsPage";
 import { ChangelogPage } from "./components/pages/ChangelogPage";
 import { BlogPostPage } from "./components/pages/BlogPostPage";
 
@@ -186,7 +187,7 @@ function DocsPage() {
             <TabsTrigger value="foundations">Foundations</TabsTrigger>
             <TabsTrigger value="components">Components</TabsTrigger>
             <TabsTrigger value="blocks">Blocks</TabsTrigger>
-            <TabsTrigger value="charts">Data Viz</TabsTrigger>
+            <TabsTrigger value="charts">Charts</TabsTrigger>
             <TabsTrigger value="icons">Icons</TabsTrigger>
             <TabsTrigger value="pages">Pages</TabsTrigger>
             <TabsTrigger value="patterns">Patterns</TabsTrigger>
@@ -1500,6 +1501,10 @@ console.log(greet("World"));`}
                         <CardHeader><CardTitle className="text-lg">404 Not Found</CardTitle></CardHeader>
                         <CardContent><Typography variant="small" className="text-text-secondary">Custom error page with navigation back.</Typography></CardContent>
                       </Card>
+                      <Card className="hover:border-primary/50 transition-colors cursor-pointer" onClick={() => window.location.href = '/voice-agents'}>
+                        <CardHeader><CardTitle className="text-lg">Voice Agents</CardTitle></CardHeader>
+                        <CardContent><Typography variant="small" className="text-text-secondary">Interactive AI voice agents with 3D animated avatars.</Typography></CardContent>
+                      </Card>
                     </div>
                   </div>
                 </ScrollFadeIn>
@@ -1551,6 +1556,9 @@ function App() {
       <Route path="/onboarding" element={<OnboardingPage />} />
       <Route path="/changelog" element={<ChangelogPage />} />
       <Route path="/blog/example" element={<BlogPostPage />} />
+
+      {/* Voice Agents */}
+      <Route path="/voice-agents" element={<VoiceAgentsPage />} />
 
       {/* 404 catch-all (must be last) */}
       <Route path="*" element={<NotFoundPage />} />

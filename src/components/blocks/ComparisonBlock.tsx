@@ -9,7 +9,8 @@ import {
 import { Badge } from "../ui/Badge"
 import { Typography } from "../ui/Typography"
 import { ScrollFadeIn } from "../ui/ScrollFadeIn"
-import { Check, X } from "lucide-react"
+import { CheckIcon } from "@/components/ui/icons/check"
+import { XIcon } from "@/components/ui/icons/x"
 import { cn } from "../../lib/utils"
 
 interface ComparisonPlan {
@@ -134,9 +135,9 @@ export function ComparisonBlock({
                         <TableCell key={plan.name} className="text-center">
                           {typeof value === "boolean" ? (
                             value ? (
-                              <Check className="mx-auto h-4 w-4 text-success" />
+                              <CheckIcon size={16} className="mx-auto text-success" />
                             ) : (
-                              <X className="mx-auto h-4 w-4 text-text-tertiary" />
+                              <XIcon size={16} className="mx-auto text-text-tertiary" />
                             )
                           ) : (
                             <span className="text-sm text-text-primary">{value}</span>

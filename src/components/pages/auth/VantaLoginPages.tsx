@@ -58,7 +58,7 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
 
                     <div className="relative flex items-center py-2">
                         <span className="w-full border-t border-border" />
-                        <span className="whitespace-nowrap px-2 text-xs text-muted-foreground">Or continue with</span>
+                        <span className="whitespace-nowrap px-2 text-xs text-text-tertiary">Or continue with</span>
                         <span className="w-full border-t border-border" />
                     </div>
 
@@ -82,7 +82,7 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
                 </CardContent>
                 <CardFooter className="flex flex-col space-y-2">
                     <Button className="w-full">Sign In</Button>
-                    <Button variant="ghost" className="w-full text-xs text-muted-foreground">
+                    <Button variant="ghost" className="w-full text-xs text-text-tertiary">
                         Forgot your password?
                     </Button>
                 </CardFooter>

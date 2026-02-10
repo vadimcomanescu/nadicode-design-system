@@ -1,5 +1,6 @@
 import { CheckIcon } from "../ui/icons/check"
 import { useState } from "react"
+import { CountingNumber } from "../ui/text-effects"
 import { Button } from "../ui/Button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/Card"
 import { Badge } from "../ui/Badge"
@@ -43,10 +44,10 @@ export function PricingTable() {
     ]
 
     return (
-        <section className="py-24">
+        <section className="py-16 md:py-24">
             <div className="container mx-auto px-6 lg:px-8">
                 <div className="mb-12 text-center">
-                    <h2 className="mb-4 text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
+                    <h2 className="mb-4 text-3xl font-semibold tracking-tight leading-tight text-text-primary sm:text-4xl">
                         Simple, transparent pricing
                     </h2>
                     <p className="mb-8 text-lg text-text-secondary">
@@ -71,7 +72,7 @@ export function PricingTable() {
                                 interactive
                                 className={cn(
                                     "flex flex-col relative overflow-hidden transition-all duration-300",
-                                    plan.popular ? "border-primary/50 shadow-lg scale-105 z-10" : "border-border/50 hover:border-border"
+                                    plan.popular ? "border-accent shadow-lg shadow-accent/5 z-10" : "border-border/50 hover:border-border"
                                 )}
                             >
                                 {plan.popular && (
@@ -80,12 +81,18 @@ export function PricingTable() {
                                     </div>
                                 )}
                                 <CardHeader className="pb-8 pt-8">
-                                    <CardTitle className="text-xl font-bold text-text-primary">{plan.name}</CardTitle>
+                                    <CardTitle className="text-xl font-semibold text-text-primary">{plan.name}</CardTitle>
                                     <p className="text-sm text-text-secondary">{plan.description}</p>
                                 </CardHeader>
                                 <CardContent className="flex-1">
                                     <div className="mb-8 flex items-baseline">
-                                        <span className="text-4xl font-extrabold text-text-primary tabular-nums">{plan.price}</span>
+                                        {plan.price === "Custom" ? (
+                                            <span className="text-4xl font-extrabold text-text-primary">{plan.price}</span>
+                                        ) : (
+                                            <span className="text-4xl font-extrabold text-text-primary tabular-nums">
+                                                $<CountingNumber number={parseInt(plan.price.slice(1), 10)} inViewOnce />
+                                            </span>
+                                        )}
                                         <span className="ml-1 text-text-tertiary">{plan.period}</span>
                                     </div>
                                     <ul className="space-y-4">

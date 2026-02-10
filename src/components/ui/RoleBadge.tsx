@@ -10,14 +10,14 @@ import {
 } from "@radix-ui/react-tooltip"
 
 const roleVariants = cva(
-    "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+    "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
     {
         variants: {
             role: {
                 owner:
-                    "border-amber-500/50 bg-amber-500/10 text-amber-500 shadow-[0_0_10px_-4px_rgba(245,158,11,0.5)]",
+                    "border-warning/50 bg-warning/10 text-warning shadow-[0_0_10px_-4px_rgba(var(--color-warning),0.5)]",
                 admin:
-                    "border-purple-500/50 bg-purple-500/10 text-purple-500 shadow-[0_0_10px_-4px_rgba(168,85,247,0.5)]",
+                    "border-chart-5/50 bg-chart-5/10 text-chart-5 shadow-[0_0_10px_-4px_rgba(var(--color-chart-5),0.5)]",
                 member:
                     "border-white/10 bg-white/5 text-text-secondary hover:bg-white/10",
                 guest:

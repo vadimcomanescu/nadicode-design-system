@@ -26,7 +26,7 @@ export const MovingBorder = React.forwardRef<HTMLDivElement, MovingBorderProps>(
           )}
           style={{
             background:
-              "conic-gradient(from 0deg, #38BDB8, #2DD4BF, #38BDB8)",
+              "conic-gradient(from 0deg, rgb(var(--color-accent)), rgb(var(--color-link)), rgb(var(--color-accent)))",
             animationDuration: duration,
           }}
         />

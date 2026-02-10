@@ -56,7 +56,7 @@ export const HeroHeader = () => {
                                         <li key={index}>
                                             <Link
                                                 to={item.href}
-                                                className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                                                className="text-text-tertiary hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </Link>
                                         </li>
@@ -72,7 +72,7 @@ export const HeroHeader = () => {
                                         <li key={index}>
                                             <Link
                                                 to={item.href}
-                                                className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                                                className="text-text-tertiary hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </Link>
                                         </li>

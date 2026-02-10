@@ -15,7 +15,7 @@ export function IntegrationsSection() {
                 <div className="mx-auto max-w-5xl px-6">
                     <div className="text-center">
                         <h2 className="text-balance text-3xl font-semibold md:text-4xl">Integrate with your favorite tools</h2>
-                        <p className="text-muted-foreground mt-6">Connect seamlessly with popular platforms and services to enhance your workflow.</p>
+                        <p className="text-text-tertiary mt-6">Connect seamlessly with popular platforms and services to enhance your workflow.</p>
                     </div>
 
                     <StaggerChildren staggerMs={80} className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -70,7 +70,7 @@ const IntegrationCard = ({ title, description, children, link = 'https://github.
 
                 <div className="space-y-2 py-6">
                     <h3 className="text-base font-medium">{title}</h3>
-                    <p className="text-muted-foreground line-clamp-2 text-sm">{description}</p>
+                    <p className="text-text-tertiary line-clamp-2 text-sm">{description}</p>
                 </div>
 
                 <div className="flex gap-3 border-t border-dashed pt-6">

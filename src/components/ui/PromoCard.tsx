@@ -30,7 +30,7 @@ export function PromoCard({
                 <CardTitle className="text-sm font-semibold tracking-tight text-text-primary">
                     {title}
                 </CardTitle>
-                <CardDescription className="text-xs text-muted-foreground mt-1">
+                <CardDescription className="text-xs text-text-tertiary mt-1">
                     {description}
                 </CardDescription>
             </CardHeader>

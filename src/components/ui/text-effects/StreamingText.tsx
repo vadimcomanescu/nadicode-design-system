@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useReducedMotion } from "motion/react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
@@ -25,7 +26,7 @@ const streamingTextVariants = cva(
 )
 
 const cursorVariants = cva(
-  "inline-block w-[2px] animate-pulse ml-0.5",
+  "inline-block animate-cursor-blink ml-0.5",
   {
     variants: {
       cursorStyle: {
@@ -76,16 +77,23 @@ const StreamingText = React.forwardRef<HTMLSpanElement, StreamingTextProps>(
     },
     ref
   ) => {
+    const prefersReduced = useReducedMotion()
     const [displayedLength, setDisplayedLength] = React.useState(0)
     const [isComplete, setIsComplete] = React.useState(false)
 
     React.useEffect(() => {
+      if (prefersReduced) {
+        setDisplayedLength(text.length)
+        setIsComplete(true)
+        onComplete?.()
+        return
+      }
       setDisplayedLength(0)
       setIsComplete(false)
-    }, [text])
+    }, [text, prefersReduced, onComplete])
 
     React.useEffect(() => {
-      if (!streaming || isComplete) return
+      if (prefersReduced || !streaming || isComplete) return
 
       if (displayedLength >= text.length) {
         setIsComplete(true)
@@ -98,7 +106,7 @@ const StreamingText = React.forwardRef<HTMLSpanElement, StreamingTextProps>(
       }, interval)
 
       return () => clearTimeout(timer)
-    }, [streaming, displayedLength, text, speed, interval, isComplete, onComplete])
+    }, [streaming, displayedLength, text, speed, interval, isComplete, onComplete, prefersReduced])
 
     return (
       <span

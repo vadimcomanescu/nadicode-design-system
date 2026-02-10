@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
 import { Card, CardContent } from "../ui/Card"
 import { StaggerChildren } from "../ui/StaggerChildren"
 import { Shine } from "@/components/animate-ui/primitives/effects/shine"
-import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering"
+import { ShimmeringText } from "../ui/text-effects"
 
 export function LogoCloud() {
     const logos = [
@@ -25,8 +25,8 @@ export function LogoCloud() {
                             key={logo.name}
                             className="group flex items-center justify-center transition-all duration-300 hover:opacity-100 hover:scale-110"
                         >
-                            <logo.icon className="h-8 w-8 text-muted-foreground transition-colors group-hover:text-primary group-hover:drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]" />
-                            <span className="ml-2 text-lg font-semibold text-muted-foreground group-hover:text-text-primary hidden md:inline-block">
+                            <logo.icon className="h-8 w-8 text-text-tertiary transition-colors group-hover:text-primary group-hover:drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]" />
+                            <span className="ml-2 text-lg font-semibold text-text-tertiary group-hover:text-text-primary hidden md:inline-block">
                                 {logo.name}
                             </span>
                         </div>
@@ -66,9 +66,9 @@ export function Testimonials() {
     ]
 
     return (
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
             <div className="container mx-auto px-6 lg:px-8">
-                <h2 className="text-3xl font-bold text-center mb-12 text-text-primary">
+                <h2 className="text-3xl font-semibold leading-tight text-center mb-12 text-text-primary">
                     <ShimmeringText
                         text="Loved by Builders"
                         color="var(--color-text-primary)"

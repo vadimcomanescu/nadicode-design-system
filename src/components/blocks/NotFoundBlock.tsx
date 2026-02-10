@@ -1,7 +1,7 @@
 import { Button } from "../ui/Button"
 import { Typography } from "../ui/Typography"
 import { MeteorShower } from "../ui/MeteorShower"
-import { AnimatedGradientText } from "../ui/AnimatedGradientText"
+import { AnimatedGradientText } from "../ui/text-effects"
 import { Link } from "react-router-dom"
 import { ArrowLeftIcon } from "@/components/ui/icons"
 import { cn } from "../../lib/utils"

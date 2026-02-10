@@ -29,7 +29,7 @@ export function DatePickerWithRange({
                         variant={"glass"} // Using our glass variant
                         className={cn(
                             "w-[300px] justify-start text-left font-normal transition-all",
-                            !date && "text-muted-foreground"
+                            !date && "text-text-tertiary"
                         )}
                     >
                         <CalendarIcon size={16} className="mr-2" />

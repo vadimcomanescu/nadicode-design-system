@@ -1,13 +1,13 @@
 import { StaggerChildren } from "../ui/StaggerChildren"
-import { CountingNumber } from "@/components/animate-ui/primitives/texts/counting-number"
+import { CountingNumber } from "../ui/text-effects"
 
 export function StatsSection() {
     return (
-        <section className="py-12 md:py-20">
+        <section className="py-12 md:py-16">
             <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
                 <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-                    <h2 className="text-4xl font-medium lg:text-5xl">Nadicode in numbers</h2>
-                    <p>Gemini is evolving to be more than just the models. It supports an entire to the APIs and platforms helping developers and businesses innovate.</p>
+                    <h2 className="text-4xl font-semibold leading-tight lg:text-5xl">Nadicode in numbers</h2>
+                    <p className="text-text-secondary">Gemini is evolving to be more than just the models. It supports an entire to the APIs and platforms helping developers and businesses innovate.</p>
                 </div>
 
                 <StaggerChildren staggerMs={150} className="grid gap-12 divide-y *:text-center md:grid-cols-3 md:gap-2 md:divide-x md:divide-y-0">

@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import type { Appearance } from "@stripe/stripe-js"
 import { motion } from "motion/react"
 import { useTheme } from "../../lib/ThemeProvider"
+import { colorTokens } from "../../tokens"
 import { CheckoutFormDemo } from "../ui/CheckoutFormDemo"
 
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx")
@@ -11,17 +12,19 @@ function useStripeAppearance(): Appearance {
     const { resolvedTheme } = useTheme()
     const isDark = resolvedTheme === "dark"
 
+    const palette = isDark ? colorTokens.dark : colorTokens.light
+
     return {
         theme: "flat",
         variables: {
-            colorPrimary: isDark ? "#38BDB8" : "#1A8F88",
-            colorText: isDark ? "#E1E7ED" : "#1A2230",
-            colorTextSecondary: isDark ? "#A0AEBB" : "#3E4F60",
-            colorDanger: isDark ? "#E5484D" : "#CE2C3B",
+            colorPrimary: palette.accent.DEFAULT,
+            colorText: palette.text.primary,
+            colorTextSecondary: palette.text.secondary,
+            colorDanger: palette.destructive.DEFAULT,
             borderRadius: "8px",
             fontFamily: '"Inter", sans-serif',
             fontSizeBase: "14px",
-            focusBoxShadow: `0 0 0 1px ${isDark ? "#38BDB8" : "#1A8F88"}`,
+            focusBoxShadow: `0 0 0 1px ${palette.accent.DEFAULT}`,
             colorBackground: "transparent",
         },
         rules: {

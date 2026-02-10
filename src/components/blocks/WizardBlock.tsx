@@ -72,11 +72,11 @@ export function WizardBlock() {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="border p-4 rounded-lg bg-background hover:bg-accent/50 cursor-pointer transition-colors">
                                 <h3 className="font-bold">Free</h3>
-                                <p className="text-sm text-muted-foreground">For hobbyists</p>
+                                <p className="text-sm text-text-tertiary">For hobbyists</p>
                             </div>
                             <div className="border border-primary p-4 rounded-lg bg-primary/10 cursor-pointer">
                                 <h3 className="font-bold text-primary">Pro</h3>
-                                <p className="text-sm text-muted-foreground">For professionals</p>
+                                <p className="text-sm text-text-tertiary">For professionals</p>
                             </div>
                         </div>
                     )}
@@ -84,7 +84,7 @@ export function WizardBlock() {
                         <div className="text-center space-y-4 py-8">
                             <RocketIcon size={64} className="mx-auto text-primary" style={{ animation: "float 2s ease-in-out infinite" }} />
                             <h3 className="text-xl font-bold">Ready to Launch!</h3>
-                            <p className="text-muted-foreground">Review your settings and click Finish to deploy.</p>
+                            <p className="text-text-tertiary">Review your settings and click Finish to deploy.</p>
                         </div>
                     )}
                 </div>

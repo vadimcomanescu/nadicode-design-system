@@ -39,7 +39,7 @@ export function Testimonials() {
 
                                     <div>
                                         <cite className="text-sm font-medium">Méschac Irung</cite>
-                                        <span className="text-muted-foreground block text-sm">Creator</span>
+                                        <span className="text-text-tertiary block text-sm">Creator</span>
                                     </div>
                                 </div>
                             </blockquote>
@@ -63,7 +63,7 @@ export function Testimonials() {
                                     </Avatar>
                                     <div>
                                         <cite className="text-sm font-medium">Théo Balick</cite>
-                                        <span className="text-muted-foreground block text-sm">Frontend Dev</span>
+                                        <span className="text-text-tertiary block text-sm">Frontend Dev</span>
                                     </div>
                                 </div>
                             </blockquote>
@@ -87,7 +87,7 @@ export function Testimonials() {
                                     </Avatar>
                                     <div>
                                         <cite className="text-sm font-medium">Glodie Lukose</cite>
-                                        <span className="text-muted-foreground block text-sm">Frontend Dev</span>
+                                        <span className="text-text-tertiary block text-sm">Frontend Dev</span>
                                     </div>
                                 </div>
                             </blockquote>
@@ -111,7 +111,7 @@ export function Testimonials() {
                                     </Avatar>
                                     <div>
                                         <p className="text-sm font-medium">Bernard Ngandu</p>
-                                        <span className="text-muted-foreground block text-sm">Backend Dev</span>
+                                        <span className="text-text-tertiary block text-sm">Backend Dev</span>
                                     </div>
                                 </div>
                             </blockquote>

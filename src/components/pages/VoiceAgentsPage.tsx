@@ -11,6 +11,7 @@ import { ThemeToggle } from "../ui/ThemeToggle"
 import { MicIcon } from "../ui/icons/mic"
 import { motionSpring, fadeInUp } from "@/lib/motion"
 import { MouseGlow } from "../ui/MouseEffect"
+import { StreamingText } from "../ui/text-effects"
 import { useNavigate } from "react-router-dom"
 
 interface VoiceAgent {
@@ -155,6 +156,7 @@ export function VoiceAgentsPage() {
   const [messages, setMessages] = React.useState<Message[]>([])
   const [input, setInput] = React.useState("")
   const [isStreaming, setIsStreaming] = React.useState(false)
+  const [streamingContent, setStreamingContent] = React.useState<string | null>(null)
   const scrollRef = React.useRef<HTMLDivElement>(null)
 
   const handleSelectAgent = (agent: VoiceAgent) => {
@@ -176,7 +178,24 @@ export function VoiceAgentsPage() {
     setMessages([])
     setInput("")
     setIsStreaming(false)
+    setStreamingContent(null)
   }
+
+  const handleStreamComplete = React.useCallback(() => {
+    if (streamingContent) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          role: "assistant" as const,
+          content: streamingContent,
+        },
+      ])
+    }
+    setStreamingContent(null)
+    setAgentState("idle")
+    setIsStreaming(false)
+  }, [streamingContent])
 
   const handleSend = () => {
     if (!input.trim() || !selectedAgent || isStreaming) return
@@ -199,20 +218,7 @@ export function VoiceAgentsPage() {
       const responseText = agentResponses[selectedAgent.id]?.(sentInput) ??
         `I heard you say: "${sentInput}". Let me think about that...`
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content: responseText,
-        },
-      ])
-
-      const streamDuration = Math.min(responseText.length * 25, 4000)
-      setTimeout(() => {
-        setAgentState("idle")
-        setIsStreaming(false)
-      }, streamDuration)
+      setStreamingContent(responseText)
     }, 1200)
   }
 
@@ -361,6 +367,18 @@ export function VoiceAgentsPage() {
                     messages={messages}
                     showTimestamps={false}
                   />
+                  {streamingContent && (
+                    <div className="mt-3 text-sm text-text-primary">
+                      <StreamingText
+                        text={streamingContent}
+                        speed={2}
+                        interval={20}
+                        showCursor
+                        cursorStyle="line"
+                        onComplete={handleStreamComplete}
+                      />
+                    </div>
+                  )}
                   <div ref={scrollRef} />
                 </div>
               </div>

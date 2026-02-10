@@ -47,7 +47,7 @@ export const MeteorShower = React.forwardRef<HTMLDivElement, MeteorShowerProps>(
               animationDelay: prefersReduced ? undefined : m.delay,
               "--meteor-duration": m.duration,
               opacity: prefersReduced ? 0.08 : undefined,
-              background: "linear-gradient(to right, #38BDB8 0%, transparent 100%)",
+              background: "linear-gradient(to right, rgb(var(--color-accent)) 0%, transparent 100%)",
             } as React.CSSProperties}
           />
         ))}

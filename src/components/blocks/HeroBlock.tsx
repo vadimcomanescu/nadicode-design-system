@@ -9,9 +9,7 @@ import { Card, CardContent, CardHeader } from "../ui/Card"
 import { cn } from "../../lib/utils"
 import { motion, useReducedMotion } from "motion/react"
 import { heroStagger } from "../../lib/motion"
-import { TextReveal } from "../ui/TextReveal"
-import { AnimatedGradientText } from "../ui/AnimatedGradientText"
-import { PixelReveal } from "../ui/PixelReveal"
+import { TextReveal, AnimatedGradientText, PixelReveal } from "../ui/text-effects"
 
 interface HeroProps {
     headline?: string
@@ -46,7 +44,7 @@ export function HeroCentered({
     const Item = shouldReduceMotion ? "div" : motion.div
 
     return (
-        <section className={cn("relative overflow-hidden py-24 lg:py-32", className)}>
+        <section className={cn("relative overflow-hidden py-24 md:py-32", className)}>
             <MouseGlow className="opacity-40" />
             <Wrapper
                 className="container relative z-10 mx-auto px-4 text-center"
@@ -76,7 +74,7 @@ export function HeroCentered({
 
                 {/* Headlines */}
                 <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
-                <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-text-primary sm:text-7xl">
+                <h1 className="mx-auto max-w-4xl text-5xl font-extrabold tracking-tight leading-[1.15] text-text-primary sm:text-7xl">
                     <span className="block">
                         <TextReveal text={headline.split(" ").slice(0, 3).join(" ")} by="word" delay={200} className="justify-center" />
                     </span>
@@ -167,7 +165,7 @@ export function HeroSplit({
     const Item = shouldReduceMotion ? "div" : motion.div
 
     return (
-        <section className={cn("relative overflow-hidden py-20 lg:py-28", className)}>
+        <section className={cn("relative overflow-hidden py-24 md:py-32", className)}>
             <div className="container mx-auto grid gap-12 px-6 lg:px-8 lg:grid-cols-2 lg:items-center">
                 {/* Left Content */}
                 <Wrapper
@@ -185,7 +183,7 @@ export function HeroSplit({
                     </div>
                     </Item>
                     <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
-                    <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-6xl mb-6">
+                    <h1 className="text-4xl font-extrabold tracking-tight leading-[1.15] text-text-primary sm:text-6xl mb-6">
                         <TextReveal text={headline} by="word" delay={200} />
                     </h1>
                     </Item>
@@ -231,7 +229,7 @@ export function HeroSplit({
                                     <div className="h-3 w-3 rounded-full bg-chart-5/50" />
                                     <div className="h-3 w-3 rounded-full bg-chart-4/50" />
                                 </div>
-                                <div className="text-xs text-muted-foreground font-mono">terminal.tsx</div>
+                                <div className="text-xs text-text-tertiary font-mono">terminal.tsx</div>
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-4 p-6 font-mono text-sm">

@@ -92,16 +92,16 @@ export function DirectoryBlock() {
                           align="end"
                         >
                           <DropdownMenuItem>
-                            <FolderIcon size={16} className="text-muted-foreground" />
+                            <FolderIcon size={16} className="text-text-tertiary" />
                             <span>View Project</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem>
-                            <StarIcon size={16} className="text-muted-foreground" />
+                            <StarIcon size={16} className="text-text-tertiary" />
                             <span>Add to Favorites</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem>
-                            <Trash2Icon size={16} className="text-muted-foreground" />
+                            <Trash2Icon size={16} className="text-text-tertiary" />
                             <span>Delete Project</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>

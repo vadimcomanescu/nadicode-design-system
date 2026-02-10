@@ -40,7 +40,7 @@ export function TeamSection() {
                                     <img className="aspect-square rounded-full object-cover" src={member.avatar} alt={member.name} height="460" width="460" loading="lazy" />
                                 </div>
                                 <span className="mt-2 block text-sm">{member.name}</span>
-                                <span className="text-muted-foreground block text-xs">{member.role}</span>
+                                <span className="text-text-tertiary block text-xs">{member.role}</span>
                             </div>
                         ))}
                     </StaggerChildren>
@@ -55,7 +55,7 @@ export function TeamSection() {
                                     <img className="aspect-square rounded-full object-cover" src={member.avatar} alt={member.name} height="460" width="460" loading="lazy" />
                                 </div>
                                 <span className="mt-2 block text-sm">{member.name}</span>
-                                <span className="text-muted-foreground block text-xs">{member.role}</span>
+                                <span className="text-text-tertiary block text-xs">{member.role}</span>
                             </div>
                         ))}
                     </StaggerChildren>
@@ -70,7 +70,7 @@ export function TeamSection() {
                                     <img className="aspect-square rounded-full object-cover" src={member.avatar} alt={member.name} height="460" width="460" loading="lazy" />
                                 </div>
                                 <span className="mt-2 block text-sm">{member.name}</span>
-                                <span className="text-muted-foreground block text-xs">{member.role}</span>
+                                <span className="text-text-tertiary block text-xs">{member.role}</span>
                             </div>
                         ))}
                     </StaggerChildren>

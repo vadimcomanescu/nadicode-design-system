@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useReducedMotion } from "motion/react"
-import { cn } from "../../lib/utils"
+import { cn } from "@/lib/utils"
 
 interface AnimatedGradientTextProps {
   children: React.ReactNode

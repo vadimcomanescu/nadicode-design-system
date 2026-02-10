@@ -37,7 +37,7 @@ export function SimpleLoginForm() {
                             <span className="w-full border-t border-border/50" />
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-transparent px-2 text-muted-foreground backdrop-blur-md">
+                            <span className="bg-transparent px-2 text-text-tertiary backdrop-blur-md">
                                 Or continue with
                             </span>
                         </div>
@@ -79,7 +79,7 @@ export function SimpleLoginForm() {
                 </CardContent>
                 <CardFooter className="justify-center">
                     <div className="text-center text-sm">
-                        <span className="text-muted-foreground">Don&apos;t have an account? </span>
+                        <span className="text-text-tertiary">Don&apos;t have an account? </span>
                         <a href="#" className="font-medium text-accent hover:underline">
                             Create account
                         </a>

@@ -169,7 +169,7 @@ export function DashboardPage() {
                                     </Avatar>
                                     <div className="ml-4 space-y-1">
                                         <p className="text-sm font-medium leading-none">Olivia Martin</p>
-                                        <p className="text-sm text-muted-foreground">
+                                        <p className="text-sm text-text-tertiary">
                                             olivia.martin@email.com
                                         </p>
                                     </div>
@@ -182,7 +182,7 @@ export function DashboardPage() {
                                     </Avatar>
                                     <div className="ml-4 space-y-1">
                                         <p className="text-sm font-medium leading-none">Jackson Lee</p>
-                                        <p className="text-sm text-muted-foreground">
+                                        <p className="text-sm text-text-tertiary">
                                             jackson.lee@email.com
                                         </p>
                                     </div>
@@ -195,7 +195,7 @@ export function DashboardPage() {
                                     </Avatar>
                                     <div className="ml-4 space-y-1">
                                         <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
-                                        <p className="text-sm text-muted-foreground">
+                                        <p className="text-sm text-text-tertiary">
                                             isabella.nguyen@email.com
                                         </p>
                                     </div>
@@ -208,7 +208,7 @@ export function DashboardPage() {
                                     </Avatar>
                                     <div className="ml-4 space-y-1">
                                         <p className="text-sm font-medium leading-none">William Kim</p>
-                                        <p className="text-sm text-muted-foreground">
+                                        <p className="text-sm text-text-tertiary">
                                             will@email.com
                                         </p>
                                     </div>
@@ -221,7 +221,7 @@ export function DashboardPage() {
                                     </Avatar>
                                     <div className="ml-4 space-y-1">
                                         <p className="text-sm font-medium leading-none">Sofia Davis</p>
-                                        <p className="text-sm text-muted-foreground">
+                                        <p className="text-sm text-text-tertiary">
                                             sofia.davis@email.com
                                         </p>
                                     </div>

@@ -54,7 +54,7 @@ export function LoginBlock({
                                 <span className="text-sm font-medium">Continue with Google</span>
                             </Button>
                         </div>
-                        <div className="flex items-center gap-3 text-xs uppercase text-muted-foreground font-medium">
+                        <div className="flex items-center gap-3 text-xs uppercase text-text-tertiary font-medium">
                             <div className="h-px flex-1 bg-border/50" />
                             <span className="whitespace-nowrap">Or continue with</span>
                             <div className="h-px flex-1 bg-border/50" />
@@ -97,7 +97,7 @@ export function LoginBlock({
                 </form>
             </CardContent>
             <CardFooter className="flex flex-col gap-2">
-                <p className="text-center text-sm text-muted-foreground">
+                <p className="text-center text-sm text-text-tertiary">
                     {type === "login" ? (
                         <>
                             Don&apos;t have an account?{" "}

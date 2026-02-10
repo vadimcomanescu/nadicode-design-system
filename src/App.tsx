@@ -93,8 +93,7 @@ import { Kbd } from "./components/ui/Kbd";
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "./components/ui/Field";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "./components/ui/Item";
 
-import { AnimatedGradientText } from "./components/ui/AnimatedGradientText";
-import { StreamingText } from "./components/ui/StreamingText";
+import { AnimatedGradientText, StreamingText } from "./components/ui/text-effects";
 import { AgentStatus } from "./components/ui/AgentStatus";
 import { AudioWaveform } from "./components/ui/AudioWaveform";
 import { ConversationThread } from "./components/ui/ConversationThread";

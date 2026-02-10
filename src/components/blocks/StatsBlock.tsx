@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
-import { PixelReveal } from "../ui/PixelReveal"
+import { PixelReveal } from "../ui/text-effects"
 import { ArrowDownRightIcon, ArrowUpRightIcon, DollarSignIcon, ActivityIcon, CreditCardIcon } from "@/components/ui/icons"
 import { UsersIcon } from "../ui/icons/users"
 
@@ -18,8 +18,8 @@ export function StatsGeneric() {
                         $<PixelReveal text="45,231.89" delay={200} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">
-                        <ArrowUpRightIcon size={12} className="text-emerald-500 mr-1" />
-                        <span className="text-emerald-500 font-medium">+20.1%</span>
+                        <ArrowUpRightIcon size={12} className="text-success mr-1" />
+                        <span className="text-success font-medium">+20.1%</span>
                         <span className="ml-1">from last month</span>
                     </p>
                 </CardContent>
@@ -36,8 +36,8 @@ export function StatsGeneric() {
                         +<PixelReveal text="2350" delay={400} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">
-                        <ArrowUpRightIcon size={12} className="text-emerald-500 mr-1" />
-                        <span className="text-emerald-500 font-medium">+180.1%</span>
+                        <ArrowUpRightIcon size={12} className="text-success mr-1" />
+                        <span className="text-success font-medium">+180.1%</span>
                         <span className="ml-1">from last month</span>
                     </p>
                 </CardContent>
@@ -52,8 +52,8 @@ export function StatsGeneric() {
                         +<PixelReveal text="12,234" delay={600} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">
-                        <ArrowDownRightIcon size={12} className="text-rose-500 mr-1" />
-                        <span className="text-rose-500 font-medium">-19%</span>
+                        <ArrowDownRightIcon size={12} className="text-destructive mr-1" />
+                        <span className="text-destructive font-medium">-19%</span>
                         <span className="ml-1">from last month</span>
                     </p>
                 </CardContent>
@@ -70,8 +70,8 @@ export function StatsGeneric() {
                         +<PixelReveal text="573" delay={800} />
                     </div>
                     <p className="text-xs text-text-secondary flex items-center mt-1">
-                        <ArrowUpRightIcon size={12} className="text-emerald-500 mr-1" />
-                        <span className="text-emerald-500 font-medium">+201</span>
+                        <ArrowUpRightIcon size={12} className="text-success mr-1" />
+                        <span className="text-success font-medium">+201</span>
                         <span className="ml-1">since last hour</span>
                     </p>
                 </CardContent>

@@ -12,6 +12,7 @@ import { LoaderCircleIcon } from "@/components/ui/icons"
 import { CheckIcon } from "./icons/check"
 import { LockIcon } from "./icons/lock"
 import { useTheme } from "../../lib/ThemeProvider"
+import { colorTokens } from "../../tokens"
 import { Input } from "./Input"
 import { Label } from "./Label"
 
@@ -39,21 +40,23 @@ export function CheckoutFormDemo({
     const [message, setMessage] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
+    const palette = isDark ? colorTokens.dark : colorTokens.light
+
     const cardElementOptions = {
         style: {
             base: {
-                color: isDark ? "#E1E7ED" : "#1A2230",
+                color: palette.text.primary,
                 fontFamily: '"Inter", sans-serif',
                 fontSmoothing: "antialiased",
                 fontSize: "14px",
                 "::placeholder": {
-                    color: isDark ? "#6B7A8D" : "#8494A7",
+                    color: palette.text.secondary,
                 },
-                iconColor: isDark ? "#38BDB8" : "#1A8F88",
+                iconColor: palette.accent.DEFAULT,
             },
             invalid: {
-                color: isDark ? "#E5484D" : "#CE2C3B",
-                iconColor: isDark ? "#E5484D" : "#CE2C3B",
+                color: palette.destructive.DEFAULT,
+                iconColor: palette.destructive.DEFAULT,
             },
         },
     }

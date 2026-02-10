@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import { FlipWords } from "../ui/text-effects"
 import { HeroHeader } from "../blocks/HeaderBlock"
 import { Footer } from "../blocks/FooterBlock"
 import { ComparisonBlock } from "../blocks/ComparisonBlock"
@@ -95,6 +96,18 @@ export function PricingPage() {
                 </Badge>
               </Button>
             </div>
+            <AnimatePresence>
+              {isYearly && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  className="mt-3 text-sm font-medium text-accent"
+                >
+                  <FlipWords words={["Save 20%", "Best value"]} interval={4000} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </ScrollFadeIn>
         </div>
       </section>

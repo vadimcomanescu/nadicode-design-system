@@ -32,7 +32,7 @@ export const AuroraEffect = React.forwardRef<HTMLDivElement, AuroraEffectProps>(
           )}
           style={{
             background:
-              "radial-gradient(ellipse at 50% 50%, #38BDB8, transparent 70%)",
+              "radial-gradient(ellipse at 50% 50%, rgb(var(--color-accent)), transparent 70%)",
           }}
         />
         <div
@@ -43,7 +43,7 @@ export const AuroraEffect = React.forwardRef<HTMLDivElement, AuroraEffectProps>(
           )}
           style={{
             background:
-              "radial-gradient(ellipse at 30% 70%, #2DD4BF, transparent 70%)",
+              "radial-gradient(ellipse at 30% 70%, rgb(var(--color-link)), transparent 70%)",
           }}
         />
         <div
@@ -54,7 +54,7 @@ export const AuroraEffect = React.forwardRef<HTMLDivElement, AuroraEffectProps>(
           )}
           style={{
             background:
-              "radial-gradient(ellipse at 70% 30%, #38BDB8, transparent 70%)",
+              "radial-gradient(ellipse at 70% 30%, rgb(var(--color-accent)), transparent 70%)",
           }}
         />
       </div>

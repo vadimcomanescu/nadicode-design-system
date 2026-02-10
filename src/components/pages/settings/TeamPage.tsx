@@ -117,11 +117,11 @@ export function TeamPage() {
                                     </TableCell>
                                     <TableCell>
                                         {member.status === "active" ? (
-                                            <Badge variant="outline" className="border-emerald-500/20 text-emerald-500 bg-emerald-500/10">
+                                            <Badge variant="outline" className="border-success/20 text-success bg-success/10">
                                                 Active
                                             </Badge>
                                         ) : (
-                                            <Badge variant="outline" className="border-amber-500/20 text-amber-500 bg-amber-500/10">
+                                            <Badge variant="outline" className="border-warning/20 text-warning bg-warning/10">
                                                 Invited
                                             </Badge>
                                         )}

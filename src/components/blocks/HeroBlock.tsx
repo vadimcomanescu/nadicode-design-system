@@ -11,6 +11,45 @@ import { motion, useReducedMotion } from "motion/react"
 import { heroStagger } from "../../lib/motion"
 import { TextReveal, AnimatedGradientText, PixelReveal } from "../ui/text-effects"
 
+/*
+ * ANIMATION STORYBOARD - HeroCentered
+ *    0ms   waiting for mount
+ *  100ms   announcement pill fades up (24px, gentle spring)
+ *  200ms   headline TextReveal starts (word-by-word)
+ *  300ms   gradient subtitle fades up
+ *  400ms   subheading fades up
+ *  500ms   CTA buttons fade up
+ *  600ms   demo card fades up
+ *  800ms   PixelReveal completes on announcement text
+ *
+ * ANIMATION STORYBOARD - HeroSplit
+ *    0ms   waiting for mount
+ *  100ms   badge pill fades up (24px, gentle spring)
+ *  200ms   headline TextReveal starts (word-by-word)
+ *  300ms   subheading fades up
+ *  400ms   CTA buttons fade up
+ *  500ms   social proof fades up
+ *
+ * Both use heroStagger from motion.ts:
+ *   container: staggerChildren 0.1s, delayChildren 0.1s
+ *   child: y 24px -> 0, opacity 0 -> 1, gentle spring
+ */
+
+const HERO_TIMING = {
+  staggerMs: 100,
+  delayChildrenMs: 100,
+} as const
+
+const HERO_REVEAL = {
+  offsetY: 24,
+} as const
+
+const TEXT_EFFECTS = {
+  textRevealDelayMs: 200,
+  pixelRevealDelayMs: 800,
+  pixelRevealDurationMs: 600,
+} as const
+
 interface HeroProps {
     headline?: string
     subheadline?: string
@@ -65,7 +104,7 @@ export function HeroCentered({
                             {announcement.label}
                         </Badge>
                         <span className="flex items-center gap-1">
-                            <PixelReveal text={announcement.text} duration={600} delay={800} className="font-mono" />
+                            <PixelReveal text={announcement.text} duration={TEXT_EFFECTS.pixelRevealDurationMs} delay={TEXT_EFFECTS.pixelRevealDelayMs} className="font-mono" />
                             <ChevronRightIcon size={12} />
                         </span>
                     </a>
@@ -76,7 +115,7 @@ export function HeroCentered({
                 <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                 <h1 className="mx-auto max-w-4xl text-5xl font-extrabold tracking-tight leading-[1.15] text-text-primary sm:text-7xl">
                     <span className="block">
-                        <TextReveal text={headline.split(" ").slice(0, 3).join(" ")} by="word" delay={200} className="justify-center" />
+                        <TextReveal text={headline.split(" ").slice(0, 3).join(" ")} by="word" delay={TEXT_EFFECTS.textRevealDelayMs} className="justify-center" />
                     </span>
                     <AnimatedGradientText className="mt-1">
                         {headline.split(" ").slice(3).join(" ")}
@@ -184,7 +223,7 @@ export function HeroSplit({
                     </Item>
                     <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                     <h1 className="text-4xl font-extrabold tracking-tight leading-[1.15] text-text-primary sm:text-6xl mb-6">
-                        <TextReveal text={headline} by="word" delay={200} />
+                        <TextReveal text={headline} by="word" delay={TEXT_EFFECTS.textRevealDelayMs} />
                     </h1>
                     </Item>
                     <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>

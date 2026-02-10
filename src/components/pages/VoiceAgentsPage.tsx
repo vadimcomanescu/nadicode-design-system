@@ -14,6 +14,49 @@ import { MouseGlow } from "../ui/MouseEffect"
 import { StreamingText } from "../ui/text-effects"
 import { useNavigate } from "react-router-dom"
 
+/*
+ * ANIMATION STORYBOARD - Selection View
+ *    0ms   waiting for mount
+ *    0ms   selection container fades in (snappy spring)
+ *   80ms   agent cards stagger in (80ms apart, 30px up, gentle spring)
+ *          cards hover: lift 4px
+ *
+ * ANIMATION STORYBOARD - Conversation View
+ *    0ms   conversation container scales in (1.02 -> 1.0, snappy)
+ *    0ms   avatar visible immediately
+ * 1200ms   agent state: idle -> listening (CSS ring transition)
+ * 1200ms   waveform fades in (scaleX 0.8 -> 1.0, snappy)
+ *   +0ms   agent state: listening -> speaking
+ *   +0ms   streaming text begins (20ms per character)
+ */
+
+const SELECTION = {
+  cardStaggerMs: 80,
+  cardOffsetY: 30,
+  cardHoverY: -4,
+  spring: motionSpring.gentle,
+} as const
+
+const CONVERSATION = {
+  enterScale: 1.02,
+  spring: motionSpring.snappy,
+} as const
+
+const AGENT_STATE = {
+  listeningDelayMs: 1200,
+} as const
+
+const WAVEFORM = {
+  bars: 40,
+  initialScaleX: 0.8,
+  spring: motionSpring.snappy,
+} as const
+
+const STREAMING = {
+  speed: 2,
+  intervalMs: 20,
+} as const
+
 interface VoiceAgent {
   id: string
   name: string
@@ -219,7 +262,7 @@ export function VoiceAgentsPage() {
         `I heard you say: "${sentInput}". Let me think about that...`
 
       setStreamingContent(responseText)
-    }, 1200)
+    }, AGENT_STATE.listeningDelayMs)
   }
 
   React.useEffect(() => {
@@ -239,7 +282,7 @@ export function VoiceAgentsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={motionSpring.snappy}
+            transition={CONVERSATION.spring}
           >
             <Container className="py-12">
               <header className="mb-16 flex items-start justify-between">
@@ -272,10 +315,10 @@ export function VoiceAgentsPage() {
                     type="button"
                     className="group flex flex-col items-center gap-5 rounded-2xl glass-panel p-8 cursor-pointer border border-transparent hover:border-accent/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     onClick={() => handleSelectAgent(agent)}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: SELECTION.cardOffsetY }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ ...motionSpring.gentle, delay: i * 0.08 }}
-                    whileHover={{ y: -4 }}
+                    transition={{ ...SELECTION.spring, delay: i * (SELECTION.cardStaggerMs / 1000) }}
+                    whileHover={{ y: SELECTION.cardHoverY }}
                   >
                     <AgentVideoAvatar agent={agent} size="lg" />
                     <div className="text-center">
@@ -301,10 +344,10 @@ export function VoiceAgentsPage() {
           <motion.div
             key={`conversation-${selectedAgent.id}`}
             className="relative z-10 min-h-dvh flex flex-col"
-            initial={{ opacity: 0, scale: 1.02 }}
+            initial={{ opacity: 0, scale: CONVERSATION.enterScale }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={motionSpring.snappy}
+            transition={CONVERSATION.spring}
           >
             {/* Top bar */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-border/50">
@@ -338,12 +381,12 @@ export function VoiceAgentsPage() {
                 <AnimatePresence>
                   {agentState === "speaking" && (
                     <motion.div
-                      initial={{ opacity: 0, scaleX: 0.8 }}
+                      initial={{ opacity: 0, scaleX: WAVEFORM.initialScaleX }}
                       animate={{ opacity: 1, scaleX: 1 }}
-                      exit={{ opacity: 0, scaleX: 0.8 }}
-                      transition={motionSpring.snappy}
+                      exit={{ opacity: 0, scaleX: WAVEFORM.initialScaleX }}
+                      transition={WAVEFORM.spring}
                     >
-                      <AudioWaveform active variant="accent" bars={40} size="default" />
+                      <AudioWaveform active variant="accent" bars={WAVEFORM.bars} size="default" />
                     </motion.div>
                   )}
                   {agentState === "listening" && (
@@ -352,7 +395,7 @@ export function VoiceAgentsPage() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                     >
-                      <AudioWaveform active={false} variant="default" bars={40} size="default" />
+                      <AudioWaveform active={false} variant="default" bars={WAVEFORM.bars} size="default" />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -371,8 +414,8 @@ export function VoiceAgentsPage() {
                     <div className="mt-3 text-sm text-text-primary">
                       <StreamingText
                         text={streamingContent}
-                        speed={2}
-                        interval={20}
+                        speed={STREAMING.speed}
+                        interval={STREAMING.intervalMs}
                         showCursor
                         cursorStyle="line"
                         onComplete={handleStreamComplete}

@@ -13,6 +13,35 @@ import { ScrollFadeIn } from "../ui/ScrollFadeIn"
 import { CheckIcon } from "../ui/icons/check"
 import { cn } from "../../lib/utils"
 
+/*
+ * ANIMATION STORYBOARD - Billing Toggle
+ *    0ms   user clicks toggle
+ *    0ms   current price exits (opacity 0, y: -8px, 200ms)
+ *    0ms   new price enters (opacity 0 -> 1, y: 8px -> 0, 200ms)
+ *
+ * ANIMATION STORYBOARD - Yearly Badge
+ *    0ms   FlipWords cycles ("Save 20%" / "Best value") every 4000ms
+ *
+ * ANIMATION STORYBOARD - Popular Card
+ *    0ms   md:scale-105 applied via CSS (no JS animation)
+ */
+
+const PRICE_TOGGLE = {
+  exitY: -8,
+  enterY: 8,
+  durationS: 0.2,
+} as const
+
+const YEARLY_BADGE = {
+  flipIntervalMs: 4000,
+  words: ["Save 20%", "Best value"],
+  badgeY: -4,
+} as const
+
+const POPULAR_CARD = {
+  scale: "md:scale-105",
+} as const
+
 const plans = [
   {
     name: "Starter",
@@ -99,12 +128,12 @@ export function PricingPage() {
             <AnimatePresence>
               {isYearly && (
                 <motion.div
-                  initial={{ opacity: 0, y: -4 }}
+                  initial={{ opacity: 0, y: YEARLY_BADGE.badgeY }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
+                  exit={{ opacity: 0, y: YEARLY_BADGE.badgeY }}
                   className="mt-3 text-sm font-medium text-accent"
                 >
-                  <FlipWords words={["Save 20%", "Best value"]} interval={4000} />
+                  <FlipWords words={YEARLY_BADGE.words} interval={YEARLY_BADGE.flipIntervalMs} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -123,7 +152,7 @@ export function PricingPage() {
                   className={cn(
                     "flex h-full flex-col relative overflow-hidden transition-all duration-300",
                     plan.popular
-                      ? "border-primary/50 shadow-lg md:scale-105 z-10"
+                      ? `border-primary/50 shadow-lg ${POPULAR_CARD.scale} z-10`
                       : "border-border/50 hover:border-border"
                   )}
                 >
@@ -143,10 +172,10 @@ export function PricingPage() {
                       <AnimatePresence mode="wait">
                         <motion.span
                           key={isYearly ? "yearly" : "monthly"}
-                          initial={{ opacity: 0, y: 8 }}
+                          initial={{ opacity: 0, y: PRICE_TOGGLE.enterY }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -8 }}
-                          transition={{ duration: 0.2 }}
+                          exit={{ opacity: 0, y: PRICE_TOGGLE.exitY }}
+                          transition={{ duration: PRICE_TOGGLE.durationS }}
                           className="text-4xl font-extrabold text-text-primary tabular-nums"
                         >
                           {plan.monthly === null

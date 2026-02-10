@@ -6,6 +6,17 @@ import { motionSpring } from "../../lib/motion"
 import { Button } from "./Button"
 import { CheckIcon } from "./icons/check"
 
+/*
+ * ANIMATION STORYBOARD - Step Transition
+ *    0ms   current step exits (opacity 0, slides STEP_TRANSITION.slideDistance px in exit direction, snappy)
+ *    0ms   next step enters (opacity 0 -> 1, slides STEP_TRANSITION.slideDistance px from entry direction, snappy)
+ */
+
+const STEP_TRANSITION = {
+  slideDistance: 20,
+  spring: motionSpring.snappy,
+} as const
+
 const formWizardVariants = cva(
   "flex flex-col",
   {
@@ -180,10 +191,10 @@ const FormWizard = React.forwardRef<HTMLDivElement, FormWizardProps>(
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={currentStep}
-              initial={{ opacity: 0, x: direction * 20 }}
+              initial={{ opacity: 0, x: direction * STEP_TRANSITION.slideDistance }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -direction * 20 }}
-              transition={motionSpring.snappy}
+              exit={{ opacity: 0, x: -direction * STEP_TRANSITION.slideDistance }}
+              transition={STEP_TRANSITION.spring}
             >
               {steps[currentStep]?.content}
             </motion.div>

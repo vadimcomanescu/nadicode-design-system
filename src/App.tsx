@@ -139,6 +139,8 @@ import {
 
 
 import { useSearchParams } from "react-router-dom";
+import { DialRoot } from "dialkit";
+import "dialkit/styles.css";
 
 const TAB_REDIRECTS: Record<string, string> = {
   overview: "foundations",
@@ -1579,6 +1581,8 @@ function ColorCard({ name, hex, className }: { name: string, hex: string, classN
 
 function App() {
   return (
+    <>
+    {import.meta.env.DEV && <DialRoot position="top-right" />}
     <PageTransition>
     <Routes>
       <Route path="/" element={<DocsPage />} />
@@ -1609,6 +1613,7 @@ function App() {
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
     </PageTransition>
+    </>
   )
 }
 

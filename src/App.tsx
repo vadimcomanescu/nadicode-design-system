@@ -52,7 +52,6 @@ import { BannerBlock } from "./components/blocks/BannerBlock";
 import { ChangelogBlock } from "./components/blocks/ChangelogBlock";
 import { ComparisonBlock } from "./components/blocks/ComparisonBlock";
 import { ActivityFeedBlock } from "./components/blocks/ActivityFeedBlock";
-import { easing, duration } from "./lib/animation.tokens";
 import { CodeBlock } from "./components/blocks/CodeBlock";
 import { AudioVisualizer } from "./components/blocks/AudioVisualizerBlock";
 import { ChatLayout } from "./components/blocks/ChatLayout";
@@ -240,17 +239,76 @@ function DocsPage() {
 
             <section>
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Typography</Typography>
-              <div className="space-y-6">
-                <Typography variant="h1">Heading 1 - Ultra Display</Typography>
-                <Typography variant="h2">Heading 2 - Section Title</Typography>
-                <Typography variant="h3">Heading 3 - Subsection</Typography>
-                <Typography variant="h4">Heading 4 - Component Title</Typography>
-                <Typography variant="body">
-                  Body Text - The quick brown fox jumps over the lazy dog. Design systems are essential for scaling
-                  consistency across enterprise, SMB, and consumer applications.
+
+              <div className="mb-8 space-y-2">
+                <Typography variant="h3" className="mb-4">Font Family</Typography>
+                <div className="flex items-baseline gap-4">
+                  <span className="text-3xl font-semibold text-text-primary">Satoshi</span>
+                  <Typography variant="muted">sans-serif fallback</Typography>
+                </div>
+                <Typography variant="body" className="text-text-secondary text-sm !mt-2">
+                  A modern geometric sans-serif with clean proportions. Used across all UI text.
                 </Typography>
-                <Typography variant="small">Small Text - Metadata and captions.</Typography>
-                <Typography variant="muted">Muted Text - Less important information.</Typography>
+              </div>
+
+              <div className="mb-10">
+                <Typography variant="h3" className="mb-4">Type Scale</Typography>
+                <div className="border border-border rounded-lg overflow-hidden">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Variant</TableHead>
+                        <TableHead>Element</TableHead>
+                        <TableHead className="tabular-nums">Size</TableHead>
+                        <TableHead>Weight</TableHead>
+                        <TableHead className="tabular-nums">Line Height</TableHead>
+                        <TableHead>Tracking</TableHead>
+                        <TableHead>Color</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {[
+                        { variant: "h1", element: "h1", size: "36 / 48px", weight: "800 Extrabold", lh: "1.2", tracking: "-0.025em", color: "primary" },
+                        { variant: "h2", element: "h2", size: "30px", weight: "600 Semibold", lh: "1.2", tracking: "-0.025em", color: "primary" },
+                        { variant: "h3", element: "h3", size: "24px", weight: "600 Semibold", lh: "1.2", tracking: "-0.025em", color: "primary" },
+                        { variant: "h4", element: "h4", size: "20px", weight: "600 Semibold", lh: "1.2", tracking: "-0.025em", color: "primary" },
+                        { variant: "body", element: "p", size: "16px", weight: "400 Normal", lh: "28px (1.75)", tracking: "normal", color: "text-primary" },
+                        { variant: "small", element: "small", size: "14px", weight: "500 Medium", lh: "1.0", tracking: "normal", color: "text-secondary" },
+                        { variant: "muted", element: "p", size: "14px", weight: "400 Normal", lh: "1.43", tracking: "normal", color: "text-tertiary" },
+                      ].map((row) => (
+                        <TableRow key={row.variant}>
+                          <TableCell className="font-mono text-accent">{row.variant}</TableCell>
+                          <TableCell className="font-mono text-text-tertiary">&lt;{row.element}&gt;</TableCell>
+                          <TableCell className="tabular-nums">{row.size}</TableCell>
+                          <TableCell>{row.weight}</TableCell>
+                          <TableCell className="tabular-nums">{row.lh}</TableCell>
+                          <TableCell className="font-mono text-xs">{row.tracking}</TableCell>
+                          <TableCell className="text-text-secondary">{row.color}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+
+              <div>
+                <Typography variant="h3" className="mb-4">Live Preview</Typography>
+                <div className="space-y-6 border border-border rounded-lg p-8 bg-surface">
+                  {([
+                    { v: "h1" as const, label: "h1", text: "Build the future" },
+                    { v: "h2" as const, label: "h2", text: "Design at scale" },
+                    { v: "h3" as const, label: "h3", text: "Token architecture" },
+                    { v: "h4" as const, label: "h4", text: "Component variants" },
+                    { v: "body" as const, label: "body", text: "The quick brown fox jumps over the lazy dog. Design systems are essential for scaling consistency across enterprise and consumer applications." },
+                    { v: "small" as const, label: "small", text: "Metadata and captions, 14px medium weight." },
+                    { v: "muted" as const, label: "muted", text: "Less important information, tertiary color." },
+                  ]).map((item) => (
+                    <div key={item.label} className="flex items-start gap-6">
+                      <span className="font-mono text-xs text-accent w-14 pt-1.5 shrink-0">{item.label}</span>
+                      <Typography variant={item.v}>{item.text}</Typography>
+                    </div>
+                  ))}
+                </div>
               </div>
             </section>
 
@@ -277,22 +335,54 @@ function DocsPage() {
             </section>
 
             <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Spacing Scale</Typography>
-              <div className="flex flex-wrap items-end gap-4">
-                {[
-                  { name: "xs (4px)", size: "h-4 w-4" },
-                  { name: "sm (8px)", size: "h-8 w-8" },
-                  { name: "md (16px)", size: "h-16 w-16" },
-                  { name: "lg (24px)", size: "h-24 w-24" },
-                  { name: "xl (32px)", size: "h-32 w-32" },
-                  { name: "2xl (48px)", size: "h-48 w-20" },
-                  { name: "3xl (64px)", size: "h-64 w-20" },
-                ].map((s) => (
-                  <div key={s.name} className="flex flex-col items-center gap-2">
-                    <div className={`${s.size} rounded-sm bg-accent/20 border border-accent/40`} />
-                    <Typography variant="small" className="text-text-secondary">{s.name}</Typography>
-                  </div>
-                ))}
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Spacing</Typography>
+              <Typography variant="body" className="text-text-secondary text-sm !mt-0 mb-6">
+                All spacing derives from a <span className="font-mono text-accent">4px</span> base unit. Components and layouts use multiples of this base for consistent vertical and horizontal rhythm.
+              </Typography>
+
+              <div className="border border-border rounded-lg overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-24"></TableHead>
+                      <TableHead className="tabular-nums">px</TableHead>
+                      <TableHead className="tabular-nums">rem</TableHead>
+                      <TableHead>Tailwind</TableHead>
+                      <TableHead>Usage</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { px: 4, rem: "0.25", tw: "p-1, gap-1", usage: "Inline spacing, icon gaps" },
+                      { px: 8, rem: "0.5", tw: "p-2, gap-2", usage: "Tight component padding" },
+                      { px: 12, rem: "0.75", tw: "p-3, gap-3", usage: "Compact component padding" },
+                      { px: 16, rem: "1", tw: "p-4, gap-4", usage: "Default component padding" },
+                      { px: 20, rem: "1.25", tw: "p-5", usage: "Comfortable padding" },
+                      { px: 24, rem: "1.5", tw: "p-6, gap-6", usage: "Card padding, section gaps" },
+                      { px: 32, rem: "2", tw: "p-8, gap-8", usage: "Section padding" },
+                      { px: 40, rem: "2.5", tw: "p-10", usage: "Large section padding" },
+                      { px: 48, rem: "3", tw: "p-12", usage: "Hero content padding" },
+                      { px: 64, rem: "4", tw: "py-16", usage: "Page section spacing" },
+                      { px: 80, rem: "5", tw: "py-20", usage: "Large page sections" },
+                      { px: 96, rem: "6", tw: "py-24", usage: "Hero and landing sections" },
+                    ].map((row) => (
+                      <TableRow key={row.px}>
+                        <TableCell>
+                          <div className="flex items-center h-5">
+                            <div
+                              className="h-3 rounded-sm bg-accent/30 border border-accent/50"
+                              style={{ width: `${Math.min(row.px, 96)}px` }}
+                            />
+                          </div>
+                        </TableCell>
+                        <TableCell className="tabular-nums font-mono">{row.px}</TableCell>
+                        <TableCell className="tabular-nums font-mono text-text-tertiary">{row.rem}</TableCell>
+                        <TableCell className="font-mono text-xs text-accent">{row.tw}</TableCell>
+                        <TableCell className="text-text-secondary">{row.usage}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </section>
 
@@ -345,53 +435,6 @@ function DocsPage() {
               </div>
             </section>
 
-            <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Animation Tokens</Typography>
-              <div className="space-y-8">
-                <div>
-                  <Typography variant="h3" className="mb-4">Easing Curves</Typography>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {Object.entries(easing).map(([name, value]) => {
-                      const nums = value.match(/[\d.]+/g) || ["0","0","1","1"];
-                      const [x1, y1, x2, y2] = nums.map(Number);
-                      return (
-                        <div key={name} className="border border-border rounded-lg p-4 bg-surface space-y-2">
-                          <Typography variant="small" className="font-mono text-accent">{name}</Typography>
-                          <div className="h-16 relative">
-                            <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
-                              <path
-                                d={`M 0 100 C ${x1 * 100} ${100 - y1 * 100}, ${x2 * 100} ${100 - y2 * 100}, 100 0`}
-                                fill="none"
-                                stroke="rgb(var(--color-accent))"
-                                strokeWidth="3"
-                              />
-                            </svg>
-                          </div>
-                          <Typography variant="small" className="text-text-tertiary text-xs truncate">{value}</Typography>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <Typography variant="h3" className="mb-4">Duration Scale</Typography>
-                  <div className="space-y-3">
-                    {Object.entries(duration).map(([name, value]) => (
-                      <div key={name} className="flex items-center gap-4">
-                        <Typography variant="small" className="font-mono w-24 text-text-secondary">{name}</Typography>
-                        <div className="flex-1 h-6 bg-surface rounded-full overflow-hidden border border-border">
-                          <div
-                            className="h-full bg-accent/40 rounded-full"
-                            style={{ width: `${(parseInt(value) / 300) * 100}%` }}
-                          />
-                        </div>
-                        <Typography variant="small" className="text-text-tertiary w-12 text-right">{value}</Typography>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </section>
           </TabsContent>
 
           <TabsContent value="components" className="space-y-16">

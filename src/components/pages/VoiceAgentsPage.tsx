@@ -1,6 +1,6 @@
 import * as React from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { Send, ArrowLeft } from "lucide-react"
+import { SendIcon, ArrowLeftIcon } from "@/components/ui/icons"
 import { Container } from "../layout/Grid"
 import { Typography } from "../ui/Typography"
 import { Button } from "../ui/Button"
@@ -244,7 +244,7 @@ export function VoiceAgentsPage() {
                     onClick={() => navigate("/")}
                     aria-label="Back to docs"
                   >
-                    <ArrowLeft className="h-4 w-4" />
+                    <ArrowLeftIcon size={16} />
                   </Button>
                   <div>
                     <Typography variant="h1" className="mb-2">Voice Agents</Typography>
@@ -308,7 +308,7 @@ export function VoiceAgentsPage() {
                 onClick={handleBack}
                 className="gap-2 text-text-secondary"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeftIcon size={16} />
                 Back
               </Button>
               <ThemeToggle />
@@ -389,7 +389,7 @@ export function VoiceAgentsPage() {
                   disabled={!input.trim() || isStreaming}
                   className="shrink-0"
                 >
-                  <Send className="h-4 w-4" />
+                  <SendIcon size={16} />
                 </Button>
               </form>
             </div>

@@ -1,7 +1,7 @@
 import { Badge } from "../ui/Badge"
 import { Typography } from "../ui/Typography"
 import { ScrollFadeIn } from "../ui/ScrollFadeIn"
-import { Wrench, RefreshCw } from "lucide-react"
+import { WrenchIcon, RefreshCwIcon } from "@/components/ui/icons"
 import { PlusIcon } from "@/components/ui/icons/plus"
 import { cn } from "../../lib/utils"
 
@@ -32,12 +32,12 @@ const typeConfig: Record<
     color: "text-success bg-success/10",
   },
   fixed: {
-    icon: <Wrench className="h-3 w-3" />,
+    icon: <WrenchIcon size={12} />,
     label: "Fixed",
     color: "text-info bg-info/10",
   },
   changed: {
-    icon: <RefreshCw className="h-3 w-3" />,
+    icon: <RefreshCwIcon size={12} />,
     label: "Changed",
     color: "text-warning bg-warning/10",
   },

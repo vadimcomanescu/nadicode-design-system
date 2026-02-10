@@ -1,4 +1,4 @@
-
+import { ScrollFadeIn } from "../ui/ScrollFadeIn";
 import { SettingsLayout } from "../blocks/SettingsLayout";
 import { AuthLayout } from "../blocks/AuthLayout";
 import { StatsGeneric } from "../blocks/StatsBlock";
@@ -17,6 +17,7 @@ export function VerificationPage() {
                 </Typography>
             </div>
 
+            <ScrollFadeIn>
             <section className="space-y-8">
                 <div className="border-b border-border pb-4">
                     <Typography variant="h3" className="text-xl font-semibold mb-2">1. KPI Stats Block</Typography>
@@ -24,7 +25,9 @@ export function VerificationPage() {
                 </div>
                 <StatsGeneric />
             </section>
+            </ScrollFadeIn>
 
+            <ScrollFadeIn>
             <section className="space-y-8">
                 <div className="border-b border-border pb-4">
                     <Typography variant="h3" className="text-xl font-semibold mb-2">2. Data Grid (Advanced)</Typography>
@@ -32,7 +35,9 @@ export function VerificationPage() {
                 </div>
                 <DataGridBlock />
             </section>
+            </ScrollFadeIn>
 
+            <ScrollFadeIn>
             <section className="space-y-8">
                 <div className="border-b border-border pb-4">
                     <Typography variant="h3" className="text-xl font-semibold mb-2">3. Analytics Charts</Typography>
@@ -43,7 +48,9 @@ export function VerificationPage() {
                     <UsageDonut />
                 </div>
             </section>
+            </ScrollFadeIn>
 
+            <ScrollFadeIn>
             <section className="space-y-8">
                 <div className="border-b border-border pb-4">
                     <Typography variant="h3" className="text-xl font-semibold mb-2">4. Auth Layout</Typography>
@@ -55,7 +62,9 @@ export function VerificationPage() {
                     </div>
                 </div>
             </section>
+            </ScrollFadeIn>
 
+            <ScrollFadeIn>
             <section className="space-y-8">
                 <div className="border-b border-border pb-4">
                     <Typography variant="h3" className="text-xl font-semibold mb-2">5. Settings Layout</Typography>
@@ -67,6 +76,7 @@ export function VerificationPage() {
                     </div>
                 </div>
             </section>
+            </ScrollFadeIn>
         </div>
     );
 }

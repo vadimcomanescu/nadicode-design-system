@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Input } from "@/components/ui/Input"
 import { Label } from "@/components/ui/Label"
-import { CreditCard } from "lucide-react"
+import { CreditCardIcon } from "@/components/ui/icons"
 import { RocketIcon } from "@/components/ui/icons/rocket"
 import { UserIcon } from "@/components/ui/icons/user"
 import { SettingsIcon } from "@/components/ui/icons/settings"
@@ -14,7 +14,7 @@ export function WizardBlock() {
     const steps = [
         { title: "Account", description: "Setup your account", icon: <UserIcon size={16} /> },
         { title: "Profile", description: "Add personal info", icon: <SettingsIcon size={16} /> },
-        { title: "Plan", description: "Choose a plan", icon: <CreditCard className="size-4" /> },
+        { title: "Plan", description: "Choose a plan", icon: <CreditCardIcon size={16} /> },
         { title: "Launch", description: "Ready to go", icon: <RocketIcon size={16} /> },
     ]
 
@@ -82,7 +82,7 @@ export function WizardBlock() {
                     )}
                     {activeStep === 3 && (
                         <div className="text-center space-y-4 py-8">
-                            <RocketIcon size={64} className="mx-auto text-primary animate-bounce" />
+                            <RocketIcon size={64} className="mx-auto text-primary" style={{ animation: "float 2s ease-in-out infinite" }} />
                             <h3 className="text-xl font-bold">Ready to Launch!</h3>
                             <p className="text-muted-foreground">Review your settings and click Finish to deploy.</p>
                         </div>

@@ -1,8 +1,7 @@
-import {
-    Package2,
-    ArrowUpRight,
-} from "lucide-react"
+import { PackageIcon, ArrowUpRightIcon } from "@/components/ui/icons"
 import { SearchIcon } from "../ui/icons/search"
+import { StaggerChildren } from "../ui/StaggerChildren"
+import { ScrollFadeIn } from "../ui/ScrollFadeIn"
 
 import { Badge } from "../ui/Badge"
 import { Button } from "../ui/Button"
@@ -66,7 +65,7 @@ export function DashboardPage() {
                         href="#"
                         className="flex items-center gap-2 text-lg font-semibold md:text-base"
                     >
-                        <Package2 className="h-6 w-6" />
+                        <PackageIcon size={24} />
                         <span className="sr-only">Nadicode</span>
                     </a>
                     <a
@@ -133,11 +132,12 @@ export function DashboardPage() {
             <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
 
                 {/* KPI Stats Block */}
-                <section>
+                <StaggerChildren staggerMs={80}>
                     <StatsGeneric />
-                </section>
+                </StaggerChildren>
 
                 {/* Charts Section */}
+                <ScrollFadeIn>
                 <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                     <Card className="col-span-4">
                         <CardHeader>
@@ -231,8 +231,10 @@ export function DashboardPage() {
                         </CardContent>
                     </Card>
                 </section>
+                </ScrollFadeIn>
 
                 {/* Transactions Table */}
+                <ScrollFadeIn>
                 <section>
                     <Card>
                         <CardHeader className="flex flex-row items-center">
@@ -245,7 +247,7 @@ export function DashboardPage() {
                             <Button asChild size="sm" className="ml-auto gap-1">
                                 <a href="#">
                                     View All
-                                    <ArrowUpRight className="h-4 w-4" />
+                                    <ArrowUpRightIcon size={16} />
                                 </a>
                             </Button>
                         </CardHeader>
@@ -332,6 +334,7 @@ export function DashboardPage() {
                         </CardContent>
                     </Card>
                 </section>
+                </ScrollFadeIn>
 
             </main>
         </div>

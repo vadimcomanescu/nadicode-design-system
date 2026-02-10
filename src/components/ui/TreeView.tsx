@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as CollapsiblePrimitive from "@radix-ui/react-collapsible"
 import { motion, AnimatePresence } from "motion/react"
-import { ChevronRight } from "lucide-react"
+import { ChevronRightIcon } from "@/components/ui/icons"
 
 import { cn } from "../../lib/utils"
 import { motionSpring, useMotionConfig } from "../../lib/motion"
@@ -134,7 +134,7 @@ function TreeItem({ node, depth, selectedId, onSelect }: TreeItemProps) {
             animate={{ rotate: open ? 90 : 0 }}
             transition={{ ...motionSpring.snappy, ...motionConfig }}
           >
-            <ChevronRight className="h-4 w-4 text-text-tertiary" />
+            <ChevronRightIcon size={16} className="text-text-tertiary" />
           </motion.span>
           {node.icon && <span className="shrink-0">{node.icon}</span>}
           <span className="truncate">{node.label}</span>

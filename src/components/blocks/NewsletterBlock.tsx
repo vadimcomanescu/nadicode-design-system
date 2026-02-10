@@ -5,6 +5,8 @@ import { Typography } from "../ui/Typography"
 import { CheckIcon } from "../ui/icons/check"
 import { Spinner } from "../ui/Spinner"
 import { cn } from "../../lib/utils"
+import { ScrollFadeIn } from "../ui/ScrollFadeIn"
+import { Shine } from "@/components/animate-ui/primitives/effects/shine"
 
 interface NewsletterBlockProps {
   onSubscribe?: (email: string) => void
@@ -44,6 +46,8 @@ export function NewsletterBlock({
   return (
     <section className={cn("py-16 md:py-24", className)}>
       <div className="mx-auto max-w-xl px-6">
+        <ScrollFadeIn>
+        <Shine enableOnHover loop loopDelay={300} color="var(--color-accent)" opacity={0.1}>
         <div className="glass-panel rounded-2xl border border-border/50 p-8 text-center sm:p-12">
           <Typography variant="h2" className="text-text-primary">
             {title}
@@ -89,6 +93,8 @@ export function NewsletterBlock({
             Unsubscribe anytime. We respect your inbox.
           </Typography>
         </div>
+        </Shine>
+        </ScrollFadeIn>
       </div>
     </section>
   )

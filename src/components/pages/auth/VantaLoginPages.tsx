@@ -13,13 +13,13 @@ import { ZapIcon } from '../../ui/icons/zap'
 
 // --- Colors ---
 const COLORS = {
-    primary: 0xFB7185,      // Coral (Brand Primary)
-    primaryDark: 0xE11D48,  // Rose-600 (High contrast for light mode)
+    primary: 0x38BDB8,      // Teal.9 (Dark mode accent)
+    primaryDark: 0x1A8F88,  // Teal.9 (Light mode accent)
     secondary: 0x2DD4BF,    // Teal-400 (Dark mode glow)
     secondaryDark: 0x0D9488,// Teal-600 (Light mode contrast)
     accent: 0xFBBF24,       // Amber-400
-    darkBg: 0x050505,       // Deep Black
-    lightBg: 0xFAFAFA,      // Off-white
+    darkBg: 0x0F1114,       // Gray.1 dark
+    lightBg: 0xFBFCFD,      // Gray.1 light
     white: 0xffffff,
     black: 0x000000
 }

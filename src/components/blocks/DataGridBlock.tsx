@@ -3,7 +3,7 @@
 import { DataTable } from "../ui/DataTable"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "../ui/Badge"
-import { MoreHorizontal } from "lucide-react"
+import { EllipsisIcon } from "@/components/ui/icons"
 import { Button } from "../ui/Button"
 import {
     DropdownMenu,
@@ -14,6 +14,7 @@ import {
     DropdownMenuTrigger,
 } from "../ui/DropdownMenu"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../ui/Card"
+import { ScrollFadeIn } from "../ui/ScrollFadeIn"
 
 export type Payment = {
     id: string
@@ -64,7 +65,7 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
+                            <EllipsisIcon size={16} />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -119,6 +120,7 @@ const data: Payment[] = [
 
 export function DataGridBlock() {
     return (
+        <ScrollFadeIn>
         <Card className="w-full">
             <CardHeader>
                 <CardTitle>Recent Transactions</CardTitle>
@@ -128,5 +130,6 @@ export function DataGridBlock() {
                 <DataTable columns={columns} data={data} searchKey="email" />
             </CardContent>
         </Card>
+        </ScrollFadeIn>
     )
 }

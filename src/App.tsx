@@ -17,7 +17,7 @@ import { Skeleton } from "./components/ui/Skeleton";
 import { Textarea } from "./components/ui/Textarea";
 import { RadioGroup, RadioGroupItem } from "./components/ui/RadioGroup";
 import { ToggleGroup, ToggleGroupItem } from "./components/ui/ToggleGroup";
-import { Package } from "lucide-react";
+import { PackageIcon } from "@/components/ui/icons";
 import { BoldIcon } from "./components/ui/icons/bold";
 import { ItalicIcon } from "./components/ui/icons/italic";
 import { UnderlineIcon } from "./components/ui/icons/underline";
@@ -94,6 +94,7 @@ import { Kbd } from "./components/ui/Kbd";
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "./components/ui/Field";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "./components/ui/Item";
 
+import { AnimatedGradientText } from "./components/ui/AnimatedGradientText";
 import { StreamingText } from "./components/ui/StreamingText";
 import { AgentStatus } from "./components/ui/AgentStatus";
 import { AudioWaveform } from "./components/ui/AudioWaveform";
@@ -169,7 +170,9 @@ function DocsPage() {
       <Container className="relative z-10">
         <header className="mb-12 flex items-start justify-between">
           <div>
-            <Typography variant="h1" className="mb-4">Nadicode System</Typography>
+            <Typography variant="h1" className="mb-4">
+              <AnimatedGradientText className="text-5xl sm:text-6xl">Nadicode System</AnimatedGradientText>
+            </Typography>
             <Typography variant="body" className="text-xl text-text-secondary max-w-2xl">
               A comprehensive design system for AI-integrated web applications.
               Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
@@ -800,7 +803,7 @@ function DocsPage() {
                   <Typography variant="h3">Empty State</Typography>
                   <Empty>
                     <EmptyIcon>
-                      <Package className="h-6 w-6" />
+                      <PackageIcon size={24} />
                     </EmptyIcon>
                     <EmptyTitle>No projects found</EmptyTitle>
                     <EmptyDescription>You haven't created any projects yet. Get started by creating a new one.</EmptyDescription>
@@ -875,7 +878,7 @@ function DocsPage() {
                             <UsersIcon size={16} className="mr-2" /> Team
                           </Button>
                           <Button variant="ghost" className="justify-start w-full bg-surface-active">
-                            <Package className="mr-2 h-4 w-4" /> Projects
+                            <PackageIcon size={16} className="mr-2" /> Projects
                           </Button>
                           <Button variant="ghost" className="justify-start w-full">
                             <SettingsIcon size={16} className="mr-2" /> Settings

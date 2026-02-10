@@ -6,6 +6,7 @@ import "prismjs/themes/prism-tomorrow.css"
 
 import { cn } from "../../lib/utils"
 import { Button } from "../ui/Button"
+import { ScrollFadeIn } from "../ui/ScrollFadeIn"
 
 export interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   code: string
@@ -33,6 +34,7 @@ export function CodeBlock({
   }
 
   return (
+    <ScrollFadeIn>
     <div
       className={cn(
         "relative overflow-hidden rounded-lg glass-panel !bg-neutral-950/80 border-white/10",
@@ -62,5 +64,6 @@ export function CodeBlock({
         </div>
       </div>
     </div>
+    </ScrollFadeIn>
   )
 }

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { X } from "lucide-react"
+import { XIcon } from "@/components/ui/icons"
 
 import { cn } from "../../lib/utils"
 import { Badge } from "./Badge"
@@ -84,7 +84,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
                   tabIndex={-1}
                   disabled={disabled}
                 >
-                  <X className="h-3 w-3" />
+                  <XIcon size={12} />
                 </button>
               </Badge>
             </motion.div>

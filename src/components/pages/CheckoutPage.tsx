@@ -1,64 +1,63 @@
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
-import { Alert, AlertDescription, AlertTitle } from "../ui/Alert"
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "../ui/Breadcrumb"
-import { TerminalIcon } from "../ui/icons/terminal"
+import type { Appearance } from "@stripe/stripe-js"
+import { motion } from "motion/react"
+import { useTheme } from "../../lib/ThemeProvider"
 import { CheckoutFormDemo } from "../ui/CheckoutFormDemo"
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx")
 
+function useStripeAppearance(): Appearance {
+    const { resolvedTheme } = useTheme()
+    const isDark = resolvedTheme === "dark"
+
+    return {
+        theme: "flat",
+        variables: {
+            colorPrimary: isDark ? "#38BDB8" : "#1A8F88",
+            colorText: isDark ? "#E1E7ED" : "#1A2230",
+            colorTextSecondary: isDark ? "#A0AEBB" : "#3E4F60",
+            colorDanger: isDark ? "#E5484D" : "#CE2C3B",
+            borderRadius: "8px",
+            fontFamily: '"Inter", sans-serif',
+            fontSizeBase: "14px",
+            focusBoxShadow: `0 0 0 1px ${isDark ? "#38BDB8" : "#1A8F88"}`,
+            colorBackground: "transparent",
+        },
+        rules: {
+            ".Label": {
+                display: "none",
+            },
+            ".Input": {
+                backgroundColor: "transparent",
+                border: "none",
+                boxShadow: "none",
+                padding: "0",
+                fontSize: "14px",
+            },
+            ".Input:focus": {
+                boxShadow: "none",
+                border: "none",
+            },
+        },
+    }
+}
+
 export default function CheckoutPage() {
+    const appearance = useStripeAppearance()
+
     return (
-        <div className="min-h-dvh bg-background text-text-primary flex flex-col">
-            {/* Header / Breadcrumb Section */}
-            <div className="border-b border-border bg-surface/50 backdrop-blur-sm sticky top-0 z-10">
-                <div className="max-w-5xl mx-auto px-6 py-4">
-                    <Breadcrumb>
-                        <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href="#">Billing</BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>Subscription</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
-                </div>
-            </div>
-
-            <main className="flex-1 py-12 px-6">
-                <div className="max-w-5xl mx-auto space-y-8">
-
-                    {/* Contextual Alert - Example of usage */}
-                    <Alert>
-                        <TerminalIcon size={16} />
-                        <AlertTitle>Upgrade to Pro</AlertTitle>
-                        <AlertDescription>
-                            You are currently on the Free plan. Upgrade now to unlock unlimited AI generations.
-                        </AlertDescription>
-                    </Alert>
-
-                    {/* The Main Event: Checkout Component */}
-                    <Elements stripe={stripePromise} options={{ appearance: { theme: 'night' } }}>
-                        <CheckoutFormDemo />
-                    </Elements>
-
-                </div>
-            </main>
+        <div className="min-h-dvh bg-background text-text-primary flex items-center justify-center px-4 py-12">
+            <motion.div
+                className="w-full max-w-lg"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+                <Elements stripe={stripePromise} options={{ appearance }}>
+                    <CheckoutFormDemo />
+                </Elements>
+            </motion.div>
         </div>
     )
 }

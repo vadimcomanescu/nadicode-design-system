@@ -1,7 +1,8 @@
 import React from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider } from "../ui/Sidebar";
-import { CreditCard, LayoutDashboard } from "lucide-react";
+import { CreditCardIcon, LayoutDashboardIcon } from "@/components/ui/icons";
 import { SettingsIcon } from "../ui/icons/settings";
 import { UserIcon } from "../ui/icons/user";
 import { UsersIcon } from "../ui/icons/users";
@@ -36,7 +37,7 @@ export function SettingsLayout() {
         },
         {
             label: "Billing",
-            icon: <CreditCard className="h-4 w-4" />,
+            icon: <CreditCardIcon size={16} />,
         },
     ];
 
@@ -49,7 +50,7 @@ export function SettingsLayout() {
                     <SidebarHeader className="p-4">
                         <div className="flex items-center gap-3 px-2">
                             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-glow">
-                                <LayoutDashboard className="size-4" />
+                                <LayoutDashboardIcon size={16} />
                             </div>
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-semibold">Nadicode</span>
@@ -88,17 +89,27 @@ export function SettingsLayout() {
 
                 <main className="flex-1 overflow-y-auto bg-background/50">
                     <div className="max-w-4xl mx-auto p-8">
-                        {activeLink === "Profile" && <ProfilePage />}
-                        {activeLink === "Team" && <TeamPage />}
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeLink}
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -8 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {activeLink === "Profile" && <ProfilePage />}
+                                {activeLink === "Team" && <TeamPage />}
 
-                        {!["Profile", "Team"].includes(activeLink) && (
-                            <div className="flex h-[400px] items-center justify-center rounded-lg border border-dashed border-border">
-                                <div className="text-center space-y-2">
-                                    <p className="text-lg font-medium text-text-primary">{activeLink} Settings</p>
-                                    <p className="text-sm text-text-secondary">This section is under construction.</p>
-                                </div>
-                            </div>
-                        )}
+                                {!["Profile", "Team"].includes(activeLink) && (
+                                    <div className="flex h-[400px] items-center justify-center rounded-lg border border-dashed border-border">
+                                        <div className="text-center space-y-2">
+                                            <p className="text-lg font-medium text-text-primary">{activeLink} Settings</p>
+                                            <p className="text-sm text-text-secondary">This section is under construction.</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                 </main>
             </div>

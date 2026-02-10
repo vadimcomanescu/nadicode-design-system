@@ -26,7 +26,7 @@ describe("FormWizard", () => {
     render(<FormWizard steps={mockSteps} />)
 
     await user.click(screen.getByText("Continue"))
-    expect(screen.getByText("Step 2 Content")).toBeInTheDocument()
+    expect(await screen.findByText("Step 2 Content")).toBeInTheDocument()
     expect(screen.getByText("Step 2 of 3")).toBeInTheDocument()
   })
 
@@ -35,8 +35,9 @@ describe("FormWizard", () => {
     render(<FormWizard steps={mockSteps} />)
 
     await user.click(screen.getByText("Continue"))
+    await screen.findByText("Step 2 Content")
     await user.click(screen.getByText("Back"))
-    expect(screen.getByText("Step 1 Content")).toBeInTheDocument()
+    expect(await screen.findByText("Step 1 Content")).toBeInTheDocument()
   })
 
   it("disables Back on first step", () => {
@@ -49,8 +50,9 @@ describe("FormWizard", () => {
     render(<FormWizard steps={mockSteps} />)
 
     await user.click(screen.getByText("Continue"))
+    await screen.findByText("Step 2 Content")
     await user.click(screen.getByText("Continue"))
-    expect(screen.getByText("Complete")).toBeInTheDocument()
+    expect(await screen.findByText("Complete")).toBeInTheDocument()
   })
 
   it("calls onComplete when completing last step", async () => {
@@ -59,7 +61,9 @@ describe("FormWizard", () => {
     render(<FormWizard steps={mockSteps} onComplete={onComplete} />)
 
     await user.click(screen.getByText("Continue"))
+    await screen.findByText("Step 2 Content")
     await user.click(screen.getByText("Continue"))
+    await screen.findByText("Complete")
     await user.click(screen.getByText("Complete"))
     expect(onComplete).toHaveBeenCalledTimes(1)
   })

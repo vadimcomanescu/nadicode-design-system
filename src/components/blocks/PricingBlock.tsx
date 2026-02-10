@@ -5,6 +5,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/Card
 import { Badge } from "../ui/Badge"
 import { Switch } from "../ui/Switch"
 import { cn } from "../../lib/utils"
+import { StaggerChildren } from "../ui/StaggerChildren"
+import { Shine } from "@/components/animate-ui/primitives/effects/shine"
 
 export function PricingTable() {
     const [isYearly, setIsYearly] = useState(false)
@@ -61,49 +63,58 @@ export function PricingTable() {
                     </div>
                 </div>
 
-                <div className="grid gap-8 md:grid-cols-3">
-                    {plans.map((plan) => (
-                        <Card
-                            key={plan.name}
-                            interactive
-                            className={cn(
-                                "flex flex-col relative overflow-hidden transition-all duration-300",
-                                plan.popular ? "border-primary/50 shadow-lg scale-105 z-10" : "border-border/50 hover:border-border"
-                            )}
-                        >
-                            {plan.popular && (
-                                <div className="absolute -top-3 left-0 ring-0 w-full flex justify-center">
-                                    <Badge variant="accent" className="shadow-lg">Most Popular</Badge>
-                                </div>
-                            )}
-                            <CardHeader className="pb-8 pt-8">
-                                <CardTitle className="text-xl font-bold text-text-primary">{plan.name}</CardTitle>
-                                <p className="text-sm text-text-secondary">{plan.description}</p>
-                            </CardHeader>
-                            <CardContent className="flex-1">
-                                <div className="mb-8 flex items-baseline">
-                                    <span className="text-4xl font-extrabold text-text-primary tabular-nums">{plan.price}</span>
-                                    <span className="ml-1 text-text-tertiary">{plan.period}</span>
-                                </div>
-                                <ul className="space-y-4">
-                                    {plan.features.map((feature) => (
-                                        <li key={feature} className="flex items-center gap-3 text-sm text-text-secondary">
-                                            <div className={cn("flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-primary")}>
-                                                <CheckIcon size={12} />
-                                            </div>
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </CardContent>
-                            <CardFooter>
-                                <Button className="w-full" variant={plan.variant as any}>
-                                    {plan.action}
-                                </Button>
-                            </CardFooter>
-                        </Card>
-                    ))}
-                </div>
+                <StaggerChildren staggerMs={120} className="grid gap-8 md:grid-cols-3">
+                    {plans.map((plan) => {
+                        const card = (
+                            <Card
+                                key={plan.name}
+                                interactive
+                                className={cn(
+                                    "flex flex-col relative overflow-hidden transition-all duration-300",
+                                    plan.popular ? "border-primary/50 shadow-lg scale-105 z-10" : "border-border/50 hover:border-border"
+                                )}
+                            >
+                                {plan.popular && (
+                                    <div className="absolute -top-3 left-0 ring-0 w-full flex justify-center">
+                                        <Badge variant="accent" className="shadow-lg">Most Popular</Badge>
+                                    </div>
+                                )}
+                                <CardHeader className="pb-8 pt-8">
+                                    <CardTitle className="text-xl font-bold text-text-primary">{plan.name}</CardTitle>
+                                    <p className="text-sm text-text-secondary">{plan.description}</p>
+                                </CardHeader>
+                                <CardContent className="flex-1">
+                                    <div className="mb-8 flex items-baseline">
+                                        <span className="text-4xl font-extrabold text-text-primary tabular-nums">{plan.price}</span>
+                                        <span className="ml-1 text-text-tertiary">{plan.period}</span>
+                                    </div>
+                                    <ul className="space-y-4">
+                                        {plan.features.map((feature) => (
+                                            <li key={feature} className="flex items-center gap-3 text-sm text-text-secondary">
+                                                <div className={cn("flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-primary")}>
+                                                    <CheckIcon size={12} />
+                                                </div>
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </CardContent>
+                                <CardFooter>
+                                    <Button className="w-full" variant={plan.variant as any}>
+                                        {plan.action}
+                                    </Button>
+                                </CardFooter>
+                            </Card>
+                        );
+                        return plan.popular ? (
+                            <Shine key={plan.name} enable loop loopDelay={3000} color="var(--color-accent)" opacity={0.12} duration={1500}>
+                                {card}
+                            </Shine>
+                        ) : (
+                            <div key={plan.name}>{card}</div>
+                        );
+                    })}
+                </StaggerChildren>
             </div>
         </section>
     )

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Send, Bot } from "lucide-react"
+import { SendIcon, BotIcon } from "@/components/ui/icons"
 import { UserIcon } from "../ui/icons/user"
 import { MicIcon } from "../ui/icons/mic"
 
@@ -8,6 +8,7 @@ import { Button } from "../ui/Button"
 import { Input } from "../ui/Input"
 import { ScrollArea } from "../ui/ScrollArea"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
+import { motion } from "motion/react"
 
 interface Message {
   id: string
@@ -62,7 +63,7 @@ export function ChatLayout() {
         <div className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
             <AvatarImage src="/ai-avatar.png" />
-            <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
+            <AvatarFallback className="bg-accent text-white"><BotIcon size={16} /></AvatarFallback>
           </Avatar>
           <div>
             <p className="text-sm font-medium">AI Assistant</p>
@@ -73,9 +74,12 @@ export function ChatLayout() {
 
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-4">
-          {messages.map((message) => (
-            <div
+          {messages.map((message, index) => (
+            <motion.div
               key={message.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: index * 0.05 }}
               className={cn(
                 "flex w-full gap-2",
                 message.role === "user" ? "justify-end" : "justify-start"
@@ -83,7 +87,7 @@ export function ChatLayout() {
             >
               {message.role === "assistant" && (
                 <Avatar className="h-8 w-8 mt-1">
-                  <AvatarFallback className="bg-accent text-white"><Bot className="h-4 w-4" /></AvatarFallback>
+                  <AvatarFallback className="bg-accent text-white"><BotIcon size={16} /></AvatarFallback>
                 </Avatar>
               )}
               <div
@@ -101,7 +105,7 @@ export function ChatLayout() {
                   <AvatarFallback className="bg-secondary"><UserIcon size={16} /></AvatarFallback>
                 </Avatar>
               )}
-            </div>
+            </motion.div>
           ))}
           <div ref={scrollRef} />
         </div>
@@ -125,7 +129,7 @@ export function ChatLayout() {
             className="flex-1"
           />
           <Button type="submit" size="icon" disabled={!input.trim()}>
-            <Send className="h-4 w-4" />
+            <SendIcon size={16} />
           </Button>
         </form>
       </div>

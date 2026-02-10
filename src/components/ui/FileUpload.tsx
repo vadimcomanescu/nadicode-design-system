@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { File, X } from "lucide-react"
+import { FileIcon, XIcon } from "@/components/ui/icons"
 import { UploadIcon } from "./icons/upload"
 
 const fileUploadVariants = cva(
@@ -154,7 +154,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                 key={`${file.name}-${index}`}
                 className="flex items-center gap-3 rounded-lg border border-border bg-surface p-2.5"
               >
-                <File className="h-4 w-4 shrink-0 text-text-tertiary" />
+                <FileIcon size={16} className="shrink-0 text-text-tertiary" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-text-primary truncate">{file.name}</p>
                   <p className="text-xs text-text-tertiary">{formatFileSize(file.size)}</p>
@@ -165,7 +165,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
                     className="shrink-0 rounded p-1 text-text-tertiary hover:text-destructive hover:bg-destructive/10 transition-colors"
                     aria-label={`Remove ${file.name}`}
                   >
-                    <X className="h-3.5 w-3.5" />
+                    <XIcon size={14} />
                   </button>
                 )}
               </li>

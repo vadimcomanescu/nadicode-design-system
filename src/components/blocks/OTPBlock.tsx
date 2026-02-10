@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/Card"
+import { motion } from "motion/react"
 import {
   InputOTP,
   InputOTPGroup,
@@ -14,6 +15,11 @@ import {
 
 export function OTPBlock() {
   return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
     <Card className="mx-auto max-w-sm text-center text-text-primary">
       <CardHeader>
         <CardTitle className="text-2xl">One-Time Password</CardTitle>
@@ -35,5 +41,6 @@ export function OTPBlock() {
         <Button className="w-full">Verify</Button>
       </CardContent>
     </Card>
+    </motion.div>
   )
 }

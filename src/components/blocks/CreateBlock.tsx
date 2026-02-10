@@ -23,6 +23,7 @@ import {
 import { Textarea } from "../ui/Textarea"
 import { toast } from "../../hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
+import { StaggerChildren } from "../ui/StaggerChildren"
 
 const profileFormSchema = z.object({
   username: z
@@ -75,7 +76,8 @@ export function CreateBlock() {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 text-text-primary">
+          <StaggerChildren staggerMs={60} className="space-y-8 text-text-primary">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="contents">
             <FormField
               control={form.control}
               name="username"
@@ -128,6 +130,7 @@ export function CreateBlock() {
             />
             <Button type="submit">Update profile</Button>
           </form>
+          </StaggerChildren>
         </Form>
       </CardContent>
     </Card>

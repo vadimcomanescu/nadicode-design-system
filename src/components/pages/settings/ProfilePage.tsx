@@ -1,3 +1,4 @@
+import { StaggerChildren } from "../../ui/StaggerChildren"
 import { AvatarUpload } from "../../ui/AvatarUpload"
 import { Button } from "../../ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card"
@@ -25,7 +26,7 @@ export function ProfilePage() {
                     </p>
                 </div>
 
-                <div className="space-y-6">
+                <StaggerChildren staggerMs={100} className="space-y-6">
                     <Card >
                         <CardHeader>
                             <CardTitle>Personal Information</CardTitle>
@@ -79,7 +80,7 @@ export function ProfilePage() {
                         <Button variant="ghost">Discard</Button>
                         <Button variant="accent">Save Changes</Button>
                     </div>
-                </div>
+                </StaggerChildren>
             </div>
         </div>
     )

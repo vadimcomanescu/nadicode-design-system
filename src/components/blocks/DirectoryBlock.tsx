@@ -1,13 +1,7 @@
-import {
-  Folder,
-  Home,
-  LayoutDashboard,
-  MoreHorizontal,
-  Star,
-  Trash2,
-} from "lucide-react"
+import { EllipsisIcon, FolderIcon, HomeIcon, LayoutDashboardIcon, StarIcon, Trash2Icon } from "@/components/ui/icons"
 import { UsersIcon } from "../ui/icons/users"
 import { SettingsIcon } from "../ui/icons/settings"
+import { StaggerChildren } from "../ui/StaggerChildren"
 
 import {
   DropdownMenu,
@@ -31,8 +25,8 @@ import {
 
 const data = {
   nav: [
-    { name: "Home", icon: <Home className="h-4 w-4" />, isActive: true },
-    { name: "Dashboard", icon: <LayoutDashboard className="h-4 w-4" /> },
+    { name: "Home", icon: <HomeIcon size={16} />, isActive: true },
+    { name: "Dashboard", icon: <LayoutDashboardIcon size={16} /> },
     { name: "Team", icon: <UsersIcon size={16} /> },
     { name: "Settings", icon: <SettingsIcon size={16} /> },
   ],
@@ -61,7 +55,7 @@ export function DirectoryBlock() {
             <SidebarGroup>
               <SidebarGroupLabel>Platform</SidebarGroupLabel>
               <SidebarGroupContent>
-                <SidebarMenu>
+                <StaggerChildren staggerMs={40}>
                   {data.nav.map((item) => (
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton isActive={item.isActive}>
@@ -70,7 +64,7 @@ export function DirectoryBlock() {
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
-                </SidebarMenu>
+                </StaggerChildren>
               </SidebarGroupContent>
             </SidebarGroup>
             <SidebarGroup>
@@ -81,14 +75,14 @@ export function DirectoryBlock() {
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton asChild>
                         <a href={item.url}>
-                          <Folder className="h-4 w-4" />
+                          <FolderIcon size={16} />
                           <span>{item.name}</span>
                         </a>
                       </SidebarMenuButton>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <SidebarMenuAction showOnHover>
-                            <MoreHorizontal className="h-4 w-4" />
+                            <EllipsisIcon size={16} />
                             <span className="sr-only">More</span>
                           </SidebarMenuAction>
                         </DropdownMenuTrigger>
@@ -98,16 +92,16 @@ export function DirectoryBlock() {
                           align="end"
                         >
                           <DropdownMenuItem>
-                            <Folder className="h-4 w-4 text-muted-foreground" />
+                            <FolderIcon size={16} className="text-muted-foreground" />
                             <span>View Project</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem>
-                            <Star className="h-4 w-4 text-muted-foreground" />
+                            <StarIcon size={16} className="text-muted-foreground" />
                             <span>Add to Favorites</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem>
-                            <Trash2 className="h-4 w-4 text-muted-foreground" />
+                            <Trash2Icon size={16} className="text-muted-foreground" />
                             <span>Delete Project</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>

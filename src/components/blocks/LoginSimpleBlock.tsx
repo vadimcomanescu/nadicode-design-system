@@ -4,10 +4,17 @@ import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'
 import { GoogleIcon } from '@/components/ui/BrandIcons'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
+import { motion } from "motion/react"
+import { StaggerChildren } from '@/components/ui/StaggerChildren'
 
 export default function SimpleLoginForm() {
     return (
         <section className="flex min-h-dvh items-center justify-center p-4 bg-transparent">
+            <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
             <Card className="w-full max-w-sm border-border/50">
                 <CardHeader className="text-center pb-2">
                     <div className="flex justify-center mb-4">
@@ -36,7 +43,7 @@ export default function SimpleLoginForm() {
                         </div>
                     </div>
 
-                    <form className="grid gap-4">
+                    <StaggerChildren staggerMs={60} className="grid gap-4">
                         <div className="grid gap-2">
                             <Label htmlFor="email">Email</Label>
                             <Input
@@ -68,7 +75,7 @@ export default function SimpleLoginForm() {
                         </div>
 
                         <Button className="w-full bg-accent hover:bg-accent/90">Sign In</Button>
-                    </form>
+                    </StaggerChildren>
                 </CardContent>
                 <CardFooter className="justify-center">
                     <div className="text-center text-sm">
@@ -79,6 +86,7 @@ export default function SimpleLoginForm() {
                     </div>
                 </CardFooter>
             </Card>
+            </motion.div>
         </section>
     )
 }

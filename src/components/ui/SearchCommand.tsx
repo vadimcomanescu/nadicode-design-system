@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { CornerDownLeft } from "lucide-react"
+import { CornerDownLeftIcon } from "@/components/ui/icons"
 import { SearchIcon } from "./icons/search"
 
 const searchCommandVariants = cva(
@@ -127,7 +127,7 @@ const SearchCommand = React.forwardRef<HTMLDivElement, SearchCommandProps>(
           />
           {showShortcut && (
             <div className="flex items-center gap-1 text-text-tertiary">
-              <CornerDownLeft className="h-3 w-3" />
+              <CornerDownLeftIcon size={12} />
             </div>
           )}
         </div>

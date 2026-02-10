@@ -55,6 +55,30 @@ export function staggerContainer(delayMs = 100) {
   } as const;
 }
 
+// Block-level stagger preset (80ms default, 16px up)
+export const blockStagger = {
+  container: (delayMs = 80) => ({
+    visible: { transition: { staggerChildren: delayMs / 1000 } },
+    hidden: {},
+  }),
+  child: {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: motionSpring.snappy },
+  },
+} as const;
+
+// Hero-level stagger preset (100ms, 24px up, gentle spring)
+export const heroStagger = {
+  container: {
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+    hidden: {},
+  },
+  child: {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: motionSpring.gentle },
+  },
+} as const;
+
 // Reduced motion hook - returns near-zero duration when user prefers reduced motion
 export function useMotionConfig() {
   const prefersReduced = useReducedMotion();

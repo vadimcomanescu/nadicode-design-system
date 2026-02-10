@@ -1,3 +1,6 @@
+import { StaggerChildren } from "../ui/StaggerChildren"
+import { CountingNumber } from "@/components/animate-ui/primitives/texts/counting-number"
+
 export default function StatsSection() {
     return (
         <section className="py-12 md:py-20">
@@ -7,20 +10,26 @@ export default function StatsSection() {
                     <p>Gemini is evolving to be more than just the models. It supports an entire to the APIs and platforms helping developers and businesses innovate.</p>
                 </div>
 
-                <div className="grid gap-12 divide-y *:text-center md:grid-cols-3 md:gap-2 md:divide-x md:divide-y-0">
+                <StaggerChildren staggerMs={150} className="grid gap-12 divide-y *:text-center md:grid-cols-3 md:gap-2 md:divide-x md:divide-y-0">
                     <div className="space-y-4">
-                        <div className="text-5xl font-bold tabular-nums">+1200</div>
+                        <div className="text-5xl font-bold tabular-nums">
+                            +<CountingNumber number={1200} inViewOnce />
+                        </div>
                         <p>Stars on GitHub</p>
                     </div>
                     <div className="space-y-4">
-                        <div className="text-5xl font-bold tabular-nums">22 Million</div>
+                        <div className="text-5xl font-bold tabular-nums">
+                            <CountingNumber number={22} inViewOnce /> Million
+                        </div>
                         <p>Active Users</p>
                     </div>
                     <div className="space-y-4">
-                        <div className="text-5xl font-bold tabular-nums">+500</div>
+                        <div className="text-5xl font-bold tabular-nums">
+                            +<CountingNumber number={500} inViewOnce />
+                        </div>
                         <p>Powered Apps</p>
                     </div>
-                </div>
+                </StaggerChildren>
             </div>
         </section>
     )

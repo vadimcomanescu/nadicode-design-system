@@ -1,4 +1,5 @@
-import { MoreHorizontal, Trash2, Shield } from "lucide-react"
+import { StaggerChildren } from "../../ui/StaggerChildren"
+import { EllipsisIcon, Trash2Icon, ShieldIcon } from "@/components/ui/icons"
 import { SearchIcon } from "../../ui/icons/search"
 import { Badge } from "../../ui/Badge"
 import { Button } from "../../ui/Button"
@@ -60,7 +61,7 @@ const initialMembers = [
 
 export function TeamPage() {
     return (
-        <div className="space-y-6">
+        <StaggerChildren staggerMs={80} className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
                     <h3 className="text-lg font-medium">Team Members</h3>
@@ -132,15 +133,15 @@ export function TeamPage() {
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100">
-                                                    <MoreHorizontal className="h-4 w-4" />
+                                                    <EllipsisIcon size={16} />
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end" className="glass-panel">
                                                 <DropdownMenuItem>
-                                                    <Shield className="mr-2 h-4 w-4" /> Change Role
+                                                    <ShieldIcon size={16} className="mr-2" /> Change Role
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem className="text-destructive focus:text-destructive">
-                                                    <Trash2 className="mr-2 h-4 w-4" /> Remove User
+                                                    <Trash2Icon size={16} className="mr-2" /> Remove User
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
@@ -151,6 +152,6 @@ export function TeamPage() {
                     </Table>
                 </CardContent>
             </Card>
-        </div>
+        </StaggerChildren>
     )
 }

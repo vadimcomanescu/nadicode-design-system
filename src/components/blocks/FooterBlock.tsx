@@ -4,9 +4,12 @@ import { LinkedinIcon } from "../ui/icons/linkedin";
 import { Button } from "../ui/Button"
 import { Input } from "../ui/Input"
 import { Separator } from "../ui/Separator"
+import { ScrollFadeIn } from "../ui/ScrollFadeIn"
+import { StaggerChildren } from "../ui/StaggerChildren"
 
 export function Footer() {
     return (
+        <ScrollFadeIn>
         <footer className="bg-background py-12 lg:py-16 border-t border-border/50">
             <div className="container mx-auto px-6 lg:px-8">
                 <div className="grid gap-12 lg:grid-cols-4">
@@ -28,7 +31,7 @@ export function Footer() {
                     </div>
 
                     {/* Links */}
-                    <div className="grid grid-cols-2 gap-8 lg:col-span-2 sm:grid-cols-3">
+                    <StaggerChildren staggerMs={60} className="grid grid-cols-2 gap-8 lg:col-span-2 sm:grid-cols-3">
                         <div className="space-y-4">
                             <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider">Product</h4>
                             <ul className="space-y-2 text-sm text-text-secondary">
@@ -55,7 +58,7 @@ export function Footer() {
                                 <li><a href="#" className="hover:text-primary transition-colors">License</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </StaggerChildren>
                 </div>
 
                 <Separator className="my-12 bg-border/50" />
@@ -65,18 +68,19 @@ export function Footer() {
                         © 2026 Nadicode System. All rights reserved.
                     </p>
                     <div className="flex gap-4">
-                        <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover">
+                        <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover hover:scale-110 transition-transform duration-fast">
                             <TwitterIcon size={16} />
                         </Button>
-                        <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover">
+                        <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover hover:scale-110 transition-transform duration-fast">
                             <GithubIcon size={16} />
                         </Button>
-                        <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover">
+                        <Button size="icon" variant="ghost" className="h-8 w-8 rounded-full text-text-secondary hover:text-primary hover:bg-surface-hover hover:scale-110 transition-transform duration-fast">
                             <LinkedinIcon size={16} />
                         </Button>
                     </div>
                 </div>
             </div>
         </footer>
+        </ScrollFadeIn>
     )
 }

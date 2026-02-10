@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
+import { CheckIcon, ChevronsUpDownIcon } from "@/components/ui/icons"
 
 import { cn } from "../../lib/utils"
 import { Button } from "./Button"
@@ -49,7 +49,7 @@ export function Combobox({
           {selectedValue
             ? options.find((option) => option.value === selectedValue)?.label
             : placeholder}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDownIcon size={16} className="ml-2 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -73,9 +73,10 @@ export function Combobox({
                   }}
                   className="text-text-primary"
                 >
-                  <Check
+                  <CheckIcon
+                    size={16}
                     className={cn(
-                      "mr-2 h-4 w-4",
+                      "mr-2",
                       selectedValue === option.value ? "opacity-100" : "opacity-0"
                     )}
                   />

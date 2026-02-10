@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Calendar as CalendarIcon } from "lucide-react"
+import { CalendarIcon } from "@/components/ui/icons"
 import { format } from "date-fns"
 
 import { cn } from "@/lib/utils"
@@ -24,7 +24,7 @@ export function DatePicker() {
             !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarIcon size={16} className="mr-2" />
           {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>

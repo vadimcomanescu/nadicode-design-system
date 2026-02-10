@@ -3,7 +3,7 @@ import { Typography } from "../ui/Typography"
 import { MeteorShower } from "../ui/MeteorShower"
 import { AnimatedGradientText } from "../ui/AnimatedGradientText"
 import { Link } from "react-router-dom"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeftIcon } from "@/components/ui/icons"
 import { cn } from "../../lib/utils"
 
 interface NotFoundBlockProps {
@@ -40,7 +40,7 @@ export function NotFoundBlock({
 
           <Button asChild size="lg" variant="accent" className="mt-8">
             <Link to={backHref}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <ArrowLeftIcon size={16} className="mr-2" />
               {backLabel}
             </Link>
           </Button>

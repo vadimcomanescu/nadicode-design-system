@@ -1,6 +1,8 @@
 import * as React from "react"
+import { AnimatePresence, motion } from "motion/react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { motionSpring } from "../../lib/motion"
 import { Button } from "./Button"
 import { CheckIcon } from "./icons/check"
 
@@ -84,7 +86,13 @@ const FormWizard = React.forwardRef<HTMLDivElement, FormWizardProps>(
     ref
   ) => {
     const [internalStep, setInternalStep] = React.useState(0)
+    const [direction, setDirection] = React.useState(0)
     const currentStep = controlledStep ?? internalStep
+    const prevStepRef = React.useRef(currentStep)
+
+    React.useEffect(() => {
+      prevStepRef.current = currentStep
+    }, [currentStep])
 
     const goTo = (step: number) => {
       if (onStepChange) {
@@ -99,6 +107,7 @@ const FormWizard = React.forwardRef<HTMLDivElement, FormWizardProps>(
       if (step.validate && !step.validate()) return
 
       if (currentStep < steps.length - 1) {
+        setDirection(1)
         goTo(currentStep + 1)
       } else {
         onComplete?.()
@@ -106,7 +115,10 @@ const FormWizard = React.forwardRef<HTMLDivElement, FormWizardProps>(
     }
 
     const handleBack = () => {
-      if (currentStep > 0) goTo(currentStep - 1)
+      if (currentStep > 0) {
+        setDirection(-1)
+        goTo(currentStep - 1)
+      }
     }
 
     const isLastStep = currentStep === steps.length - 1
@@ -165,7 +177,17 @@ const FormWizard = React.forwardRef<HTMLDivElement, FormWizardProps>(
 
         {/* Step content */}
         <div className="min-h-[120px]" role="tabpanel" aria-label={steps[currentStep]?.title}>
-          {steps[currentStep]?.content}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: direction * 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -direction * 20 }}
+              transition={motionSpring.snappy}
+            >
+              {steps[currentStep]?.content}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Navigation */}

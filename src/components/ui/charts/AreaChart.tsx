@@ -102,6 +102,9 @@ export function AreaChart({
                             stroke={`var(--color-${key})`}
                             stackId={stacked ? "a" : undefined}
                             strokeWidth={2}
+                            isAnimationActive={true}
+                            animationDuration={800}
+                            animationEasing="ease-out"
                         />
                     ))}
 

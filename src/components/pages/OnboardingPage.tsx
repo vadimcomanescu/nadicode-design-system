@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { motion } from "motion/react"
+import { motionSpring } from "../../lib/motion"
 import { FormWizard } from "../ui/FormWizard"
 import { Typography } from "../ui/Typography"
 import { Input } from "../ui/Input"
@@ -15,10 +17,20 @@ export function OnboardingPage() {
   if (completed) {
     return (
       <div className="flex min-h-dvh items-center justify-center bg-background px-6">
-        <div className="text-center space-y-4">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/10 text-success">
+        <motion.div
+          className="text-center space-y-4"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={motionSpring.snappy}
+        >
+          <motion.div
+            className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/10 text-success"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ ...motionSpring.bouncy, delay: 0.15 }}
+          >
             <CheckIcon size={32} />
-          </div>
+          </motion.div>
           <Typography variant="h2" className="text-text-primary">
             You're all set!
           </Typography>
@@ -29,14 +41,19 @@ export function OnboardingPage() {
             <RocketIcon size={16} className="mr-2" />
             Go to Dashboard
           </Button>
-        </div>
+        </motion.div>
       </div>
     )
   }
 
   return (
     <div className="flex min-h-dvh items-center justify-center bg-background px-6 py-12">
-      <div className="w-full max-w-2xl">
+      <motion.div
+        className="w-full max-w-2xl"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={motionSpring.snappy}
+      >
         <div className="mb-8 text-center">
           <Typography variant="h2" className="text-text-primary">
             Welcome to Nadicode
@@ -156,7 +173,7 @@ export function OnboardingPage() {
             },
           ]}
         />
-      </div>
+      </motion.div>
     </div>
   )
 }

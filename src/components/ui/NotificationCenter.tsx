@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { X } from "lucide-react"
+import { XIcon } from "@/components/ui/icons"
 import { BellIcon } from "./icons/bell"
 
 const notificationVariants = cva(
@@ -119,7 +119,7 @@ const NotificationCenter = React.forwardRef<HTMLDivElement, NotificationCenterPr
                     className="shrink-0 rounded p-0.5 text-text-tertiary hover:text-text-primary hover:bg-surface-hover transition-colors"
                     aria-label={`Dismiss notification: ${notification.title}`}
                   >
-                    <X className="h-3.5 w-3.5" />
+                    <XIcon size={14} />
                   </button>
                 )}
               </div>

@@ -1,5 +1,6 @@
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-import { Monitor, Smartphone } from "lucide-react"
+import { MonitorIcon, SmartphoneIcon } from "@/components/ui/icons"
+import { ScrollFadeIn } from "../ui/ScrollFadeIn"
 
 import {
   Card,
@@ -30,17 +31,18 @@ const chartConfig = {
   desktop: {
     label: "Desktop",
     color: "rgb(var(--chart-1))",
-    icon: ({ ...props }) => <Monitor {...props} />,
+    icon: ({ ...props }) => <MonitorIcon size={16} {...props} />,
   },
   mobile: {
     label: "Mobile",
     color: "rgb(var(--chart-2))",
-    icon: ({ ...props }) => <Smartphone {...props} />,
+    icon: ({ ...props }) => <SmartphoneIcon size={16} {...props} />,
   },
 } satisfies ChartConfig
 
 export function ChartBlock() {
   return (
+    <ScrollFadeIn>
     <Card >
       <CardHeader>
         <CardTitle>Analytics</CardTitle>
@@ -59,11 +61,12 @@ export function ChartBlock() {
             />
             <ChartTooltip content={<ChartTooltipContent />} />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="desktop" fill="rgb(var(--chart-1))" radius={4} />
-            <Bar dataKey="mobile" fill="rgb(var(--chart-2))" radius={4} />
+            <Bar dataKey="desktop" fill="rgb(var(--chart-1))" radius={4} isAnimationActive={true} animationDuration={800} />
+            <Bar dataKey="mobile" fill="rgb(var(--chart-2))" radius={4} isAnimationActive={true} animationDuration={800} />
           </BarChart>
         </ChartContainer>
       </CardContent>
     </Card>
+    </ScrollFadeIn>
   )
 }

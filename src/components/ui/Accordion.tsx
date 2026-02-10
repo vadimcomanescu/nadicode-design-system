@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
-import { ChevronDown } from "lucide-react"
+import { ChevronDownIcon } from "@/components/ui/icons"
 
 import { cn } from "@/lib/utils"
 
@@ -32,7 +32,7 @@ const AccordionTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-normal ease-out-cubic" />
+      <ChevronDownIcon size={16} className="shrink-0 transition-transform duration-normal ease-out-cubic" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ))
@@ -44,7 +44,7 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-sm transition-all duration-normal ease-out-cubic data-[state=closed]:hidden data-[state=open]:block"
+    className="overflow-hidden text-sm data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up"
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>

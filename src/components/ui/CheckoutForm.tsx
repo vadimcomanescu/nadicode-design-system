@@ -7,7 +7,7 @@ import {
 import { Button } from "./Button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./Card"
 import { Alert, AlertDescription, AlertTitle } from "./Alert"
-import { Loader2 } from "lucide-react"
+import { LoaderCircleIcon } from "@/components/ui/icons"
 
 interface CheckoutFormProps {
     amount?: number
@@ -81,7 +81,7 @@ export function CheckoutForm({ amount = 2000, currency = "usd" }: CheckoutFormPr
                     >
                         {isLoading ? (
                             <>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                <LoaderCircleIcon size={16} className="mr-2 animate-spin" />
                                 Processing...
                             </>
                         ) : (

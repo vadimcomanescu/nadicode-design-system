@@ -78,8 +78,8 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       />
       <defs>
         <linearGradient id="beam-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#FB7185" stopOpacity="0.4" />
-          <stop offset="50%" stopColor="#FB7185" stopOpacity="1" />
+          <stop offset="0%" stopColor="#38BDB8" stopOpacity="0.4" />
+          <stop offset="50%" stopColor="#38BDB8" stopOpacity="1" />
           <stop offset="100%" stopColor="#2DD4BF" stopOpacity="0.4" />
         </linearGradient>
       </defs>

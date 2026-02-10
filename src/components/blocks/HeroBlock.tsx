@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronRight } from "lucide-react"
+import { ArrowRightIcon, ChevronRightIcon } from "@/components/ui/icons"
 import { SparklesIcon } from "../ui/icons/sparkles"
 import { TerminalIcon } from "../ui/icons/terminal"
 import { ZapIcon } from "../ui/icons/zap"
@@ -7,6 +7,11 @@ import { Badge } from "../ui/Badge"
 import { MouseGlow } from "../ui/MouseEffect"
 import { Card, CardContent, CardHeader } from "../ui/Card"
 import { cn } from "../../lib/utils"
+import { motion, useReducedMotion } from "motion/react"
+import { heroStagger } from "../../lib/motion"
+import { TextReveal } from "../ui/TextReveal"
+import { AnimatedGradientText } from "../ui/AnimatedGradientText"
+import { PixelReveal } from "../ui/PixelReveal"
 
 interface HeroProps {
     headline?: string
@@ -35,11 +40,24 @@ export function HeroCentered({
     announcement = { label: "New", text: "Nadicode System v2.0 is now live", href: "#" },
     className,
 }: HeroProps) {
+    const shouldReduceMotion = useReducedMotion()
+
+    const Wrapper = shouldReduceMotion ? "div" : motion.div
+    const Item = shouldReduceMotion ? "div" : motion.div
+
     return (
         <section className={cn("relative overflow-hidden py-24 lg:py-32", className)}>
             <MouseGlow className="opacity-40" />
-            <div className="container relative z-10 mx-auto px-4 text-center">
+            <Wrapper
+                className="container relative z-10 mx-auto px-4 text-center"
+                {...(!shouldReduceMotion && {
+                    initial: "hidden",
+                    animate: "visible",
+                    variants: heroStagger.container,
+                })}
+            >
                 {/* Announcement Pill */}
+                <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                 <div className="mb-8 flex justify-center">
                     <a
                         href={announcement.href}
@@ -49,34 +67,45 @@ export function HeroCentered({
                             {announcement.label}
                         </Badge>
                         <span className="flex items-center gap-1">
-                            {announcement.text}
-                            <ChevronRight className="h-3 w-3" />
+                            <PixelReveal text={announcement.text} duration={600} delay={800} className="font-mono" />
+                            <ChevronRightIcon size={12} />
                         </span>
                     </a>
                 </div>
+                </Item>
 
                 {/* Headlines */}
+                <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                 <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-text-primary sm:text-7xl">
-                    <span className="block">{headline.split(" ").slice(0, 3).join(" ")}</span>
-                    <span className="bg-gradient-to-r from-primary to-text-secondary bg-clip-text text-transparent">
-                        {headline.split(" ").slice(3).join(" ")}
+                    <span className="block">
+                        <TextReveal text={headline.split(" ").slice(0, 3).join(" ")} by="word" delay={200} className="justify-center" />
                     </span>
+                    <AnimatedGradientText className="mt-1">
+                        {headline.split(" ").slice(3).join(" ")}
+                    </AnimatedGradientText>
                 </h1>
+                </Item>
+
+                <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                 <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-text-secondary">
                     {subheadline}
                 </p>
+                </Item>
 
                 {/* Actions */}
+                <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                 <div className="mt-10 flex items-center justify-center gap-4">
                     <Button size="lg" variant="primary" onClick={primaryAction.onClick}>
                         {primaryAction.label}
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                        <ArrowRightIcon size={16} className="ml-2" />
                     </Button>
                     <Button size="lg" variant="outline" onClick={secondaryAction.onClick}>
                         {secondaryAction.label}
                     </Button>
                 </div>
+                </Item>
 
+                <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                 <div className="mt-20">
                     <Card className="mx-auto max-w-5xl rounded-xl p-2 lg:rounded-2xl lg:p-4">
                         <div className="aspect-[16/9] overflow-hidden rounded-lg border border-border glass-panel shadow-inner relative">
@@ -120,8 +149,9 @@ export function HeroCentered({
                         </div>
                     </Card>
                 </div>
-            </div>
-        </section >
+                </Item>
+            </Wrapper>
+        </section>
     )
 }
 
@@ -131,21 +161,40 @@ export function HeroSplit({
     primaryAction = { label: "Start Building" },
     className,
 }: HeroProps) {
+    const shouldReduceMotion = useReducedMotion()
+
+    const Wrapper = shouldReduceMotion ? "div" : motion.div
+    const Item = shouldReduceMotion ? "div" : motion.div
+
     return (
         <section className={cn("relative overflow-hidden py-20 lg:py-28", className)}>
             <div className="container mx-auto grid gap-12 px-6 lg:px-8 lg:grid-cols-2 lg:items-center">
                 {/* Left Content */}
-                <div className="relative z-10">
+                <Wrapper
+                    className="relative z-10"
+                    {...(!shouldReduceMotion && {
+                        initial: "hidden",
+                        animate: "visible",
+                        variants: heroStagger.container,
+                    })}
+                >
+                    <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                     <div className="inline-flex items-center rounded-lg border border-border bg-surface px-3 py-1 mb-6">
                         <SparklesIcon size={16} className="mr-2 text-accent" />
                         <span className="text-sm font-medium text-text-secondary">AI-Powered Components</span>
                     </div>
+                    </Item>
+                    <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                     <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-6xl mb-6">
-                        {headline}
+                        <TextReveal text={headline} by="word" delay={200} />
                     </h1>
+                    </Item>
+                    <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                     <p className="text-lg text-text-secondary mb-8 leading-relaxed max-w-lg">
                         {subheadline}
                     </p>
+                    </Item>
+                    <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                     <div className="flex flex-wrap gap-4">
                         <Button size="lg" variant="accent" onClick={primaryAction.onClick}>
                             {primaryAction.label}
@@ -155,7 +204,9 @@ export function HeroSplit({
                             Documentation
                         </Button>
                     </div>
+                    </Item>
 
+                    <Item {...(!shouldReduceMotion && { variants: heroStagger.child })}>
                     <div className="mt-8 flex items-center gap-4 text-sm text-text-tertiary">
                         <div className="flex -space-x-2">
                             {[1, 2, 3, 4].map(i => (
@@ -166,7 +217,8 @@ export function HeroSplit({
                         </div>
                         <p>Trusted by 10,000+ developers</p>
                     </div>
-                </div>
+                    </Item>
+                </Wrapper>
 
                 {/* Right Visual (Mock UI) */}
                 <div className="relative lg:ml-auto w-full max-w-md">
@@ -184,14 +236,14 @@ export function HeroSplit({
                         </CardHeader>
                         <CardContent className="space-y-4 p-6 font-mono text-sm">
                             <div className="flex items-center gap-2 text-chart-4">
-                                <ChevronRight className="h-4 w-4" />
+                                <ChevronRightIcon size={16} />
                                 <span>npm install @nadicode/core</span>
                             </div>
                             <div className="text-text-secondary">
                                 <span className="text-chart-2">✔</span> Added 124 packages
                             </div>
                             <div className="flex items-center gap-2 text-text-primary">
-                                <ChevronRight className="h-4 w-4 text-text-tertiary" />
+                                <ChevronRightIcon size={16} className="text-text-tertiary" />
                                 <span>npx nadicode init</span>
                             </div>
                             <div className="bg-surface/50 p-3 rounded border border-border/50 text-xs text-text-secondary mt-4">

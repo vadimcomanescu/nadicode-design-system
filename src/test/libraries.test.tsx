@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { cva } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRightIcon } from '@/components/ui/icons';
 
 describe('Utility Libraries', () => {
   it('class-variance-authority works', () => {
@@ -34,7 +34,7 @@ describe('Utility Libraries', () => {
   });
 
   it('lucide-react renders icons', () => {
-    const { container } = render(<ArrowRight />);
+    const { container } = render(<ArrowRightIcon />);
     expect(container.querySelector('svg')).toBeInTheDocument();
   });
 });

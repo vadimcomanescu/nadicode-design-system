@@ -17,6 +17,7 @@ import {
   RadialBarChart,
 } from "recharts"
 import { HeatmapBlock } from "./HeatmapChartBlock"
+import { StaggerChildren } from "../ui/StaggerChildren"
 
 import {
   Card,
@@ -84,7 +85,7 @@ const config = {
 
 export function ChartCollectionBlock() {
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <StaggerChildren staggerMs={100} className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <Card >
         <CardHeader>
           <CardTitle>Area Chart</CardTitle>
@@ -234,7 +235,7 @@ export function ChartCollectionBlock() {
         </CardContent>
       </Card>
       <HeatmapBlock />
-    </div>
+    </StaggerChildren>
   )
 }
 

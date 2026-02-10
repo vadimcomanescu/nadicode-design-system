@@ -138,12 +138,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: { height: "0", opacity: "0" },
+          to: { height: "var(--radix-accordion-content-height)", opacity: "1" },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: { height: "var(--radix-accordion-content-height)", opacity: "1" },
+          to: { height: "0", opacity: "0" },
         },
         "fade-in": {
           from: { opacity: "0" },
@@ -211,14 +211,14 @@ export default {
         },
       },
       animation: {
-        "accordion-down": "accordion-down 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
-        "accordion-up": "accordion-up 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "accordion-down": "accordion-down 200ms ease-out",
+        "accordion-up": "accordion-up 150ms ease-out",
         "fade-in": "fade-in 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
         "fade-in-up": "fade-in-up 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
         "scale-in": "scale-in 200ms cubic-bezier(0.215, 0.61, 0.355, 1)",
         "blur-reveal": "blur-reveal 300ms cubic-bezier(0.215, 0.61, 0.355, 1) both",
         "cursor-blink": "cursor-blink 1s step-end infinite",
-        "gradient-sweep": "gradient-sweep 3s linear infinite",
+        "gradient-sweep": "gradient-sweep 8s linear infinite",
         "border-spin": "border-spin 3s linear infinite",
         "meteor": "meteor var(--meteor-duration, 2s) linear infinite",
         "aurora-1": "aurora-1 15s ease-in-out infinite",

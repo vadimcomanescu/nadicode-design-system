@@ -2,7 +2,7 @@ import * as React from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { Mail } from "lucide-react"
+import { MailIcon } from "@/components/ui/icons"
 import { PlusIcon } from "../../ui/icons/plus"
 import { CheckIcon } from "../../ui/icons/check"
 
@@ -83,7 +83,7 @@ export function InviteUserModal() {
                     <div className="space-y-2">
                         <Label htmlFor="email">Email Address</Label>
                         <div className="relative">
-                            <Mail className="absolute left-3 top-2.5 h-4 w-4 text-text-tertiary" />
+                            <MailIcon size={16} className="absolute left-3 top-2.5 text-text-tertiary" />
                             <Input
                                 id="email"
                                 placeholder="colleague@company.com"

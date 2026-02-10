@@ -2,7 +2,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Button } from "../ui/Button"
 import { Typography } from "../ui/Typography"
-import { Info, AlertTriangle } from "lucide-react"
+import { InfoIcon, AlertTriangleIcon } from "@/components/ui/icons"
 import { XIcon } from "@/components/ui/icons/x"
 import { cn } from "../../lib/utils"
 
@@ -21,9 +21,9 @@ const variantStyles: Record<string, string> = {
 }
 
 const variantIcons: Record<string, React.ReactNode> = {
-  info: <Info className="h-4 w-4 shrink-0" />,
-  warning: <AlertTriangle className="h-4 w-4 shrink-0" />,
-  accent: <Info className="h-4 w-4 shrink-0" />,
+  info: <InfoIcon size={16} className="shrink-0" />,
+  warning: <AlertTriangleIcon size={16} className="shrink-0" />,
+  accent: <InfoIcon size={16} className="shrink-0" />,
 }
 
 export function BannerBlock({

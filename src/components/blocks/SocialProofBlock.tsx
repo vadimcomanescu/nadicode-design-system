@@ -1,5 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
 import { Card, CardContent } from "../ui/Card"
+import { StaggerChildren } from "../ui/StaggerChildren"
+import { Shine } from "@/components/animate-ui/primitives/effects/shine"
+import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering"
 
 export function LogoCloud() {
     const logos = [
@@ -16,7 +19,7 @@ export function LogoCloud() {
                 <p className="mb-8 text-sm font-medium text-text-tertiary uppercase tracking-wider">
                     Trusted by innovative teams
                 </p>
-                <div className="grid grid-cols-2 gap-8 md:grid-cols-5 items-center justify-items-center opacity-70">
+                <StaggerChildren staggerMs={60} distance={12} className="grid grid-cols-2 gap-8 md:grid-cols-5 items-center justify-items-center opacity-70">
                     {logos.map((logo) => (
                         <div
                             key={logo.name}
@@ -28,7 +31,7 @@ export function LogoCloud() {
                             </span>
                         </div>
                     ))}
-                </div>
+                </StaggerChildren>
             </div>
         </div>
     )
@@ -66,27 +69,34 @@ export function Testimonials() {
         <section className="py-24 relative overflow-hidden">
             <div className="container mx-auto px-6 lg:px-8">
                 <h2 className="text-3xl font-bold text-center mb-12 text-text-primary">
-                    Loved by Builders
+                    <ShimmeringText
+                        text="Loved by Builders"
+                        color="var(--color-text-primary)"
+                        shimmeringColor="var(--color-accent)"
+                        duration={2}
+                    />
                 </h2>
-                <div className="flex flex-wrap justify-center gap-6">
+                <StaggerChildren staggerMs={100} direction="up" distance={20} className="flex flex-wrap justify-center gap-6">
                     {testimonials.map((t, i) => (
-                        <Card key={i} className="w-full max-w-md">
-                            <CardContent className="p-6">
-                                <p className="mb-4 text-lg text-text-secondary leading-relaxed">"{t.quote}"</p>
-                                <div className="flex items-center gap-3">
-                                    <Avatar className="h-10 w-10 border border-primary/20">
-                                        <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${t.author}`} />
-                                        <AvatarFallback>{t.avatar}</AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <div className="text-sm font-semibold text-text-primary">{t.author}</div>
-                                        <div className="text-xs text-text-tertiary">{t.role}</div>
+                        <Shine key={i} enableOnHover loop loopDelay={200} color="var(--color-accent)" opacity={0.15}>
+                            <Card interactive className="w-full max-w-md">
+                                <CardContent className="p-6">
+                                    <p className="mb-4 text-lg text-text-secondary leading-relaxed">"{t.quote}"</p>
+                                    <div className="flex items-center gap-3">
+                                        <Avatar className="h-10 w-10 border border-primary/20">
+                                            <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${t.author}`} />
+                                            <AvatarFallback>{t.avatar}</AvatarFallback>
+                                        </Avatar>
+                                        <div>
+                                            <div className="text-sm font-semibold text-text-primary">{t.author}</div>
+                                            <div className="text-xs text-text-tertiary">{t.role}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                                </CardContent>
+                            </Card>
+                        </Shine>
                     ))}
-                </div>
+                </StaggerChildren>
             </div>
         </section>
     )

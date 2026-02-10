@@ -1,17 +1,18 @@
-import { BarChart3, Cloud, Code2, Database, Globe, Laptop, Shield } from "lucide-react"
+import { ChartBarIcon, CloudIcon, Code2Icon, DatabaseIcon, GlobeIcon, LaptopIcon, ShieldIcon } from "@/components/ui/icons"
 import { ZapIcon } from "../ui/icons/zap"
 import { LayersIcon } from "../ui/icons/layers"
 import { KeyIcon } from "../ui/icons/key"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
 import { Button } from "../ui/Button"
 import { Badge } from "../ui/Badge"
+import { StaggerChildren } from "../ui/StaggerChildren"
 
 export function FeatureGrid() {
     const features = [
         {
             title: "Edge Network",
             description: "Deploy your AI models to the edge with a single click. Global low-latency inference.",
-            icon: <Globe className="h-5 w-5" />,
+            icon: <GlobeIcon size={20} />,
         },
         {
             title: "Real-time Processing",
@@ -21,22 +22,22 @@ export function FeatureGrid() {
         {
             title: "Vector Database",
             description: "Integrated vector storage for semantic search and long-term memory retrieval.",
-            icon: <Database className="h-5 w-5" />,
+            icon: <DatabaseIcon size={20} />,
         },
         {
             title: "End-to-End Encryption",
             description: "Your data is encrypted at rest and in transit. Enterprise-grade security standards.",
-            icon: <Shield className="h-5 w-5" />,
+            icon: <ShieldIcon size={20} />,
         },
         {
             title: "Automated Scaling",
             description: "Scale from 0 to millions of requests without managing infrastructure.",
-            icon: <BarChart3 className="h-5 w-5" />,
+            icon: <ChartBarIcon size={20} />,
         },
         {
             title: "API First",
             description: "Everything is available via API. Integrate with your existing stack seamlessly.",
-            icon: <Code2 className="h-5 w-5" />,
+            icon: <Code2Icon size={20} />,
         }
     ]
 
@@ -53,7 +54,7 @@ export function FeatureGrid() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <StaggerChildren staggerMs={80} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((feature, i) => (
                         <Card key={i} interactive>
                             <CardHeader className="pb-2">
@@ -67,7 +68,7 @@ export function FeatureGrid() {
                             </CardContent>
                         </Card>
                     ))}
-                </div>
+                </StaggerChildren>
             </div>
         </section>
     )
@@ -125,7 +126,7 @@ export function FeatureList() {
                         <div className="absolute -inset-4 bg-primary/10 blur-3xl rounded-full" />
                         <Card className="p-0 overflow-hidden border-border/50">
                             <div className="glass-overlay p-6 h-[350px] relative overflow-hidden flex flex-col items-center justify-center">
-                                <Cloud className="h-24 w-24 text-primary opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                                <CloudIcon size={96} className="text-primary opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                                 <div className="z-10 glass-panel p-4 rounded-lg flex items-center gap-4 w-64 shadow-lg">
                                     <div className="h-8 w-8 rounded bg-chart-4/20 text-chart-4 flex items-center justify-center">
                                         <KeyIcon size={16} />
@@ -137,7 +138,7 @@ export function FeatureList() {
                                 </div>
                                 <div className="z-10 glass-panel p-4 rounded-lg flex items-center gap-4 w-64 mt-4 translate-x-4 shadow-lg">
                                     <div className="h-8 w-8 rounded bg-chart-2/20 text-chart-2 flex items-center justify-center">
-                                        <Laptop className="h-4 w-4" />
+                                        <LaptopIcon size={16} />
                                     </div>
                                     <div className="flex-1">
                                         <div className="h-2 w-16 bg-text-primary/20 rounded mb-2" />
@@ -149,7 +150,7 @@ export function FeatureList() {
                     </div>
                     <div className="order-1 lg:order-2">
                         <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6">
-                            <Shield className="h-6 w-6" />
+                            <ShieldIcon size={24} />
                         </div>
                         <h3 className="text-3xl font-bold text-text-primary mb-4">
                             Secure by Default

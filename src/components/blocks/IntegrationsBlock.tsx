@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRightIcon } from '@/components/ui/icons'
 import { Link } from 'react-router-dom'
 import * as React from 'react'
 import { Gemini, Replit, MagicUI, VSCodium, MediaWiki, GooglePaLM } from '@/components/logos'
+import { ScrollFadeIn } from '@/components/ui/ScrollFadeIn'
+import { StaggerChildren } from '@/components/ui/StaggerChildren'
 
 export default function IntegrationsSection() {
     return (
+        <ScrollFadeIn>
         <section>
             <div className="py-32">
                 <div className="mx-auto max-w-5xl px-6">
@@ -15,7 +18,7 @@ export default function IntegrationsSection() {
                         <p className="text-muted-foreground mt-6">Connect seamlessly with popular platforms and services to enhance your workflow.</p>
                     </div>
 
-                    <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <StaggerChildren staggerMs={80} className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                         <IntegrationCard
                             title="Google Gemini"
                             description="Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.">
@@ -51,10 +54,11 @@ export default function IntegrationsSection() {
                             description="Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.">
                             <GooglePaLM />
                         </IntegrationCard>
-                    </div>
+                    </StaggerChildren>
                 </div>
             </div>
         </section>
+        </ScrollFadeIn>
     )
 }
 
@@ -77,7 +81,7 @@ const IntegrationCard = ({ title, description, children, link = 'https://github.
                         className="gap-1 pr-2 shadow-none">
                         <Link to={link}>
                             Learn More
-                            <ChevronRight className="ml-0 !size-3.5 opacity-50" />
+                            <ChevronRightIcon size={14} className="ml-0 opacity-50" />
                         </Link>
                     </Button>
                 </div>

@@ -11,7 +11,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ChevronLeft, ChevronRight, Settings2 } from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon, Settings2Icon } from "@/components/ui/icons"
 
 import { Button } from "./Button"
 import {
@@ -86,7 +86,7 @@ export function DataTable<TData, TValue>({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              <Settings2 className="mr-2 h-4 w-4" />
+              <Settings2Icon size={16} className="mr-2" />
               View
             </Button>
           </DropdownMenuTrigger>
@@ -173,7 +173,7 @@ export function DataTable<TData, TValue>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeftIcon size={16} />
             Previous
           </Button>
           <Button
@@ -183,7 +183,7 @@ export function DataTable<TData, TValue>({
             disabled={!table.getCanNextPage()}
           >
             Next
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRightIcon size={16} />
           </Button>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ChevronRightIcon } from '@/components/ui/icons'
-import { Link } from 'react-router-dom'
 import * as React from 'react'
 import { Gemini, Replit, MagicUI, VSCodium, MediaWiki, GooglePaLM } from '@/components/logos'
 import { ScrollFadeIn } from '@/components/ui/ScrollFadeIn'
@@ -79,10 +78,10 @@ const IntegrationCard = ({ title, description, children, link = 'https://github.
                         variant="secondary"
                         size="sm"
                         className="gap-1 pr-2 shadow-none">
-                        <Link to={link}>
+                        <a href={link}>
                             Learn More
                             <ChevronRightIcon size={14} className="ml-0 opacity-50" />
-                        </Link>
+                        </a>
                     </Button>
                 </div>
             </div>

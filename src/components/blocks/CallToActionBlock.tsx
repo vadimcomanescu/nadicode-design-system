@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/Button'
-import { Link } from 'react-router-dom'
 import { StaggerChildren } from '../ui/StaggerChildren'
 import { ShimmeringText } from '../ui/text-effects'
 
@@ -22,18 +21,18 @@ export function CallToAction() {
                         <Button
                             asChild
                             size="lg">
-                            <Link to="/">
+                            <a href="/">
                                 <span>Get Started</span>
-                            </Link>
+                            </a>
                         </Button>
 
                         <Button
                             asChild
                             size="lg"
                             variant="outline">
-                            <Link to="/">
+                            <a href="/">
                                 <span>Book Demo</span>
-                            </Link>
+                            </a>
                         </Button>
                     </div>
                 </StaggerChildren>

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
 import { CheckIcon } from '@/components/ui/icons/check'
@@ -40,7 +39,7 @@ export function Pricing() {
                                 asChild
                                 variant="outline"
                                 className="w-full">
-                                <Link to="">Get Started</Link>
+                                <a href="">Get Started</a>
                             </Button>
                         </CardFooter>
                     </Card>
@@ -73,7 +72,7 @@ export function Pricing() {
                                 <Button
                                     asChild
                                     className="w-full">
-                                    <Link to="">Get Started</Link>
+                                    <a href="">Get Started</a>
                                 </Button>
                             </CardFooter>
                         </div>
@@ -106,7 +105,7 @@ export function Pricing() {
                                 asChild
                                 variant="outline"
                                 className="w-full">
-                                <Link to="">Get Started</Link>
+                                <a href="">Get Started</a>
                             </Button>
                         </CardFooter>
                     </Card>

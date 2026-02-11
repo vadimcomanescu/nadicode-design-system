@@ -12,7 +12,6 @@ import { MicIcon } from "../ui/icons/mic"
 import { motionSpring, fadeInUp } from "@/lib/motion"
 import { MouseGlow } from "../ui/MouseEffect"
 import { StreamingText } from "../ui/text-effects"
-import { useNavigate } from "react-router-dom"
 
 /*
  * ANIMATION STORYBOARD - Selection View
@@ -192,8 +191,7 @@ function AgentVideoAvatar({
   )
 }
 
-export function VoiceAgentsPage() {
-  const navigate = useNavigate()
+export function VoiceAgentsPage({ onNavigateHome }: { onNavigateHome?: () => void }) {
   const [selectedAgent, setSelectedAgent] = React.useState<VoiceAgent | null>(null)
   const [agentState, setAgentState] = React.useState<AgentState>("idle")
   const [messages, setMessages] = React.useState<Message[]>([])
@@ -290,7 +288,7 @@ export function VoiceAgentsPage() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => navigate("/")}
+                    onClick={() => onNavigateHome?.()}
                     aria-label="Back to docs"
                   >
                     <ArrowLeftIcon size={16} />

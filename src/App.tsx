@@ -14,7 +14,7 @@ import { MouseGlow } from "./components/ui/MouseEffect";
 import { PatternsPage } from "./components/pages/PatternsPage";
 import { IconsPage } from "./components/pages/IconsPage";
 
-import { Routes, Route, useSearchParams } from "react-router-dom";
+import { Routes, Route, useSearchParams, useLocation } from "react-router-dom";
 const DashboardPage = lazy(() => import("./components/pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
 const NotFoundPage = lazy(() => import("./components/pages/NotFoundPage").then(m => ({ default: m.NotFoundPage })));
 const LandingPage = lazy(() => import("./components/pages/LandingPage").then(m => ({ default: m.LandingPage })));
@@ -134,10 +134,11 @@ function DocsPage() {
 }
 
 function App() {
+  const location = useLocation()
   return (
     <>
     {import.meta.env.DEV && <DialRoot position="top-right" />}
-    <PageTransition>
+    <PageTransition pathname={location.pathname}>
     <Suspense fallback={<div className="flex items-center justify-center min-h-dvh"><Spinner /></div>}>
     <Routes>
       <Route path="/" element={<DocsPage />} />

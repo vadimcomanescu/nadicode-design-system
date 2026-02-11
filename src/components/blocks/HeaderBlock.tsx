@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Logo } from '@/components/ui/Logo'
 import { MenuIcon, XIcon } from '@/components/ui/icons'
 import { Button } from '@/components/ui/Button'
@@ -35,12 +34,12 @@ export const HeroHeader = () => {
                         key={1}
                         className={cn('relative flex flex-wrap items-center justify-between gap-6 py-3 duration-200 lg:gap-0 lg:py-6', scrolled && 'lg:py-4')}>
                         <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
-                            <Link
-                                to="/"
+                            <a
+                                href="/"
                                 aria-label="home"
                                 className="flex items-center space-x-2">
                                 <Logo />
-                            </Link>
+                            </a>
 
                             <button
                                 onClick={() => setMenuState(!menuState)}
@@ -54,11 +53,11 @@ export const HeroHeader = () => {
                                 <ul className="flex gap-8 text-sm">
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
-                                            <Link
-                                                to={item.href}
+                                            <a
+                                                href={item.href}
                                                 className="text-text-tertiary hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
-                                            </Link>
+                                            </a>
                                         </li>
                                     ))}
                                 </ul>
@@ -70,11 +69,11 @@ export const HeroHeader = () => {
                                 <ul className="space-y-6 text-base">
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
-                                            <Link
-                                                to={item.href}
+                                            <a
+                                                href={item.href}
                                                 className="text-text-tertiary hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
-                                            </Link>
+                                            </a>
                                         </li>
                                     ))}
                                 </ul>
@@ -84,16 +83,16 @@ export const HeroHeader = () => {
                                     asChild
                                     variant="outline"
                                     size="sm">
-                                    <Link to="#">
+                                    <a href="#">
                                         <span>Login</span>
-                                    </Link>
+                                    </a>
                                 </Button>
                                 <Button
                                     asChild
                                     size="sm">
-                                    <Link to="#">
+                                    <a href="#">
                                         <span>Sign Up</span>
-                                    </Link>
+                                    </a>
                                 </Button>
                             </div>
                         </div>

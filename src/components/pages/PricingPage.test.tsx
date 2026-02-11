@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeAll } from "vitest"
 import { render } from "@testing-library/react"
-import { MemoryRouter } from "react-router-dom"
 import { ThemeProvider } from "@/lib/ThemeProvider"
 import { PricingPage } from "./PricingPage"
 
@@ -19,11 +18,9 @@ beforeAll(() => {
 describe("PricingPage", () => {
   it("renders without crashing", () => {
     const { container } = render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <PricingPage />
-        </ThemeProvider>
-      </MemoryRouter>
+      <ThemeProvider>
+        <PricingPage />
+      </ThemeProvider>
     )
     expect(container).toBeTruthy()
   })

@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from "vitest"
 import { render } from "@testing-library/react"
-import { MemoryRouter } from "react-router-dom"
 import { ThemeProvider } from "@/lib/ThemeProvider"
 
 // Mock VantaWrapper since it loads WebGL effects that don't work in jsdom
@@ -19,9 +18,7 @@ import {
 } from "./VantaLoginPages"
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <MemoryRouter>
-    <ThemeProvider>{children}</ThemeProvider>
-  </MemoryRouter>
+  <ThemeProvider>{children}</ThemeProvider>
 )
 
 describe("VantaLoginPages", () => {

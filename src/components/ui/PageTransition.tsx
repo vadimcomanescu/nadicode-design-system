@@ -1,10 +1,10 @@
 import * as React from "react"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
-import { useLocation } from "react-router-dom"
 import { cn } from "../../lib/utils"
 
 interface PageTransitionProps {
   children: React.ReactNode
+  pathname: string
   mode?: "fade" | "slide" | "scale"
   className?: string
 }
@@ -36,10 +36,10 @@ const transition = {
 
 export const PageTransition: React.FC<PageTransitionProps> = ({
   children,
+  pathname,
   mode = "fade",
   className,
 }) => {
-  const location = useLocation()
   const prefersReduced = useReducedMotion()
   const v = variants[mode]
 
@@ -50,7 +50,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        key={location.pathname}
+        key={pathname}
         className={cn(className)}
         initial={v.initial}
         animate={{ ...v.animate, transition }}

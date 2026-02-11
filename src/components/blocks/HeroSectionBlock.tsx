@@ -1,5 +1,4 @@
 
-import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import { HeroHeader } from './HeaderBlock'
 import { InfiniteSlider } from '@/components/ui/InfiniteSlider'
@@ -31,10 +30,10 @@ export function HeroSection() {
                                         asChild
                                         size="lg"
                                         className="h-12 rounded-full pl-5 pr-3 text-base">
-                                        <Link to="#link">
+                                        <a href="#link">
                                             <span className="text-nowrap">Start Building</span>
                                             <ChevronRightIcon size={16} className="ml-1" />
-                                        </Link>
+                                        </a>
                                     </Button>
                                     <Button
                                         key={2}
@@ -42,9 +41,9 @@ export function HeroSection() {
                                         size="lg"
                                         variant="ghost"
                                         className="h-12 rounded-full px-5 text-base hover:bg-surface-active/5 dark:hover:bg-white/5">
-                                        <Link to="#link">
+                                        <a href="#link">
                                             <span className="text-nowrap">Request a demo</span>
-                                        </Link>
+                                        </a>
                                     </Button>
                                 </div>
                             </div>

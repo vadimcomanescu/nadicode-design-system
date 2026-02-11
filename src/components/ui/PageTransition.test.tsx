@@ -12,28 +12,24 @@ vi.mock('motion/react', () => ({
   useReducedMotion: () => true,
 }));
 
-vi.mock('react-router-dom', () => ({
-  useLocation: () => ({ pathname: '/test' }),
-}));
-
 describe('PageTransition', () => {
   it('renders without crashing', () => {
     const { container } = render(
-      <PageTransition>Page content</PageTransition>
+      <PageTransition pathname="/test">Page content</PageTransition>
     );
     expect(container.firstChild).toBeTruthy();
   });
 
   it('renders children', () => {
     const { getByText } = render(
-      <PageTransition>Page content</PageTransition>
+      <PageTransition pathname="/test">Page content</PageTransition>
     );
     expect(getByText('Page content')).toBeInTheDocument();
   });
 
   it('accepts custom className', () => {
     const { container } = render(
-      <PageTransition className="page-custom">Content</PageTransition>
+      <PageTransition pathname="/test" className="page-custom">Content</PageTransition>
     );
     expect(container.innerHTML).toContain('page-custom');
   });

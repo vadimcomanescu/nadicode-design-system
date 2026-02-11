@@ -298,7 +298,7 @@ touch src/components/blocks/MyFeatureBlock.tsx
 npx tsc -b                                    # Zero type errors
 npm run test                                   # All tests pass
 npm run lint                                   # Clean lint
-python3 seed-design-system/tests/validate_design.py  # Token validation
+python3 tests/validate_design.py                     # Token validation
 ```
 
 ### 9.2. Visual Verification (CRITICAL)

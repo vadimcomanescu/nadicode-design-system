@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/incompatible-library -- TanStack Table API is safe to use here */
 import * as React from "react"
 import {
   type ColumnDef,

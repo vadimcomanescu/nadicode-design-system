@@ -1,6 +1,6 @@
+import { createRef } from "react";
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
-import React from "react"
 import { AgentStatus } from "./AgentStatus"
 
 describe("AgentStatus", () => {
@@ -43,7 +43,7 @@ describe("AgentStatus", () => {
   })
 
   it("forwards ref", () => {
-    const ref = React.createRef<HTMLSpanElement>()
+    const ref = createRef<HTMLSpanElement>()
     render(<AgentStatus ref={ref} />)
     expect(ref.current).toBeInstanceOf(HTMLSpanElement)
   })

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -126,6 +127,7 @@ SheetDescription.displayName = DialogPrimitive.Description.displayName
 
 export {
   Sheet,
+  sheetVariants,
   SheetPortal,
   SheetOverlay,
   SheetTrigger,

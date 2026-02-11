@@ -1,7 +1,6 @@
 import * as React from "react"
 import { motion } from "motion/react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/Card"
-import { Button } from "../ui/Button"
 import { Alert, AlertDescription } from "../ui/Alert"
 import { Separator } from "../ui/Separator"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/InputOTP"

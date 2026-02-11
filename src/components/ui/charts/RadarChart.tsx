@@ -16,7 +16,7 @@ import {
 } from "../../ui/Chart"
 
 interface RadarChartProps {
-    data: any[]
+    data: Record<string, unknown>[]
     config: ChartConfig
     indexKey: string // Key for the angle axis (labels like "Speed", "Reliability")
     series: string[] // Keys for the radar shapes

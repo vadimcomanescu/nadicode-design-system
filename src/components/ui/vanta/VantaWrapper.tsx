@@ -1,20 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 interface VantaWrapperProps {
     children: React.ReactNode
-    effectImporter: () => Promise<any> // Function that imports the Vanta effect
-    config?: any // Configuration object for the effect
+    effectImporter: () => Promise<Record<string, unknown>>
+    config?: Record<string, unknown>
     className?: string
 }
 
 export function VantaWrapper({ children, effectImporter, config, className }: VantaWrapperProps) {
     const vantaRef = useRef<HTMLDivElement>(null)
-    const [vantaEffect, setVantaEffect] = useState<any>(null)
+    const effectRef = useRef<{ destroy: () => void } | null>(null)
 
     useEffect(() => {
-        let instance: any = null;
-        let timeoutId: any;
+        let instance: { destroy: () => void } | null = null;
         let isMounted = true;
 
         const initVanta = async () => {
@@ -22,19 +21,19 @@ export function VantaWrapper({ children, effectImporter, config, className }: Va
 
             try {
                 // Vanta requires THREE to be on window
-                if (typeof window !== 'undefined' && !(window as any).THREE) {
-                    (window as any).THREE = THREE;
+                if (typeof window !== 'undefined' && !(window as unknown as Record<string, unknown>).THREE) {
+                    (window as unknown as Record<string, unknown>).THREE = THREE;
                 }
 
                 // Dynamically import the effect
                 const vantaModule = await effectImporter();
-                const effectRequest = vantaModule.default || vantaModule;
+                const effectRequest = (vantaModule.default || vantaModule) as (opts: Record<string, unknown>) => { destroy: () => void };
 
                 if (!isMounted) return;
 
                 instance = effectRequest({
                     el: vantaRef.current,
-                    THREE: THREE, // Pass THREE instance explicitly
+                    THREE: THREE,
                     mouseControls: true,
                     touchControls: true,
                     gyroControls: false,
@@ -44,20 +43,20 @@ export function VantaWrapper({ children, effectImporter, config, className }: Va
                     scaleMobile: 1.00,
                     ...config
                 })
-                setVantaEffect(instance)
+                effectRef.current = instance
             } catch (error) {
                 console.error("Failed to initialize Vanta effect:", error)
             }
         };
 
         // Cleanup previous effect first
-        if (vantaEffect) {
-            vantaEffect.destroy();
-            setVantaEffect(null);
+        if (effectRef.current) {
+            effectRef.current.destroy();
+            effectRef.current = null;
         }
 
         // Small delay to ensure DOM/Canvas is ready and previous instance is fully gone
-        timeoutId = setTimeout(initVanta, 10);
+        const timeoutId = setTimeout(initVanta, 10);
 
         return () => {
             isMounted = false;
@@ -66,7 +65,7 @@ export function VantaWrapper({ children, effectImporter, config, className }: Va
                 instance.destroy()
             }
         }
-    }, [effectImporter, config]) // Depend on importer instead of effect object
+    }, [effectImporter, config])
 
     return (
         <div ref={vantaRef} className={`relative w-full h-dvh overflow-hidden ${className}`}>

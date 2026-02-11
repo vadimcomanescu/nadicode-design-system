@@ -1,7 +1,7 @@
+import { createRef } from "react";
 import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import React from "react"
 import { FormWizard, type WizardStep } from "./FormWizard"
 
 const mockSteps: WizardStep[] = [
@@ -88,7 +88,7 @@ describe("FormWizard", () => {
   })
 
   it("forwards ref", () => {
-    const ref = React.createRef<HTMLDivElement>()
+    const ref = createRef<HTMLDivElement>()
     render(<FormWizard ref={ref} steps={mockSteps} />)
     expect(ref.current).toBeInstanceOf(HTMLDivElement)
   })

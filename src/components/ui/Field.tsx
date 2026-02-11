@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -146,7 +147,7 @@ FieldSeparator.displayName = "FieldSeparator"
 
 const FieldError = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement> & { errors?: any[] | string }
+  React.HTMLAttributes<HTMLParagraphElement> & { errors?: (string | { message?: string })[] | string }
 >(({ className, children, errors, ...props }, ref) => {
   const errorMessages = Array.isArray(errors)
     ? errors.map((e) => (typeof e === "string" ? e : e?.message)).filter(Boolean)
@@ -169,6 +170,7 @@ export {
   FieldLegend,
   FieldGroup,
   Field,
+  fieldVariants,
   FieldContent,
   FieldLabel,
   FieldTitle,

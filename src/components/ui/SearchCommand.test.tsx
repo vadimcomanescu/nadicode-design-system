@@ -1,7 +1,7 @@
+import { createRef } from "react";
 import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import React from "react"
 import { SearchCommand, type SearchResult } from "./SearchCommand"
 
 const mockResults: SearchResult[] = [
@@ -68,7 +68,7 @@ describe("SearchCommand", () => {
   })
 
   it("forwards ref", () => {
-    const ref = React.createRef<HTMLDivElement>()
+    const ref = createRef<HTMLDivElement>()
     render(<SearchCommand ref={ref} />)
     expect(ref.current).toBeInstanceOf(HTMLDivElement)
   })

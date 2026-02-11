@@ -17,7 +17,7 @@ import {
 } from "../../ui/Chart"
 
 interface BarChartProps {
-    data: any[]
+    data: Record<string, unknown>[]
     config: ChartConfig
     indexKey: string
     bars?: string[]

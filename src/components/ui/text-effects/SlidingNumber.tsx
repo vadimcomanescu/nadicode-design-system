@@ -247,6 +247,7 @@ function SlidingNumber({
     ? newIntStrRaw.padStart(finalIntLength, '0')
     : newIntStrRaw
 
+  // eslint-disable-next-line react-hooks/refs -- prevNumberRef stores last rendered value for animation comparison
   const prevFormatted = formatNumber(prevNumberRef.current)
   const [prevIntStrRaw = '', prevDecStrRaw = ''] = prevFormatted.split('.')
   const prevIntStr = padStart

@@ -1,9 +1,10 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 import { XIcon } from './icons/x'
 
-const bannerVariants = cva(
+export const bannerVariants = cva(
   'relative flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium',
   {
     variants: {

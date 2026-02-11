@@ -99,7 +99,7 @@ export function LoginBirdsDark() {
 
     return (
         <VantaWrapper
-            // @ts-expect-error
+            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
             effectImporter={() => import('vanta/dist/vanta.birds.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
@@ -127,7 +127,7 @@ export function LoginGlobeDark() {
 
     return (
         <VantaWrapper
-            // @ts-expect-error
+            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
             effectImporter={() => import('vanta/dist/vanta.globe.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
@@ -148,7 +148,7 @@ export function LoginNetDark() {
 
     return (
         <VantaWrapper
-            // @ts-expect-error
+            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
             effectImporter={() => import('vanta/dist/vanta.net.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
@@ -170,7 +170,7 @@ export function LoginCellsLight() {
 
     return (
         <VantaWrapper
-            // @ts-expect-error
+            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
             effectImporter={() => import('vanta/dist/vanta.cells.min')}
             config={{
                 color1: isDark ? COLORS.secondary : COLORS.secondaryDark,
@@ -192,7 +192,7 @@ export function LoginTrunkLight() {
 
     return (
         <VantaWrapper
-            // @ts-expect-error
+            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
             effectImporter={() => import('vanta/dist/vanta.trunk.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
@@ -212,7 +212,7 @@ export function LoginDotsLight() {
 
     return (
         <VantaWrapper
-            // @ts-expect-error
+            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
             effectImporter={() => import('vanta/dist/vanta.net.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
@@ -234,7 +234,7 @@ export function LoginTopologyDark() {
 
     return (
         <VantaWrapper
-            // @ts-expect-error
+            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
             effectImporter={() => import('vanta/dist/vanta.topology.min')}
             config={{
                 backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,

@@ -18,6 +18,7 @@ export function Step({
     icon,
     completed,
     className,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- destructured to exclude from ...props spread
     children,
     ...props
 }: StepProps) {

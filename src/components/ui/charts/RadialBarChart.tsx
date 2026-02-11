@@ -15,7 +15,7 @@ import {
 } from "../../ui/Chart"
 
 interface RadialBarChartProps {
-    data: any[]
+    data: Record<string, unknown>[]
     config: ChartConfig
     dataKey: string // Value key
     nameKey: string // Name key

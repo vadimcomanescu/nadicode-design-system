@@ -107,7 +107,7 @@ export function PricingTable() {
                                     </ul>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className="w-full" variant={plan.variant as any}>
+                                    <Button className="w-full" variant={plan.variant as "outline" | "accent"}>
                                         {plan.action}
                                     </Button>
                                 </CardFooter>

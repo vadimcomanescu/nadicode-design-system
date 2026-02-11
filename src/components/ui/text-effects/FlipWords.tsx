@@ -4,7 +4,7 @@ import { motionSpring } from "@/lib/motion"
 import { cn } from "@/lib/utils"
 
 interface FlipWordsProps {
-  words: string[]
+  words: readonly string[]
   interval?: number
   className?: string
 }

@@ -1,8 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 
-const statusDotVariants = cva(
+export const statusDotVariants = cva(
   'inline-block rounded-full shrink-0',
   {
     variants: {
@@ -14,13 +15,13 @@ const statusDotVariants = cva(
       },
       size: {
         sm: 'size-2',
-        md: 'size-2.5',
+        default: 'size-2.5',
         lg: 'size-3',
       },
     },
     defaultVariants: {
       status: 'offline',
-      size: 'md',
+      size: 'default',
     },
   }
 )

@@ -1,8 +1,8 @@
+import { createRef } from "react";
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { PasswordInput } from "./PasswordInput"
 import { describe, it, expect } from "vitest"
-import * as React from "react"
 
 describe("PasswordInput", () => {
   it("renders as password type by default", () => {
@@ -28,7 +28,7 @@ describe("PasswordInput", () => {
   })
 
   it("forwards ref to input element", () => {
-    const ref = React.createRef<HTMLInputElement>()
+    const ref = createRef<HTMLInputElement>()
     render(<PasswordInput ref={ref} />)
     expect(ref.current).toBeInstanceOf(HTMLInputElement)
   })

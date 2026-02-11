@@ -8,8 +8,8 @@ import p5 from 'p5'
 
 // Expose THREE and p5 globally for Vanta.js
 if (typeof window !== 'undefined') {
-  (window as any).THREE = THREE;
-  (window as any).p5 = p5;
+  (window as unknown as Record<string, unknown>).THREE = THREE;
+  (window as unknown as Record<string, unknown>).p5 = p5;
 }
 
 createRoot(document.getElementById('root')!).render(

@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react"
+import { cleanup, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { TwoFactorChallengeBlock } from "./TwoFactorChallengeBlock"
-import { describe, it, expect, vi, beforeAll } from "vitest"
+import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from "vitest"
 
 beforeAll(() => {
   if (!globalThis.ResizeObserver) {
@@ -14,6 +14,16 @@ beforeAll(() => {
   if (!document.elementFromPoint) {
     document.elementFromPoint = () => null
   }
+})
+
+beforeEach(() => {
+  vi.useFakeTimers({ shouldAdvanceTime: true })
+})
+
+afterEach(() => {
+  cleanup()
+  vi.runOnlyPendingTimers()
+  vi.useRealTimers()
 })
 
 describe("TwoFactorChallengeBlock", () => {

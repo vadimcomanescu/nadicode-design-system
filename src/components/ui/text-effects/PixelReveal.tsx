@@ -31,7 +31,9 @@ export function PixelReveal({
 
   useEffect(() => {
     if (prefersReduced) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reduced-motion shortcut needs immediate state sync
       setDisplayText(targetText)
+       
       setIsComplete(true)
       return
     }

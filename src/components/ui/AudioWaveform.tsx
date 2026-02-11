@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-hooks/refs -- deterministic ref init pattern for stable random offsets */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
@@ -48,10 +50,11 @@ const AudioWaveform = React.forwardRef<HTMLDivElement, AudioWaveformProps>(
     },
     ref
   ) => {
-    const randomOffsets = React.useMemo(
-      () => Array.from({ length: bars }, () => Math.random() * 20),
-      [bars]
-    )
+    const randomOffsetsRef = React.useRef<number[] | null>(null)
+    if (randomOffsetsRef.current === null || randomOffsetsRef.current.length !== bars) {
+      randomOffsetsRef.current = Array.from({ length: bars }, (_, i) => ((i * 7 + 3) % 20))
+    }
+    const randomOffsets = randomOffsetsRef.current
 
     return (
       <div

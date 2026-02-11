@@ -1,3 +1,4 @@
+import { createRef } from "react";
 import { describe, it, expect, vi } from "vitest"
 import { render, screen, act } from "@testing-library/react"
 import { StreamingText } from "./StreamingText"
@@ -58,10 +59,9 @@ describe("StreamingText", () => {
   })
 
   it("forwards ref", () => {
-    const ref = React.createRef<HTMLSpanElement>()
+    const ref = createRef<HTMLSpanElement>()
     render(<StreamingText ref={ref} text="Test" streaming={false} />)
     expect(ref.current).toBeInstanceOf(HTMLSpanElement)
   })
 })
 
-import React from "react"

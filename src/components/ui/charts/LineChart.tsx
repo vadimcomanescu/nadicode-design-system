@@ -17,7 +17,7 @@ import {
 } from "../../ui/Chart"
 
 interface LineChartProps {
-    data: any[]
+    data: Record<string, unknown>[]
     config: ChartConfig
     indexKey: string
     lines?: string[] // Simple list of keys to plot. If undefined, plots all keys in config that aren't the indexKey.

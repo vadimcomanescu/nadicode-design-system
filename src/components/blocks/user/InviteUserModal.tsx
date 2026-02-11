@@ -100,7 +100,7 @@ export function InviteUserModal() {
                         <Label>Role</Label>
                         <Select
                             defaultValue="member"
-                            onValueChange={(val: any) => setValue("role", val)}
+                            onValueChange={(val: string) => setValue("role", val as "admin" | "member" | "guest")}
                         >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select a role" />

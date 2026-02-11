@@ -93,8 +93,7 @@ const AnimatedTabsTrigger = React.forwardRef<
 })
 AnimatedTabsTrigger.displayName = "AnimatedTabsTrigger"
 
-interface AnimatedTabsContentProps
-  extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content> {}
+type AnimatedTabsContentProps = React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 
 const AnimatedTabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,

@@ -1,6 +1,6 @@
+import { createRef } from "react";
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
-import React from "react"
 import { ConversationThread, type Message } from "./ConversationThread"
 
 const mockMessages: Message[] = [
@@ -39,7 +39,7 @@ describe("ConversationThread", () => {
   })
 
   it("forwards ref", () => {
-    const ref = React.createRef<HTMLDivElement>()
+    const ref = createRef<HTMLDivElement>()
     render(<ConversationThread ref={ref} messages={[]} />)
     expect(ref.current).toBeInstanceOf(HTMLDivElement)
   })

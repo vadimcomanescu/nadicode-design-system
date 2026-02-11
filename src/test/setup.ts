@@ -48,6 +48,14 @@ if (typeof window !== 'undefined') {
   if (!window.HTMLElement.prototype.hasPointerCapture) {
     window.HTMLElement.prototype.hasPointerCapture = () => false;
   }
+
+  if (!window.ResizeObserver) {
+    window.ResizeObserver = class ResizeObserver {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    } as unknown as typeof window.ResizeObserver;
+  }
 }
 
 // Mock localStorage for theme tests

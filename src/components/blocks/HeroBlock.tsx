@@ -35,15 +35,6 @@ import { TextReveal, AnimatedGradientText, PixelReveal } from "../ui/text-effect
  *   child: y 24px -> 0, opacity 0 -> 1, gentle spring
  */
 
-const HERO_TIMING = {
-  staggerMs: 100,
-  delayChildrenMs: 100,
-} as const
-
-const HERO_REVEAL = {
-  offsetY: 24,
-} as const
-
 const TEXT_EFFECTS = {
   textRevealDelayMs: 200,
   pixelRevealDelayMs: 800,

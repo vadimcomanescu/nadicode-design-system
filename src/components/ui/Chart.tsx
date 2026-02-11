@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- Recharts types are untyped */
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
@@ -64,7 +65,7 @@ ChartContainer.displayName = "ChartContainer"
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
-    ([_, config]) => config.theme || config.color
+    ([, config]) => config.theme || config.color
   )
 
   if (!colorConfig.length) {
@@ -100,7 +101,7 @@ const ChartTooltip = RechartsPrimitive.Tooltip
 
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
-  any // Using any for component props to bypass complex Recharts Tooltip version mismatches
+  any // Recharts Tooltip props vary across versions
 >(
   (
     {
@@ -308,7 +309,7 @@ ChartLegendContent.displayName = "ChartLegend"
 
 function getPayloadConfigFromPayload(
   config: ChartConfig,
-  payload: unknown,
+  payload: any,
   key: string
 ) {
   if (typeof payload !== "object" || payload === null) {
@@ -317,24 +318,24 @@ function getPayloadConfigFromPayload(
 
   const payloadPayload =
     "payload" in payload &&
-      typeof (payload as any).payload === "object" &&
-      (payload as any).payload !== null
-      ? (payload as any).payload
+      typeof payload.payload === "object" &&
+      payload.payload !== null
+      ? payload.payload
       : undefined
 
   let configLabelKey: string = key
 
   if (
     key in payload &&
-    typeof (payload as any)[key] === "string"
+    typeof payload[key] === "string"
   ) {
-    configLabelKey = (payload as any)[key] as string
+    configLabelKey = payload[key]
   } else if (
     payloadPayload &&
     key in payloadPayload &&
     typeof payloadPayload[key] === "string"
   ) {
-    configLabelKey = payloadPayload[key] as string
+    configLabelKey = payloadPayload[key]
   }
 
   return configLabelKey in config

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react"
 import * as ToastPrimitive from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -120,6 +121,7 @@ export {
   ToastProvider,
   ToastViewport,
   Toast,
+  toastVariants,
   ToastTitle,
   ToastDescription,
   ToastClose,

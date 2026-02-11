@@ -15,7 +15,7 @@ import {
 import { cn } from "@/lib/utils"
 
 interface PieChartProps {
-    data: any[]
+    data: Record<string, unknown>[]
     config: ChartConfig
     dataKey: string
     nameKey: string
@@ -60,13 +60,13 @@ export function PieChart({
                     label={label}
                 >
                     {data.map((entry, index) => {
-                        const key = entry[nameKey]
+                        const key = String(entry[nameKey])
                         const configColor = config[key]?.color
 
                         return (
                             <Cell
                                 key={`cell-${index}`}
-                                fill={entry.fill || configColor || `var(--color-${key})`}
+                                fill={(entry.fill as string) || configColor || `var(--color-${key})`}
                                 stroke="rgba(0,0,0,0)"
                             />
                         )

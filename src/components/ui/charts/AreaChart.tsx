@@ -17,7 +17,7 @@ import {
 } from "../../ui/Chart"
 
 interface AreaChartProps {
-    data: any[]
+    data: Record<string, unknown>[]
     config: ChartConfig
     indexKey: string
     areas?: string[] // Keys to plot

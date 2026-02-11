@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/refs -- deterministic ref init pattern for stable opacity offsets */
 import { motion } from "motion/react"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "../../lib/utils"
 
 export interface AudioVisualizerProps {
@@ -15,10 +16,11 @@ export function AudioVisualizer({
 }: AudioVisualizerProps) {
   const [heights, setHeights] = useState<number[]>(Array(bars).fill(10))
 
-  const opacityOffsets = useMemo(
-    () => Array.from({ length: bars }, () => Math.random() * 0.5),
-    [bars]
-  )
+  const opacityOffsetsRef = useRef<number[] | null>(null)
+  if (opacityOffsetsRef.current === null || opacityOffsetsRef.current.length !== bars) {
+    opacityOffsetsRef.current = Array.from({ length: bars }, (_, i) => ((i * 3 + 1) % 10) * 0.05)
+  }
+  const opacityOffsets = opacityOffsetsRef.current
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>

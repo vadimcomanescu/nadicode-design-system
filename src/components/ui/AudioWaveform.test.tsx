@@ -1,6 +1,6 @@
+import { createRef } from "react";
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
-import React from "react"
 import { AudioWaveform } from "./AudioWaveform"
 
 describe("AudioWaveform", () => {
@@ -33,7 +33,7 @@ describe("AudioWaveform", () => {
   })
 
   it("forwards ref", () => {
-    const ref = React.createRef<HTMLDivElement>()
+    const ref = createRef<HTMLDivElement>()
     render(<AudioWaveform ref={ref} />)
     expect(ref.current).toBeInstanceOf(HTMLDivElement)
   })

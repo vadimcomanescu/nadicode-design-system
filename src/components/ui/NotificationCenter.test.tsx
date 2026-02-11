@@ -1,7 +1,7 @@
+import { createRef } from "react";
 import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import React from "react"
 import { NotificationCenter, type Notification } from "./NotificationCenter"
 
 const mockNotifications: Notification[] = [
@@ -64,7 +64,7 @@ describe("NotificationCenter", () => {
   })
 
   it("forwards ref", () => {
-    const ref = React.createRef<HTMLDivElement>()
+    const ref = createRef<HTMLDivElement>()
     render(<NotificationCenter ref={ref} notifications={[]} />)
     expect(ref.current).toBeInstanceOf(HTMLDivElement)
   })

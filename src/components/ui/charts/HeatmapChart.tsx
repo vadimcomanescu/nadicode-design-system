@@ -15,13 +15,33 @@ import {
 } from "../../ui/Chart"
 
 interface HeatmapChartProps {
-    data: { x: any; y: any; value: number }[]
+    data: { x: string | number; y: string | number; value: number }[]
     config: ChartConfig
     className?: string
     height?: number | string
     xKey?: string // defaults to "x"
     yKey?: string // defaults to "y"
     valueKey?: string // defaults to "value"
+}
+
+function CustomShape(props: Record<string, unknown>) {
+    const { cx, cy, fill, fillOpacity, stroke, strokeWidth, strokeOpacity } = props as { cx: number; cy: number; fill: string; fillOpacity: number; stroke: string; strokeWidth: number; strokeOpacity: number }
+    const size = 24
+    return (
+        <rect
+            x={cx - size}
+            y={cy - size / 2}
+            width={size * 2}
+            height={size}
+            fill={fill}
+            fillOpacity={fillOpacity}
+            stroke={stroke}
+            strokeWidth={strokeWidth}
+            strokeOpacity={strokeOpacity}
+            rx={4}
+            ry={4}
+        />
+    )
 }
 
 export function HeatmapChart({
@@ -34,46 +54,20 @@ export function HeatmapChart({
     valueKey = "value"
 }: HeatmapChartProps) {
 
-    // 1. Determine unique X and Y categories for axes (recharts handles this via type="category")
-
-
-    // 2. Find min/max values to calculate color intensity
-    const values = data.map(d => (d as any)[valueKey])
+    const values = data.map(d => (d as Record<string, unknown>)[valueKey] as number)
     const minVal = Math.min(...values)
     const maxVal = Math.max(...values)
 
-    // Helper to determine color based on value (Low/Mid/High)
     const getColor = (val: number) => {
         const percentage = (val - minVal) / (maxVal - minVal)
-        if (percentage < 0.33) return `rgb(var(--chart-2))` // Cyan (Low)
-        if (percentage < 0.66) return `rgb(var(--chart-1))` // Indigo (Mid)
-        return `rgb(var(--chart-5))` // Pink (High)
-    }
-
-    const CustomShape = (props: any) => {
-        const { cx, cy, fill, fillOpacity, stroke, strokeWidth, strokeOpacity } = props
-        const size = 24 // Adjusted size to prevent overlap
-        // We render a rect centered at (cx, cy)
-        return (
-            <rect
-                x={cx - size}
-                y={cy - size / 2}
-                width={size * 2}
-                height={size}
-                fill={fill}
-                fillOpacity={fillOpacity}
-                stroke={stroke}
-                strokeWidth={strokeWidth}
-                strokeOpacity={strokeOpacity}
-                rx={4} // Rounded corners
-                ry={4}
-            />
-        )
+        if (percentage < 0.33) return `rgb(var(--chart-2))`
+        if (percentage < 0.66) return `rgb(var(--chart-1))`
+        return `rgb(var(--chart-5))`
     }
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={height as any}>
+            <ResponsiveContainer width="100%" height={height as number | `${number}%`}>
                 <ScatterChart
                     margin={{ top: 20, right: 30, bottom: 20, left: 30 }}
                 >
@@ -102,12 +96,12 @@ export function HeatmapChart({
                         cursor={{ strokeDasharray: '3 3' }}
                         content={({ active, payload }) => {
                             if (active && payload && payload.length) {
-                                const d = payload[0].payload
+                                const d = payload[0].payload as Record<string, unknown>
                                 return (
                                     <div className="rounded-lg border border-border bg-background p-2 shadow-sm">
                                         <div className="grid grid-cols-2 gap-2">
-                                            <span className="font-medium text-text-secondary">{(d as any)[xKey]} / {(d as any)[yKey]}</span>
-                                            <span className="font-bold text-text-primary text-right">{(d as any)[valueKey]}</span>
+                                            <span className="font-medium text-text-secondary">{String(d[xKey])} / {String(d[yKey])}</span>
+                                            <span className="font-bold text-text-primary text-right">{String(d[valueKey])}</span>
                                         </div>
                                     </div>
                                 )
@@ -121,9 +115,9 @@ export function HeatmapChart({
                             return (
                                 <Cell
                                     key={`cell-${index}`}
-                                    fill={getColor((entry as any)[valueKey])}
+                                    fill={getColor((entry as Record<string, unknown>)[valueKey] as number)}
                                     fillOpacity={0.9}
-                                    stroke={getColor((entry as any)[valueKey])}
+                                    stroke={getColor((entry as Record<string, unknown>)[valueKey] as number)}
                                     strokeWidth={1}
                                     strokeOpacity={1}
                                 />

@@ -1,3 +1,7 @@
+# CLAUDE.md / AGENTS.md (Single Source of Truth)
+
+This file is the canonical agent guide for this repository. `CLAUDE.md` symlinks here.
+
 # Seed Design System Agent Guide
 
 ## Quick Reference
@@ -249,8 +253,12 @@ touch src/components/ui/MyComponent.tsx
 touch src/components/ui/MyComponent.test.tsx
 
 # 4. Export from the component file (no barrel needed)
-# 5. Import in App.tsx for preview
+# 5. MANDATORY: Wire into App.tsx for preview (see rule below)
 ```
+
+> [!CAUTION]
+> **MANDATORY: Wire new components into App.tsx.**
+> Every new component MUST be added to the visual showcase in `src/App.tsx` so it can be evaluated in the browser. Never leave a new component unrendered. Place it in the appropriate tab section (Foundations, Components, Blocks, etc.) with a demo that exercises its key props and variants. This is NOT optional.
 
 ### Using overlay tokens (modals, drawers)
 ```tsx
@@ -318,9 +326,23 @@ python3 tests/validate_design.py                     # Token validation
 5. **NEVER use `bg-black/80`** for overlays. Use `bg-overlay/80`.
 6. **NEVER use `border-error`** (undefined). Use `border-destructive`.
 
-## 11. Known Issues
+## 11. Accessibility Requirements
 
-- **Yellow Sidebar**: Caused by HSL variables. Fix: Use RGB values in `index.css`.
-- **Violet Glow**: Mixed color spaces in gradients. Stick to `--color-accent` variables.
-- **Mobile Overflow**: `ResizablePanelGroup` needs explicit hiding on mobile.
-- **ThemeToggle tests**: 4 pre-existing test failures in ThemeToggle.test.tsx (aria-label mismatch).
+- All interactive components must use Radix UI primitives or proper ARIA
+- Keyboard navigation must work (Tab, Enter, Escape, Arrow keys)
+- Focus indicators must be visible (using `focus-visible:ring-1`)
+- Screen reader labels must be present (aria-label or associated labels)
+
+## 12. Key Dependencies
+
+**Core:** react 19, react-dom, tailwindcss 4, @tailwindcss/postcss, class-variance-authority, clsx, tailwind-merge
+
+**Radix UI:** @radix-ui/react-slot, -dialog, -select, -checkbox, -switch, -label, -separator
+
+**Icons & Utilities:** lucide-react, tailwindcss-animate
+
+## 13. ESLint & Commit Standard
+
+**ESLint:** Modern flat config (`eslint.config.js`) with typescript-eslint, react-hooks, react-refresh. Ignores `dist/`.
+
+**Commits:** `type(scope): subject` (scope optional). Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`. Imperative mood, <= 72 chars, no trailing period.

@@ -19,7 +19,7 @@ export const ProgressiveBlur = ({
                 className
             )}
             style={{
-                background: `linear-gradient(to ${direction}, transparent, hsl(var(--background)))`,
+                background: `linear-gradient(to ${direction}, transparent, rgb(var(--background)))`,
                 backdropFilter: `blur(${blurIntensity * 4}px)`,
             }}
         />

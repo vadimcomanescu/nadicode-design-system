@@ -9,6 +9,11 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Typography } from "./components/ui/Typography";
 import { Container, Grid } from "./components/layout/Grid";
 import { ThemeToggle } from "./components/ui/ThemeToggle";
+import { StyleToggle } from "./components/ui/StyleToggle";
+import { SuccessCheck } from "./components/ui/SuccessCheck";
+import { ConfettiBurst } from "./components/ui/ConfettiBurst";
+import { SpringHover } from "./components/ui/SpringHover";
+import { GridSystem } from "./components/layout/GridSystem";
 import { Toaster } from "./components/ui/Toaster";
 import { tokens } from "./tokens";
 import { Badge } from "./components/ui/Badge";
@@ -187,7 +192,10 @@ function DocsPage() {
               Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
             </Typography>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <StyleToggle />
+            <ThemeToggle />
+          </div>
         </header>
 
         <Tabs
@@ -442,6 +450,146 @@ function DocsPage() {
                     <Typography variant="small" className="text-text-primary font-mono text-xs">{layer.name}</Typography>
                   </div>
                 ))}
+              </div>
+            </section>
+
+            <section>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Delight & Motion</Typography>
+              <Typography variant="body" className="text-text-secondary mb-8">
+                Animated feedback components. Switch between Arctic and Bloom styles using the toggle in the header to see how motion adapts.
+              </Typography>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Success Check</CardTitle>
+                    <CardDescription>Animated SVG checkmark with spring overshoot</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex items-center justify-center py-8">
+                    <SuccessCheckDemo />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Confetti Burst</CardTitle>
+                    <CardDescription>Particle spray with spring physics</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex items-center justify-center py-8">
+                    <ConfettiBurstDemo />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Spring Hover</CardTitle>
+                    <CardDescription>Interactive spring-based hover & press</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex items-center justify-center py-8">
+                    <SpringHover>
+                      <div className="px-6 py-4 rounded-lg bg-accent text-white font-semibold cursor-pointer select-none">
+                        Hover & Press Me
+                      </div>
+                    </SpringHover>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Spring Hover (Cards)</CardTitle>
+                    <CardDescription>Wrap any element for spring interaction</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex gap-4 justify-center py-6">
+                    {["primary", "accent", "secondary"].map((v) => (
+                      <SpringHover key={v}>
+                        <Button variant={v as "primary" | "accent" | "secondary"}>{v}</Button>
+                      </SpringHover>
+                    ))}
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Combined: Check + Confetti</CardTitle>
+                    <CardDescription>Trigger both for celebratory feedback</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex items-center justify-center py-8">
+                    <CombinedDelightDemo />
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            <section>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Grid System</Typography>
+              <Typography variant="body" className="text-text-secondary mb-8">
+                Geist-inspired three-tier grid: GridSystem (container) &gt; GridSystem.Grid (row) &gt; GridSystem.Cell (unit). Toggle <code className="text-accent font-mono text-sm">showGuides</code> to see column alignment.
+              </Typography>
+
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <Typography variant="h3">12-Column with Guides</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden p-4 bg-surface">
+                    <GridSystem showGuides>
+                      <GridSystem.Grid>
+                        <GridSystem.Cell span={4}>
+                          <div className="bg-accent/20 border border-accent/40 rounded-md p-4 text-center text-sm">span 4</div>
+                        </GridSystem.Cell>
+                        <GridSystem.Cell span={4}>
+                          <div className="bg-accent/20 border border-accent/40 rounded-md p-4 text-center text-sm">span 4</div>
+                        </GridSystem.Cell>
+                        <GridSystem.Cell span={4}>
+                          <div className="bg-accent/20 border border-accent/40 rounded-md p-4 text-center text-sm">span 4</div>
+                        </GridSystem.Cell>
+                      </GridSystem.Grid>
+                    </GridSystem>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Mixed Spans</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden p-4 bg-surface">
+                    <GridSystem>
+                      <GridSystem.Grid>
+                        <GridSystem.Cell span={8}>
+                          <div className="bg-primary/20 border border-primary/40 rounded-md p-4 text-center text-sm">Main (8)</div>
+                        </GridSystem.Cell>
+                        <GridSystem.Cell span={4}>
+                          <div className="bg-primary/20 border border-primary/40 rounded-md p-4 text-center text-sm">Sidebar (4)</div>
+                        </GridSystem.Cell>
+                      </GridSystem.Grid>
+                      <GridSystem.Grid>
+                        <GridSystem.Cell span={3}>
+                          <div className="bg-info/20 border border-info/40 rounded-md p-4 text-center text-sm">3</div>
+                        </GridSystem.Cell>
+                        <GridSystem.Cell span={6}>
+                          <div className="bg-info/20 border border-info/40 rounded-md p-4 text-center text-sm">6</div>
+                        </GridSystem.Cell>
+                        <GridSystem.Cell span={3}>
+                          <div className="bg-info/20 border border-info/40 rounded-md p-4 text-center text-sm">3</div>
+                        </GridSystem.Cell>
+                      </GridSystem.Grid>
+                    </GridSystem>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Offset Cells</Typography>
+                  <div className="border border-border rounded-lg overflow-hidden p-4 bg-surface">
+                    <GridSystem showGuides>
+                      <GridSystem.Grid>
+                        <GridSystem.Cell span={4} offset={2}>
+                          <div className="bg-success/20 border border-success/40 rounded-md p-4 text-center text-sm">offset 2, span 4</div>
+                        </GridSystem.Cell>
+                        <GridSystem.Cell span={4}>
+                          <div className="bg-success/20 border border-success/40 rounded-md p-4 text-center text-sm">span 4</div>
+                        </GridSystem.Cell>
+                      </GridSystem.Grid>
+                    </GridSystem>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -1629,6 +1777,49 @@ console.log(greet("World"));`}
       <Toaster />
     </div>
   )
+}
+
+function SuccessCheckDemo() {
+  const [key, setKey] = useState(0);
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <SuccessCheck key={key} size={64} />
+      <Button variant="outline" size="sm" onClick={() => setKey((k) => k + 1)}>
+        Replay
+      </Button>
+    </div>
+  );
+}
+
+function ConfettiBurstDemo() {
+  const [key, setKey] = useState(0);
+  return (
+    <div className="flex flex-col items-center gap-4 relative">
+      <div className="relative">
+        <ConfettiBurst key={key} count={24} />
+      </div>
+      <Button variant="outline" size="sm" onClick={() => setKey((k) => k + 1)}>
+        Burst
+      </Button>
+    </div>
+  );
+}
+
+function CombinedDelightDemo() {
+  const [key, setKey] = useState(0);
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <div className="relative">
+        <SuccessCheck key={key} size={72} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <ConfettiBurst key={`c-${key}`} count={32} spread={120} />
+        </div>
+      </div>
+      <Button variant="accent" size="sm" onClick={() => setKey((k) => k + 1)}>
+        Celebrate
+      </Button>
+    </div>
+  );
 }
 
 function ColorCard({ name, hex, className }: { name: string, hex: string, className?: string }) {

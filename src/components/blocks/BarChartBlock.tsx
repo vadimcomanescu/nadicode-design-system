@@ -36,8 +36,8 @@ const data = [
 ]
 
 const chartConfig = {
-    total: { label: "Total", color: "hsl(var(--chart-1))" },
-    prediction: { label: "Prediction", color: "hsl(var(--chart-2))" },
+    total: { label: "Total", color: "rgb(var(--chart-1))" },
+    prediction: { label: "Prediction", color: "rgb(var(--chart-2))" },
 } satisfies ChartConfig
 
 export function BarChart() {

@@ -48,11 +48,11 @@ const chartData = [
 const chartConfig = {
     desktop: {
         label: "Desktop",
-        color: "hsl(var(--chart-1))",
+        color: "rgb(var(--chart-1))",
     },
     mobile: {
         label: "Mobile",
-        color: "hsl(var(--chart-2))",
+        color: "rgb(var(--chart-2))",
     },
 }
 

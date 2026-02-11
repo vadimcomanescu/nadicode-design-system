@@ -91,7 +91,7 @@ export function ThemeProvider({
       setResolvedTheme(resolved);
     };
 
-    mediaQuery.addEventListener('change', handleChange);
+    mediaQuery.addEventListener('change', handleChange, { passive: true });
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme, style]);
 

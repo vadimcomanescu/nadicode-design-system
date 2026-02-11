@@ -53,6 +53,8 @@ export interface SearchCommandProps
   showShortcut?: boolean
 }
 
+const EMPTY_RESULTS: SearchResult[] = []
+
 const SearchCommand = React.forwardRef<HTMLDivElement, SearchCommandProps>(
   (
     {
@@ -61,7 +63,7 @@ const SearchCommand = React.forwardRef<HTMLDivElement, SearchCommandProps>(
       size,
       value = "",
       onChange,
-      results = [],
+      results = EMPTY_RESULTS,
       onSelect,
       placeholder = "Type a command or search...",
       loading = false,

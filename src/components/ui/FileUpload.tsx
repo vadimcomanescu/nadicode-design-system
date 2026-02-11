@@ -60,6 +60,8 @@ function formatFileSize(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
+const EMPTY_FILES: UploadedFile[] = []
+
 const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
   (
     {
@@ -69,7 +71,7 @@ const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       accept,
       multiple = false,
       maxSize,
-      files = [],
+      files = EMPTY_FILES,
       onChange,
       onRemove,
       helperText,

@@ -3,34 +3,33 @@ import { Container } from "./components/layout/Grid";
 import { ThemeToggle } from "./components/ui/ThemeToggle";
 import { StyleToggle } from "./components/ui/StyleToggle";
 import { Toaster } from "./components/ui/Toaster";
+import { Spinner } from "./components/ui/Spinner";
 import { useToast } from "./hooks/use-toast";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/Tabs";
 import { PageTransition } from "./components/ui/PageTransition";
 import { AnimatedGradientText } from "./components/ui/text-effects";
 import { MouseGlow } from "./components/ui/MouseEffect";
 
-import { DashboardPage } from "./components/pages/DashboardPage";
 import { PatternsPage } from "./components/pages/PatternsPage";
 import { IconsPage } from "./components/pages/IconsPage";
-import { NotFoundPage } from "./components/pages/NotFoundPage";
-import { LandingPage } from "./components/pages/LandingPage";
-import { PricingPage } from "./components/pages/PricingPage";
-import { OnboardingPage } from "./components/pages/OnboardingPage";
-import { VoiceAgentsPage } from "./components/pages/VoiceAgentsPage";
-import { ChangelogPage } from "./components/pages/ChangelogPage";
-import { BlogPostPage } from "./components/pages/BlogPostPage";
 
 import { Routes, Route, useSearchParams } from "react-router-dom";
-import {
-  LoginBirdsDark,
-  LoginGlobeDark,
-  LoginNetDark,
-  LoginCellsLight,
-  LoginTrunkLight,
-  LoginDotsLight,
-  LoginTopologyDark
-} from "./components/pages/auth/VantaLoginPages";
+const DashboardPage = lazy(() => import("./components/pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
+const NotFoundPage = lazy(() => import("./components/pages/NotFoundPage").then(m => ({ default: m.NotFoundPage })));
+const LandingPage = lazy(() => import("./components/pages/LandingPage").then(m => ({ default: m.LandingPage })));
+const PricingPage = lazy(() => import("./components/pages/PricingPage").then(m => ({ default: m.PricingPage })));
+const OnboardingPage = lazy(() => import("./components/pages/OnboardingPage").then(m => ({ default: m.OnboardingPage })));
+const VoiceAgentsPage = lazy(() => import("./components/pages/VoiceAgentsPage").then(m => ({ default: m.VoiceAgentsPage })));
+const ChangelogPage = lazy(() => import("./components/pages/ChangelogPage").then(m => ({ default: m.ChangelogPage })));
+const BlogPostPage = lazy(() => import("./components/pages/BlogPostPage").then(m => ({ default: m.BlogPostPage })));
+const LoginBirdsDark = lazy(() => import("./components/pages/auth/VantaLoginPages").then(m => ({ default: m.LoginBirdsDark })));
+const LoginGlobeDark = lazy(() => import("./components/pages/auth/VantaLoginPages").then(m => ({ default: m.LoginGlobeDark })));
+const LoginNetDark = lazy(() => import("./components/pages/auth/VantaLoginPages").then(m => ({ default: m.LoginNetDark })));
+const LoginCellsLight = lazy(() => import("./components/pages/auth/VantaLoginPages").then(m => ({ default: m.LoginCellsLight })));
+const LoginTrunkLight = lazy(() => import("./components/pages/auth/VantaLoginPages").then(m => ({ default: m.LoginTrunkLight })));
+const LoginDotsLight = lazy(() => import("./components/pages/auth/VantaLoginPages").then(m => ({ default: m.LoginDotsLight })));
+const LoginTopologyDark = lazy(() => import("./components/pages/auth/VantaLoginPages").then(m => ({ default: m.LoginTopologyDark })));
 
 import { DialRoot } from "dialkit";
 import "dialkit/styles.css";
@@ -139,6 +138,7 @@ function App() {
     <>
     {import.meta.env.DEV && <DialRoot position="top-right" />}
     <PageTransition>
+    <Suspense fallback={<div className="flex items-center justify-center min-h-dvh"><Spinner /></div>}>
     <Routes>
       <Route path="/" element={<DocsPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
@@ -167,6 +167,7 @@ function App() {
       {/* 404 catch-all (must be last) */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    </Suspense>
     </PageTransition>
     </>
   )

@@ -3,8 +3,8 @@ import { render } from '@testing-library/react'
 
 vi.mock('motion/react', () => ({
   motion: {
-    svg: ({ children, ...props }: Record<string, unknown>) => (
-      <svg {...props}>{children as React.ReactNode}</svg>
+    div: ({ children, style, ...props }: Record<string, unknown>) => (
+      <div style={style as React.CSSProperties} {...props}>{children as React.ReactNode}</div>
     ),
     circle: (props: Record<string, unknown>) => <circle {...props} />,
     path: (props: Record<string, unknown>) => <path {...props} />,

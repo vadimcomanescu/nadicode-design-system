@@ -22,7 +22,6 @@ export function MouseGlow({
 }: MouseGlowProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const overlayRef = React.useRef<HTMLDivElement>(null)
-  const [opacity, setOpacity] = React.useState(0)
   const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
@@ -31,9 +30,8 @@ export function MouseGlow({
     const handleMouseMove = (e: MouseEvent) => {
       const x = e.clientX
       const y = e.clientY
-      setOpacity(1)
-
       if (containerRef.current) {
+        containerRef.current.style.opacity = '1'
         containerRef.current.style.setProperty("--mx", `${x}px`)
         containerRef.current.style.setProperty("--my", `${y}px`)
       }
@@ -43,11 +41,15 @@ export function MouseGlow({
       }
     }
 
-    const handleMouseOut = () => setOpacity(0)
+    const handleMouseOut = () => {
+      if (containerRef.current) {
+        containerRef.current.style.opacity = '0'
+      }
+    }
 
-    window.addEventListener("mousemove", handleMouseMove)
-    window.addEventListener("mouseout", handleMouseOut)
-    window.addEventListener("mouseleave", handleMouseOut)
+    window.addEventListener("mousemove", handleMouseMove, { passive: true })
+    window.addEventListener("mouseout", handleMouseOut, { passive: true })
+    window.addEventListener("mouseleave", handleMouseOut, { passive: true })
 
     return () => {
       setMounted(false)
@@ -67,7 +69,7 @@ export function MouseGlow({
         width: "100vw",
         height: "100vh",
         transition: "opacity 0.25s ease",
-        opacity,
+        opacity: 0,
         maskImage: `radial-gradient(circle ${maskRadius}px at var(--mx, -9999px) var(--my, -9999px), black 0%, transparent 100%)`,
         WebkitMaskImage: `radial-gradient(circle ${maskRadius}px at var(--mx, -9999px) var(--my, -9999px), black 0%, transparent 100%)`,
       }}

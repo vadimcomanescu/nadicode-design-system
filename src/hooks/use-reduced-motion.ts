@@ -10,7 +10,7 @@ export function useReducedMotion(): boolean {
   useEffect(() => {
     const mql = window.matchMedia(QUERY)
     const handler = (e: MediaQueryListEvent) => setMatches(e.matches)
-    mql.addEventListener('change', handler)
+    mql.addEventListener('change', handler, { passive: true })
     return () => mql.removeEventListener('change', handler)
   }, [])
 

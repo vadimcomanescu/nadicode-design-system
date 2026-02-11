@@ -18,39 +18,38 @@ export const SuccessCheck = React.forwardRef<HTMLDivElement, SuccessCheckProps>(
 
     return (
       <div ref={ref} className={cn("inline-flex items-center justify-center", className)}>
-        <motion.svg
-          width={size}
-          height={size}
-          viewBox="0 0 48 48"
-          fill="none"
+        <motion.div
           initial={{ scale: 0.3, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={spring.bouncy}
+          style={{ display: 'inline-flex' }}
         >
-          <motion.circle
-            cx="24"
-            cy="24"
-            r="22"
-            stroke={circleColor}
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ ...spring.gentle, delay: 0.1 }}
-          />
-          <motion.path
-            d="M14 24L21 31L34 18"
-            stroke={strokeColor}
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ ...spring.bouncy, delay: 0.3 }}
-            onAnimationComplete={onComplete}
-          />
-        </motion.svg>
+          <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+            <motion.circle
+              cx="24"
+              cy="24"
+              r="22"
+              stroke={circleColor}
+              strokeWidth="2"
+              fill="none"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ ...spring.gentle, delay: 0.1 }}
+            />
+            <motion.path
+              d="M14 24L21 31L34 18"
+              stroke={strokeColor}
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ ...spring.bouncy, delay: 0.3 }}
+              onAnimationComplete={onComplete}
+            />
+          </svg>
+        </motion.div>
       </div>
     );
   }

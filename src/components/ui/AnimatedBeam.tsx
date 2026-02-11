@@ -48,7 +48,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     }
 
     update()
-    window.addEventListener("resize", update)
+    window.addEventListener("resize", update, { passive: true })
     return () => window.removeEventListener("resize", update)
   }, [fromRef, toRef, containerRef, curvature])
 

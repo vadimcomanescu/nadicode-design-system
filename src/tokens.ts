@@ -1,4 +1,10 @@
-import { tokens as configTokens, colorTokens as configColorTokens, colorScales as configColorScales } from './lib/tokens.config';
+import {
+  tokens as configTokens,
+  colorTokens as configColorTokens,
+  colorScales as configColorScales,
+  bloomScales as configBloomScales,
+  styleTokens as configStyleTokens,
+} from './lib/tokens.config';
 
 export interface TokenColors {
   background: string;
@@ -103,6 +109,7 @@ export interface DesignTokens {
 export interface ColorTokens {
   dark: TokenColors;
   light: TokenColors;
+  bloom: TokenColors;
 }
 
 /** 12-step Radix-style color scale */
@@ -132,11 +139,35 @@ export interface ArcticGlowScales {
   violet: ColorScale;
 }
 
+export interface BloomScales {
+  sand: ColorScale;
+  coral: ColorScale;
+  lavender: ColorScale;
+  mint: ColorScale;
+  peach: ColorScale;
+  rose: ColorScale;
+  sky: ColorScale;
+}
+
 export interface ColorScales {
   dark: ArcticGlowScales;
   light: ArcticGlowScales;
 }
 
+export type Style = 'arctic' | 'bloom';
+
+export interface StyleTokenSet {
+  radius: { sm: string; md: string; lg: string };
+  shadows: Record<string, string>;
+}
+
+export interface StyleTokens {
+  arctic: StyleTokenSet;
+  bloom: StyleTokenSet;
+}
+
 export const tokens = configTokens as unknown as DesignTokens;
 export const colorTokens = configColorTokens as unknown as ColorTokens;
 export const colorScales = configColorScales as unknown as ColorScales;
+export const bloomScales = configBloomScales as unknown as BloomScales;
+export const styleTokens = configStyleTokens as unknown as StyleTokens;

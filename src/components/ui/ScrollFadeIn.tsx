@@ -1,6 +1,6 @@
 import * as React from "react"
 import { motion, useInView, useReducedMotion } from "motion/react"
-import { motionSpring } from "../../lib/motion"
+import { useStyleMotion } from "../../lib/motion"
 import { cn } from "../../lib/utils"
 
 interface ScrollFadeInProps {
@@ -19,11 +19,14 @@ const directionOffset = {
 } as const
 
 export const ScrollFadeIn = React.forwardRef<HTMLDivElement, ScrollFadeInProps>(
-  ({ children, className, delay = 0, direction = "up", distance = 20 }, ref) => {
+  ({ children, className, delay = 0, direction = "up", distance }, ref) => {
     const prefersReduced = useReducedMotion()
     const internalRef = React.useRef<HTMLDivElement>(null)
     const mergedRef = ref || internalRef
     const isInView = useInView(internalRef, { once: true, margin: "-40px" })
+    const { spring, distance: styleDistance } = useStyleMotion()
+
+    const d = distance ?? styleDistance.md
 
     if (prefersReduced) {
       return (
@@ -41,12 +44,12 @@ export const ScrollFadeIn = React.forwardRef<HTMLDivElement, ScrollFadeInProps>(
         className={cn(className)}
         initial={{
           opacity: 0,
-          x: offset.x * distance,
-          y: offset.y * distance,
+          x: offset.x * d,
+          y: offset.y * d,
         }}
         animate={
           isInView
-            ? { opacity: 1, x: 0, y: 0, transition: { ...motionSpring.snappy, delay: delay / 1000 } }
+            ? { opacity: 1, x: 0, y: 0, transition: { ...spring.snappy, delay: delay / 1000 } }
             : undefined
         }
       >

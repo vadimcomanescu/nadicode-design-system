@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { ScrollFadeIn } from './ScrollFadeIn';
+import { ThemeProvider } from '@/lib/ThemeProvider';
 
 vi.mock('motion/react', () => ({
   motion: {
@@ -12,24 +13,31 @@ vi.mock('motion/react', () => ({
   useReducedMotion: () => false,
 }));
 
+function Wrapper({ children }: { children: React.ReactNode }) {
+  return <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>;
+}
+
 describe('ScrollFadeIn', () => {
   it('renders without crashing', () => {
     const { container } = render(
-      <ScrollFadeIn>Content</ScrollFadeIn>
+      <ScrollFadeIn>Content</ScrollFadeIn>,
+      { wrapper: Wrapper }
     );
     expect(container.firstChild).toBeTruthy();
   });
 
   it('renders children', () => {
     const { getByText } = render(
-      <ScrollFadeIn>Visible content</ScrollFadeIn>
+      <ScrollFadeIn>Visible content</ScrollFadeIn>,
+      { wrapper: Wrapper }
     );
     expect(getByText('Visible content')).toBeInTheDocument();
   });
 
   it('accepts custom className', () => {
     const { container } = render(
-      <ScrollFadeIn className="custom-fade">Test</ScrollFadeIn>
+      <ScrollFadeIn className="custom-fade">Test</ScrollFadeIn>,
+      { wrapper: Wrapper }
     );
     expect(container.innerHTML).toContain('custom-fade');
   });

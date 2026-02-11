@@ -1,7 +1,7 @@
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { useRef, Children, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { motionSpring } from "@/lib/motion";
+import { useStyleMotion } from "@/lib/motion";
 
 interface StaggerChildrenProps {
   children: ReactNode;
@@ -17,23 +17,26 @@ export function StaggerChildren({
   className,
   staggerMs = 80,
   direction = "up",
-  distance = 16,
+  distance,
   once = true,
 }: StaggerChildrenProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-40px" });
   const shouldReduceMotion = useReducedMotion();
+  const { spring, distance: styleDistance } = useStyleMotion();
+
+  const d = distance ?? styleDistance.md;
 
   const getOffset = () => {
     switch (direction) {
       case "up":
-        return { y: distance };
+        return { y: d };
       case "down":
-        return { y: -distance };
+        return { y: -d };
       case "left":
-        return { x: distance };
+        return { x: d };
       case "right":
-        return { x: -distance };
+        return { x: -d };
     }
   };
 
@@ -60,7 +63,7 @@ export function StaggerChildren({
               opacity: 1,
               x: 0,
               y: 0,
-              transition: motionSpring.snappy,
+              transition: spring.snappy,
             },
           }}
         >

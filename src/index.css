@@ -188,6 +188,96 @@
     --chart-6: 229 72 77;
   }
 
+  /* Bloom theme — warm, light-only */
+  .bloom {
+    color-scheme: light;
+
+    /* Background */
+    --color-background: 254 253 251;
+
+    /* Surface */
+    --color-surface: 251 249 246;
+    --color-surface-hover: 245 241 236;
+    --color-surface-active: 237 232 225;
+    --color-surface-raised: 251 249 246;
+
+    /* Border */
+    --color-border: 217 209 199;
+    --color-border-hover: 196 185 172;
+    --color-border-subtle: 45 35 24 / 0.07;
+    --color-border-subtle-hover: 45 35 24 / 0.15;
+
+    /* Primary */
+    --color-primary: 45 35 24;
+    --color-primary-foreground: 254 253 251;
+
+    /* Secondary */
+    --color-secondary: 245 241 236;
+    --color-secondary-foreground: 45 35 24;
+
+    /* Accent — Coral */
+    --color-accent: 232 87 58;
+    --color-accent-foreground: 255 255 255;
+
+    /* Destructive — Rose */
+    --color-destructive: 232 86 109;
+    --color-destructive-foreground: 255 255 255;
+
+    /* Success — Mint */
+    --color-success: 61 214 160;
+    --color-success-foreground: 10 79 57;
+
+    /* Warning — Peach */
+    --color-warning: 245 166 35;
+    --color-warning-foreground: 92 60 8;
+
+    /* Info — Sky */
+    --color-info: 90 180 245;
+    --color-info-foreground: 20 65 112;
+
+    /* Overlay */
+    --color-overlay: 45 35 24;
+
+    /* Muted */
+    --color-muted: 245 241 236;
+    --color-muted-foreground: 87 73 56;
+
+    /* Text */
+    --color-text-primary: 45 35 24;
+    --color-text-secondary: 87 73 56;
+    --color-text-tertiary: 136 121 104;
+
+    /* Interactive */
+    --color-focus-ring: 139 92 246;
+    --color-link: 99 56 196;
+    --color-input: 245 241 236;
+    --color-disabled: 217 209 199;
+    --color-disabled-foreground: 168 155 140;
+
+    /* Sidebar */
+    --sidebar-background: 254 253 251;
+    --sidebar-foreground: 87 73 56;
+    --sidebar-primary: 45 35 24;
+    --sidebar-primary-foreground: 254 253 251;
+    --sidebar-accent: 245 241 236;
+    --sidebar-accent-foreground: 45 35 24;
+    --sidebar-border: 217 209 199;
+    --sidebar-ring: 139 92 246;
+
+    /* Charts — Bloom */
+    --chart-1: 232 87 58;
+    --chart-2: 139 92 246;
+    --chart-3: 245 166 35;
+    --chart-4: 61 214 160;
+    --chart-5: 90 180 245;
+    --chart-6: 232 86 109;
+
+    /* Style-specific: radius */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
   body {
     @apply bg-background text-text-primary antialiased min-h-dvh transition-colors duration-300;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -309,6 +399,51 @@
 
   :root[class~="light"] .glass-floating::after {
     box-shadow: inset 0 0 10px 0 rgba(200, 220, 240, 0.04);
+  }
+
+  /* Bloom glass — warm cream tint, brown shadows */
+  .bloom .glass-panel {
+    @apply bg-surface/70 backdrop-blur-3xl border border-border/30;
+    box-shadow:
+      0 4px 12px rgba(45, 35, 24, 0.06),
+      0 8px 24px rgba(45, 35, 24, 0.04),
+      inset 0 1px 0 0 rgba(255, 248, 240, 0.6);
+    background-image: linear-gradient(to bottom right,
+        rgba(255, 248, 240, 0.5),
+        rgba(255, 248, 240, 0.15));
+  }
+
+  .bloom .glass-floating {
+    @apply bg-surface/60 backdrop-blur-[40px] border border-border/20;
+    box-shadow:
+      0 10px 25px rgba(45, 35, 24, 0.08),
+      0 20px 40px rgba(45, 35, 24, 0.06),
+      inset 0 1px 0 0 rgba(255, 248, 240, 0.5);
+  }
+
+  .bloom .glass-floating::after {
+    content: '';
+    @apply absolute inset-0 rounded-[inherit] pointer-events-none;
+    box-shadow: inset 0 0 10px 0 rgba(232, 87, 58, 0.03);
+  }
+
+  .bloom .glass-floating:hover {
+    transform: translateY(-6px) scale(1.01) rotate(0.3deg);
+    box-shadow:
+      0 15px 35px rgba(45, 35, 24, 0.1),
+      0 25px 50px rgba(45, 35, 24, 0.07),
+      inset 0 1px 0 0 rgba(255, 248, 240, 0.6);
+  }
+
+  .bloom .glass-overlay {
+    @apply bg-surface/60 backdrop-blur-md border border-border/30 transition-colors duration-300;
+    box-shadow:
+      0 4px 20px -2px rgba(45, 35, 24, 0.08),
+      inset 0 1px 0 0 rgba(255, 248, 240, 0.4);
+  }
+
+  .bloom .glass-overlay:hover {
+    @apply bg-surface/80;
   }
 }
 

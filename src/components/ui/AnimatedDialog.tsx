@@ -51,9 +51,9 @@ const AnimatedDialogContent = React.forwardRef<
             className
           )}
           style={{ x: "-50%", y: "-50%" }}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.85, filter: "blur(8px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, scale: 0.85, filter: "blur(8px)" }}
           transition={{ ...motionSpring.snappy, ...motionConfig }}
         >
           {children}

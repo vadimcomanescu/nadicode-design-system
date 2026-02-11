@@ -16,20 +16,22 @@ const variants = {
     exit: { opacity: 0 },
   },
   slide: {
-    initial: { opacity: 0, y: 8 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -8 },
+    initial: { opacity: 0, y: 32, filter: "blur(4px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+    exit: { opacity: 0, y: -32, filter: "blur(4px)" },
   },
   scale: {
-    initial: { opacity: 0, scale: 0.98 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.98 },
+    initial: { opacity: 0, scale: 0.90, filter: "blur(6px)" },
+    animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
+    exit: { opacity: 0, scale: 0.90, filter: "blur(6px)" },
   },
 } as const
 
 const transition = {
-  duration: 0.2,
-  ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number],
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 28,
+  mass: 0.8,
 }
 
 export const PageTransition: React.FC<PageTransitionProps> = ({

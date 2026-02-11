@@ -41,15 +41,23 @@ describe('Tailwind Configuration', () => {
     expect(tailwindConfig.theme?.extend?.fontSize).toEqual(tokens.typography.sizes);
   });
 
-  it('should extend borderRadius with tokens', () => {
-    expect(tailwindConfig.theme?.extend?.borderRadius).toEqual(tokens.radius);
+  it('should extend borderRadius with CSS variable-based values', () => {
+    const radius = tailwindConfig.theme?.extend?.borderRadius as Record<string, string>;
+    expect(radius.sm).toContain('var(--radius-sm');
+    expect(radius.md).toContain('var(--radius-md');
+    expect(radius.lg).toContain('var(--radius-lg');
+    expect(radius.full).toBe(tokens.radius.full);
   });
 
   it('should extend spacing with tokens', () => {
     expect(tailwindConfig.theme?.extend?.spacing).toEqual(tokens.spacing);
   });
 
-  it('should extend boxShadow with tokens', () => {
-    expect(tailwindConfig.theme?.extend?.boxShadow).toEqual(tokens.shadows);
+  it('should extend boxShadow with token shadows and bloom shadows', () => {
+    const shadows = tailwindConfig.theme?.extend?.boxShadow as Record<string, string>;
+    expect(shadows.glow).toBe(tokens.shadows.glow);
+    expect(shadows['glow-accent']).toBe(tokens.shadows['glow-accent']);
+    expect(shadows['bloom-soft']).toBeDefined();
+    expect(shadows['bloom-lifted']).toBeDefined();
   });
 });

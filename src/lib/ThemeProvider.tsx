@@ -3,17 +3,22 @@ import * as React from 'react';
 
 type Theme = 'light' | 'dark' | 'system';
 type ResolvedTheme = 'light' | 'dark';
+type Style = 'arctic' | 'bloom';
 
 interface ThemeProviderProps {
   children: React.ReactNode;
   defaultTheme?: Theme;
+  defaultStyle?: Style;
   storageKey?: string;
+  styleStorageKey?: string;
 }
 
 interface ThemeContextValue {
   theme: Theme;
   resolvedTheme: ResolvedTheme;
+  style: Style;
   setTheme: (theme: Theme) => void;
+  setStyle: (style: Style) => void;
 }
 
 const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
@@ -23,17 +28,19 @@ function getSystemTheme(): ResolvedTheme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-function resolveTheme(theme: Theme): ResolvedTheme {
-  if (theme === 'system') {
-    return getSystemTheme();
-  }
+function resolveTheme(theme: Theme, style: Style): ResolvedTheme {
+  // Bloom is light-only
+  if (style === 'bloom') return 'light';
+  if (theme === 'system') return getSystemTheme();
   return theme;
 }
 
 export function ThemeProvider({
   children,
   defaultTheme = 'system',
+  defaultStyle = 'arctic',
   storageKey = 'design-system-theme',
+  styleStorageKey = 'design-system-style',
 }: ThemeProviderProps) {
   const [theme, setThemeState] = React.useState<Theme>(() => {
     if (typeof window === 'undefined') return defaultTheme;
@@ -44,23 +51,35 @@ export function ThemeProvider({
     return defaultTheme;
   });
 
+  const [style, setStyleState] = React.useState<Style>(() => {
+    if (typeof window === 'undefined') return defaultStyle;
+    const stored = localStorage.getItem(styleStorageKey);
+    if (stored === 'arctic' || stored === 'bloom') {
+      return stored;
+    }
+    return defaultStyle;
+  });
+
   const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>(() =>
-    resolveTheme(theme)
+    resolveTheme(theme, style)
   );
 
-  // Apply theme class to document
+  // Apply theme and style classes to document
   React.useEffect(() => {
     const root = document.documentElement;
-    const resolved = resolveTheme(theme);
+    const resolved = resolveTheme(theme, style);
 
-    root.classList.remove('light', 'dark');
+    root.classList.remove('light', 'dark', 'bloom');
     root.classList.add(resolved);
+    if (style === 'bloom') {
+      root.classList.add('bloom');
+    }
     setResolvedTheme(resolved);
-  }, [theme]);
+  }, [theme, style]);
 
   // Listen for system theme changes when theme is 'system'
   React.useEffect(() => {
-    if (theme !== 'system') return;
+    if (theme !== 'system' || style === 'bloom') return;
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -74,16 +93,21 @@ export function ThemeProvider({
 
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme]);
+  }, [theme, style]);
 
   const setTheme = React.useCallback((newTheme: Theme) => {
     localStorage.setItem(storageKey, newTheme);
     setThemeState(newTheme);
   }, [storageKey]);
 
+  const setStyle = React.useCallback((newStyle: Style) => {
+    localStorage.setItem(styleStorageKey, newStyle);
+    setStyleState(newStyle);
+  }, [styleStorageKey]);
+
   const value = React.useMemo(
-    () => ({ theme, resolvedTheme, setTheme }),
-    [theme, resolvedTheme, setTheme]
+    () => ({ theme, resolvedTheme, style, setTheme, setStyle }),
+    [theme, resolvedTheme, style, setTheme, setStyle]
   );
 
   return (
@@ -100,3 +124,5 @@ export function useTheme(): ThemeContextValue {
   }
   return context;
 }
+
+export type { Theme, ResolvedTheme, Style, ThemeContextValue };

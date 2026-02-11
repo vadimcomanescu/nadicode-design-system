@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { StaggerChildren } from './StaggerChildren';
+import { ThemeProvider } from '@/lib/ThemeProvider';
 
 vi.mock('motion/react', () => ({
   motion: {
@@ -12,13 +13,18 @@ vi.mock('motion/react', () => ({
   useReducedMotion: () => false,
 }));
 
+function Wrapper({ children }: { children: React.ReactNode }) {
+  return <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>;
+}
+
 describe('StaggerChildren', () => {
   it('renders without crashing', () => {
     const { container } = render(
       <StaggerChildren>
         <div>A</div>
         <div>B</div>
-      </StaggerChildren>
+      </StaggerChildren>,
+      { wrapper: Wrapper }
     );
     expect(container.firstChild).toBeTruthy();
   });
@@ -28,7 +34,8 @@ describe('StaggerChildren', () => {
       <StaggerChildren>
         <div>First</div>
         <div>Second</div>
-      </StaggerChildren>
+      </StaggerChildren>,
+      { wrapper: Wrapper }
     );
     expect(getByText('First')).toBeInTheDocument();
     expect(getByText('Second')).toBeInTheDocument();
@@ -38,7 +45,8 @@ describe('StaggerChildren', () => {
     const { container } = render(
       <StaggerChildren className="stagger-custom">
         <div>Child</div>
-      </StaggerChildren>
+      </StaggerChildren>,
+      { wrapper: Wrapper }
     );
     expect(container.innerHTML).toContain('stagger-custom');
   });

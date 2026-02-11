@@ -231,6 +231,46 @@ export const colorScales = {
   },
 };
 
+// Bloom — 12-step warm color scales (light-only)
+// Steps 1-2: app bg · 3-5: component bg · 6-8: borders · 9-10: solid · 11-12: text
+export const bloomScales = {
+  sand: {
+    1:  '#FEFDFB', 2:  '#FBF9F6', 3:  '#F5F1EC', 4:  '#EDE8E1',
+    5:  '#E4DED5', 6:  '#D9D1C7', 7:  '#C4B9AC', 8:  '#A89B8C',
+    9:  '#887968', 10: '#72624F', 11: '#574938', 12: '#2D2318',
+  },
+  coral: {
+    1:  '#FFFBFA', 2:  '#FFF1EE', 3:  '#FFE0D9', 4:  '#FFCBBF',
+    5:  '#FFB3A2', 6:  '#F99882', 7:  '#ED7B60', 8:  '#DC6347',
+    9:  '#E8573A', 10: '#D04A2F', 11: '#A83A25', 12: '#5C1E12',
+  },
+  lavender: {
+    1:  '#FBF8FF', 2:  '#F5EFFE', 3:  '#EAE0FD', 4:  '#DCCEFB',
+    5:  '#CCB8F9', 6:  '#B99DF5', 7:  '#A47DEF', 8:  '#9060EA',
+    9:  '#8B5CF6', 10: '#7642E0', 11: '#6338C4', 12: '#3B1F75',
+  },
+  mint: {
+    1:  '#F2FDF9', 2:  '#E0FAF0', 3:  '#C2F2DF', 4:  '#9DE8CA',
+    5:  '#76D9B2', 6:  '#4EC79A', 7:  '#30B27E', 8:  '#1D9B63',
+    9:  '#3DD6A0', 10: '#2FBA88', 11: '#1A8A64', 12: '#0A4F39',
+  },
+  peach: {
+    1:  '#FFFCF5', 2:  '#FFF8E8', 3:  '#FFEFC8', 4:  '#FFE3A0',
+    5:  '#FFD574', 6:  '#F5C34A', 7:  '#E0AD2E', 8:  '#C49518',
+    9:  '#F5A623', 10: '#D98E14', 11: '#A56C0F', 12: '#5C3C08',
+  },
+  rose: {
+    1:  '#FFF8F9', 2:  '#FFEEF1', 3:  '#FFDCE2', 4:  '#FFC5CE',
+    5:  '#FFABB8', 6:  '#F98E9E', 7:  '#ED6F82', 8:  '#DC5568',
+    9:  '#E8566D', 10: '#D0445A', 11: '#A83347', 12: '#5C1A28',
+  },
+  sky: {
+    1:  '#F5FAFF', 2:  '#EAF3FE', 3:  '#D2E6FD', 4:  '#B5D6FB',
+    5:  '#94C3F8', 6:  '#70AEF4', 7:  '#5099EE', 8:  '#3585E5',
+    9:  '#5AB4F5', 10: '#3E9AE5', 11: '#2874C0', 12: '#144170',
+  },
+};
+
 // Semantic color tokens mapped from scales
 export const colorTokens = {
   dark: {
@@ -348,6 +388,84 @@ export const colorTokens = {
     input: '#EDF0F3',            // gray.3
     disabled: '#CDD4DC',         // gray.6
     disabledForeground: '#97A3B2', // gray.8
+  },
+  bloom: {
+    background: '#FEFDFB',         // sand.1 (warm white)
+    surface: {
+      DEFAULT: '#FBF9F6',          // sand.2 (cream)
+      hover: '#F5F1EC',            // sand.3
+      active: '#EDE8E1',           // sand.4
+      raised: '#FBF9F6',           // sand.2
+    },
+    border: {
+      DEFAULT: '#D9D1C7',          // sand.6
+      hover: '#C4B9AC',            // sand.7
+      subtle: 'rgba(45, 35, 24, 0.07)',
+      'subtle-hover': 'rgba(45, 35, 24, 0.15)',
+    },
+    primary: {
+      DEFAULT: '#2D2318',          // sand.12 (warm ink)
+      foreground: '#FEFDFB',       // sand.1
+    },
+    secondary: {
+      DEFAULT: '#F5F1EC',          // sand.3
+      foreground: '#2D2318',       // sand.12
+    },
+    accent: {
+      DEFAULT: '#E8573A',          // coral.9
+      foreground: '#FFFFFF',
+    },
+    destructive: {
+      DEFAULT: '#E8566D',          // rose.9
+      foreground: '#FFFFFF',
+    },
+    success: {
+      DEFAULT: '#3DD6A0',          // mint.9
+      foreground: '#0A4F39',       // mint.12
+    },
+    warning: {
+      DEFAULT: '#F5A623',          // peach.9
+      foreground: '#5C3C08',       // peach.12
+    },
+    info: {
+      DEFAULT: '#5AB4F5',          // sky.9
+      foreground: '#144170',       // sky.12
+    },
+    muted: {
+      DEFAULT: '#F5F1EC',          // sand.3
+      foreground: '#574938',       // sand.11
+    },
+    overlay: '#2D2318',            // warm ink (not pure black)
+    text: {
+      primary: '#2D2318',          // sand.12 (warm ink)
+      secondary: '#574938',        // sand.11
+      tertiary: '#887968',         // sand.9
+    },
+    focusRing: '#8B5CF6',          // lavender.9
+    link: '#6338C4',               // lavender.11
+    input: '#F5F1EC',              // sand.3
+    disabled: '#D9D1C7',           // sand.6
+    disabledForeground: '#A89B8C', // sand.8
+  },
+};
+
+// Style-dependent non-color tokens
+export const styleTokens = {
+  arctic: {
+    radius: { sm: '4px', md: '8px', lg: '16px' },
+    shadows: {
+      'glow': '0 0 20px -5px rgba(255, 255, 255, 0.1)',
+      'glow-accent': '0 0 20px -5px rgba(56, 189, 184, 0.15)',
+    },
+  },
+  bloom: {
+    radius: { sm: '8px', md: '14px', lg: '24px' },
+    shadows: {
+      'glow': '0 0 20px -5px rgba(232, 87, 58, 0.12)',
+      'glow-accent': '0 0 20px -5px rgba(139, 92, 246, 0.15)',
+      'soft': '0 2px 12px -2px rgba(45, 35, 24, 0.08)',
+      'lifted': '0 8px 30px -8px rgba(45, 35, 24, 0.12)',
+    },
   },
 };
 

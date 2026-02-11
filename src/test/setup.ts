@@ -49,6 +49,18 @@ if (typeof window !== 'undefined') {
     window.HTMLElement.prototype.hasPointerCapture = () => false;
   }
 
+  if (!window.IntersectionObserver) {
+    window.IntersectionObserver = class IntersectionObserver {
+      readonly root: Element | null = null;
+      readonly rootMargin: string = '';
+      readonly thresholds: ReadonlyArray<number> = [];
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+      takeRecords(): IntersectionObserverEntry[] { return []; }
+    } as unknown as typeof window.IntersectionObserver;
+  }
+
   if (!window.ResizeObserver) {
     window.ResizeObserver = class ResizeObserver {
       observe() {}

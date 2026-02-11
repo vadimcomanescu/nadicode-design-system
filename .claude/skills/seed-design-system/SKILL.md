@@ -11,7 +11,8 @@ tags: [seed, design-system, arctic-glow, react, tailwind, radix, glassmorphism]
 # Seed Design System — Agent Skill
 
 React 19 + TypeScript + Tailwind CSS 4 + Radix UI + CVA.
-"Arctic Glow" aesthetic: cool blue-tinted dark glassmorphism with teal accents.
+Dual-axis theming: `theme` (light/dark/system) + `style` (arctic/bloom).
+Arctic: cool blue-tinted glassmorphism. Bloom: warm light-only organic aesthetic.
 
 ---
 
@@ -31,6 +32,7 @@ The single most common source of bugs. Memorize this table.
 | `glass-card`                           | `glass-panel`                                | `glass-card` is deleted                  |
 | `glass-atmospheric`                    | `glass-overlay`                              | Renamed                                  |
 | `<AnimatedIcon icon={Settings} />`     | `<SettingsIcon size={16} />`                 | AnimatedIcon is deleted                  |
+| `import { X } from "lucide-react"`    | `import { XIcon } from "@/components/ui/icons"` | Direct lucide-react imports forbidden (integrity test enforces) |
 | `import { motion } from "framer-motion"` | `import { motion } from "motion/react"`   | Package renamed                          |
 | `#6366f1` / "Electric Indigo"          | `#38BDB8` (dark) / `#1A8F88` (light) teal   | Arctic Glow palette replaced Indigo      |
 | `#FB7185` / coral colors               | Use `destructive` or `accent` tokens         | Coral purged from design system          |
@@ -161,20 +163,19 @@ export { MyComponent, myComponentVariants }
 ## 5. Icon System
 
 ```tsx
-// Animated icons (73 available) - SVG path animations on hover
+// ALL icons must use animated wrappers from the icons/ directory
 import { SettingsIcon, BellIcon, SearchIcon } from "@/components/ui/icons"
 
 <SettingsIcon size={16} />   // size in px, default 28
 <BellIcon size={20} />
-
-// For icons without animated version, use lucide-react directly
-import { SomeOtherIcon } from "lucide-react"
 ```
 
-- Import path: `@/components/ui/icons` (barrel export)
+- Import path: `@/components/ui/icons` (barrel export) or individual files (e.g., `@/components/ui/icons/settings`)
 - `size` prop controls width/height in pixels
-- 73 animated icons available (see `references/icons-catalog.md`)
-- Icons NOT in the animated set: fall back to plain `lucide-react`
+- Each icon uses `motion/react` with an imperative handle (`startAnimation`/`stopAnimation`) and hover animations
+- **NEVER import directly from `lucide-react`** in component files. An integrity test (`no-static-lucide-imports.test.ts`) enforces this. Only the `icons/` directory itself may import from lucide-react SVG paths.
+- **Source for new icons**: Get animated icon code from [lucide-animated.com](https://lucide-animated.com), then adapt it to the project pattern (motion/react, imperative handle, size prop). See `sun.tsx` as reference. Export from `index.ts`
+- Browse available icons: `ls src/components/ui/icons/` (excluding index.ts)
 
 ---
 
@@ -201,28 +202,91 @@ import { motionSpring, fadeInUp, blockStagger } from "@/lib/motion"
 
 **Reduced motion:** Handled globally via CSS `prefers-reduced-motion` + `useMotionConfig()` hook.
 
+**Style-aware motion:** Use `useStyleMotion()` hook for style-dependent animation parameters (arctic vs bloom).
+
 ---
 
 ## 7. Component Categories
 
-| Category           | Count | Key Components                                                          |
-| ------------------ | ----- | ----------------------------------------------------------------------- |
-| **Form Controls**  | ~20   | Button, Input, Textarea, Select, Checkbox, Switch, RadioGroup, Slider, TagInput, PasswordInput, Combobox, DatePicker, DateRangePicker, InputOTP, NativeSelect, InputGroup, FormWizard, Form, Field |
-| **Display**        | ~20   | Card, Avatar, Badge, Table, DataTable, Skeleton, Progress, Empty, Timeline, Accordion, Tabs, AnimatedTabs, Tooltip, HoverCard, Popover, Alert, AlertDialog, Breadcrumb |
-| **Navigation**     | ~10   | Sidebar, NavigationMenu, Menubar, DropdownMenu, ContextMenu, Pagination, FloatingDock, SearchCommand, Command |
-| **Layout**         | ~10   | Dialog, Drawer, Sheet, AnimatedDialog, AnimatedSheet, Resizable, ScrollArea, Collapsible, BentoGrid, AspectRatio |
-| **Effects**        | ~15   | AmbientGrid, AuroraEffect, MeteorShower, Spotlight, AnimatedBackground, AnimatedBeam, PixelBackground, MouseEffect, MovingBorder, ProgressiveBlur, TiltCard, MagneticElement, InfiniteSlider |
-| **Text Effects**   | 10    | TextReveal, AnimatedGradientText, PixelReveal, FlipWords, StreamingText, ShimmeringText, CountingNumber, MorphingText, HighlightText, SlidingNumber |
-| **Animation**      | ~5    | ScrollFadeIn, StaggerChildren, StaggeredEntrance, PageTransition        |
-| **Charts**         | 7     | AreaChart, BarChart, LineChart, PieChart, RadarChart, RadialBarChart, HeatmapChart (+ Chart base) |
-| **AI/Voice**       | ~5    | AgentAvatar, AgentStatus, AudioWaveform, ConversationThread, Avatar3D   |
-| **Misc**           | ~10   | ThemeToggle, Toaster/Toast/Sonner, Logo, BrandIcons, Kbd, Typography, SkipNav, VisuallyHidden, StatusDot, RoleBadge |
+Browse actual components: `ls src/components/ui/` for primitives, `ls src/components/blocks/` for blocks, `ls src/components/pages/` for pages.
 
-**Blocks:** 54 pre-composed page sections. See `references/blocks-catalog.md`.
+| Category           | Key Components                                                          |
+| ------------------ | ----------------------------------------------------------------------- |
+| **Form Controls**  | Button, Input, Textarea, Select, Checkbox, Switch, RadioGroup, Slider, TagInput, PasswordInput, Combobox, DatePicker, DateRangePicker, InputOTP, NativeSelect, InputGroup, FormWizard, Form, Field |
+| **Display**        | Card, Avatar, Badge, Table, DataTable, Skeleton, Progress, Empty, Timeline, Accordion, Tabs, AnimatedTabs, Tooltip, HoverCard, Popover, Alert, AlertDialog, Breadcrumb |
+| **Navigation**     | Sidebar, NavigationMenu, Menubar, DropdownMenu, ContextMenu, Pagination, FloatingDock, SearchCommand, Command |
+| **Layout**         | Dialog, Drawer, Sheet, AnimatedDialog, AnimatedSheet, Resizable, ScrollArea, Collapsible, BentoGrid, AspectRatio |
+| **Effects**        | AmbientGrid, AuroraEffect, MeteorShower, Spotlight, AnimatedBackground, AnimatedBeam, PixelBackground, MouseEffect, MovingBorder, ProgressiveBlur, TiltCard, MagneticElement, InfiniteSlider |
+| **Text Effects**   | TextReveal, AnimatedGradientText, PixelReveal, FlipWords, StreamingText, ShimmeringText, CountingNumber, MorphingText, HighlightText, SlidingNumber |
+| **Animation**      | ScrollFadeIn, StaggerChildren, StaggeredEntrance, PageTransition        |
+| **Charts**         | AreaChart, BarChart, LineChart, PieChart, RadarChart, RadialBarChart, HeatmapChart (+ Chart base) |
+| **AI/Voice**       | AgentAvatar, AgentStatus, AudioWaveform, ConversationThread, Avatar3D   |
+| **Misc**           | ThemeToggle, StyleToggle, Toaster/Toast/Sonner, Logo, BrandIcons, Kbd, Typography, SkipNav, VisuallyHidden |
+
+**Blocks:** Pre-composed page sections in `src/components/blocks/`. See `references/blocks-catalog.md`.
 
 ---
 
-## 8. Next.js Integration Essentials
+## 8. Theming
+
+Dual-axis system:
+- **theme**: `light` | `dark` | `system` (controlled by `ThemeToggle`)
+- **style**: `arctic` | `bloom` (controlled by `StyleToggle`)
+
+Bloom forces `resolvedTheme` to `light` (bloom is light-only). CSS vars switch via `:root`, `.dark`, `.bloom` selectors.
+
+```tsx
+import { useTheme } from "@/lib/ThemeProvider"
+const { theme, style, setTheme, setStyle, resolvedTheme } = useTheme()
+```
+
+---
+
+## 9. Integrity Test Suite
+
+The design system has automated gates that run on `npm test`. These catch regressions:
+
+| Test | What It Guards |
+| ---- | -------------- |
+| `token-integrity` | Dark/light/bloom token parity, 12-step scales, hex format, no undefined values |
+| `css-variable-completeness` | Every CSS var in tailwind.config.js defined in both `:root` and `.dark` |
+| `contrast` | WCAG contrast ratios for text/background pairs |
+| `animation-integrity` | Spring config validity, motion distance/scale/blur ranges |
+| `glass-effects` | Glass tier classes exist with light mode overrides |
+| `no-hardcoded-values` | No hex colors in Tailwind classes or style objects |
+| `no-static-lucide-imports` | No direct `lucide-react` imports outside `icons/` |
+| `component-coverage` | Every `ui/*.tsx` has a matching `*.test.tsx` |
+
+**When extending the system, run:** `npm test` to verify all gates pass.
+
+---
+
+## 10. Project Structure
+
+```
+src/
+  App.tsx                              # Shell: router + DocsPage tab switcher (~175 lines)
+  components/
+    ui/                                # Core primitives
+    ui/icons/                          # Animated icon wrappers (motion/react)
+    ui/charts/                         # Chart primitives (recharts)
+    ui/text-effects/                   # Text animation components
+    blocks/                            # Composed page sections (*Block.tsx)
+    pages/                             # Full page compositions
+    pages/showcase/                    # Tab content for the dev showcase
+    layout/                            # Grid, GridSystem
+  lib/
+    tokens.config.js                   # Master token definitions
+    utils.ts                           # cn() helper
+    ThemeProvider.tsx                   # Dual-axis theme context
+    motion.ts                          # Spring presets, motion variants
+    animation.tokens.ts                # Easing curves, duration scale
+  tokens.ts                            # TypeScript re-export
+```
+
+---
+
+## 11. Next.js Integration Essentials
 
 ### Setup Checklist
 1. Copy core files: `lib/utils.ts`, `lib/tokens.config.js`, `lib/ThemeProvider.tsx`, `lib/motion.ts`, `lib/animation.tokens.ts`, `tokens.ts`
@@ -269,7 +333,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ---
 
-## 9. Naming & Testing Conventions
+## 12. Naming & Testing Conventions
 
 - Components: `PascalCase.tsx` in `components/ui/` or `components/blocks/`
 - Blocks use `*Block.tsx` suffix (e.g., `LoginBlock.tsx`)
@@ -277,18 +341,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 - Test framework: Vitest + @testing-library/react
 - BDD-style: `describe("Button")` / `it("should render primary variant")`
 - Import `cn` from `@/lib/utils`, never re-implement merge logic
+- Every new UI component MUST have a colocated test (coverage gate enforces this)
 
 ---
 
-## 10. Reference Index
+## 13. Reference Index
 
 | File                              | Contents                                                    |
 | --------------------------------- | ----------------------------------------------------------- |
 | `references/tokens-and-colors.md` | Full 12-step Radix scales, semantic token map, CSS var format|
-| `references/component-inventory.md`| All 109+ UI components with variants and Radix primitives   |
+| `references/component-inventory.md`| UI components with variants and Radix primitives            |
 | `references/component-patterns.md`| 4 real code patterns: Button, Input, Dialog, LoginBlock     |
 | `references/animation-system.md`  | Springs, easings, durations, stagger, reduced motion        |
 | `references/nextjs-integration.md`| Vendoring guide, App Router setup, SSR boundaries           |
 | `references/glass-and-effects.md` | Glass tiers CSS, decorative components, text effects        |
-| `references/blocks-catalog.md`    | All 54 blocks by domain with import paths                   |
-| `references/icons-catalog.md`     | 73 animated icons + lucide fallback convention              |
+| `references/blocks-catalog.md`    | Blocks by domain with import paths                          |
+| `references/icons-catalog.md`     | Animated icon usage patterns and conventions                |

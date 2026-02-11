@@ -77,7 +77,10 @@ export { SmartphoneIcon } from "./smartphone";
 export { Trash2Icon } from "./trash-2";
 
 // Additional icons needed by components
+export { EyeIcon } from "./eye";
+export { EyeOffIcon } from "./eye-off";
 export { FolderIcon } from "./folder";
 export { HomeIcon } from "./home";
 export { Package2Icon } from "./package-2";
+export { SnowflakeIcon } from "./snowflake";
 export { StarIcon } from "./star";

@@ -1,5 +1,6 @@
 import * as React from "react"
-import { Eye, EyeOff } from "lucide-react"
+import { EyeIcon } from "@/components/ui/icons/eye"
+import { EyeOffIcon } from "@/components/ui/icons/eye-off"
 import { inputVariants, type InputProps } from "./Input"
 import { Label } from "./Label"
 import { cn } from "../../lib/utils"
@@ -35,7 +36,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
             aria-label={visible ? "Hide password" : "Show password"}
             tabIndex={-1}
           >
-            {visible ? <EyeOff size={16} /> : <Eye size={16} />}
+            {visible ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
           </button>
         </div>
         {typeof error === "string" && (

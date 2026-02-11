@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/ThemeProvider';
-import { Snowflake, Sun } from 'lucide-react';
+import { SnowflakeIcon } from '@/components/ui/icons/snowflake';
+import { SunIcon } from '@/components/ui/icons/sun';
 
 export interface StyleToggleProps {
   className?: string;
@@ -32,7 +33,7 @@ export const StyleToggle = React.forwardRef<HTMLDivElement, StyleToggleProps>(
               : 'text-text-secondary hover:text-text-primary'
           )}
         >
-          <Snowflake size={14} />
+          <SnowflakeIcon size={14} />
           Arctic
         </button>
         <button
@@ -46,7 +47,7 @@ export const StyleToggle = React.forwardRef<HTMLDivElement, StyleToggleProps>(
               : 'text-text-secondary hover:text-text-primary'
           )}
         >
-          <Sun size={14} />
+          <SunIcon size={14} />
           Bloom
         </button>
       </div>

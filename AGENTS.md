@@ -36,11 +36,18 @@ Key characteristics:
 
 ### 1.2. Iconography (STRICT)
 > [!IMPORTANT]
-> **ALWAYS use `AnimatedIcon`.**
-> Never use static `lucide-react` icons directly (e.g., `<Home />`). Use `<AnimatedIcon icon={Home} />` for a living, premium feel.
-> - The component auto-selects contextual animations per icon (arrows slide, settings rotate, bell rings).
-> - Override with `animation` prop: `"scale" | "rotate" | "wiggle" | "shake" | "pulse" | "slideRight" | "slideLeft" | "ring"`.
-> - Default fallback: `"scale"`.
+> **ALWAYS use animated icon components from `src/components/ui/icons/`.**
+> Never import static icons from `lucide-react` directly (e.g., `import { Home } from 'lucide-react'`).
+> Instead, import the animated wrapper:
+> ```tsx
+> import { HomeIcon } from '@/components/ui/icons/home';
+> // or barrel import:
+> import { HomeIcon } from '@/components/ui/icons';
+> ```
+> - 77+ individual animated icon components live in `src/components/ui/icons/`.
+> - Each uses `motion/react` for hover animations with an imperative handle (`startAnimation` / `stopAnimation`).
+> - Icons accept `size` prop (default 28) and standard `HTMLAttributes<HTMLDivElement>`.
+> - An integrity test (`src/test/no-static-lucide-imports.test.ts`) enforces zero direct lucide-react imports in components.
 
 ## 2. Token Architecture
 
@@ -346,3 +353,13 @@ python3 tests/validate_design.py                     # Token validation
 **ESLint:** Modern flat config (`eslint.config.js`) with typescript-eslint, react-hooks, react-refresh. Ignores `dist/`.
 
 **Commits:** `type(scope): subject` (scope optional). Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`. Imperative mood, <= 72 chars, no trailing period.
+
+## 14. Skill Maintenance
+
+> [!IMPORTANT]
+> **After any architectural change, update the agent skill.**
+> The `.claude/skills/seed-design-system/` directory contains an agent skill (SKILL.md + reference files) that teaches AI assistants how to use this design system. When you make changes that affect the system's architecture, conventions, or component inventory, you MUST update the skill to match:
+> - **SKILL.md**: Forbidden patterns, token references, component categories, theming, animation, project structure
+> - **references/**: Token catalog, component inventory, animation system, glass effects, blocks catalog, icons catalog, Next.js integration
+>
+> The skill should contain **general guidance** (patterns, conventions, rules), not fragile specifics (exact counts, exhaustive lists). Point agents to `ls` or `grep` commands for dynamic discovery instead of hardcoding inventories.

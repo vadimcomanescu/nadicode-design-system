@@ -348,11 +348,38 @@ python3 tests/validate_design.py                     # Token validation
 
 **Icons & Utilities:** lucide-react, tailwindcss-animate
 
-## 13. ESLint & Commit Standard
+## 13. Quality Gates (enforced by git hooks)
 
-**ESLint:** Modern flat config (`eslint.config.js`) with typescript-eslint, react-hooks, react-refresh. Ignores `dist/`.
+Every commit is gated by husky pre-commit hooks. Nothing reaches the repo
+without passing ALL of these:
 
-**Commits:** `type(scope): subject` (scope optional). Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`. Imperative mood, <= 72 chars, no trailing period.
+### Pre-commit (blocks `git commit`)
+
+1. **Type-check**: `npx tsc -b` (zero tolerance for type errors)
+2. **Lint + auto-fix staged files**: `npx lint-staged` (runs `eslint --fix` on staged `*.{ts,tsx}`)
+3. **Unit tests**: `npx vitest run` (all 1084+ tests must pass)
+
+### Pre-push (blocks `git push`)
+
+4. **Full build**: `npm run build` (tsc + vite build must succeed)
+
+### NPM Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `npm run typecheck` | `tsc -b` |
+| `npm run lint` | `eslint .` (check only) |
+| `npm run lint:fix` | `eslint . --fix` (auto-fix) |
+| `npm run test` | `vitest run` |
+| `npm run test:all` | typecheck + lint + tests |
+
+### ESLint Config
+
+Modern flat config (`eslint.config.js`) with typescript-eslint, react-hooks, react-refresh. Ignores `dist/`.
+
+### Commits
+
+`type(scope): subject` (scope optional). Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`. Imperative mood, <= 72 chars, no trailing period.
 
 ## 14. Skill Maintenance
 

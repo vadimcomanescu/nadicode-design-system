@@ -14,6 +14,16 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - name: Verify SCAFFOLD_PAT is set
+        run: |
+          if [ -z "${{ secrets.SCAFFOLD_PAT }}" ]; then
+            echo "::error::SCAFFOLD_PAT secret is not configured."
+            echo "Create a fine-grained PAT at https://github.com/settings/personal-access-tokens"
+            echo "Scope: vadimcomanescu/scaffold-nextjs-saas, permissions: Contents (read/write), Pull requests (read/write)"
+            echo "Then add it at https://github.com/vadimcomanescu/nadicode-design-system/settings/secrets/actions"
+            exit 1
+          fi
+
       - name: Checkout design system
         uses: actions/checkout@v4
         with:
@@ -45,6 +55,26 @@ jobs:
         run: |
           git diff --quiet && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
 
+      - name: Typecheck scaffold
+        if: steps.diff.outputs.changed == 'true'
+        working-directory: scaffold
+        run: npx tsc --noEmit
+
+      - name: Lint scaffold
+        if: steps.diff.outputs.changed == 'true'
+        working-directory: scaffold
+        run: npx eslint .
+
+      - name: Test scaffold
+        if: steps.diff.outputs.changed == 'true'
+        working-directory: scaffold
+        run: npx vitest run --coverage
+
+      - name: Build scaffold
+        if: steps.diff.outputs.changed == 'true'
+        working-directory: scaffold
+        run: npm run build
+
       - name: Get DS commit info
         if: steps.diff.outputs.changed == 'true'
         id: ds-info
@@ -59,10 +89,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.SCAFFOLD_PAT }}
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           BRANCH="chore/sync-ds-${{ steps.ds-info.outputs.sha }}"
           git checkout -b "$BRANCH"
           git add -A
-          git commit -m "$(cat <<EOF
+          git commit -m "$(cat <<'EOF'
           Sync design system (${{ steps.ds-info.outputs.sha }})
 
           Upstream: ${{ steps.ds-info.outputs.msg }}
@@ -71,17 +103,23 @@ jobs:
           git push -u origin "$BRANCH"
           gh pr create \
             --title "Sync design system (${{ steps.ds-info.outputs.sha }})" \
-            --body "$(cat <<EOF
+            --body "$(cat <<'EOF'
           ## Summary
 
-          Auto-sync from [nadicode-design-system@\`${{ steps.ds-info.outputs.sha }}\`](https://github.com/vadimcomanescu/nadicode-design-system/commit/${{ steps.ds-info.outputs.sha }}).
+          Auto-sync from [nadicode-design-system@`${{ steps.ds-info.outputs.sha }}`](https://github.com/vadimcomanescu/nadicode-design-system/commit/${{ steps.ds-info.outputs.sha }}).
 
           Upstream commit: **${{ steps.ds-info.outputs.msg }}**
+
+          ## Validated
+
+          - [x] `tsc --noEmit` passed
+          - [x] `eslint .` passed
+          - [x] `vitest run --coverage` passed (90%+ threshold)
+          - [x] `next build` passed
 
           ## Review checklist
 
           - [ ] Check diff for token/component changes
-          - [ ] Run \`npm test\` locally
           - [ ] Verify dev server renders correctly
           EOF
           )"

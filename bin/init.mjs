@@ -173,15 +173,19 @@ function copySources() {
 // ─── Step 2: Copy fonts ─────────────────────────────────────
 
 function copyFonts() {
-  const src = join(DS_ROOT, 'public', 'fonts', 'geist-pixel')
-  const dest = join(TARGET, 'public', 'fonts', 'geist-pixel')
-  if (!existsSync(src)) return
+  const fontsRoot = join(DS_ROOT, 'public', 'fonts')
+  if (!existsSync(fontsRoot)) return
 
-  mkdirSync(dest, { recursive: true })
   let count = 0
-  for (const f of readdirSync(src)) {
-    copyFileSync(join(src, f), join(dest, f))
-    count++
+  for (const family of readdirSync(fontsRoot)) {
+    const src = join(fontsRoot, family)
+    if (!statSync(src).isDirectory()) continue
+    const dest = join(TARGET, 'public', 'fonts', family)
+    mkdirSync(dest, { recursive: true })
+    for (const f of readdirSync(src)) {
+      copyFileSync(join(src, f), join(dest, f))
+      count++
+    }
   }
   ok(`${count} font files`)
 }

@@ -475,7 +475,7 @@ export const tokens = {
   colors: colorTokens.dark,
   typography: {
     fontFamily: {
-      sans: ['Satoshi', 'sans-serif'],
+      sans: ['var(--font-satoshi)', 'Satoshi', 'sans-serif'],
       pixel: ['GeistPixel', 'monospace'],
       'pixel-grid': ['GeistPixelGrid', 'monospace'],
       'pixel-line': ['GeistPixelLine', 'monospace'],

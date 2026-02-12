@@ -113,6 +113,7 @@ const SearchCommand = React.forwardRef<HTMLDivElement, SearchCommandProps>(
         className={cn(searchCommandVariants({ variant, size }), "w-full", className)}
         role="combobox"
         aria-expanded={results.length > 0}
+        aria-controls="search-command-listbox"
         aria-haspopup="listbox"
         {...props}
       >
@@ -144,6 +145,7 @@ const SearchCommand = React.forwardRef<HTMLDivElement, SearchCommandProps>(
 
         {!loading && results.length > 0 && (
           <ul
+            id="search-command-listbox"
             className="max-h-[300px] overflow-y-auto py-1"
             role="listbox"
             aria-label="Search results"

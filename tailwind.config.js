@@ -16,7 +16,7 @@ function buildScaleColors(scales) {
 }
 
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   darkMode: 'class',
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -69,7 +69,10 @@ export default {
           DEFAULT: 'rgb(var(--color-info) / <alpha-value>)',
           foreground: 'rgb(var(--color-info-foreground) / <alpha-value>)',
         },
-        overlay: 'rgb(var(--color-overlay) / <alpha-value>)',
+        overlay: {
+          DEFAULT: 'rgb(var(--color-overlay) / <alpha-value>)',
+          foreground: 'rgb(var(--color-overlay-foreground) / <alpha-value>)',
+        },
         muted: {
           DEFAULT: 'rgb(var(--color-muted) / <alpha-value>)',
           foreground: 'rgb(var(--color-muted-foreground) / <alpha-value>)',
@@ -261,3 +264,5 @@ export default {
   },
   plugins: [tailwindAnimate],
 }
+
+export default config;

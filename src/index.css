@@ -47,6 +47,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'GeistPixel';
+  src: url('/fonts/geist-pixel/GeistPixel-Grid.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GeistPixelLine';
+  src: url('/fonts/geist-pixel/GeistPixel-Line.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
 
 
@@ -99,6 +115,7 @@
 
     /* Overlay */
     --color-overlay: 0 0 0;
+    --color-overlay-foreground: 251 252 253;
 
     /* Muted */
     --color-muted: 237 240 243;
@@ -106,6 +123,7 @@
 
     /* Slider */
     --color-slider-fill: 0 0 0 / 0.25;
+    --color-slider-handle: 255 255 255;
 
     /* Text */
     --color-text-primary: 26 34 48;
@@ -187,6 +205,7 @@
 
     /* Overlay */
     --color-overlay: 0 0 0;
+    --color-overlay-foreground: 225 231 237;
 
     /* Muted */
     --color-muted: 35 39 48;
@@ -194,6 +213,7 @@
 
     /* Slider */
     --color-slider-fill: 255 255 255 / 0.10;
+    --color-slider-handle: 255 255 255;
 
     /* Text */
     --color-text-primary: 225 231 237;
@@ -277,6 +297,7 @@
 
     /* Overlay */
     --color-overlay: 45 35 24;
+    --color-overlay-foreground: 254 253 251;
 
     /* Muted */
     --color-muted: 245 241 236;
@@ -284,6 +305,7 @@
 
     /* Slider */
     --color-slider-fill: 45 35 24 / 0.20;
+    --color-slider-handle: 254 253 251;
 
     /* Text */
     --color-text-primary: 45 35 24;

@@ -1,1 +1,2 @@
 npm run build
+bash bin/test-sync.sh

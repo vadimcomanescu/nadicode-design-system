@@ -21,7 +21,7 @@ export function CallToAction() {
                         <Button
                             asChild
                             size="lg">
-                            <a href="/">
+                            <a href="#">
                                 <span>Get Started</span>
                             </a>
                         </Button>
@@ -30,7 +30,7 @@ export function CallToAction() {
                             asChild
                             size="lg"
                             variant="outline">
-                            <a href="/">
+                            <a href="#">
                                 <span>Book Demo</span>
                             </a>
                         </Button>

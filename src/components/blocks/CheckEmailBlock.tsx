@@ -85,7 +85,7 @@ export function CheckEmailBlock({
           <Separator />
 
           <div className="text-center space-y-2">
-            <p className="text-sm text-text-tertiary">Didn't receive the email?</p>
+            <p className="text-sm text-text-tertiary">Didn{"'"}t receive the email?</p>
             <Button
               variant="outline"
               size="sm"

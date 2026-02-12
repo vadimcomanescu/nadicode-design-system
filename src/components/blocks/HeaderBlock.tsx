@@ -35,7 +35,7 @@ export const HeroHeader = () => {
                         className={cn('relative flex flex-wrap items-center justify-between gap-6 py-3 duration-200 lg:gap-0 lg:py-6', scrolled && 'lg:py-4')}>
                         <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
                             <a
-                                href="/"
+                                href="#"
                                 aria-label="home"
                                 className="flex items-center space-x-2">
                                 <Logo />

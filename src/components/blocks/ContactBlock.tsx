@@ -70,7 +70,7 @@ export function ContactBlock({
                 Message sent
               </Typography>
               <Typography variant="body" className="text-text-secondary">
-                We'll get back to you soon.
+                We{"'"}ll get back to you soon.
               </Typography>
             </div>
           ) : (

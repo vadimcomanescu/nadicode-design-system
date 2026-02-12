@@ -102,7 +102,7 @@ export function MagicLinkBlock({
 
             <Alert>
               <AlertDescription className="text-xs text-text-tertiary">
-                We'll send you a link that expires in 15 minutes.
+                We{"'"}ll send you a link that expires in 15 minutes.
               </AlertDescription>
             </Alert>
 

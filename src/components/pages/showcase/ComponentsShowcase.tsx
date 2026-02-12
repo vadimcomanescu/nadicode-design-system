@@ -195,7 +195,7 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                   </div>
                   <div className="space-y-2">
                     <Label>Security Level</Label>
-                    <Slider defaultValue={[50]} max={100} step={1} />
+                    <Slider label="Security Level" defaultValue={50} max={100} step={1} />
                   </div>
                   <div className="space-y-2">
                     <Label>Date Picker</Label>

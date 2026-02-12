@@ -28,7 +28,7 @@ export function AuthLayout({ mode = "login" }: AuthLayoutProps) {
                         Build the future, faster.
                     </h1>
                     <p className="text-lg text-text-tertiary relative">
-                        "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
+                        {'"'}This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.{'"'}
                     </p>
                 </StaggerChildren>
                 <div className="relative z-20 p-8 mt-auto">

@@ -108,8 +108,18 @@ function shouldSkip(name) {
 }
 
 /**
+ * Strip Vite-specific eslint directives that don't exist in Next.js.
+ * The DS uses react-refresh plugin; the scaffold does not.
+ */
+function stripViteEslint(text) {
+  return text
+    .replace(/^\s*\/\*\s*eslint-disable\s+react-refresh\/[^\n]*\*\/\s*\n?/gm, '')
+    .replace(/^\s*\/\/\s*eslint-disable-next-line\s+react-refresh\/[^\n]*\n?/gm, '')
+}
+
+/**
  * Recursively copy directory, excluding test files.
- * Prepends "use client" to .ts/.tsx files for Next.js compatibility.
+ * Prepends "use client" and strips Vite eslint directives for Next.js.
  */
 function copyDir(src, dest, { useClient = false } = {}) {
   if (!existsSync(src)) return 0
@@ -130,6 +140,7 @@ function copyDir(src, dest, { useClient = false } = {}) {
     const ext = extname(name)
     if (useClient && (ext === '.ts' || ext === '.tsx')) {
       let text = readFileSync(from, 'utf8')
+      text = stripViteEslint(text)
       if (!text.startsWith('"use client"') && !text.startsWith("'use client'")) {
         text = '"use client"\n\n' + text
       }

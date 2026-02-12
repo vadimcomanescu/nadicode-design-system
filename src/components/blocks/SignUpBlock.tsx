@@ -12,7 +12,7 @@ export function LoginPage() {
                 <div className="p-8 pb-6">
                     <div>
                         <a
-                            href="/"
+                            href="#"
                             aria-label="go home">
                             <LogoIcon />
                         </a>

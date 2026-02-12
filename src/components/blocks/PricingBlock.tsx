@@ -51,7 +51,7 @@ export function PricingTable() {
                         Simple, transparent pricing
                     </h2>
                     <p className="mb-8 text-lg text-text-secondary">
-                        Choose the plan that's right for you. Change or cancel anytime.
+                        Choose the plan that{"'"}s right for you. Change or cancel anytime.
                     </p>
                     <div className="flex items-center justify-center gap-4">
                         <span className={cn("text-sm font-medium", !isYearly ? "text-text-primary" : "text-text-tertiary")}>

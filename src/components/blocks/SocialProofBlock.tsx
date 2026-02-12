@@ -81,7 +81,7 @@ export function Testimonials() {
                         <Shine key={i} enableOnHover loop loopDelay={200} color="var(--color-accent)" opacity={0.15}>
                             <Card interactive className="w-full max-w-md">
                                 <CardContent className="p-6">
-                                    <p className="mb-4 text-lg text-text-secondary leading-relaxed">"{t.quote}"</p>
+                                    <p className="mb-4 text-lg text-text-secondary leading-relaxed">{'"'}{t.quote}{'"'}</p>
                                     <div className="flex items-center gap-3">
                                         <Avatar className="h-10 w-10 border border-primary/20">
                                             <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${t.author}`} />

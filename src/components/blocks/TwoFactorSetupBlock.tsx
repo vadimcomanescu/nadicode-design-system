@@ -88,7 +88,7 @@ export function TwoFactorSetupBlock({
           <Collapsible>
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="sm" className="w-full text-text-tertiary">
-                Can't scan? Enter code manually
+                Can{"'"}t scan? Enter code manually
               </Button>
             </CollapsibleTrigger>
             <CollapsibleContent className="pt-2">

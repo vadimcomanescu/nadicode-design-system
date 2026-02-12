@@ -59,7 +59,7 @@ export function NewsletterBlock({
           {status === "success" ? (
             <div className="mt-8 flex items-center justify-center gap-2 text-success">
               <CheckIcon size={20} />
-              <span className="text-sm font-medium">You're subscribed!</span>
+              <span className="text-sm font-medium">You{"'"}re subscribed!</span>
             </div>
           ) : (
             <form

@@ -377,11 +377,38 @@ function patchTsConfig() {
   ok('tsconfig.json (@/* path alias)')
 }
 
-// ─── Step 8: Agent CLAUDE.md ────────────────────────────────
+// ─── Step 8: Write .seed-version ────────────────────────────
 
-const SEED_SECTION = `# Seed Design System
+function writeSeedVersion() {
+  let commit = 'unknown'
+  try {
+    commit = execSync('git rev-parse --short HEAD', {
+      cwd: DS_ROOT, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'],
+    }).trim()
+  } catch {
+    warn('Could not read DS git commit')
+  }
 
-This project uses the Seed Design System. Read the skill before working with UI:
+  writeFileSync(join(TARGET, '.seed-version'), commit + '\n')
+  ok(`.seed-version (${commit})`)
+}
+
+// ─── Step 9: Agent CLAUDE.md ────────────────────────────────
+
+const SEED_SECTION = `# Provenance
+
+This project uses the [Nadicode Design System](https://github.com/vadimcomanescu/nadicode-design-system) (Seed).
+
+- **Vendored commit**: see \`.seed-version\` in project root
+- **Update**: clone the DS repo, then run \`node <ds-path>/bin/init.mjs --update\`
+- **What updates**: components, tokens, icons, blocks, hooks, agent skill, CSS
+- **What it won't touch**: your app routes, layouts, pages, or custom components
+
+After updating, run \`npm test\` to verify integrity gates still pass.
+
+# Seed Design System
+
+Read the skill before working with UI:
 \`.agents/skills/seed-design-system/SKILL.md\`
 
 ## Rules
@@ -419,12 +446,17 @@ function generateAgentMd() {
 
     if (existsSync(dest)) {
       const existing = readFileSync(dest, 'utf8')
-      if (existing.includes('Seed Design System')) {
+      if (existing.includes('Seed Design System') || existing.includes('Nadicode Design System')) {
         if (UPDATE) {
-          const updated = existing.replace(
+          // Strip old provenance + seed sections, replace with new template
+          let updated = existing.replace(
+            /# Provenance[\s\S]*?(?=\n# (?!Seed|Provenance)|$)/,
+            ''
+          ).replace(
             /# Seed Design System[\s\S]*?(?=\n# (?!Seed)|$)/,
-            SEED_SECTION.trim()
-          )
+            ''
+          ).trim()
+          updated = SEED_SECTION + updated + '\n'
           writeFileSync(dest, updated)
           ok(`${dir}/${file} (updated Seed section)`)
         } else {
@@ -553,6 +585,7 @@ async function main() {
   setupTailwind()
   setupPostCSS()
   patchTsConfig()
+  writeSeedVersion()
   generateAgentMd()
   log('')
   installDeps()

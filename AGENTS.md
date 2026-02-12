@@ -13,7 +13,7 @@ This file is the canonical agent guide for this repository. `CLAUDE.md` symlinks
 | Tokens | `src/lib/tokens.config.js` -> `src/index.css` -> `tailwind.config.js` |
 | Theme | Light + Dark via CSS variables, `darkMode: 'class'` |
 | Tests | Vitest + Testing Library, co-located `*.test.tsx` |
-| Dev | `npm run dev` (port 3000) |
+| Dev | `npm run dev` (port 5001) |
 | Type check | `npx tsc --noEmit` |
 | Test | `npm run test` |
 | Lint | `npm run lint` |
@@ -44,7 +44,7 @@ Key characteristics:
 > // or barrel import:
 > import { HomeIcon } from '@/components/ui/icons';
 > ```
-> - 77+ individual animated icon components live in `src/components/ui/icons/`.
+> - 76+ animated icon components live in `src/components/ui/icons/`.
 > - Each uses `motion/react` for hover animations with an imperative handle (`startAnimation` / `stopAnimation`).
 > - Icons accept `size` prop (default 28) and standard `HTMLAttributes<HTMLDivElement>`.
 > - An integrity test (`src/test/no-static-lucide-imports.test.ts`) enforces zero direct lucide-react imports in components.
@@ -95,8 +95,8 @@ Variables use **space-separated RGB values** (not hex, not HSL):
 ```
 
 ### 2.4. Typography
-**Font**: `Satoshi` (Fontshare CDN), geometric sans-serif.
-**Pixel fonts**: `GeistPixel`, `GeistPixelGrid`, `GeistPixelLine` for decorative use.
+**Font**: `Satoshi`, geometric sans-serif. Bundled locally as woff2 in `public/fonts/satoshi/` (for scaffold customers) and `src/app/fonts/` (for `next/font/local` in this repo). Loaded via `next/font/local` in `src/app/layout.tsx` with CSS variable `--font-satoshi`.
+**Pixel fonts**: `GeistPixel`, `GeistPixelGrid`, `GeistPixelLine` for decorative use. Bundled in `public/fonts/geist-pixel/`.
 
 ## 3. Component Patterns (Golden Pattern)
 
@@ -393,7 +393,7 @@ without passing ALL of these:
 
 ### ESLint Config
 
-Modern flat config (`eslint.config.js`) with typescript-eslint, react-hooks, react-refresh. Ignores `dist/`.
+Modern flat config (`eslint.config.mjs`) with typescript-eslint, react-hooks, react-refresh.
 
 ### Commits
 

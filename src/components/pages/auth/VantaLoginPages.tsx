@@ -8,7 +8,7 @@ import { Label } from '../../ui/Label'
 import { Checkbox } from '../../ui/Checkbox'
 import { GoogleIcon } from '../../ui/BrandIcons'
 import { useRouter } from 'next/navigation'
-import { useTheme } from '../../../lib/ThemeProvider'
+import { useTheme } from '@/lib/ThemeProvider'
 import { ZapIcon } from '../../ui/icons/zap'
 
 // Note: Vanta effects are now lazy-loaded via effectImporter to avoid bundle bloat.

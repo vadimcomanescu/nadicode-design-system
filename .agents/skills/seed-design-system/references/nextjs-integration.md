@@ -96,8 +96,7 @@ npm install tailwindcss-animate
 Copy the contents of Seed's `src/index.css` into your `app/globals.css`. Key sections:
 
 ```css
-/* Font import */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap');
+/* Fonts are bundled locally - loaded via next/font/local in layout.tsx */
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -227,8 +226,21 @@ export default {
 ```tsx
 // app/layout.tsx (SERVER component - no "use client")
 import type { Metadata } from "next"
+import localFont from "next/font/local"
 import { ThemeProvider } from "@/lib/ThemeProvider"
 import "./globals.css"
+
+const satoshi = localFont({
+  src: [
+    { path: "./fonts/Satoshi-Light.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/Satoshi-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Satoshi-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/Satoshi-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/Satoshi-Black.woff2", weight: "900", style: "normal" },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "My App",
@@ -241,14 +253,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-background text-text-primary antialiased min-h-dvh">
+    <html lang="en" className={satoshi.variable} suppressHydrationWarning>
+      <body className="bg-background text-text-primary antialiased min-h-dvh font-sans">
         <ThemeProvider defaultTheme="system" storageKey="theme">
           {children}
         </ThemeProvider>
@@ -258,22 +264,7 @@ export default function RootLayout({
 }
 ```
 
-**Alternative font loading** with `next/font/local`:
-```tsx
-import localFont from "next/font/local"
-
-const satoshi = localFont({
-  src: [
-    { path: "../fonts/Satoshi-Regular.woff2", weight: "400" },
-    { path: "../fonts/Satoshi-Medium.woff2", weight: "500" },
-    { path: "../fonts/Satoshi-Bold.woff2", weight: "700" },
-    { path: "../fonts/Satoshi-Black.woff2", weight: "900" },
-  ],
-  variable: "--font-satoshi",
-})
-
-// Then in <body>: className={`${satoshi.variable} font-sans ...`}
-```
+Satoshi fonts are bundled locally in `public/fonts/satoshi/` (copied by `init.mjs`). The `@font-face` declarations in `seed-tokens.css` serve as a fallback. For optimal loading, use `next/font/local` as shown above.
 
 ---
 

@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card";
 import { Typography } from "../../ui/Typography";
 import { Grid } from "../../layout/Grid";
-import { useTheme } from "../../../lib/ThemeProvider";
+import { useTheme } from "@/lib/ThemeProvider";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/Table";
 import { SuccessCheck } from "../../ui/SuccessCheck";
 import { ConfettiBurst } from "../../ui/ConfettiBurst";

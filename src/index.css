@@ -70,6 +70,9 @@
     --color-muted: 237 240 243;
     --color-muted-foreground: 62 79 96;
 
+    /* Slider */
+    --color-slider-fill: 0 0 0 / 0.25;
+
     /* Text */
     --color-text-primary: 26 34 48;
     --color-text-secondary: 62 79 96;
@@ -154,6 +157,9 @@
     /* Muted */
     --color-muted: 35 39 48;
     --color-muted-foreground: 160 174 187;
+
+    /* Slider */
+    --color-slider-fill: 255 255 255 / 0.10;
 
     /* Text */
     --color-text-primary: 225 231 237;
@@ -241,6 +247,9 @@
     /* Muted */
     --color-muted: 245 241 236;
     --color-muted-foreground: 87 73 56;
+
+    /* Slider */
+    --color-slider-fill: 45 35 24 / 0.20;
 
     /* Text */
     --color-text-primary: 45 35 24;

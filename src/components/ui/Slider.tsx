@@ -74,8 +74,12 @@ function FillBar({
   )
   return (
     <motion.div
-      className="absolute top-0 left-0 h-full bg-surface-hover"
-      style={{ width, borderRadius: radius }}
+      className="absolute top-0 left-0 h-full"
+      style={{
+        width,
+        borderRadius: radius,
+        background: "rgb(var(--color-slider-fill))",
+      }}
     />
   )
 }
@@ -397,7 +401,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         tabIndex={disabled ? -1 : 0}
         className={cn(
           "relative w-full select-none touch-none outline-none",
-          "rounded-xl bg-surface overflow-hidden",
+          "rounded-xl bg-muted overflow-hidden",
           "transition-[filter] duration-200",
           "focus-visible:ring-1 focus-visible:ring-accent",
           disabled && "opacity-50 pointer-events-none",

@@ -193,10 +193,7 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                       </div>
                     </RadioGroup>
                   </div>
-                  <div className="space-y-2">
-                    <Label>Security Level</Label>
-                    <Slider label="Security Level" defaultValue={50} max={100} step={1} />
-                  </div>
+                  <Slider label="Security Level" defaultValue={50} max={100} step={1} />
                   <div className="space-y-2">
                     <Label>Date Picker</Label>
                     <DatePicker />

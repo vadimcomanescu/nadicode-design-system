@@ -27,5 +27,11 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+# Build artifacts
+tsconfig.tsbuildinfo
+
+# Plans (auto-generated)
+plans/
+
 # next-agents-md
 .next-docs/

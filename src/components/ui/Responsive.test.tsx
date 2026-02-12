@@ -6,7 +6,7 @@ import { ResponsivePanel, ResponsiveHandle } from './Responsive'
 describe('ResponsivePanel', () => {
   it('renders without crashing', () => {
     const { container } = render(
-      <ResizablePanelGroup direction="horizontal">
+      <ResizablePanelGroup orientation="horizontal">
         <ResponsivePanel>Content</ResponsivePanel>
         <ResizablePanel>Other</ResizablePanel>
       </ResizablePanelGroup>
@@ -18,7 +18,7 @@ describe('ResponsivePanel', () => {
 describe('ResponsiveHandle', () => {
   it('renders without crashing', () => {
     const { container } = render(
-      <ResizablePanelGroup direction="horizontal">
+      <ResizablePanelGroup orientation="horizontal">
         <ResizablePanel>A</ResizablePanel>
         <ResponsiveHandle />
         <ResizablePanel>B</ResizablePanel>

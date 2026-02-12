@@ -2,7 +2,7 @@
 import {
   type ToastActionElement,
   type ToastProps,
-} from "../components/ui/Toast.tsx"
+} from "../components/ui/Toast"
 
 import * as React from "react"
 

@@ -5,7 +5,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './Resizabl
 describe('Resizable', () => {
   it('renders ResizablePanelGroup without crashing', () => {
     const { container } = render(
-      <ResizablePanelGroup direction="horizontal">
+      <ResizablePanelGroup orientation="horizontal">
         <ResizablePanel>Panel 1</ResizablePanel>
         <ResizableHandle />
         <ResizablePanel>Panel 2</ResizablePanel>
@@ -16,7 +16,7 @@ describe('Resizable', () => {
 
   it('renders handle with grip icon when withHandle is true', () => {
     const { container } = render(
-      <ResizablePanelGroup direction="horizontal">
+      <ResizablePanelGroup orientation="horizontal">
         <ResizablePanel>A</ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel>B</ResizablePanel>

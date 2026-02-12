@@ -8,8 +8,6 @@ import { UserIcon } from "../ui/icons/user";
 import { UsersIcon } from "../ui/icons/users";
 import { BellIcon } from "../ui/icons/bell";
 import { LockIcon } from "../ui/icons/lock";
-import { ProfilePage } from "../pages/settings/ProfilePage";
-import { TeamPage } from "../pages/settings/TeamPage";
 import { Badge } from "../ui/Badge";
 
 export function SettingsLayout() {
@@ -97,17 +95,12 @@ export function SettingsLayout() {
                                 exit={{ opacity: 0, y: -8 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                {activeLink === "Profile" && <ProfilePage />}
-                                {activeLink === "Team" && <TeamPage />}
-
-                                {!["Profile", "Team"].includes(activeLink) && (
-                                    <div className="flex h-[400px] items-center justify-center rounded-lg border border-dashed border-border">
-                                        <div className="text-center space-y-2">
-                                            <p className="text-lg font-medium text-text-primary">{activeLink} Settings</p>
-                                            <p className="text-sm text-text-secondary">This section is under construction.</p>
-                                        </div>
+                                <div className="flex h-[400px] items-center justify-center rounded-lg border border-dashed border-border">
+                                    <div className="text-center space-y-2">
+                                        <p className="text-lg font-medium text-text-primary">{activeLink} Settings</p>
+                                        <p className="text-sm text-text-secondary">This section is under construction.</p>
                                     </div>
-                                )}
+                                </div>
                             </motion.div>
                         </AnimatePresence>
                     </div>

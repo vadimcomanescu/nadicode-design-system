@@ -540,7 +540,7 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                 <div className="space-y-4">
                   <Typography variant="h3">Resizable Panels</Typography>
                   <div className="h-[400px] border border-border rounded-lg overflow-hidden">
-                    <ResizablePanelGroup direction="horizontal">
+                    <ResizablePanelGroup orientation="horizontal">
                       <ResponsivePanel defaultSize={25} minSize={20} mobileBehavior="hide" className="md:hidden lg:flex">
                         <div className="flex h-full flex-col p-4 bg-surface gap-2">
                           <div className="p-2 font-semibold text-text-primary mb-2">My App</div>

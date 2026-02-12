@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import { useMotionValue, useSpring, type SpringOptions } from 'motion/react'
 import {

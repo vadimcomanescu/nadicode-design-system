@@ -1,4 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
+'use client'
+
 import { DataTable } from "../ui/DataTable"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "../ui/Badge"

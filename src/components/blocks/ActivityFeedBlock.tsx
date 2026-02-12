@@ -1,3 +1,5 @@
+'use client'
+
 import { Timeline } from "../ui/Timeline"
 import { Avatar, AvatarFallback } from "../ui/Avatar"
 import { Typography } from "../ui/Typography"

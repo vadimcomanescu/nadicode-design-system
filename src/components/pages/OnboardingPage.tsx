@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react"
 import { motion } from "motion/react"
 import { motionSpring } from "../../lib/motion"
@@ -32,7 +34,7 @@ export function OnboardingPage() {
             <CheckIcon size={32} />
           </motion.div>
           <Typography variant="h2" className="text-text-primary">
-            You're all set!
+            You&apos;re all set!
           </Typography>
           <Typography variant="body" className="text-text-secondary max-w-sm mx-auto">
             Your workspace is ready. Start building something great.
@@ -59,7 +61,7 @@ export function OnboardingPage() {
             Welcome to Nadicode
           </Typography>
           <Typography variant="body" className="mt-2 text-text-secondary">
-            Let's get your workspace set up in a few steps.
+            Let&apos;s get your workspace set up in a few steps.
           </Typography>
         </div>
 
@@ -80,7 +82,7 @@ export function OnboardingPage() {
                     Ready to launch?
                   </Typography>
                   <Typography variant="body" className="text-text-secondary max-w-md mx-auto">
-                    We'll walk you through setting up your profile, preferences, and first project. It only takes a minute.
+                    We&apos;ll walk you through setting up your profile, preferences, and first project. It only takes a minute.
                   </Typography>
                 </div>
               ),

@@ -1,7 +1,10 @@
+'use client'
+
 import { LogoIcon } from '@/components/ui/Logo'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'
+import Link from 'next/link'
 
 export function LoginPage() {
     return (
@@ -11,11 +14,11 @@ export function LoginPage() {
                 className="bg-card m-auto h-fit w-full max-w-sm rounded-[calc(var(--radius)+.125rem)] border p-0.5 shadow-md dark:[--color-muted:var(--color-surface)]">
                 <div className="p-8 pb-6">
                     <div>
-                        <a
+                        <Link
                             href="#"
                             aria-label="go home">
                             <LogoIcon />
-                        </a>
+                        </Link>
                         <h1 className="mb-1 mt-4 text-xl font-semibold">Create a Nadicode Account</h1>
                         <p className="text-sm">Welcome! Create an account to get started</p>
                     </div>
@@ -141,7 +144,7 @@ export function LoginPage() {
                             asChild
                             variant="link"
                             className="px-2">
-                            <a href="#">Sign In</a>
+                            <Link href="#">Sign In</Link>
                         </Button>
                     </p>
                 </div>

@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { Avatar3D, type Avatar3DState } from "../ui/Avatar3D"

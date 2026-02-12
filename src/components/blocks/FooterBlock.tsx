@@ -1,3 +1,5 @@
+'use client'
+
 import { TwitterIcon } from "../ui/icons/twitter";
 import { GithubIcon } from "../ui/icons/github";
 import { LinkedinIcon } from "../ui/icons/linkedin";
@@ -6,6 +8,7 @@ import { Input } from "../ui/Input"
 import { Separator } from "../ui/Separator"
 import { ScrollFadeIn } from "../ui/ScrollFadeIn"
 import { StaggerChildren } from "../ui/StaggerChildren"
+import Link from 'next/link'
 
 export function Footer() {
     return (
@@ -35,27 +38,27 @@ export function Footer() {
                         <div className="space-y-4">
                             <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider">Product</h4>
                             <ul className="space-y-2 text-sm text-text-secondary">
-                                <li><a href="#" className="hover:text-primary transition-colors">Components</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Blocks</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Themes</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Showcase</a></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Components</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Blocks</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Themes</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Showcase</Link></li>
                             </ul>
                         </div>
                         <div className="space-y-4">
                             <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider">Company</h4>
                             <ul className="space-y-2 text-sm text-text-secondary">
-                                <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">About</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Blog</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Contact</Link></li>
                             </ul>
                         </div>
                         <div className="space-y-4">
                             <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider">Legal</h4>
                             <ul className="space-y-2 text-sm text-text-secondary">
-                                <li><a href="#" className="hover:text-primary transition-colors">Privacy</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Terms</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">License</a></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Privacy</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">Terms</Link></li>
+                                <li><Link href="#" className="hover:text-primary transition-colors">License</Link></li>
                             </ul>
                         </div>
                     </StaggerChildren>

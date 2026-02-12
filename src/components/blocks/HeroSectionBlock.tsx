@@ -1,3 +1,5 @@
+'use client'
+
 
 import { Button } from '@/components/ui/Button'
 import { HeroHeader } from './HeaderBlock'
@@ -5,6 +7,7 @@ import { InfiniteSlider } from '@/components/ui/InfiniteSlider'
 import { ProgressiveBlur } from '@/components/ui/ProgressiveBlur'
 import { ChevronRightIcon } from '@/components/ui/icons'
 import { FlipWords } from '../ui/text-effects'
+import Link from 'next/link'
 
 export function HeroSection() {
     return (
@@ -30,10 +33,10 @@ export function HeroSection() {
                                         asChild
                                         size="lg"
                                         className="h-12 rounded-full pl-5 pr-3 text-base">
-                                        <a href="#link">
+                                        <Link href="#link">
                                             <span className="text-nowrap">Start Building</span>
                                             <ChevronRightIcon size={16} className="ml-1" />
-                                        </a>
+                                        </Link>
                                     </Button>
                                     <Button
                                         key={2}
@@ -41,9 +44,9 @@ export function HeroSection() {
                                         size="lg"
                                         variant="ghost"
                                         className="h-12 rounded-full px-5 text-base hover:bg-surface-active/5 dark:hover:bg-white/5">
-                                        <a href="#link">
+                                        <Link href="#link">
                                             <span className="text-nowrap">Request a demo</span>
-                                        </a>
+                                        </Link>
                                     </Button>
                                 </div>
                             </div>

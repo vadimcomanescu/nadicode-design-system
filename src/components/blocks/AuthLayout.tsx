@@ -1,3 +1,5 @@
+'use client'
+
 import { LoginBlock } from "./LoginBlock";
 import { AnimatedBackground } from "../ui/AnimatedBackground";
 import { SparklesIcon } from "../ui/icons/sparkles";

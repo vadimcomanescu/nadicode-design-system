@@ -1,3 +1,5 @@
+'use client'
+
 import { HeroHeader } from "../blocks/HeaderBlock"
 import { HeroCentered } from "../blocks/HeroBlock"
 import { LogoCloud, Testimonials } from "../blocks/SocialProofBlock"

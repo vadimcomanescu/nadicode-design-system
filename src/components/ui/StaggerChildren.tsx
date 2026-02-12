@@ -1,3 +1,5 @@
+'use client'
+
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { useRef, Children, type ReactNode } from "react";
 import { cn } from "@/lib/utils";

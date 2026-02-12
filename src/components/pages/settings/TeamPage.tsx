@@ -1,3 +1,5 @@
+'use client'
+
 import { StaggerChildren } from "../../ui/StaggerChildren"
 import { EllipsisIcon, Trash2Icon, ShieldIcon } from "@/components/ui/icons"
 import { SearchIcon } from "../../ui/icons/search"

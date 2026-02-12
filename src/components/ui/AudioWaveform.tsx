@@ -1,4 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
+'use client'
+
 /* eslint-disable react-hooks/refs -- deterministic ref init pattern for stable random offsets */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"

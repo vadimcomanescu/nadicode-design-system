@@ -1,3 +1,5 @@
+'use client'
+
 import { Badge } from "../ui/Badge"
 import { Typography } from "../ui/Typography"
 import { ScrollFadeIn } from "../ui/ScrollFadeIn"

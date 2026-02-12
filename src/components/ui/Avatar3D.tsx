@@ -1,4 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
+'use client'
+
 import * as React from "react"
 import { motion, useSpring, useReducedMotion } from "motion/react"
 import { cva, type VariantProps } from "class-variance-authority"

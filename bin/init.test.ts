@@ -112,14 +112,14 @@ describe("bin/init.mjs", () => {
       expect(existsSync(join(projectDir, "src/components/pages"))).toBe(false)
     })
 
-    it("prepends 'use client' to .tsx files", () => {
+    it("has 'use client' in .tsx files", () => {
       const button = readFileSync(join(projectDir, "src/components/ui/Button.tsx"), "utf8")
-      expect(button.startsWith('"use client"')).toBe(true)
+      expect(button.startsWith("'use client'") || button.startsWith('"use client"')).toBe(true)
     })
 
-    it("prepends 'use client' to .ts hook files", () => {
+    it("has 'use client' in .ts hook files", () => {
       const hook = readFileSync(join(projectDir, "src/hooks/use-toast.ts"), "utf8")
-      expect(hook.startsWith('"use client"')).toBe(true)
+      expect(hook.startsWith("'use client'") || hook.startsWith('"use client"')).toBe(true)
     })
 
     it("does not prepend 'use client' to .js files", () => {
@@ -231,7 +231,7 @@ describe("bin/init.mjs", () => {
 
     it("does not double-prepend 'use client'", () => {
       const button = readFileSync(join(projectDir2, "src/components/ui/Button.tsx"), "utf8")
-      const matches = (button.match(/"use client"/g) || []).length
+      const matches = (button.match(/['"]use client['"]/g) || []).length
       expect(matches).toBe(1)
     })
   })

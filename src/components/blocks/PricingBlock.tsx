@@ -1,3 +1,5 @@
+'use client'
+
 import { CheckIcon } from "../ui/icons/check"
 import { useState } from "react"
 import { CountingNumber } from "../ui/text-effects"

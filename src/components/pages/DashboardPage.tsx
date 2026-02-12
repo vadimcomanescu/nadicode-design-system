@@ -1,3 +1,5 @@
+'use client'
+
 import { PackageIcon, ArrowUpRightIcon } from "@/components/ui/icons"
 import { SearchIcon } from "../ui/icons/search"
 import { StaggerChildren } from "../ui/StaggerChildren"

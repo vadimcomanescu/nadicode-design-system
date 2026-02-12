@@ -1,3 +1,5 @@
+'use client'
+
 import { ScrollFadeIn } from "../ui/ScrollFadeIn";
 import { SettingsLayout } from "../blocks/SettingsLayout";
 import { AuthLayout } from "../blocks/AuthLayout";
@@ -13,7 +15,7 @@ export function VerificationPage() {
             <div className="space-y-2">
                 <Typography variant="h2" className="text-3xl font-bold text-text-primary">Verification Station</Typography>
                 <Typography variant="body" className="text-text-secondary">
-                    Visual confirmation of all new "Synthetic AI" components.
+                    Visual confirmation of all new &quot;Synthetic AI&quot; components.
                 </Typography>
             </div>
 

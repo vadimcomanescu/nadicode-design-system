@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { motion, useInView, useReducedMotion } from "motion/react"
 import { useStyleMotion } from "../../lib/motion"

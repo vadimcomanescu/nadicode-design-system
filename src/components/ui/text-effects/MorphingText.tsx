@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import { AnimatePresence, motion, type HTMLMotionProps } from 'motion/react'
 import {

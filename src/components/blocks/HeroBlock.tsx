@@ -1,3 +1,5 @@
+'use client'
+
 import { ArrowRightIcon, ChevronRightIcon } from "@/components/ui/icons"
 import { SparklesIcon } from "../ui/icons/sparkles"
 import { TerminalIcon } from "../ui/icons/terminal"

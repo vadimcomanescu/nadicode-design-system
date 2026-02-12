@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from "motion/react"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "../ui/Card"
 import { Alert, AlertDescription } from "../ui/Alert"

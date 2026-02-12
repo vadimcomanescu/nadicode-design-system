@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { UploadIcon } from "@/components/ui/icons/upload"

@@ -1,3 +1,5 @@
+'use client'
+
 import { EllipsisIcon, FolderIcon, HomeIcon, LayoutDashboardIcon, StarIcon, Trash2Icon } from "@/components/ui/icons"
 import { UsersIcon } from "../ui/icons/users"
 import { SettingsIcon } from "../ui/icons/settings"
@@ -22,6 +24,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "../ui/Sidebar"
+import Link from 'next/link'
 
 const data = {
   nav: [
@@ -74,10 +77,10 @@ export function DirectoryBlock() {
                   {data.projects.map((item) => (
                     <SidebarMenuItem key={item.name}>
                       <SidebarMenuButton asChild>
-                        <a href={item.url}>
+                        <Link href={item.url}>
                           <FolderIcon size={16} />
                           <span>{item.name}</span>
-                        </a>
+                        </Link>
                       </SidebarMenuButton>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>

@@ -1,3 +1,5 @@
+'use client'
+
 import { HeroHeader } from "../blocks/HeaderBlock"
 import { Footer } from "../blocks/FooterBlock"
 import { ChangelogBlock } from "../blocks/ChangelogBlock"
@@ -13,7 +15,7 @@ export function ChangelogPage() {
         <div className="mx-auto max-w-3xl px-6">
           <ScrollFadeIn>
             <Typography variant="h1" className="text-text-primary">
-              What's new
+              What&apos;s new
             </Typography>
             <Typography variant="body" className="mt-4 text-lg text-text-secondary">
               All the latest updates, improvements, and fixes to the Nadicode design system.

@@ -1,3 +1,5 @@
+'use client'
+
 import { BarChart as BarChartPrimitive } from "../ui/charts/BarChart"
 import { type ChartConfig } from "../ui/Chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"

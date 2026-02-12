@@ -1,3 +1,5 @@
+'use client'
+
 import { StaggerChildren } from "../ui/StaggerChildren"
 import { CountingNumber } from "../ui/text-effects"
 

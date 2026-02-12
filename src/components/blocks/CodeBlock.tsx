@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { CheckIcon } from "../ui/icons/check"
 import { CopyIcon } from "../ui/icons/copy"

@@ -1,4 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
+'use client'
+
 import * as React from 'react';
 import { AnimatePresence, motion, type Transition } from 'motion/react';
 

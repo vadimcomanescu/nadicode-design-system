@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@/components/ui/icons"
 import { DayPicker } from "react-day-picker"

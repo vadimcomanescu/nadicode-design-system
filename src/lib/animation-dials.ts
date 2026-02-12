@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * DialKit animation configuration registry.
  * Centralized tuning presets for major animation patterns.

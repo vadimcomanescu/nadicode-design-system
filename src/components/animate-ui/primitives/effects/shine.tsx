@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react-hooks/refs -- third-party animate-ui code passes refs through cloneElement */
 import * as React from 'react';
 import { motion } from 'motion/react';

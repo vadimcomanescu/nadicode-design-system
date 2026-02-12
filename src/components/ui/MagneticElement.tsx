@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { motion, useMotionValue, useSpring, useReducedMotion } from "motion/react"
 import { cn } from "../../lib/utils"

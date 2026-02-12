@@ -1,9 +1,12 @@
+'use client'
+
 import { Logo } from '@/components/ui/Logo'
 import { MenuIcon, XIcon } from '@/components/ui/icons'
 import { Button } from '@/components/ui/Button'
 import React from 'react'
 import { useScroll, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 const menuItems = [
     { name: 'Features', href: '#link' },
@@ -34,12 +37,12 @@ export const HeroHeader = () => {
                         key={1}
                         className={cn('relative flex flex-wrap items-center justify-between gap-6 py-3 duration-200 lg:gap-0 lg:py-6', scrolled && 'lg:py-4')}>
                         <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
-                            <a
+                            <Link
                                 href="#"
                                 aria-label="home"
                                 className="flex items-center space-x-2">
                                 <Logo />
-                            </a>
+                            </Link>
 
                             <button
                                 onClick={() => setMenuState(!menuState)}
@@ -53,11 +56,11 @@ export const HeroHeader = () => {
                                 <ul className="flex gap-8 text-sm">
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
-                                            <a
+                                            <Link
                                                 href={item.href}
                                                 className="text-text-tertiary hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -69,11 +72,11 @@ export const HeroHeader = () => {
                                 <ul className="space-y-6 text-base">
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
-                                            <a
+                                            <Link
                                                 href={item.href}
                                                 className="text-text-tertiary hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -83,16 +86,16 @@ export const HeroHeader = () => {
                                     asChild
                                     variant="outline"
                                     size="sm">
-                                    <a href="#">
+                                    <Link href="#">
                                         <span>Login</span>
-                                    </a>
+                                    </Link>
                                 </Button>
                                 <Button
                                     asChild
                                     size="sm">
-                                    <a href="#">
+                                    <Link href="#">
                                         <span>Sign Up</span>
-                                    </a>
+                                    </Link>
                                 </Button>
                             </div>
                         </div>

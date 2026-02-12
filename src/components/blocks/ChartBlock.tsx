@@ -1,3 +1,5 @@
+'use client'
+
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import { MonitorIcon, SmartphoneIcon } from "@/components/ui/icons"
 import { ScrollFadeIn } from "../ui/ScrollFadeIn"

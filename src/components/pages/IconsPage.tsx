@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 import { Typography } from "../../components/ui/Typography";
 import { Card, CardContent } from "../../components/ui/Card";
@@ -128,7 +130,7 @@ export function IconsPage() {
 
                 {filteredIcons.length === 0 && (
                     <div className="text-center py-12 text-text-secondary">
-                        No icons found matching "{search}"
+                        No icons found matching &quot;{search}&quot;
                     </div>
                 )}
             </section>

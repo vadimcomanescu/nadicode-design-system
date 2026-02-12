@@ -1,3 +1,5 @@
+'use client'
+
 import { StaggerChildren } from "../../ui/StaggerChildren"
 import { AvatarUpload } from "../../ui/AvatarUpload"
 import { Button } from "../../ui/Button"

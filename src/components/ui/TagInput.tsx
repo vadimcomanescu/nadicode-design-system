@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { XIcon } from "@/components/ui/icons"

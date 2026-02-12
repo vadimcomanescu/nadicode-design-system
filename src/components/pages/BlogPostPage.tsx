@@ -1,3 +1,5 @@
+'use client'
+
 import { HeroHeader } from "../blocks/HeaderBlock"
 import { Footer } from "../blocks/FooterBlock"
 import { Typography } from "../ui/Typography"
@@ -52,7 +54,7 @@ export function BlogPostPage() {
                 The Problem with Scattered Tokens
               </Typography>
               <Typography variant="body" className="text-text-secondary leading-relaxed">
-                Most design systems start by defining colors directly in Tailwind's config. This works
+                Most design systems start by defining colors directly in Tailwind&apos;s config. This works
                 fine at first, but once you add dark mode, brand variants, or multiple products, you
                 end up with duplicated values scattered across config files, CSS, and component code.
               </Typography>
@@ -71,7 +73,7 @@ export function BlogPostPage() {
               </Typography>
               <Typography variant="body" className="text-text-secondary leading-relaxed">
                 The token system follows a linear flow: definition, CSS generation, and Tailwind
-                integration. Here's how the three files work together:
+                integration. Here&apos;s how the three files work together:
               </Typography>
             </ScrollFadeIn>
 
@@ -91,7 +93,7 @@ export function BlogPostPage() {
               </Typography>
               <Typography variant="body" className="text-text-secondary leading-relaxed mb-4">
                 The config file exports a structured object with all design decisions. Colors use
-                space-separated RGB values for Tailwind's opacity modifier syntax.
+                space-separated RGB values for Tailwind&apos;s opacity modifier syntax.
               </Typography>
             </ScrollFadeIn>
 

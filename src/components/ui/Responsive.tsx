@@ -1,3 +1,5 @@
+'use client'
+
 import { ResizablePanel, ResizableHandle } from "./Resizable"
 import { cn } from "../../lib/utils"
 import * as React from "react"

@@ -1,3 +1,5 @@
+'use client'
+
 import { Typography } from "../ui/Typography"
 import { Progress } from "../ui/Progress"
 import { Checkbox } from "../ui/Checkbox"

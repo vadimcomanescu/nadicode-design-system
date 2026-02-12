@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react-hooks/set-state-in-effect -- syncing CSS computed values from DOM is the purpose of this hook */
 import { useEffect, useState } from "react";
 

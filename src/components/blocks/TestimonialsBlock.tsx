@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar'
 

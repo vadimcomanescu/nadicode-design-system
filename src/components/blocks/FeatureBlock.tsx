@@ -1,3 +1,5 @@
+'use client'
+
 import { ChartBarIcon, CloudIcon, Code2Icon, DatabaseIcon, GlobeIcon, LaptopIcon, ShieldIcon } from "@/components/ui/icons"
 import { ZapIcon } from "../ui/icons/zap"
 import { LayersIcon } from "../ui/icons/layers"

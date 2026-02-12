@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from "../../lib/utils"
 import { Button } from "./Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card"

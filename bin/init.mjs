@@ -20,7 +20,7 @@ import {
   readFileSync, writeFileSync, mkdirSync, existsSync,
   copyFileSync, readdirSync, statSync, symlinkSync, rmSync,
 } from 'node:fs'
-import { join, dirname, relative, resolve, extname } from 'node:path'
+import { join, dirname, relative, resolve } from 'node:path'
 import { execSync } from 'node:child_process'
 import { createInterface } from 'node:readline'
 
@@ -108,20 +108,10 @@ function shouldSkip(name) {
 }
 
 /**
- * Strip Vite-specific eslint directives that don't exist in Next.js.
- * The DS uses react-refresh plugin; the scaffold does not.
- */
-function stripViteEslint(text) {
-  return text
-    .replace(/^\s*\/\*\s*eslint-disable\s+react-refresh\/[^\n]*\*\/\s*\n?/gm, '')
-    .replace(/^\s*\/\/\s*eslint-disable-next-line\s+react-refresh\/[^\n]*\n?/gm, '')
-}
-
-/**
  * Recursively copy directory, excluding test files.
- * Prepends "use client" and strips Vite eslint directives for Next.js.
+ * Source files already have "use client" directives, so this is a plain copy.
  */
-function copyDir(src, dest, { useClient = false } = {}) {
+function copyDir(src, dest) {
   if (!existsSync(src)) return 0
   mkdirSync(dest, { recursive: true })
   let count = 0
@@ -131,23 +121,12 @@ function copyDir(src, dest, { useClient = false } = {}) {
     const to = join(dest, name)
 
     if (statSync(from).isDirectory()) {
-      count += copyDir(from, to, { useClient })
+      count += copyDir(from, to)
       continue
     }
 
     if (shouldSkip(name)) continue
-
-    const ext = extname(name)
-    if (useClient && (ext === '.ts' || ext === '.tsx')) {
-      let text = readFileSync(from, 'utf8')
-      text = stripViteEslint(text)
-      if (!text.startsWith('"use client"') && !text.startsWith("'use client'")) {
-        text = '"use client"\n\n' + text
-      }
-      writeFileSync(to, text)
-    } else {
-      copyFileSync(from, to)
-    }
+    copyFileSync(from, to)
     count++
   }
 
@@ -170,24 +149,20 @@ function copySources() {
     'components/logos',
     'components/animate-ui',
   ]) {
-    total += copyDir(s(dir), d(dir), { useClient: true })
+    total += copyDir(s(dir), d(dir))
   }
 
   // Hooks
-  total += copyDir(s('hooks'), d('hooks'), { useClient: true })
+  total += copyDir(s('hooks'), d('hooks'))
 
   // Lib (utils, ThemeProvider, tokens, motion, etc.)
-  total += copyDir(s('lib'), d('lib'), { useClient: true })
+  total += copyDir(s('lib'), d('lib'))
 
   // tokens.ts (root-level type re-export)
   const tokensFile = join(DS_ROOT, 'src', 'tokens.ts')
   if (existsSync(tokensFile)) {
     mkdirSync(join(TARGET, 'src'), { recursive: true })
-    let text = readFileSync(tokensFile, 'utf8')
-    if (!text.startsWith('"use client"') && !text.startsWith("'use client'")) {
-      text = '"use client"\n\n' + text
-    }
-    writeFileSync(join(TARGET, 'src', 'tokens.ts'), text)
+    copyFileSync(tokensFile, join(TARGET, 'src', 'tokens.ts'))
     total++
   }
 

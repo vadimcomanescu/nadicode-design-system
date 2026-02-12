@@ -1,3 +1,5 @@
+'use client'
+
 export function LogoCloud() {
     return (
         <section className="bg-background py-16">

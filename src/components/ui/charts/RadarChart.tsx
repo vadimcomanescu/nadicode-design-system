@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Radar,
     RadarChart as RechartsRadarChart,

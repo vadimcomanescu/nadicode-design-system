@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
 import { PixelReveal } from "../ui/text-effects"
 import { ArrowDownRightIcon, ArrowUpRightIcon, DollarSignIcon, ActivityIcon, CreditCardIcon } from "@/components/ui/icons"

@@ -1,6 +1,9 @@
+'use client'
+
 import { Button } from '@/components/ui/Button'
 import { StaggerChildren } from '../ui/StaggerChildren'
 import { ShimmeringText } from '../ui/text-effects'
+import Link from 'next/link'
 
 export function CallToAction() {
     return (
@@ -21,18 +24,18 @@ export function CallToAction() {
                         <Button
                             asChild
                             size="lg">
-                            <a href="#">
+                            <Link href="#">
                                 <span>Get Started</span>
-                            </a>
+                            </Link>
                         </Button>
 
                         <Button
                             asChild
                             size="lg"
                             variant="outline">
-                            <a href="#">
+                            <Link href="#">
                                 <span>Book Demo</span>
-                            </a>
+                            </Link>
                         </Button>
                     </div>
                 </StaggerChildren>

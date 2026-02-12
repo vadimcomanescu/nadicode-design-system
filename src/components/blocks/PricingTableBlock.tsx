@@ -1,6 +1,9 @@
+'use client'
+
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
 import { CheckIcon } from '@/components/ui/icons/check'
+import Link from 'next/link'
 
 export function Pricing() {
     return (
@@ -39,7 +42,7 @@ export function Pricing() {
                                 asChild
                                 variant="outline"
                                 className="w-full">
-                                <a href="">Get Started</a>
+                                <Link href="">Get Started</Link>
                             </Button>
                         </CardFooter>
                     </Card>
@@ -72,7 +75,7 @@ export function Pricing() {
                                 <Button
                                     asChild
                                     className="w-full">
-                                    <a href="">Get Started</a>
+                                    <Link href="">Get Started</Link>
                                 </Button>
                             </CardFooter>
                         </div>
@@ -105,7 +108,7 @@ export function Pricing() {
                                 asChild
                                 variant="outline"
                                 className="w-full">
-                                <a href="">Get Started</a>
+                                <Link href="">Get Started</Link>
                             </Button>
                         </CardFooter>
                     </Card>

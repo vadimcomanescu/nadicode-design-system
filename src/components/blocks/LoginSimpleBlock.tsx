@@ -1,3 +1,5 @@
+'use client'
+
 import { LogoIcon } from '@/components/ui/Logo'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -6,6 +8,7 @@ import { GoogleIcon } from '@/components/ui/BrandIcons'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
 import { motion } from "motion/react"
 import { StaggerChildren } from '@/components/ui/StaggerChildren'
+import Link from 'next/link'
 
 export function SimpleLoginForm() {
     return (
@@ -59,11 +62,11 @@ export function SimpleLoginForm() {
                         <div className="grid gap-2">
                             <div className="flex items-center justify-between">
                                 <Label htmlFor="pwd">Password</Label>
-                                <a
+                                <Link
                                     href="#"
                                     className="text-sm font-medium text-accent hover:underline">
                                     Forgot password?
-                                </a>
+                                </Link>
                             </div>
                             <Input
                                 type="password"
@@ -80,9 +83,9 @@ export function SimpleLoginForm() {
                 <CardFooter className="justify-center">
                     <div className="text-center text-sm">
                         <span className="text-text-tertiary">Don&apos;t have an account? </span>
-                        <a href="#" className="font-medium text-accent hover:underline">
+                        <Link href="#" className="font-medium text-accent hover:underline">
                             Create account
-                        </a>
+                        </Link>
                     </div>
                 </CardFooter>
             </Card>

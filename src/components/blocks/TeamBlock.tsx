@@ -1,3 +1,5 @@
+'use client'
+
 import { ScrollFadeIn } from "../ui/ScrollFadeIn"
 import { StaggerChildren } from "../ui/StaggerChildren"
 

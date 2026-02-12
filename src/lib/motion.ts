@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * Centralized Motion variants, spring presets, and reduced motion logic.
  * All animation components should import from here instead of defining their own.

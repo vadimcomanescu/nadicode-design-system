@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { motionSpring } from "@/lib/motion"

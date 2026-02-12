@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { CalendarIcon } from "@/components/ui/icons"
 import { format } from "date-fns"

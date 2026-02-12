@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { EyeIcon } from "@/components/ui/icons/eye"
 import { EyeOffIcon } from "@/components/ui/icons/eye-off"

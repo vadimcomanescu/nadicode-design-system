@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { SettingsIcon } from '@/components/ui/icons/settings'
 import { ZapIcon } from '@/components/ui/icons/zap'

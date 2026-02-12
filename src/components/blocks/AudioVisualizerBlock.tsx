@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react-hooks/refs -- deterministic ref init pattern for stable opacity offsets */
 import { motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"

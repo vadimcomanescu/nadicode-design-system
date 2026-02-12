@@ -1,3 +1,5 @@
+'use client'
+
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
 import { Card, CardContent } from "../ui/Card"
 import { StaggerChildren } from "../ui/StaggerChildren"

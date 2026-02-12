@@ -1,3 +1,5 @@
+'use client'
+
 import { NotFoundBlock } from "../blocks/NotFoundBlock"
 import { MeteorShower } from "../ui/MeteorShower"
 

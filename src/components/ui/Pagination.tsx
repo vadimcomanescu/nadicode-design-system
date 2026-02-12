@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon, EllipsisIcon } from "@/components/ui/icons"
 import { cn } from "../../lib/utils"

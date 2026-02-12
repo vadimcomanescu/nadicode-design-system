@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ChevronRightIcon } from '@/components/ui/icons'
@@ -5,6 +7,7 @@ import * as React from 'react'
 import { Gemini, Replit, MagicUI, VSCodium, MediaWiki, GooglePaLM } from '@/components/logos'
 import { ScrollFadeIn } from '@/components/ui/ScrollFadeIn'
 import { StaggerChildren } from '@/components/ui/StaggerChildren'
+import Link from 'next/link'
 
 export function IntegrationsSection() {
     return (
@@ -78,10 +81,10 @@ const IntegrationCard = ({ title, description, children, link = 'https://github.
                         variant="secondary"
                         size="sm"
                         className="gap-1 pr-2 shadow-none">
-                        <a href={link}>
+                        <Link href={link}>
                             Learn More
                             <ChevronRightIcon size={14} className="ml-0 opacity-50" />
-                        </a>
+                        </Link>
                     </Button>
                 </div>
             </div>

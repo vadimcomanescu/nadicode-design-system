@@ -1,3 +1,5 @@
+'use client'
+
 // Adapted from shadcn/ui
 import {
   type ToastActionElement,

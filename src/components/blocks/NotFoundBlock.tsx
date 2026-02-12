@@ -1,9 +1,12 @@
+'use client'
+
 import { Button } from "../ui/Button"
 import { Typography } from "../ui/Typography"
 import { MeteorShower } from "../ui/MeteorShower"
 import { AnimatedGradientText } from "../ui/text-effects"
 import { ArrowLeftIcon } from "@/components/ui/icons"
 import { cn } from "../../lib/utils"
+import Link from 'next/link'
 
 interface NotFoundBlockProps {
   title?: string
@@ -38,10 +41,10 @@ export function NotFoundBlock({
           </Typography>
 
           <Button asChild size="lg" variant="accent" className="mt-8">
-            <a href={backHref}>
+            <Link href={backHref}>
               <ArrowLeftIcon size={16} className="mr-2" />
               {backLabel}
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

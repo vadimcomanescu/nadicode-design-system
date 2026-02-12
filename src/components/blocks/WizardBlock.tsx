@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react"
 import { Stepper, Step } from "@/components/ui/stepper"
 import { Button } from "@/components/ui/Button"

@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 import { SendIcon, BotIcon } from "@/components/ui/icons"
 import { UserIcon } from "../ui/icons/user"

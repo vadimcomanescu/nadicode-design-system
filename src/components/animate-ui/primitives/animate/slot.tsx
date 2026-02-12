@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react-hooks/static-components -- third-party animate-ui code uses motion.create dynamically */
 import * as React from 'react';
 import { motion, isMotionComponent, type HTMLMotionProps } from 'motion/react';

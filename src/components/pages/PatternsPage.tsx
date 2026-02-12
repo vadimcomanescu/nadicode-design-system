@@ -1,3 +1,5 @@
+'use client'
+
 
 import { useState } from 'react';
 import { gridPatterns, type Pattern } from '../../lib/patterns';

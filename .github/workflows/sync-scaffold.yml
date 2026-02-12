@@ -1,0 +1,87 @@
+name: Sync scaffold
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - ".github/**"
+      - "plans/**"
+      - "README.md"
+
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout design system
+        uses: actions/checkout@v4
+        with:
+          path: ds
+
+      - name: Checkout scaffold
+        uses: actions/checkout@v4
+        with:
+          repository: vadimcomanescu/scaffold-nextjs-saas
+          token: ${{ secrets.SCAFFOLD_PAT }}
+          path: scaffold
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install scaffold deps
+        working-directory: scaffold
+        run: npm ci
+
+      - name: Run init --update
+        working-directory: scaffold
+        run: node ../ds/bin/init.mjs --update --skip-deps
+
+      - name: Check for changes
+        id: diff
+        working-directory: scaffold
+        run: |
+          git diff --quiet && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Get DS commit info
+        if: steps.diff.outputs.changed == 'true'
+        id: ds-info
+        working-directory: ds
+        run: |
+          echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          echo "msg=$(git log -1 --format=%s)" >> "$GITHUB_OUTPUT"
+
+      - name: Create PR
+        if: steps.diff.outputs.changed == 'true'
+        working-directory: scaffold
+        env:
+          GH_TOKEN: ${{ secrets.SCAFFOLD_PAT }}
+        run: |
+          BRANCH="chore/sync-ds-${{ steps.ds-info.outputs.sha }}"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "$(cat <<EOF
+          Sync design system (${{ steps.ds-info.outputs.sha }})
+
+          Upstream: ${{ steps.ds-info.outputs.msg }}
+          EOF
+          )"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "Sync design system (${{ steps.ds-info.outputs.sha }})" \
+            --body "$(cat <<EOF
+          ## Summary
+
+          Auto-sync from [nadicode-design-system@\`${{ steps.ds-info.outputs.sha }}\`](https://github.com/vadimcomanescu/nadicode-design-system/commit/${{ steps.ds-info.outputs.sha }}).
+
+          Upstream commit: **${{ steps.ds-info.outputs.msg }}**
+
+          ## Review checklist
+
+          - [ ] Check diff for token/component changes
+          - [ ] Run \`npm test\` locally
+          - [ ] Verify dev server renders correctly
+          EOF
+          )"

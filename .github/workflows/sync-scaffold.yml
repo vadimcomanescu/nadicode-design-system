@@ -83,7 +83,7 @@ jobs:
           echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
           echo "msg=$(git log -1 --format=%s)" >> "$GITHUB_OUTPUT"
 
-      - name: Create PR
+      - name: Create or update PR
         if: steps.diff.outputs.changed == 'true'
         working-directory: scaffold
         env:
@@ -91,8 +91,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          BRANCH="chore/sync-ds-${{ steps.ds-info.outputs.sha }}"
-          git checkout -b "$BRANCH"
+          BRANCH="chore/sync-ds"
+          git fetch origin "$BRANCH" 2>/dev/null || true
+          git checkout -B "$BRANCH"
           git add -A
           git commit -m "$(cat <<'EOF'
           Sync design system (${{ steps.ds-info.outputs.sha }})
@@ -100,10 +101,13 @@ jobs:
           Upstream: ${{ steps.ds-info.outputs.msg }}
           EOF
           )"
-          git push -u origin "$BRANCH"
-          gh pr create \
-            --title "Sync design system (${{ steps.ds-info.outputs.sha }})" \
-            --body "$(cat <<'EOF'
+          git push --force-with-lease -u origin "$BRANCH"
+
+          EXISTING_PR=$(gh pr list --head "$BRANCH" --json number --jq '.[0].number')
+          if [ -n "$EXISTING_PR" ]; then
+            gh pr edit "$EXISTING_PR" \
+              --title "Sync design system (latest: ${{ steps.ds-info.outputs.sha }})" \
+              --body "$(cat <<'EOF'
           ## Summary
 
           Auto-sync from [nadicode-design-system@`${{ steps.ds-info.outputs.sha }}`](https://github.com/vadimcomanescu/nadicode-design-system/commit/${{ steps.ds-info.outputs.sha }}).
@@ -123,3 +127,29 @@ jobs:
           - [ ] Verify dev server renders correctly
           EOF
           )"
+            echo "Updated existing PR #$EXISTING_PR"
+          else
+            gh pr create \
+              --title "Sync design system (latest: ${{ steps.ds-info.outputs.sha }})" \
+              --body "$(cat <<'EOF'
+          ## Summary
+
+          Auto-sync from [nadicode-design-system@`${{ steps.ds-info.outputs.sha }}`](https://github.com/vadimcomanescu/nadicode-design-system/commit/${{ steps.ds-info.outputs.sha }}).
+
+          Upstream commit: **${{ steps.ds-info.outputs.msg }}**
+
+          ## Validated
+
+          - [x] `tsc --noEmit` passed
+          - [x] `eslint .` passed
+          - [x] `vitest run --coverage` passed (90%+ threshold)
+          - [x] `next build` passed
+
+          ## Review checklist
+
+          - [ ] Check diff for token/component changes
+          - [ ] Verify dev server renders correctly
+          EOF
+          )"
+            echo "Created new PR"
+          fi

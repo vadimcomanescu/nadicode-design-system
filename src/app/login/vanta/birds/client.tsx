@@ -2,11 +2,11 @@
 
 import dynamic from 'next/dynamic'
 
-const LoginBirdsDark = dynamic(
-  () => import('@/components/pages/auth/VantaLoginPages').then(m => ({ default: m.LoginBirdsDark })),
+const VantaLoginPage = dynamic(
+  () => import('@/components/pages/auth/VantaLoginPages').then(m => ({ default: m.VantaLoginPage })),
   { ssr: false }
 )
 
 export default function LoginBirdsClient() {
-  return <LoginBirdsDark />
+  return <VantaLoginPage effect="birds" />
 }

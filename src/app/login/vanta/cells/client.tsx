@@ -2,11 +2,11 @@
 
 import dynamic from 'next/dynamic'
 
-const LoginCellsLight = dynamic(
-  () => import('@/components/pages/auth/VantaLoginPages').then(m => ({ default: m.LoginCellsLight })),
+const VantaLoginPage = dynamic(
+  () => import('@/components/pages/auth/VantaLoginPages').then(m => ({ default: m.VantaLoginPage })),
   { ssr: false }
 )
 
 export default function LoginCellsClient() {
-  return <LoginCellsLight />
+  return <VantaLoginPage effect="cells" />
 }

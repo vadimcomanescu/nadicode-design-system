@@ -4,21 +4,28 @@ import * as React from "react"
 import { motion } from "motion/react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../ui/Card"
 import { Button } from "../ui/Button"
-import { CheckIcon } from "../ui/icons/check"
 import { scaleIn, motionSpring } from "../../lib/motion"
 import { cn } from "../../lib/utils"
 
-interface EmailVerifiedBlockProps {
+interface AuthSuccessBlockProps {
   className?: string
+  icon: React.ReactNode
+  title: string
+  description: string
+  buttonText?: string
   onContinue?: () => void
   autoRedirectSeconds?: number
 }
 
-export function EmailVerifiedBlock({
+export function AuthSuccessBlock({
   className,
+  icon,
+  title,
+  description,
+  buttonText = "Continue",
   onContinue,
   autoRedirectSeconds,
-}: EmailVerifiedBlockProps) {
+}: AuthSuccessBlockProps) {
   const [countdown, setCountdown] = React.useState(autoRedirectSeconds ?? 0)
 
   React.useEffect(() => {
@@ -48,13 +55,11 @@ export function EmailVerifiedBlock({
             transition={motionSpring.bouncy}
           >
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/10 shadow-[0_0_24px_rgba(61,214,140,0.2)]">
-              <CheckIcon size={32} className="text-success" />
+              {icon}
             </div>
           </motion.div>
-          <CardTitle className="text-2xl">Email verified!</CardTitle>
-          <CardDescription>
-            Your email address has been successfully verified.
-          </CardDescription>
+          <CardTitle className="text-2xl">{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </CardHeader>
 
         <CardContent className="grid gap-4">
@@ -64,7 +69,7 @@ export function EmailVerifiedBlock({
             </p>
           )}
           <Button variant="accent" className="w-full" onClick={onContinue}>
-            Continue
+            {buttonText}
           </Button>
         </CardContent>
       </Card>

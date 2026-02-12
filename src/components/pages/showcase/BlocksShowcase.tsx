@@ -20,12 +20,11 @@ import { NewsletterBlock } from "../../blocks/NewsletterBlock";
 import { ContactBlock } from "../../blocks/ContactBlock";
 import { FAQBlock } from "../../blocks/FAQBlock";
 import { BannerBlock } from "../../blocks/BannerBlock";
-import { ForgotPasswordBlock } from "../../blocks/ForgotPasswordBlock";
-import { MagicLinkBlock } from "../../blocks/MagicLinkBlock";
+import { PasswordRecoveryBlock } from "../../blocks/PasswordRecoveryBlock";
 import { ResetPasswordBlock } from "../../blocks/ResetPasswordBlock";
-import { PasswordChangedBlock } from "../../blocks/PasswordChangedBlock";
-import { CheckEmailBlock } from "../../blocks/CheckEmailBlock";
-import { EmailVerifiedBlock } from "../../blocks/EmailVerifiedBlock";
+import { AuthSuccessBlock } from "../../blocks/AuthSuccessBlock";
+import { CheckIcon } from "../../ui/icons/check";
+import { ShieldCheckIcon } from "../../ui/icons/shield-check";
 import { TwoFactorChallengeBlock } from "../../blocks/TwoFactorChallengeBlock";
 import { AccountLockedBlock } from "../../blocks/AccountLockedBlock";
 import { TwoFactorSetupBlock } from "../../blocks/TwoFactorSetupBlock";
@@ -34,7 +33,6 @@ import { CodeBlock } from "../../blocks/CodeBlock";
 import { AudioVisualizer } from "../../blocks/AudioVisualizerBlock";
 import { DirectoryBlock } from "../../blocks/DirectoryBlock";
 import { CreateBlock } from "../../blocks/CreateBlock";
-import { OTPBlock } from "../../blocks/OTPBlock";
 import { StatsGeneric } from "../../blocks/StatsBlock";
 import { DataGridBlock } from "../../blocks/DataGridBlock";
 import { SettingsLayout } from "../../blocks/SettingsLayout";
@@ -42,16 +40,16 @@ import { WizardBlock } from "../../blocks/WizardBlock";
 import { ChangelogBlock } from "../../blocks/ChangelogBlock";
 import { ComparisonBlock } from "../../blocks/ComparisonBlock";
 import { ActivityFeedBlock } from "../../blocks/ActivityFeedBlock";
-import { StreamingText } from "../../ui/text-effects";
-import { AgentStatus } from "../../ui/AgentStatus";
-import { AudioWaveform } from "../../ui/AudioWaveform";
-import { ConversationThread } from "../../ui/ConversationThread";
+import { GalleryBlock } from "../../blocks/GalleryBlock";
+import { OnboardingBlock } from "../../blocks/OnboardingBlock";
+import { VoiceAgentCard } from "../../blocks/VoiceAgentCard";
+import { AgentConversationBlock } from "../../blocks/AgentConversationBlock";
 
 const TOC_SECTIONS = [
-  { id: "marketing", label: "Marketing", count: 17 },
-  { id: "authentication", label: "Authentication", count: 9 },
+  { id: "marketing", label: "Marketing", count: 18 },
+  { id: "authentication", label: "Authentication", count: 7 },
   { id: "application", label: "Application", count: 13 },
-  { id: "ai-voice", label: "AI & Voice", count: 4 },
+  { id: "ai-voice", label: "AI & Voice", count: 2 },
 ] as const;
 
 function BlocksTOC({ activeSection }: { activeSection: string }) {
@@ -134,8 +132,10 @@ function BlocksShowcase() {
 
       {/* Content */}
       <div className="flex-1 min-w-0 space-y-16">
-        {/* Mobile TOC */}
-        <BlocksTOC activeSection={activeSection} />
+        {/* Mobile TOC (desktop uses the aside sidebar) */}
+        <div className="md:hidden">
+          <BlocksTOC activeSection={activeSection} />
+        </div>
 
         {/* MARKETING */}
         <section id="marketing" data-toc-heading className="space-y-16">
@@ -267,6 +267,15 @@ function BlocksShowcase() {
                   </div>
                 </div>
               </ScrollFadeIn>
+
+              <ScrollFadeIn>
+                <div className="space-y-4">
+                  <Typography variant="h3">Gallery</Typography>
+                  <div className="rounded-lg border border-border bg-background overflow-hidden relative">
+                    <GalleryBlock />
+                  </div>
+                </div>
+              </ScrollFadeIn>
             </section>
 
             {/* AUTHENTICATION */}
@@ -275,12 +284,12 @@ function BlocksShowcase() {
               <Grid cols={1} gap="xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-4">
-                    <Typography variant="h3">Forgot Password</Typography>
-                    <ForgotPasswordBlock />
+                    <Typography variant="h3">Password Recovery</Typography>
+                    <PasswordRecoveryBlock mode="reset" />
                   </div>
                   <div className="space-y-4">
                     <Typography variant="h3">Magic Link</Typography>
-                    <MagicLinkBlock />
+                    <PasswordRecoveryBlock mode="magic-link" />
                   </div>
                 </div>
 
@@ -291,35 +300,39 @@ function BlocksShowcase() {
                   </div>
                   <div className="space-y-4">
                     <Typography variant="h3">Password Changed</Typography>
-                    <PasswordChangedBlock />
+                    <AuthSuccessBlock
+                      icon={<ShieldCheckIcon size={32} className="text-success" />}
+                      title="Password changed!"
+                      description="Your password has been successfully updated."
+                      buttonText="Continue to login"
+                    />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <Typography variant="h3">Check Email</Typography>
-                    <CheckEmailBlock email="user@example.com" type="verification" />
-                  </div>
                   <div className="space-y-4">
                     <Typography variant="h3">Email Verified</Typography>
-                    <EmailVerifiedBlock />
+                    <AuthSuccessBlock
+                      icon={<CheckIcon size={32} className="text-success" />}
+                      title="Email verified!"
+                      description="Your email address has been successfully verified."
+                    />
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-4">
                     <Typography variant="h3">2FA Challenge</Typography>
                     <TwoFactorChallengeBlock />
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-4">
                     <Typography variant="h3">Account Locked</Typography>
                     <AccountLockedBlock reason="too_many_attempts" unlockMinutes={15} />
                   </div>
-                </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">2FA Setup</Typography>
-                  <TwoFactorSetupBlock />
+                  <div className="space-y-4">
+                    <Typography variant="h3">2FA Setup</Typography>
+                    <TwoFactorSetupBlock />
+                  </div>
                 </div>
               </Grid>
             </section>
@@ -366,11 +379,6 @@ console.log(greet("World"));`}
                 </div>
 
                 <div className="space-y-4">
-                  <Typography variant="h3">OTP Block</Typography>
-                  <OTPBlock />
-                </div>
-
-                <div className="space-y-4">
                   <Typography variant="h3">Stats Generic (KPIs)</Typography>
                   <StatsGeneric />
                 </div>
@@ -414,6 +422,15 @@ console.log(greet("World"));`}
                     <ActivityFeedBlock />
                   </div>
                 </ScrollFadeIn>
+
+                <ScrollFadeIn>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Onboarding</Typography>
+                    <div className="flex justify-center py-8">
+                      <OnboardingBlock />
+                    </div>
+                  </div>
+                </ScrollFadeIn>
               </Grid>
             </section>
 
@@ -422,61 +439,81 @@ console.log(greet("World"));`}
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">AI & Voice</Typography>
 
               <div className="space-y-4">
-                <Typography variant="h3">Streaming Text</Typography>
-                <Card>
-                  <CardContent className="p-6 space-y-4">
-                    <StreamingText
-                      text="The agent is analyzing your codebase and generating a comprehensive review of all components, patterns, and potential improvements..."
-                      speed={2}
-                      interval={25}
-                    />
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="space-y-4">
-                <Typography variant="h3">Agent Status</Typography>
-                <div className="flex flex-wrap gap-4">
-                  <AgentStatus status="idle" />
-                  <AgentStatus status="thinking" />
-                  <AgentStatus status="streaming" />
-                  <AgentStatus status="error" />
-                  <AgentStatus status="complete" />
-                  <AgentStatus status="thinking" label="Processing query..." size="lg" />
+                <Typography variant="h3">Voice Agent Card</Typography>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-lg">
+                  <VoiceAgentCard
+                    agent={{ id: "atlas", name: "Atlas", role: "Engineering", avatar: "https://picsum.photos/seed/atlas/200/200" }}
+                    state="idle"
+                    selected={false}
+                  />
+                  <VoiceAgentCard
+                    agent={{ id: "nova", name: "Nova", role: "Design", avatar: "https://picsum.photos/seed/nova/200/200" }}
+                    state="speaking"
+                    selected={true}
+                  />
+                  <VoiceAgentCard
+                    agent={{ id: "echo", name: "Echo", role: "Support", avatar: "https://picsum.photos/seed/echo/200/200" }}
+                    state="listening"
+                    selected={true}
+                  />
                 </div>
               </div>
 
               <div className="space-y-4">
-                <Typography variant="h3">Audio Waveform</Typography>
-                <Card>
-                  <CardContent className="p-6 space-y-4">
-                    <div className="space-y-2">
-                      <Typography variant="small" className="text-text-secondary">Active (accent)</Typography>
-                      <AudioWaveform active variant="accent" bars={32} />
-                    </div>
-                    <div className="space-y-2">
-                      <Typography variant="small" className="text-text-secondary">Inactive</Typography>
-                      <AudioWaveform bars={32} />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="space-y-4">
-                <Typography variant="h3">Conversation Thread</Typography>
-                <Card>
-                  <CardContent className="p-6">
-                    <ConversationThread
-                      showTimestamps
-                      messages={[
-                        { id: "1", role: "user", content: "Can you review the token system?", timestamp: "10:24 AM" },
-                        { id: "2", role: "assistant", content: "I'll analyze the token architecture. The three-file flow (tokens.config.js -> index.css -> tailwind.config.js) looks solid. Let me check for any violations.", timestamp: "10:24 AM" },
-                        { id: "3", role: "system", content: "Agent started code analysis" },
-                        { id: "4", role: "assistant", content: "Found 3 hardcoded colors that should use semantic tokens. I'll fix those now.", timestamp: "10:25 AM" },
-                      ]}
-                    />
-                  </CardContent>
-                </Card>
+                <Typography variant="h3">Agent Conversation</Typography>
+                <AgentConversationBlock
+                  messages={[
+                    {
+                      id: "1",
+                      role: "user",
+                      content: "Help me optimize the database queries in the dashboard. The page load is over 3 seconds.",
+                      timestamp: "10:30 AM",
+                    },
+                    {
+                      id: "2",
+                      role: "agent",
+                      content: "I'll investigate the slow queries. Let me read the data access layer first.",
+                      timestamp: "10:30 AM",
+                      isThinking: true,
+                      reasoning: "The user reports 3s+ load times on the dashboard. This likely involves N+1 queries or missing indexes. I should check the data fetching code first.",
+                      toolCalls: [
+                        {
+                          toolName: "read_file",
+                          args: { path: "src/lib/dashboard-queries.ts" },
+                          status: "complete",
+                          result: "Found 3 sequential queries that could be batched into a single JOIN",
+                          duration: 280,
+                        },
+                      ],
+                    },
+                    {
+                      id: "3",
+                      role: "system",
+                      content: "Agent identified 3 N+1 query patterns",
+                    },
+                    {
+                      id: "4",
+                      role: "agent",
+                      content: "Found the bottleneck: three sequential queries fetching users, orders, and metrics separately. I've combined them into a single query with JOINs, reducing round trips from 3 to 1. Expected load time improvement: ~60%.",
+                      timestamp: "10:31 AM",
+                      toolCalls: [
+                        {
+                          toolName: "edit_file",
+                          args: { path: "src/lib/dashboard-queries.ts", description: "Batch N+1 queries into JOIN" },
+                          status: "complete",
+                          duration: 450,
+                        },
+                        {
+                          toolName: "bash",
+                          args: { command: "npm run test -- --filter dashboard" },
+                          status: "complete",
+                          result: "12 tests passed, 0 failed",
+                          duration: 3200,
+                        },
+                      ],
+                    },
+                  ]}
+                />
               </div>
             </section>
       </div>

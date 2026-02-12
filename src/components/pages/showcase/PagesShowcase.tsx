@@ -4,15 +4,11 @@ import { useRouter } from "next/navigation";
 import { Typography } from "../../ui/Typography";
 import { Card, CardContent, CardHeader, CardTitle } from "../../ui/Card";
 import { ScrollFadeIn } from "../../ui/ScrollFadeIn";
-import { AnimatedBackground } from "../../ui/AnimatedBackground";
 import { DashboardPage } from "../DashboardPage";
 import { VerificationPage } from "../VerificationPage";
 import { ProfilePage } from "../settings/ProfilePage";
 import { TeamPage } from "../settings/TeamPage";
 import { CheckoutPage } from "../CheckoutPage";
-import { LoginPage } from "../LoginPage";
-import { SignupPage } from "../SignupPage";
-import { SimpleLoginForm } from "../../blocks/LoginSimpleBlock";
 import { AuthLayout } from "../../blocks/AuthLayout";
 
 function PagesShowcase() {
@@ -100,35 +96,16 @@ function PagesShowcase() {
         </div>
 
         <div className="space-y-4">
-          <Typography variant="h3">Login Page</Typography>
+          <Typography variant="h3">Auth Layout (Login)</Typography>
           <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-y-auto min-h-[600px] max-h-[800px] flex items-center justify-center bg-background/50">
-            <LoginPage />
+            <AuthLayout mode="login" />
           </div>
         </div>
 
         <div className="space-y-4">
-          <Typography variant="h3">Signup Page</Typography>
+          <Typography variant="h3">Auth Layout (Signup)</Typography>
           <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-y-auto min-h-[600px] max-h-[800px] flex items-center justify-center bg-background/50">
-            <SignupPage />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <Typography variant="h3">Simple Login Form (Alternative)</Typography>
-          <div className="rounded-lg shadow-2xl ring-1 ring-border overflow-y-auto min-h-[600px] max-h-[800px] flex items-center justify-center relative">
-            <div className="absolute inset-0 z-0">
-              <AnimatedBackground />
-            </div>
-            <div className="relative z-10 w-full">
-              <SimpleLoginForm />
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <Typography variant="h3">Auth Layout (Split Glass)</Typography>
-          <div className="h-[800px] overflow-y-auto rounded-lg shadow-2xl ring-1 ring-border bg-background/50">
-            <AuthLayout />
+            <AuthLayout mode="signup" />
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 'use client'
 
 import React from "react"
+import { motion } from "motion/react"
 import { Button } from "../ui/Button"
 import {
     Card,
@@ -13,6 +14,7 @@ import {
 import { Input } from "../ui/Input"
 import { Label } from "../ui/Label"
 import { GoogleIcon } from "../ui/BrandIcons"
+import { StaggerChildren } from "../ui/StaggerChildren"
 import { cn } from "../../lib/utils"
 
 interface LoginBlockProps {
@@ -40,6 +42,11 @@ export function LoginBlock({
     const buttonText = type === "login" ? "Sign In" : "Sign Up"
 
     return (
+        <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
         <Card className={cn("w-full max-w-[400px] border-border/50", className)}>
             <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl text-center">{title || defaultTitle}</CardTitle>
@@ -64,38 +71,40 @@ export function LoginBlock({
                     </>
                 )}
                 <form onSubmit={onLogin} className="grid gap-4">
-                    <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            placeholder="name@example.com"
-                            autoCapitalize="none"
-                            autoComplete="email"
-                            autoCorrect="off"
-                            className="border-border/50 focus:border-accent/50 transition-colors"
-                        />
-                    </div>
-                    <div className="grid gap-2">
-                        <div className="flex items-center justify-between">
-                            <Label htmlFor="password">Password</Label>
-                            <a
-                                href="#"
-                                className="text-xs text-accent hover:text-accent/80 transition-colors font-medium"
-                            >
-                                Forgot password?
-                            </a>
+                    <StaggerChildren staggerMs={60} className="grid gap-4">
+                        <div className="grid gap-2">
+                            <Label htmlFor="email">Email address</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="name@example.com"
+                                autoCapitalize="none"
+                                autoComplete="email"
+                                autoCorrect="off"
+                                className="border-border/50 focus:border-accent/50 transition-colors"
+                            />
                         </div>
-                        <Input
-                            id="password"
-                            type="password"
-                            autoComplete="current-password"
-                            className="border-border/50 focus:border-accent/50 transition-colors"
-                        />
-                    </div>
-                    <Button className="w-full bg-accent hover:bg-accent/90 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all hover:scale-[1.01] active:scale-[0.99] font-semibold">
-                        {buttonText}
-                    </Button>
+                        <div className="grid gap-2">
+                            <div className="flex items-center justify-between">
+                                <Label htmlFor="password">Password</Label>
+                                <a
+                                    href="#"
+                                    className="text-xs text-accent hover:text-accent/80 transition-colors font-medium"
+                                >
+                                    Forgot password?
+                                </a>
+                            </div>
+                            <Input
+                                id="password"
+                                type="password"
+                                autoComplete="current-password"
+                                className="border-border/50 focus:border-accent/50 transition-colors"
+                            />
+                        </div>
+                        <Button className="w-full bg-accent hover:bg-accent/90 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all hover:scale-[1.01] active:scale-[0.99] font-semibold">
+                            {buttonText}
+                        </Button>
+                    </StaggerChildren>
                 </form>
             </CardContent>
             <CardFooter className="flex flex-col gap-2">
@@ -124,5 +133,6 @@ export function LoginBlock({
                 </p>
             </CardFooter>
         </Card>
+        </motion.div>
     )
 }

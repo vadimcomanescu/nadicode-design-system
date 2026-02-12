@@ -2,11 +2,11 @@
 
 import dynamic from 'next/dynamic'
 
-const LoginDotsLight = dynamic(
-  () => import('@/components/pages/auth/VantaLoginPages').then(m => ({ default: m.LoginDotsLight })),
+const VantaLoginPage = dynamic(
+  () => import('@/components/pages/auth/VantaLoginPages').then(m => ({ default: m.VantaLoginPage })),
   { ssr: false }
 )
 
 export default function LoginDotsClient() {
-  return <LoginDotsLight />
+  return <VantaLoginPage effect="dots" />
 }

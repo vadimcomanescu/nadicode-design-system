@@ -11,23 +11,16 @@ import { useRouter } from 'next/navigation'
 import { useTheme } from '@/lib/ThemeProvider'
 import { ZapIcon } from '../../ui/icons/zap'
 
-// Note: Vanta effects are now lazy-loaded via effectImporter to avoid bundle bloat.
-// No top-level imports of vanta/dist/*.min.js
-
-// --- Colors ---
 const COLORS = {
-    primary: 0x38BDB8,      // Teal.9 (Dark mode accent)
-    primaryDark: 0x1A8F88,  // Teal.9 (Light mode accent)
-    secondary: 0x2DD4BF,    // Teal-400 (Dark mode glow)
-    secondaryDark: 0x0D9488,// Teal-600 (Light mode contrast)
-    accent: 0xFBBF24,       // Amber-400
-    darkBg: 0x0F1114,       // Gray.1 dark
-    lightBg: 0xFBFCFD,      // Gray.1 light
-    white: 0xffffff,
-    black: 0x000000
+    primary: 0x38BDB8,
+    primaryDark: 0x1A8F88,
+    secondary: 0x2DD4BF,
+    secondaryDark: 0x0D9488,
+    accent: 0xFBBF24,
+    darkBg: 0x0F1114,
+    lightBg: 0xFBFCFD,
 }
 
-// --- Shared Layout ---
 function LoginPageLayout({ title, description, isDark }: { title: string, description: string, isDark: boolean }) {
     const router = useRouter();
     return (
@@ -95,157 +88,135 @@ function LoginPageLayout({ title, description, isDark }: { title: string, descri
     )
 }
 
-// --- Adaptive Components ---
+export type VantaEffect = 'birds' | 'globe' | 'net' | 'cells' | 'trunk' | 'dots' | 'topology'
 
-export function LoginBirdsDark() {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
-
-    return (
-        <VantaWrapper
-            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
-            effectImporter={() => import('vanta/dist/vanta.birds.min')}
-            config={{
-                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
-                color1: isDark ? COLORS.primary : COLORS.primaryDark,
-                color2: isDark ? COLORS.secondary : COLORS.secondaryDark,
-                colorMode: "varianceGradient",
-                birdSize: 1.50,
-                wingSpan: 30.00,
-                speedLimit: 4.00,
-                separation: 50.00,
-                alignment: 50.00,
-                cohesion: 50.00,
-                quantity: 4.00, // Reduced slightly from 5 for performance
-                // backgroundAlpha: 1.0 // Removing to test visibility
-            }}
-        >
-            <LoginPageLayout title="Welcome Back" description="Enter your credentials to access the system" isDark={isDark} />
-        </VantaWrapper>
-    )
+interface EffectConfig {
+    title: string
+    description: string
+    importer: () => Promise<Record<string, unknown>>
+    config: (isDark: boolean) => Record<string, unknown>
 }
 
-export function LoginGlobeDark() {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
-
-    return (
-        <VantaWrapper
-            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
-            effectImporter={() => import('vanta/dist/vanta.globe.min')}
-            config={{
-                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
-                color: isDark ? COLORS.primary : COLORS.primaryDark,
-                color2: isDark ? COLORS.accent : COLORS.accent, // Pink looks good on both
-                size: 1.2,
-                showDots: true
-            }}
-        >
-            <LoginPageLayout title="Global Access" description="Connect to the worldwide network" isDark={isDark} />
-        </VantaWrapper>
-    )
+const EFFECT_CONFIGS: Record<VantaEffect, EffectConfig> = {
+    birds: {
+        title: "Welcome Back",
+        description: "Enter your credentials to access the system",
+        // @ts-expect-error - Vanta.js has no TypeScript definitions
+        importer: () => import('vanta/dist/vanta.birds.min'),
+        config: (isDark) => ({
+            backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+            color1: isDark ? COLORS.primary : COLORS.primaryDark,
+            color2: isDark ? COLORS.secondary : COLORS.secondaryDark,
+            colorMode: "varianceGradient",
+            birdSize: 1.50,
+            wingSpan: 30.00,
+            speedLimit: 4.00,
+            separation: 50.00,
+            alignment: 50.00,
+            cohesion: 50.00,
+            quantity: 4.00,
+        }),
+    },
+    globe: {
+        title: "Global Access",
+        description: "Connect to the worldwide network",
+        // @ts-expect-error - Vanta.js has no TypeScript definitions
+        importer: () => import('vanta/dist/vanta.globe.min'),
+        config: (isDark) => ({
+            backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+            color: isDark ? COLORS.primary : COLORS.primaryDark,
+            color2: COLORS.accent,
+            size: 1.2,
+            showDots: true,
+        }),
+    },
+    net: {
+        title: "Neural Interface",
+        description: "Secure connection established",
+        // @ts-expect-error - Vanta.js has no TypeScript definitions
+        importer: () => import('vanta/dist/vanta.net.min'),
+        config: (isDark) => ({
+            backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+            color: isDark ? COLORS.secondary : COLORS.primaryDark,
+            points: 12.00,
+            maxDistance: 22.00,
+            spacing: 18.00,
+            showDots: true,
+        }),
+    },
+    cells: {
+        title: "Cellular Login",
+        description: "Organic authentication systems",
+        // @ts-expect-error - Vanta.js has no TypeScript definitions
+        importer: () => import('vanta/dist/vanta.cells.min'),
+        config: (isDark) => ({
+            color1: isDark ? COLORS.secondary : COLORS.secondaryDark,
+            color2: COLORS.primary,
+            size: 1.5,
+            speed: 1,
+            minHeight: 200.00,
+            minWidth: 200.00,
+        }),
+    },
+    trunk: {
+        title: "Growth Platform",
+        description: "Scale your business with us",
+        // @ts-expect-error - Vanta.js has no TypeScript definitions
+        importer: () => import('vanta/dist/vanta.trunk.min'),
+        config: (isDark) => ({
+            backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+            color: isDark ? COLORS.secondary : COLORS.primaryDark,
+            spacing: 2.0,
+            chaos: 4.0,
+        }),
+    },
+    dots: {
+        title: "Connected Systems",
+        description: "Join the grid",
+        // @ts-expect-error - Vanta.js has no TypeScript definitions
+        importer: () => import('vanta/dist/vanta.net.min'),
+        config: (isDark) => ({
+            backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+            color: isDark ? COLORS.secondary : COLORS.primaryDark,
+            points: 15.0,
+            maxDistance: 22.0,
+            spacing: 18.0,
+            showDots: true,
+        }),
+    },
+    topology: {
+        title: "Topology View",
+        description: "Structural mapping login",
+        // @ts-expect-error - Vanta.js has no TypeScript definitions
+        importer: () => import('vanta/dist/vanta.topology.min'),
+        config: (isDark) => ({
+            backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
+            color: isDark ? COLORS.secondary : COLORS.primaryDark,
+        }),
+    },
 }
 
-export function LoginNetDark() {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
-
-    return (
-        <VantaWrapper
-            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
-            effectImporter={() => import('vanta/dist/vanta.net.min')}
-            config={{
-                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
-                color: isDark ? COLORS.secondary : COLORS.primaryDark,
-                points: 12.00,
-                maxDistance: 22.00,
-                spacing: 18.00,
-                showDots: true
-            }}
-        >
-            <LoginPageLayout title="Neural Interface" description="Secure connection established" isDark={isDark} />
-        </VantaWrapper>
-    )
+interface VantaLoginPageProps {
+    effect: VantaEffect
+    title?: string
+    description?: string
 }
 
-export function LoginCellsLight() {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
+export function VantaLoginPage({ effect, title, description }: VantaLoginPageProps) {
+    const { resolvedTheme } = useTheme()
+    const isDark = resolvedTheme === 'dark'
+    const cfg = EFFECT_CONFIGS[effect]
 
     return (
         <VantaWrapper
-            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
-            effectImporter={() => import('vanta/dist/vanta.cells.min')}
-            config={{
-                color1: isDark ? COLORS.secondary : COLORS.secondaryDark,
-                color2: isDark ? COLORS.primary : COLORS.primary,
-                size: 1.5,
-                speed: 1,
-                minHeight: 200.00,
-                minWidth: 200.00
-            }}
+            effectImporter={cfg.importer}
+            config={cfg.config(isDark)}
         >
-            <LoginPageLayout title="Cellular Login" description="Organic authentication systems" isDark={isDark} />
-        </VantaWrapper>
-    )
-}
-
-export function LoginTrunkLight() {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
-
-    return (
-        <VantaWrapper
-            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
-            effectImporter={() => import('vanta/dist/vanta.trunk.min')}
-            config={{
-                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
-                color: isDark ? COLORS.secondary : COLORS.primaryDark,
-                spacing: 2.0,
-                chaos: 4.0
-            }}
-        >
-            <LoginPageLayout title="Growth Platform" description="Scale your business with us" isDark={isDark} />
-        </VantaWrapper>
-    )
-}
-
-export function LoginDotsLight() {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
-
-    return (
-        <VantaWrapper
-            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
-            effectImporter={() => import('vanta/dist/vanta.net.min')}
-            config={{
-                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
-                color: isDark ? COLORS.secondary : COLORS.primaryDark,
-                points: 15.0,
-                maxDistance: 22.0,
-                spacing: 18.0,
-                showDots: true
-            }}
-        >
-            <LoginPageLayout title="Connected Systems" description="Join the grid" isDark={isDark} />
-        </VantaWrapper >
-    )
-}
-
-export function LoginTopologyDark() {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
-
-    return (
-        <VantaWrapper
-            // @ts-expect-error - Vanta.js has no TypeScript definitions for effect imports
-            effectImporter={() => import('vanta/dist/vanta.topology.min')}
-            config={{
-                backgroundColor: isDark ? COLORS.darkBg : COLORS.lightBg,
-                color: isDark ? COLORS.secondary : COLORS.primaryDark,
-            }}
-        >
-            <LoginPageLayout title="Topology View" description="Structural mapping login" isDark={isDark} />
+            <LoginPageLayout
+                title={title ?? cfg.title}
+                description={description ?? cfg.description}
+                isDark={isDark}
+            />
         </VantaWrapper>
     )
 }

@@ -1,7 +1,12 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { PagesShowcase } from "./PagesShowcase";
 import { ThemeProvider } from "@/lib/ThemeProvider";
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
+}));
+
+import { PagesShowcase } from "./PagesShowcase";
 
 describe("PagesShowcase", () => {
   it("renders without crashing and shows section heading", () => {

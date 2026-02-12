@@ -1,8 +1,10 @@
-import { useState } from "react";
+'use client'
+
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card";
 import { Typography } from "../../ui/Typography";
 import { Grid } from "../../layout/Grid";
-import { tokens } from "../../../tokens";
+import { useTheme } from "../../../lib/ThemeProvider";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/Table";
 import { SuccessCheck } from "../../ui/SuccessCheck";
 import { ConfettiBurst } from "../../ui/ConfettiBurst";
@@ -53,7 +55,65 @@ function CombinedDelightDemo() {
   );
 }
 
-function ColorCard({ name, hex, className }: { name: string, hex: string, className?: string }) {
+function rgbToHex(rgbStr: string): string {
+  const parts = rgbStr.trim().split(/\s+/).map(Number);
+  if (parts.length < 3 || parts.some(isNaN)) return "";
+  return (
+    "#" +
+    parts
+      .slice(0, 3)
+      .map((n) => Math.max(0, Math.min(255, n)).toString(16).padStart(2, "0"))
+      .join("")
+  );
+}
+
+const CSS_VAR_NAMES = [
+  "--color-background",
+  "--color-surface",
+  "--color-surface-active",
+  "--color-border",
+  "--color-primary",
+  "--color-accent",
+  "--color-destructive",
+  "--chart-1",
+  "--chart-2",
+  "--chart-3",
+  "--chart-4",
+  "--chart-5",
+] as const;
+
+type CssVarName = (typeof CSS_VAR_NAMES)[number];
+
+function useComputedColors(): Record<CssVarName, string> {
+  const { resolvedTheme, style } = useTheme();
+  return useMemo(() => {
+    if (typeof document === "undefined") {
+      const empty = {} as Record<CssVarName, string>;
+      for (const v of CSS_VAR_NAMES) empty[v] = "";
+      return empty;
+    }
+    const styles = getComputedStyle(document.documentElement);
+    const result = {} as Record<CssVarName, string>;
+    for (const v of CSS_VAR_NAMES) {
+      result[v] = rgbToHex(styles.getPropertyValue(v));
+    }
+    return result;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resolvedTheme, style]);
+}
+
+function ColorCard({
+  name,
+  cssVar,
+  computedColors,
+  className,
+}: {
+  name: string;
+  cssVar: CssVarName;
+  computedColors: Record<CssVarName, string>;
+  className?: string;
+}) {
+  const hex = computedColors[cssVar];
   return (
     <div className="rounded-lg overflow-hidden border border-border">
       <div className={`h-24 w-full ${className}`}></div>
@@ -62,7 +122,7 @@ function ColorCard({ name, hex, className }: { name: string, hex: string, classN
         <Typography variant="small" className="text-text-secondary font-sans">{hex}</Typography>
       </div>
     </div>
-  )
+  );
 }
 
 interface FoundationsShowcaseProps {
@@ -71,6 +131,7 @@ interface FoundationsShowcaseProps {
 
 function FoundationsShowcase({ progress }: FoundationsShowcaseProps) {
   void progress;
+  const computedColors = useComputedColors();
   return (
     <>
             <section>
@@ -105,7 +166,7 @@ function FoundationsShowcase({ progress }: FoundationsShowcaseProps) {
                   </CardHeader>
                   <CardContent>
                     <Typography variant="body" className="text-text-secondary text-base leading-relaxed">
-                      Beauty does not compromise usability. We prioritize strict contrast ratios ensuring that our "dark mode" is legible, crisp, and accessible to everyone.
+                      Beauty does not compromise usability. We prioritize strict contrast ratios ensuring that our &quot;dark mode&quot; is legible, crisp, and accessible to everyone.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -190,22 +251,22 @@ function FoundationsShowcase({ progress }: FoundationsShowcaseProps) {
             <section>
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Colors</Typography>
               <Grid cols={4} gap="md">
-                <ColorCard name="Background" hex={tokens.colors.background} className="bg-background border border-border" />
-                <ColorCard name="Surface" hex={tokens.colors.surface.DEFAULT} className="bg-surface" />
-                <ColorCard name="Surface Active" hex={tokens.colors.surface.active} className="bg-surface-active" />
-                <ColorCard name="Border" hex={tokens.colors.border.DEFAULT} className="bg-border" />
-                <ColorCard name="Primary" hex={tokens.colors.primary.DEFAULT} className="bg-primary text-primary-foreground" />
-                <ColorCard name="Accent" hex={tokens.colors.accent.DEFAULT} className="bg-accent text-white" />
-                <ColorCard name="Destructive" hex={tokens.colors.destructive.DEFAULT} className="bg-destructive text-white" />
+                <ColorCard name="Background" cssVar="--color-background" computedColors={computedColors} className="bg-background border border-border" />
+                <ColorCard name="Surface" cssVar="--color-surface" computedColors={computedColors} className="bg-surface" />
+                <ColorCard name="Surface Active" cssVar="--color-surface-active" computedColors={computedColors} className="bg-surface-active" />
+                <ColorCard name="Border" cssVar="--color-border" computedColors={computedColors} className="bg-border" />
+                <ColorCard name="Primary" cssVar="--color-primary" computedColors={computedColors} className="bg-primary text-primary-foreground" />
+                <ColorCard name="Accent" cssVar="--color-accent" computedColors={computedColors} className="bg-accent text-white" />
+                <ColorCard name="Destructive" cssVar="--color-destructive" computedColors={computedColors} className="bg-destructive text-white" />
               </Grid>
 
               <Typography variant="h3" className="mt-8 mb-4">Data Visualization Palette</Typography>
               <Grid cols={5} gap="md">
-                <ColorCard name="Chart 1" hex="#4f46e5" className="bg-[rgb(var(--chart-1))]" />
-                <ColorCard name="Chart 2" hex="#0891b2" className="bg-[rgb(var(--chart-2))]" />
-                <ColorCard name="Chart 3" hex="#7c3aed" className="bg-[rgb(var(--chart-3))]" />
-                <ColorCard name="Chart 4" hex="#65a30d" className="bg-[rgb(var(--chart-4))]" />
-                <ColorCard name="Chart 5" hex="#db2777" className="bg-[rgb(var(--chart-5))]" />
+                <ColorCard name="Chart 1" cssVar="--chart-1" computedColors={computedColors} className="bg-[rgb(var(--chart-1))]" />
+                <ColorCard name="Chart 2" cssVar="--chart-2" computedColors={computedColors} className="bg-[rgb(var(--chart-2))]" />
+                <ColorCard name="Chart 3" cssVar="--chart-3" computedColors={computedColors} className="bg-[rgb(var(--chart-3))]" />
+                <ColorCard name="Chart 4" cssVar="--chart-4" computedColors={computedColors} className="bg-[rgb(var(--chart-4))]" />
+                <ColorCard name="Chart 5" cssVar="--chart-5" computedColors={computedColors} className="bg-[rgb(var(--chart-5))]" />
               </Grid>
             </section>
 

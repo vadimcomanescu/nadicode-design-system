@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from "react";
 import { Typography } from "../../ui/Typography";
 import { Grid } from "../../layout/Grid";
 import { Card, CardContent } from "../../ui/Card";
@@ -44,12 +47,99 @@ import { AgentStatus } from "../../ui/AgentStatus";
 import { AudioWaveform } from "../../ui/AudioWaveform";
 import { ConversationThread } from "../../ui/ConversationThread";
 
-function BlocksShowcase() {
+const TOC_SECTIONS = [
+  { id: "marketing", label: "Marketing", count: 17 },
+  { id: "authentication", label: "Authentication", count: 9 },
+  { id: "application", label: "Application", count: 13 },
+  { id: "ai-voice", label: "AI & Voice", count: 4 },
+] as const;
+
+function BlocksTOC({ activeSection }: { activeSection: string }) {
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
     <>
-            {/* MARKETING */}
-            <section className="space-y-16">
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Marketing</Typography>
+      {/* Desktop: vertical sidebar */}
+      <nav className="hidden md:block border-l border-border pl-4">
+        <ul className="space-y-2">
+          {TOC_SECTIONS.map(({ id, label, count }) => (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                onClick={(e) => handleClick(e, id)}
+                className={
+                  activeSection === id
+                    ? "block text-sm font-medium text-accent border-l-2 border-accent -ml-[calc(1rem+1px)] pl-[calc(1rem-1px)] py-0.5 transition-colors"
+                    : "block text-sm text-text-secondary hover:text-text-primary py-0.5 transition-colors"
+                }
+              >
+                {label} ({count})
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Mobile: horizontal scrollbar */}
+      <nav className="md:hidden flex gap-4 overflow-x-auto pb-2 mb-8 border-b border-border sticky top-16 z-10 bg-background/95 backdrop-blur-sm px-1">
+        {TOC_SECTIONS.map(({ id, label, count }) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            onClick={(e) => handleClick(e, id)}
+            className={
+              activeSection === id
+                ? "text-sm font-medium text-accent border-b-2 border-accent pb-1 whitespace-nowrap transition-colors"
+                : "text-sm text-text-secondary hover:text-text-primary pb-1 whitespace-nowrap transition-colors"
+            }
+          >
+            {label} ({count})
+          </a>
+        ))}
+      </nav>
+    </>
+  );
+}
+
+function BlocksShowcase() {
+  const [activeSection, setActiveSection] = useState("marketing");
+
+  useEffect(() => {
+    const headings = document.querySelectorAll("[data-toc-heading]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    headings.forEach((h) => observer.observe(h));
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="flex gap-8">
+      {/* TOC - sticky sidebar, hidden on mobile */}
+      <aside className="hidden md:block w-48 shrink-0">
+        <div className="sticky top-24">
+          <BlocksTOC activeSection={activeSection} />
+        </div>
+      </aside>
+
+      {/* Content */}
+      <div className="flex-1 min-w-0 space-y-16">
+        {/* Mobile TOC */}
+        <BlocksTOC activeSection={activeSection} />
+
+        {/* MARKETING */}
+        <section id="marketing" data-toc-heading className="space-y-16">
+          <Typography variant="h2" className="mb-8 border-b border-border pb-2">Marketing</Typography>
 
               <div className="space-y-4">
                 <Typography variant="h3">Marketing Header</Typography>
@@ -180,7 +270,7 @@ function BlocksShowcase() {
             </section>
 
             {/* AUTHENTICATION */}
-            <section className="space-y-8">
+            <section id="authentication" data-toc-heading className="space-y-8">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Authentication</Typography>
               <Grid cols={1} gap="xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -235,7 +325,7 @@ function BlocksShowcase() {
             </section>
 
             {/* APPLICATION */}
-            <section className="space-y-8">
+            <section id="application" data-toc-heading className="space-y-8">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Application</Typography>
               <Grid cols={1} gap="xl">
                 <div className="space-y-4">
@@ -328,7 +418,7 @@ console.log(greet("World"));`}
             </section>
 
             {/* AI & VOICE */}
-            <section className="space-y-8">
+            <section id="ai-voice" data-toc-heading className="space-y-8">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">AI & Voice</Typography>
 
               <div className="space-y-4">
@@ -389,7 +479,8 @@ console.log(greet("World"));`}
                 </Card>
               </div>
             </section>
-    </>
+      </div>
+    </div>
   );
 }
 

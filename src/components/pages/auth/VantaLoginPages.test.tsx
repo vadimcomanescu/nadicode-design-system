@@ -7,6 +7,10 @@ vi.mock("../../ui/vanta/VantaWrapper", () => ({
   VantaWrapper: ({ children }: { children: React.ReactNode }) => <div data-testid="vanta-wrapper">{children}</div>,
 }))
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
+}))
+
 import {
   LoginBirdsDark,
   LoginGlobeDark,

@@ -1,3 +1,5 @@
+'use client'
+
 import { VantaWrapper } from '../../ui/vanta/VantaWrapper'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '../../ui/Card'
 import { Button } from '../../ui/Button'
@@ -5,6 +7,7 @@ import { Input } from '../../ui/Input'
 import { Label } from '../../ui/Label'
 import { Checkbox } from '../../ui/Checkbox'
 import { GoogleIcon } from '../../ui/BrandIcons'
+import { useRouter } from 'next/navigation'
 import { useTheme } from '../../../lib/ThemeProvider'
 import { ZapIcon } from '../../ui/icons/zap'
 
@@ -26,12 +29,13 @@ const COLORS = {
 
 // --- Shared Layout ---
 function LoginPageLayout({ title, description, isDark }: { title: string, description: string, isDark: boolean }) {
+    const router = useRouter();
     return (
         <div className="flex items-center justify-center min-h-dvh relative">
             <Button
                 variant="ghost"
                 className="absolute top-4 left-4 z-50 text-text-primary/50 hover:text-text-primary"
-                onClick={() => window.location.href = '/?tab=pages'}
+                onClick={() => router.push("/pages")}
             >
                 ← Back to Pages
             </Button>

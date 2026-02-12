@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from "../../ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card";
 import { Input } from "../../ui/Input";
@@ -54,6 +56,76 @@ import { FileUpload } from "../../ui/FileUpload";
 import { SearchCommand } from "../../ui/SearchCommand";
 import { FormWizard } from "../../ui/FormWizard";
 import { DatePickerWithRange } from "../../ui/DateRangePicker";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../ui/Tabs";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "../../ui/Breadcrumb";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink, navigationMenuTriggerStyle } from "../../ui/NavigationMenu";
+import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSeparator } from "../../ui/Menubar";
+import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem } from "../../ui/ContextMenu";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, PaginationEllipsis } from "../../ui/Pagination";
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter } from "../../ui/Drawer";
+import { PasswordInput } from "../../ui/PasswordInput";
+import { Alert, AlertTitle, AlertDescription } from "../../ui/Alert";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../../ui/Collapsible";
+import { ScrollArea } from "../../ui/ScrollArea";
+import { Separator } from "../../ui/Separator";
+import { Timeline } from "../../ui/Timeline";
+import { PromoCard } from "../../ui/PromoCard";
+import { AnimatedBackground } from "../../ui/AnimatedBackground";
+import { PixelBackground } from "../../ui/PixelBackground";
+import { ProgressiveBlur } from "../../ui/ProgressiveBlur";
+import { TiltCard } from "../../ui/TiltCard";
+import { MovingBorder } from "../../ui/MovingBorder";
+import { MagneticElement } from "../../ui/MagneticElement";
+import { FloatingDock } from "../../ui/FloatingDock";
+import { BentoGrid } from "../../ui/BentoGrid";
+import { InfiniteSlider } from "../../ui/InfiniteSlider";
+import { StaggerChildren } from "../../ui/StaggerChildren";
+import { StaggeredEntrance } from "../../ui/StaggeredEntrance";
+import { HomeIcon } from "../../ui/icons/home";
+import { GlobeIcon } from "../../ui/icons/globe";
+import { MailIcon } from "../../ui/icons/mail";
+import { RocketIcon } from "../../ui/icons/rocket";
+import { TerminalIcon } from "../../ui/icons/terminal";
+import { SearchIcon } from "../../ui/icons/search";
+import { StarIcon } from "../../ui/icons/star";
+import { ZapIcon } from "../../ui/icons/zap";
+import { InfoIcon } from "../../ui/icons/info";
+import { AlertTriangleIcon } from "../../ui/icons/alert-triangle";
+import { CheckIcon } from "../../ui/icons/check";
+import { SparklesIcon } from "../../ui/icons/sparkles";
+import { ChevronDownIcon } from "../../ui/icons/chevron-down";
+import { DatabaseIcon } from "../../ui/icons/database";
+import { LayersIcon } from "../../ui/icons/layers";
+
+const FLOATING_DOCK_ITEMS = [
+  { icon: <HomeIcon size={20} />, label: "Home" },
+  { icon: <GlobeIcon size={20} />, label: "Browse" },
+  { icon: <MailIcon size={20} />, label: "Mail" },
+  { icon: <TerminalIcon size={20} />, label: "Terminal" },
+  { icon: <RocketIcon size={20} />, label: "Deploy" },
+  { icon: <SearchIcon size={20} />, label: "Search" },
+];
+
+const BENTO_ITEMS = [
+  { title: "Analytics", description: "Real-time metrics and insights for your application.", className: "md:col-span-2", icon: <StarIcon size={20} /> },
+  { title: "Database", description: "Managed PostgreSQL with automatic backups.", className: "", icon: <DatabaseIcon size={20} /> },
+  { title: "Edge Functions", description: "Deploy serverless functions globally.", className: "", icon: <ZapIcon size={20} /> },
+  { title: "Storage", description: "Object storage with CDN distribution.", className: "", icon: <LayersIcon size={20} /> },
+  { title: "Authentication", description: "Full auth system with social providers and MFA.", className: "md:col-span-2", icon: <SparklesIcon size={20} /> },
+];
+
+const TIMELINE_ITEMS = [
+  { title: "Project created", description: "Repository initialized with design system scaffolding.", timestamp: "Jan 15" },
+  { title: "Core primitives shipped", description: "Button, Input, Card, and 20+ base components released.", timestamp: "Feb 3" },
+  { title: "Dark mode support", description: "Full theme system with CSS variables and automatic switching.", timestamp: "Mar 12" },
+  { title: "v1.0 released", description: "Public release with 96 components, 35 blocks, and full documentation.", timestamp: "Apr 1" },
+];
+
+const SCROLL_AREA_TAGS = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`);
+
+const INFINITE_SLIDER_WORDS = ["React", "TypeScript", "Tailwind", "Radix", "Next.js", "Vitest", "Motion"];
+
+const STAGGER_ITEMS = ["Design Tokens", "Components", "Blocks", "Pages"];
 
 interface ComponentsShowcaseProps {
   toast: (opts: { title: string; description: string }) => void;
@@ -106,6 +178,148 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                       <UnderlineIcon size={16} />
                     </ToggleGroupItem>
                   </ToggleGroup>
+                </div>
+              </div>
+            </section>
+            </ScrollFadeIn>
+
+            {/* NAVIGATION */}
+            <ScrollFadeIn>
+            <section>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Navigation</Typography>
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <Typography variant="h4">Tabs</Typography>
+                  <Tabs defaultValue="overview" className="w-full">
+                    <TabsList>
+                      <TabsTrigger value="overview">Overview</TabsTrigger>
+                      <TabsTrigger value="analytics">Analytics</TabsTrigger>
+                      <TabsTrigger value="reports">Reports</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="overview">
+                      <Card><CardContent className="pt-6"><Typography variant="muted">Overview content goes here.</Typography></CardContent></Card>
+                    </TabsContent>
+                    <TabsContent value="analytics">
+                      <Card><CardContent className="pt-6"><Typography variant="muted">Analytics dashboard.</Typography></CardContent></Card>
+                    </TabsContent>
+                    <TabsContent value="reports">
+                      <Card><CardContent className="pt-6"><Typography variant="muted">Generated reports.</Typography></CardContent></Card>
+                    </TabsContent>
+                  </Tabs>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h4">Breadcrumb</Typography>
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Components</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h4">Navigation Menu</Typography>
+                  <NavigationMenu>
+                    <NavigationMenuList>
+                      <NavigationMenuItem>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>Dashboard</NavigationMenuLink>
+                      </NavigationMenuItem>
+                      <NavigationMenuItem>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>Projects</NavigationMenuLink>
+                      </NavigationMenuItem>
+                      <NavigationMenuItem>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>Settings</NavigationMenuLink>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h4">Menubar</Typography>
+                  <Menubar>
+                    <MenubarMenu>
+                      <MenubarTrigger>File</MenubarTrigger>
+                      <MenubarContent>
+                        <MenubarItem>New Tab</MenubarItem>
+                        <MenubarItem>New Window</MenubarItem>
+                        <MenubarSeparator />
+                        <MenubarItem>Share</MenubarItem>
+                        <MenubarItem>Print</MenubarItem>
+                      </MenubarContent>
+                    </MenubarMenu>
+                    <MenubarMenu>
+                      <MenubarTrigger>Edit</MenubarTrigger>
+                      <MenubarContent>
+                        <MenubarItem>Undo</MenubarItem>
+                        <MenubarItem>Redo</MenubarItem>
+                        <MenubarSeparator />
+                        <MenubarItem>Cut</MenubarItem>
+                        <MenubarItem>Copy</MenubarItem>
+                        <MenubarItem>Paste</MenubarItem>
+                      </MenubarContent>
+                    </MenubarMenu>
+                    <MenubarMenu>
+                      <MenubarTrigger>View</MenubarTrigger>
+                      <MenubarContent>
+                        <MenubarItem>Zoom In</MenubarItem>
+                        <MenubarItem>Zoom Out</MenubarItem>
+                        <MenubarSeparator />
+                        <MenubarItem>Fullscreen</MenubarItem>
+                      </MenubarContent>
+                    </MenubarMenu>
+                  </Menubar>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h4">Context Menu</Typography>
+                  <ContextMenu>
+                    <ContextMenuTrigger className="flex h-[120px] w-full items-center justify-center rounded-md border border-dashed border-border text-sm text-text-secondary">
+                      Right-click here
+                    </ContextMenuTrigger>
+                    <ContextMenuContent>
+                      <ContextMenuItem>Back</ContextMenuItem>
+                      <ContextMenuItem>Forward</ContextMenuItem>
+                      <ContextMenuItem>Reload</ContextMenuItem>
+                      <ContextMenuItem>View Source</ContextMenuItem>
+                      <ContextMenuItem>Inspect</ContextMenuItem>
+                    </ContextMenuContent>
+                  </ContextMenu>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h4">Pagination</Typography>
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious href="#" />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#" isActive>1</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">2</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">3</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationNext href="#" />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
                 </div>
               </div>
             </section>
@@ -221,6 +435,10 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                       ]}
                     />
                   </div>
+                  <div className="space-y-4">
+                    <Typography variant="h4">Password Input</Typography>
+                    <PasswordInput placeholder="Enter your password" />
+                  </div>
                 </div>
               </Grid>
             </section>
@@ -266,6 +484,22 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                     </SheetHeader>
                   </SheetContent>
                 </Sheet>
+
+                <Drawer>
+                  <DrawerTrigger asChild><Button variant="outline">Drawer</Button></DrawerTrigger>
+                  <DrawerContent>
+                    <DrawerHeader>
+                      <DrawerTitle>Move to project</DrawerTitle>
+                      <DrawerDescription>Select a destination for your files.</DrawerDescription>
+                    </DrawerHeader>
+                    <div className="p-4">
+                      <Typography variant="muted">Drawer body content goes here.</Typography>
+                    </div>
+                    <DrawerFooter>
+                      <Button>Submit</Button>
+                    </DrawerFooter>
+                  </DrawerContent>
+                </Drawer>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild><Button variant="ghost">Dropdown</Button></DropdownMenuTrigger>
@@ -342,7 +576,7 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                     </AccordionItem>
                     <AccordionItem value="item-2">
                       <AccordionTrigger>Is it styled?</AccordionTrigger>
-                      <AccordionContent>Yes. It comes with default styles that match the other components' aesthetic.</AccordionContent>
+                      <AccordionContent>Yes. It comes with default styles that match the other components&apos; aesthetic.</AccordionContent>
                     </AccordionItem>
                   </Accordion>
 
@@ -473,9 +707,101 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                       <PackageIcon size={24} />
                     </EmptyIcon>
                     <EmptyTitle>No projects found</EmptyTitle>
-                    <EmptyDescription>You haven't created any projects yet. Get started by creating a new one.</EmptyDescription>
+                    <EmptyDescription>You haven&apos;t created any projects yet. Get started by creating a new one.</EmptyDescription>
                     <Button>Create Project</Button>
                   </Empty>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Alert</Typography>
+                  <div className="space-y-3">
+                    <Alert variant="success">
+                      <CheckIcon size={16} />
+                      <AlertTitle>Success</AlertTitle>
+                      <AlertDescription>Your changes have been saved successfully.</AlertDescription>
+                    </Alert>
+                    <Alert variant="warning">
+                      <AlertTriangleIcon size={16} />
+                      <AlertTitle>Warning</AlertTitle>
+                      <AlertDescription>Your trial expires in 3 days.</AlertDescription>
+                    </Alert>
+                    <Alert variant="destructive">
+                      <InfoIcon size={16} />
+                      <AlertTitle>Error</AlertTitle>
+                      <AlertDescription>Failed to deploy. Check build logs for details.</AlertDescription>
+                    </Alert>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Collapsible</Typography>
+                  <Collapsible className="w-full max-w-sm border border-border rounded-lg">
+                    <CollapsibleTrigger asChild>
+                      <Button variant="ghost" className="w-full justify-between">
+                        Advanced Settings
+                        <ChevronDownIcon size={16} />
+                      </Button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="p-4 pt-0 space-y-2">
+                      <div className="rounded-md border border-border px-4 py-3 text-sm text-text-secondary">
+                        Enable experimental features
+                      </div>
+                      <div className="rounded-md border border-border px-4 py-3 text-sm text-text-secondary">
+                        Debug mode output
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                </div>
+
+                <Grid cols={2} gap="xl">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Scroll Area</Typography>
+                    <ScrollArea className="h-[200px] w-full rounded-md border border-border p-4">
+                      <div className="space-y-2">
+                        {SCROLL_AREA_TAGS.map((item) => (
+                          <div key={item} className="text-sm text-text-secondary py-1 border-b border-border last:border-0">
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </ScrollArea>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Separator</Typography>
+                    <div className="space-y-4">
+                      <div>
+                        <Typography variant="h4">Horizontal</Typography>
+                        <Separator className="my-4" />
+                        <Typography variant="muted">Content below the separator.</Typography>
+                      </div>
+                      <div className="flex h-5 items-center space-x-4 text-sm">
+                        <span>Blog</span>
+                        <Separator orientation="vertical" />
+                        <span>Docs</span>
+                        <Separator orientation="vertical" />
+                        <span>Source</span>
+                      </div>
+                    </div>
+                  </div>
+                </Grid>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Timeline</Typography>
+                  <div className="max-w-lg">
+                    <Timeline items={TIMELINE_ITEMS} />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Promo Card</Typography>
+                  <div className="max-w-xs">
+                    <PromoCard
+                      title="Upgrade to Pro"
+                      description="Unlock all features and get unlimited access to the design system."
+                      actionLabel="Upgrade Now"
+                    />
+                  </div>
                 </div>
               </div>
             </section>
@@ -499,7 +825,7 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                         <FieldLabel>Email Address</FieldLabel>
                         <FieldContent>
                           <Input placeholder="rabbit@evil.com" />
-                          <FieldDescription>We'll never share your email.</FieldDescription>
+                          <FieldDescription>We&apos;ll never share your email.</FieldDescription>
                         </FieldContent>
                       </Field>
                       <FieldSeparator>Security</FieldSeparator>
@@ -699,6 +1025,144 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                     </div>
                   </div>
                 </Grid>
+              </section>
+            </ScrollFadeIn>
+
+            {/* EFFECTS & ANIMATION */}
+            <ScrollFadeIn>
+              <section>
+                <Typography variant="h2" className="mb-8 border-b border-border pb-2">Effects & Animation</Typography>
+                <div className="space-y-8">
+                  <Grid cols={2} gap="xl">
+                    <div className="space-y-4">
+                      <Typography variant="h3">Animated Background</Typography>
+                      <div className="relative h-[200px] rounded-lg border border-border overflow-hidden">
+                        <AnimatedBackground />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Typography variant="h4" className="text-text-primary z-10">Living Canvas</Typography>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Pixel Background</Typography>
+                      <div className="relative h-[200px] rounded-lg border border-border overflow-hidden bg-background">
+                        <PixelBackground theme="cyber" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Typography variant="h4" className="text-text-primary z-10">Pixel Grid</Typography>
+                        </div>
+                      </div>
+                    </div>
+                  </Grid>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Progressive Blur</Typography>
+                    <div className="relative h-[160px] rounded-lg border border-border overflow-hidden">
+                      <div className="flex items-center justify-center h-full gap-4 px-8">
+                        {INFINITE_SLIDER_WORDS.map((w) => (
+                          <Badge key={w} variant="secondary" className="text-sm">{w}</Badge>
+                        ))}
+                      </div>
+                      <ProgressiveBlur className="inset-y-0 left-0 w-24" direction="right" blurIntensity={2} />
+                      <ProgressiveBlur className="inset-y-0 right-0 w-24" direction="left" blurIntensity={2} />
+                    </div>
+                  </div>
+
+                  <Grid cols={2} gap="xl">
+                    <div className="space-y-4">
+                      <Typography variant="h3">Tilt Card</Typography>
+                      <TiltCard>
+                        <Card className="glass-panel">
+                          <CardHeader>
+                            <CardTitle>Hover to Tilt</CardTitle>
+                            <CardDescription>Move your mouse across this card to see the 3D tilt effect.</CardDescription>
+                          </CardHeader>
+                          <CardContent>
+                            <Typography variant="muted">Perspective-based interaction with spring physics.</Typography>
+                          </CardContent>
+                        </Card>
+                      </TiltCard>
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Moving Border</Typography>
+                      <MovingBorder>
+                        <div className="p-6 space-y-2">
+                          <Typography variant="h4">Animated Border</Typography>
+                          <Typography variant="muted">A conic gradient spins around the border using CSS animation.</Typography>
+                        </div>
+                      </MovingBorder>
+                    </div>
+                  </Grid>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Magnetic Element</Typography>
+                    <div className="flex gap-4 items-center justify-center py-8">
+                      <MagneticElement>
+                        <Button variant="accent" size="lg">Pull Me</Button>
+                      </MagneticElement>
+                      <MagneticElement strength={0.5}>
+                        <Button variant="outline" size="lg">Stronger Pull</Button>
+                      </MagneticElement>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Floating Dock</Typography>
+                    <div className="flex items-end justify-center py-8">
+                      <FloatingDock items={FLOATING_DOCK_ITEMS} />
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Bento Grid</Typography>
+                    <BentoGrid columns={3}>
+                      {BENTO_ITEMS.map((item) => (
+                        <Card key={item.title} className={`glass-panel ${item.className}`}>
+                          <CardHeader>
+                            <div className="flex items-center gap-2">
+                              {item.icon}
+                              <CardTitle className="text-base">{item.title}</CardTitle>
+                            </div>
+                            <CardDescription>{item.description}</CardDescription>
+                          </CardHeader>
+                        </Card>
+                      ))}
+                    </BentoGrid>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Infinite Slider</Typography>
+                    <div className="border border-border rounded-lg overflow-hidden py-2">
+                      <InfiniteSlider speed={30} gap={16}>
+                        {INFINITE_SLIDER_WORDS.map((word) => (
+                          <Badge key={word} variant="outline" className="text-sm whitespace-nowrap">{word}</Badge>
+                        ))}
+                      </InfiniteSlider>
+                    </div>
+                  </div>
+
+                  <Grid cols={2} gap="xl">
+                    <div className="space-y-4">
+                      <Typography variant="h3">Stagger Children</Typography>
+                      <StaggerChildren staggerMs={100} direction="up">
+                        {STAGGER_ITEMS.map((item) => (
+                          <div key={item} className="rounded-md border border-border px-4 py-3 mb-2 text-sm text-text-primary bg-surface">
+                            {item}
+                          </div>
+                        ))}
+                      </StaggerChildren>
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Staggered Entrance</Typography>
+                      <StaggeredEntrance delayMs={80}>
+                        {STAGGER_ITEMS.map((item) => (
+                          <div key={item} className="rounded-md border border-border px-4 py-3 mb-2 text-sm text-text-primary bg-surface">
+                            {item}
+                          </div>
+                        ))}
+                      </StaggeredEntrance>
+                    </div>
+                  </Grid>
+                </div>
               </section>
             </ScrollFadeIn>
     </>

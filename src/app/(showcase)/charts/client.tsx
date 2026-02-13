@@ -1,11 +1,6 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-const ChartsShowcase = dynamic(
-  () => import('@/components/pages/showcase/ChartsShowcase').then(m => ({ default: m.ChartsShowcase })),
-  { ssr: false }
-)
+import { ChartsShowcase } from '@/components/pages/showcase/ChartsShowcase'
 
 export default function ChartsClient() {
   return <ChartsShowcase />

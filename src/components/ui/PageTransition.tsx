@@ -50,13 +50,13 @@ export const PageTransition: React.FC<PageTransitionProps> = ({
   }
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       <motion.div
         key={pathname}
         className={cn(className)}
         initial={v.initial}
         animate={{ ...v.animate, transition }}
-        exit={{ ...v.exit, transition }}
+        exit={{ ...v.exit, transition: { ...transition, duration: 0.15 } }}
       >
         {children}
       </motion.div>

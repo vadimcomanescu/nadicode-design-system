@@ -271,7 +271,7 @@ export function VoiceAgentsPage({ onNavigateHome }: { onNavigateHome?: () => voi
 
   return (
     <div className="min-h-dvh bg-background text-text-primary relative overflow-hidden">
-      <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-70" />
+      <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-85" />
 
       <AnimatePresence mode="wait">
         {/* ──── SELECTION VIEW ──── */}

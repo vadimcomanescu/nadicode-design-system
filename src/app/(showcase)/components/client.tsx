@@ -1,13 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import dynamic from 'next/dynamic'
 import { useToast } from '@/hooks/use-toast'
-
-const ComponentsShowcase = dynamic(
-  () => import('@/components/pages/showcase/ComponentsShowcase').then(m => ({ default: m.ComponentsShowcase })),
-  { ssr: false }
-)
+import { ComponentsShowcase } from '@/components/pages/showcase/ComponentsShowcase'
 
 export default function ComponentsClient() {
   const { toast } = useToast()

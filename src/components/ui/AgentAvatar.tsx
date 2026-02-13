@@ -37,7 +37,7 @@ const AgentAvatar = forwardRef<HTMLButtonElement, AgentAvatarProps>(
         ref={ref}
         type="button"
         className={cn(
-          "group cursor-pointer border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full",
+          "relative group cursor-pointer border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full",
           className
         )}
         aria-label={`${name} - ${state}`}

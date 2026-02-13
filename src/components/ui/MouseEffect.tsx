@@ -20,7 +20,7 @@ export function MouseGlow({
   overlayColor = "rgba(56, 189, 184, 0.95)",
   gap = 24,
   maskRadius = 300,
-  overlayRadius = 220,
+  overlayRadius = 260,
 }: MouseGlowProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const overlayRef = React.useRef<HTMLDivElement>(null)

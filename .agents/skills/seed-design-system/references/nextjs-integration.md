@@ -4,6 +4,39 @@ Seed Design System is vendored (shadcn/ui-style): copy source files into your Ne
 
 ---
 
+## Step 0: Install The Contract Kit (Recommended)
+
+Use the vendoring CLI so destination repos get the same rules and guardrails:
+
+```bash
+node <path-to-nadicode-design-system>/bin/init.mjs
+```
+
+This installs:
+
+- `docs/nadicode/NADICODE_CONTRACT.md`
+- `docs/nadicode/factory/page-intent-catalog.json`
+- `docs/nadicode/recipes/`
+- `docs/nadicode/PROMPT_TEMPLATES.md`
+- `scripts/ds-check.mjs`
+- `scripts/ds-generate-task-pack.mjs`
+- `package.json` script: `ds:check`
+- `package.json` script: `ds:task-pack`
+
+Run this gate before and after migration tasks:
+
+```bash
+npm run ds:check
+```
+
+If `scope-definition.json` exists:
+
+```bash
+npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md
+```
+
+---
+
 ## Step 1: Core Files to Copy
 
 Copy these files first (they have no component dependencies):

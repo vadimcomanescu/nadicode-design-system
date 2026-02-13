@@ -4,7 +4,7 @@
  * Seed Design System - Vendoring CLI
  *
  * Copies design system source files into a Next.js project.
- * One command: components, tokens, config, skill, and dependencies.
+ * One command: components, tokens, config, agent contract kit, and dependencies.
  *
  * Usage:
  *   node ~/Code/nadicode-design-system/bin/init.mjs [flags]
@@ -37,7 +37,7 @@ if (args.includes('--help') || args.includes('-h')) {
   Seed Design System - Vendoring CLI
 
   Copies the full design system into a Next.js project:
-  components, blocks, icons, tokens, config, and agent skill.
+  components, blocks, icons, tokens, config, agent skill, and contract kit.
 
   Usage:
     node ${process.argv[1]} [flags]
@@ -229,6 +229,63 @@ function lstatSafe(p) {
   try { return statSync(p, { throwIfNoEntry: false }) } catch { return null }
 }
 
+function copyTemplateFile(src, dest, label) {
+  if (!existsSync(src)) {
+    warn(`Template missing: ${relative(DS_ROOT, src)}`)
+    return
+  }
+  mkdirSync(dirname(dest), { recursive: true })
+  copyFileSync(src, dest)
+  ok(label)
+}
+
+function installAdoptionKit() {
+  info('Installing Nadicode adoption kit...')
+  const docsSource = join(DS_ROOT, 'docs', 'nadicode')
+  const docsDest = join(TARGET, 'docs', 'nadicode')
+  const docsCount = copyDir(docsSource, docsDest)
+  ok(`docs/nadicode/* (${docsCount} files)`)
+
+  copyTemplateFile(
+    join(DS_ROOT, 'scripts', 'ds-check.mjs'),
+    join(TARGET, 'scripts', 'ds-check.mjs'),
+    'scripts/ds-check.mjs'
+  )
+  copyTemplateFile(
+    join(DS_ROOT, 'scripts', 'ds-generate-task-pack.mjs'),
+    join(TARGET, 'scripts', 'ds-generate-task-pack.mjs'),
+    'scripts/ds-generate-task-pack.mjs'
+  )
+
+  patchPackageScripts()
+}
+
+function patchPackageScripts() {
+  const packagePath = join(TARGET, 'package.json')
+  if (!existsSync(packagePath)) {
+    warn('No package.json found while patching scripts')
+    return
+  }
+
+  const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'))
+  const scripts = packageJson.scripts || {}
+  const requiredScripts = {
+    'ds:check': 'node scripts/ds-check.mjs',
+    'ds:task-pack': 'node scripts/ds-generate-task-pack.mjs',
+  }
+
+  for (const [name, command] of Object.entries(requiredScripts)) {
+    if (scripts[name] && scripts[name] !== command && !UPDATE && !FORCE) {
+      warn(`package.json already has ${name} script (use --update/--force to override)`)
+      return
+    }
+  }
+
+  packageJson.scripts = { ...scripts, ...requiredScripts }
+  writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + '\n')
+  ok('package.json scripts ds:check, ds:task-pack')
+}
+
 // ─── Step 4: Setup CSS ──────────────────────────────────────
 
 function setupCSS(appDir) {
@@ -331,13 +388,81 @@ function setupPostCSS() {
 
 // ─── Step 7: TypeScript config ──────────────────────────────
 
+function stripJsonComments(input) {
+  let result = ''
+  let inString = false
+  let inLineComment = false
+  let inBlockComment = false
+  let escape = false
+
+  for (let i = 0; i < input.length; i += 1) {
+    const ch = input[i]
+    const next = input[i + 1]
+
+    if (inLineComment) {
+      if (ch === '\n') {
+        inLineComment = false
+        result += ch
+      }
+      continue
+    }
+
+    if (inBlockComment) {
+      if (ch === '*' && next === '/') {
+        inBlockComment = false
+        i += 1
+      }
+      continue
+    }
+
+    if (inString) {
+      result += ch
+      if (escape) {
+        escape = false
+        continue
+      }
+      if (ch === '\\') {
+        escape = true
+        continue
+      }
+      if (ch === '"') {
+        inString = false
+      }
+      continue
+    }
+
+    if (ch === '"') {
+      inString = true
+      result += ch
+      continue
+    }
+
+    if (ch === '/' && next === '/') {
+      inLineComment = true
+      i += 1
+      continue
+    }
+
+    if (ch === '/' && next === '*') {
+      inBlockComment = true
+      i += 1
+      continue
+    }
+
+    result += ch
+  }
+
+  return result
+}
+
 function parseJsonc(text) {
-  return JSON.parse(
-    text
-      .replace(/\/\/[^\n]*/g, '')
-      .replace(/\/\*[\s\S]*?\*\//g, '')
-      .replace(/,(\s*[}\]])/g, '$1')
-  )
+  try {
+    return JSON.parse(text)
+  } catch {
+    const withoutComments = stripJsonComments(text)
+    const withoutTrailingCommas = withoutComments.replace(/,(\s*[}\]])/g, '$1')
+    return JSON.parse(withoutTrailingCommas)
+  }
 }
 
 function patchTsConfig() {
@@ -398,8 +523,11 @@ After updating, run \`npm test\` to verify integrity gates still pass.
 
 # Seed Design System
 
-Read the skill before working with UI:
-\`.agents/skills/seed-design-system/SKILL.md\`
+Required read order before any UI implementation:
+1. \`docs/nadicode/NADICODE_CONTRACT.md\` (if present)
+2. \`docs/nadicode/factory/page-intent-catalog.json\` (if present)
+3. matching \`docs/nadicode/recipes/*.md\` recipe files
+4. \`.agents/skills/seed-design-system/SKILL.md\`
 
 ## Rules
 
@@ -418,6 +546,8 @@ ls src/components/ui/          # Primitives
 ls src/components/blocks/      # Composed blocks
 ls src/components/ui/icons/    # Animated icons
 ls src/components/ui/charts/   # Chart components
+npm run ds:check               # Enforce Nadicode contract rules
+npm run ds:task-pack           # Generate deterministic tasks from scope-definition
 \`\`\`
 `
 
@@ -577,6 +707,7 @@ async function main() {
   patchTsConfig()
   writeSeedVersion()
   generateAgentMd()
+  installAdoptionKit()
   log('')
   installDeps()
 

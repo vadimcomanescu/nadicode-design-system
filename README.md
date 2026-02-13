@@ -27,6 +27,9 @@ This copies all components, installs dependencies, sets up Tailwind/PostCSS conf
 | Source files | Copies ~300 files (components, blocks, icons, hooks, lib) with `"use client"` prepended |
 | Fonts | Copies GeistPixel fonts to `public/fonts/` |
 | Agent skill | Copies to `.agents/skills/`, symlinks from `.claude/`, `.codex/`, `.opencode/` |
+| Agent contract kit | Writes `docs/nadicode/` (contract, recipes, prompts) |
+| Factory contracts | Writes `docs/nadicode/factory/page-intent-catalog.json` |
+| Enforcement | Writes `scripts/ds-check.mjs`, `scripts/ds-generate-task-pack.mjs`, and package scripts |
 | CSS tokens | Creates `seed-tokens.css` with all design tokens, glass effects, keyframes |
 | globals.css | Patches with Tailwind v4 directives and seed token import |
 | Tailwind | Copies config with Next.js content paths |
@@ -84,6 +87,25 @@ import { Card } from "@/components/ui/Card"
 import { HomeIcon } from "@/components/ui/icons"
 ```
 
+4. Enforce Nadicode rules in that project:
+
+```bash
+npm run ds:check
+```
+
+5. Generate deterministic tasks from scope (if present):
+
+```bash
+npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md
+```
+
+6. Use the portable docs in the target app:
+
+- `docs/nadicode/NADICODE_CONTRACT.md`
+- `docs/nadicode/factory/page-intent-catalog.json`
+- `docs/nadicode/recipes/`
+- `docs/nadicode/PROMPT_TEMPLATES.md`
+
 ### Updating
 
 When the design system evolves, re-run from your Next.js project:
@@ -129,6 +151,8 @@ npm run dev          # Start dev server
 npm run build        # Type check + production build
 npm run test         # Run tests
 npm run lint         # ESLint
+npm run ds:check     # Nadicode contract enforcement
+npm run ds:task-pack # Build task pack from scope-definition.json
 npm run docs:check   # Validate docs and agent references
 npx tsc -b           # Type check only
 ```

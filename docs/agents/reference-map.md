@@ -2,6 +2,14 @@
 
 Use this map to find deep docs quickly.
 
+- Portable contract and migration kit:
+  - `docs/nadicode/NADICODE_CONTRACT.md`
+  - `docs/nadicode/factory/README.md`
+  - `docs/nadicode/factory/page-intent-catalog.json`
+  - `docs/nadicode/factory/PIPELINE_INTEGRATION.md`
+  - `docs/nadicode/ADOPTION_PLAYBOOK.md`
+  - `docs/nadicode/PROMPT_TEMPLATES.md`
+  - `docs/nadicode/recipes/`
 - Design laws and rationale: `docs/OPINIONS.md`
 - High-level principles: `docs/design-principles.md`
 - Evolution and governance: `docs/EVOLUTION.md`

@@ -11,6 +11,25 @@ Use these task playbooks instead of ad-hoc workflows.
 - Verification
 - Output
 
+## Migrate Existing App To Nadicode (Portable)
+
+- Goal: Apply Nadicode in an existing external app without allowing implementation drift.
+- Inputs: Target feature scope (paths), destination repo root.
+- Constraints: Follow `docs/nadicode/NADICODE_CONTRACT.md` and recipe files in `docs/nadicode/`.
+- Steps:
+  1. Run `node <nadicode-repo>/bin/init.mjs` from destination app root.
+  2. If scope exists, run `npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md`.
+  3. Use one prompt from `docs/nadicode/PROMPT_TEMPLATES.md` with explicit scope.
+  4. Migrate one route/feature slice at a time.
+  5. Run `npm run ds:check` before typecheck/build/tests.
+- Verification:
+  1. `npm run ds:check`
+  2. `npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md`
+  3. `npx tsc --noEmit`
+  4. `npm run build`
+  5. `npm run test`
+- Output: Scoped migration with enforced Nadicode conventions.
+
 ## Add A New UI Primitive
 
 - Goal: Add a new component under `src/components/ui/`.

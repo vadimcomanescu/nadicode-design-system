@@ -60,14 +60,15 @@ function VoiceAgentCard({
       whileHover={isInteractive ? { y: -2 } : undefined}
       transition={motionSpring.snappy}
     >
-      <Avatar3D
-        src={agent.avatar}
-        name={agent.name}
-        state={selected ? state : "idle"}
-        size="lg"
-        enableTilt={selected}
-        interactive={false}
-      />
+      <div aria-hidden="true">
+        <Avatar3D
+          src={agent.avatar}
+          name={agent.name}
+          state={selected ? state : "idle"}
+          size="lg"
+          enableTilt={selected}
+        />
+      </div>
 
       <div className="flex flex-col items-center gap-1 text-center">
         <Typography variant="h4" className="text-sm font-semibold text-text-primary">

@@ -1,2 +1,27 @@
+#!/usr/bin/env sh
+set -eu
+
+STASH_MARKER="pre-push-snapshot-check"
+STASHED=0
+
+if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+  echo "pre-push: stashing local changes (including untracked) to validate tracked snapshot"
+  git stash push --quiet --include-untracked --message "$STASH_MARKER"
+  STASHED=1
+fi
+
+restore_stash() {
+  if [ "$STASHED" -eq 1 ]; then
+    git stash pop --quiet >/dev/null 2>&1 || {
+      echo "pre-push: failed to restore stashed local changes"
+      echo "run: git stash list"
+      exit 1
+    }
+  fi
+}
+trap restore_stash EXIT
+
+echo "pre-push: running checks against tracked snapshot only"
+npx tsc --noEmit
 npm run build
 bash bin/test-sync.sh

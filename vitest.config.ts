@@ -13,6 +13,12 @@ export default defineConfig({
       reporter: ['text', 'text-summary'],
       include: ['src/components/**/*.{ts,tsx}'],
       exclude: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}', '**/index.ts'],
+      thresholds: {
+        statements: 60,
+        branches: 50,
+        functions: 50,
+        lines: 65,
+      },
     },
   },
 })

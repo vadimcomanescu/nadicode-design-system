@@ -34,6 +34,7 @@ Use this recipe for entity management pages where users browse, filter, and insp
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

@@ -299,7 +299,7 @@ function MyComponent() {
 
 ## 9. Integrity Test Suite
 
-The design system has automated gates that run on `npm test`. These catch regressions:
+The design system has automated gates that run in husky hooks and CI. These catch regressions:
 
 | Test | What It Guards |
 | ---- | -------------- |
@@ -314,8 +314,10 @@ The design system has automated gates that run on `npm test`. These catch regres
 | `opinion-card-behavior` | Card interaction patterns follow opinions bible |
 | `opinion-typography` | Typography scale and weight rules enforced |
 | `opinion-navigation` | Navigation depth and pattern rules enforced |
+| `npm run ds:check` | Regex/string contract checks for forbidden classes/patterns |
+| `npm run ds:ast-check` | AST contract checks for imports, class tokens, and inline style drift |
 
-**When extending the system, run:** `npm test` to verify all gates pass.
+**When extending the system, run:** `npm run ds:check && npm run ds:ast-check && npm test`
 
 ---
 

@@ -19,6 +19,7 @@ Then implement by recipe and validate:
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

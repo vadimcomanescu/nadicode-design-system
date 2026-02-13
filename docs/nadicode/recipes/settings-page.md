@@ -33,6 +33,7 @@ Use this recipe for user/workspace configuration.
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

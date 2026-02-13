@@ -1,0 +1,36 @@
+{
+  "rulesByPattern": [
+    {
+      "pattern": "src/components/logos/**",
+      "rules": ["hardcoded-inline-color"]
+    },
+    {
+      "pattern": "src/components/ui/BrandIcons.tsx",
+      "rules": ["hardcoded-inline-color"]
+    },
+    {
+      "pattern": "src/components/ui/CheckoutFormDemo.tsx",
+      "rules": ["hardcoded-inline-color"]
+    },
+    {
+      "pattern": "src/components/ui/Chart.tsx",
+      "rules": ["hardcoded-inline-color"]
+    },
+    {
+      "pattern": "src/components/pages/VoiceAgentsPage.tsx",
+      "rules": ["hardcoded-inline-color"]
+    },
+    {
+      "pattern": "src/components/ui/Avatar3D.tsx",
+      "rules": ["hardcoded-inline-color"]
+    },
+    {
+      "pattern": "src/components/animate-ui/primitives/effects/highlight.tsx",
+      "rules": ["hardcoded-inline-zindex"]
+    },
+    {
+      "pattern": "src/components/animate-ui/primitives/effects/shine.tsx",
+      "rules": ["hardcoded-inline-zindex"]
+    }
+  ]
+}

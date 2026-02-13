@@ -30,6 +30,7 @@ Use this recipe for first-run setup workflows.
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

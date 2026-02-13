@@ -21,13 +21,14 @@ Use these task playbooks instead of ad-hoc workflows.
   2. If scope exists, run `npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md`.
   3. Use one prompt from `docs/nadicode/PROMPT_TEMPLATES.md` with explicit scope.
   4. Migrate one route/feature slice at a time.
-  5. Run `npm run ds:check` before typecheck/build/tests.
+  5. Run `npm run ds:check` and `npm run ds:ast-check` before typecheck/build/tests.
 - Verification:
   1. `npm run ds:check`
-  2. `npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md`
-  3. `npx tsc --noEmit`
-  4. `npm run build`
-  5. `npm run test`
+  2. `npm run ds:ast-check`
+  3. `npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md`
+  4. `npx tsc --noEmit`
+  5. `npm run build`
+  6. `npm run test`
 - Output: Scoped migration with enforced Nadicode conventions.
 
 ## Add A New UI Primitive

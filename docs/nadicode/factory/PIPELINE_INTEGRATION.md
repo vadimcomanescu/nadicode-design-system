@@ -28,6 +28,7 @@ npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```
@@ -46,6 +47,7 @@ Fail stage if any occur:
 - Recipe missing for mapped intent
 - Route generated without recipe coverage
 - `ds:check` fails
+- `ds:ast-check` fails
 - Build/typecheck fails
 
 ## Stage Prompt Upgrade (Required)

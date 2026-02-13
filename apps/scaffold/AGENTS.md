@@ -8,8 +8,9 @@ All agent entrypoints must resolve to this file.
 1. `npm install`
 2. `npx playwright install --with-deps chromium`
 3. `npm run ds:check`
-4. `npm run typecheck && npm run lint && npm run test:unit && npm run build`
-5. `npm run dev`
+4. `npm run ds:ast-check`
+5. `npm run typecheck && npm run lint && npm run test:unit && npm run build`
+6. `npm run dev`
 
 ## Mandatory Read Order Before Any UI Change
 
@@ -38,10 +39,11 @@ Then implement only from that task pack.
 Before commit:
 
 1. `npm run ds:check`
-2. `npm run typecheck`
-3. `npm run lint`
-4. `npm run test:unit`
-5. `npm run build`
+2. `npm run ds:ast-check`
+3. `npm run typecheck`
+4. `npm run lint`
+5. `npm run test:unit`
+6. `npm run build`
 
 Before merge/release:
 

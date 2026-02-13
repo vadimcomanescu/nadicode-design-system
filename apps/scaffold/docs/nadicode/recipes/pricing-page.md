@@ -29,6 +29,7 @@ Use this recipe for plan comparison and purchase entry.
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

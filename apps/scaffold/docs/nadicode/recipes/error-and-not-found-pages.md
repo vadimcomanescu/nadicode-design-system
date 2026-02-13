@@ -28,6 +28,7 @@ Use this recipe for fallback surfaces and hard failures.
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

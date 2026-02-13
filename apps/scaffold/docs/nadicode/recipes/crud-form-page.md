@@ -35,6 +35,7 @@ Use this recipe for create/edit flows.
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

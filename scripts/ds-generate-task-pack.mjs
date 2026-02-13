@@ -165,6 +165,7 @@ function buildTaskPack({
   lines.push("")
   lines.push("```bash")
   lines.push("npm run ds:check")
+  lines.push("npm run ds:ast-check")
   lines.push("npx tsc --noEmit")
   lines.push("npm run build")
   lines.push("```")

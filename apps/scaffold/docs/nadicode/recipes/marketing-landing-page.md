@@ -30,6 +30,7 @@ Use this recipe for public home/landing pages.
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

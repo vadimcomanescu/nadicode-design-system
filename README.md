@@ -101,6 +101,7 @@ import { HomeIcon } from "@/components/ui/icons"
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 ```
 
 5. Generate deterministic tasks from scope (if present):
@@ -173,6 +174,7 @@ npm run scaffold:test       # Run scaffold unit tests
 npm --prefix apps/scaffold run test:e2e # Run scaffold Playwright e2e tests
 npm run scaffold:build      # Build scaffold app
 npm run ds:check            # Nadicode contract enforcement
+npm run ds:ast-check        # Nadicode AST contract enforcement
 npm run ds:task-pack        # Build task pack from scope-definition.json
 npm run docs:check          # Validate docs and agent references
 ```

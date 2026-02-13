@@ -41,6 +41,9 @@ jobs:
       - name: Nadicode contract check
         run: npm run ds:check
 
+      - name: Nadicode AST contract check
+        run: npm run ds:ast-check
+
       - name: Test design system with coverage
         run: npx vitest run --coverage
 

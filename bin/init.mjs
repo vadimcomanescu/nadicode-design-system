@@ -257,6 +257,16 @@ function installAdoptionKit() {
     'scripts/ds-check.mjs'
   )
   copyTemplateFile(
+    join(DS_ROOT, 'scripts', 'ds-ast-check.mjs'),
+    join(TARGET, 'scripts', 'ds-ast-check.mjs'),
+    'scripts/ds-ast-check.mjs'
+  )
+  copyTemplateFile(
+    join(DS_ROOT, 'scripts', 'ds-ast-allowlist.json'),
+    join(TARGET, 'scripts', 'ds-ast-allowlist.json'),
+    'scripts/ds-ast-allowlist.json'
+  )
+  copyTemplateFile(
     join(DS_ROOT, 'scripts', 'ds-generate-task-pack.mjs'),
     join(TARGET, 'scripts', 'ds-generate-task-pack.mjs'),
     'scripts/ds-generate-task-pack.mjs'
@@ -276,6 +286,7 @@ function patchPackageScripts() {
   const scripts = packageJson.scripts || {}
   const requiredScripts = {
     'ds:check': 'node scripts/ds-check.mjs',
+    'ds:ast-check': 'node scripts/ds-ast-check.mjs',
     'ds:task-pack': 'node scripts/ds-generate-task-pack.mjs',
   }
 
@@ -288,7 +299,7 @@ function patchPackageScripts() {
 
   packageJson.scripts = { ...scripts, ...requiredScripts }
   writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + '\n')
-  ok('package.json scripts ds:check, ds:task-pack')
+  ok('package.json scripts ds:check, ds:ast-check, ds:task-pack')
 }
 
 // ─── Step 4: Setup CSS ──────────────────────────────────────
@@ -552,6 +563,7 @@ ls src/components/blocks/      # Composed blocks
 ls src/components/ui/icons/    # Animated icons
 ls src/components/ui/charts/   # Chart components
 npm run ds:check               # Enforce Nadicode contract rules
+npm run ds:ast-check           # Enforce AST-level contract rules
 npm run ds:task-pack           # Generate deterministic tasks from scope-definition
 \`\`\`
 `

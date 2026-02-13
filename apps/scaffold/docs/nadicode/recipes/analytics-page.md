@@ -33,6 +33,7 @@ Use this recipe for trend analysis and chart-heavy views.
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

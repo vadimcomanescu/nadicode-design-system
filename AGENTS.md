@@ -370,14 +370,15 @@ without passing all of these checks:
 1. **Type-check**: `npx tsc --noEmit` (zero tolerance for type errors)
 2. **Lint + auto-fix staged files**: `npx lint-staged` (runs `eslint --fix` on staged `*.{ts,tsx}`)
 3. **Nadicode contract**: `npm run ds:check` (forbidden patterns and composition contract)
-4. **Docs integrity**: `npm run docs:check` (agent/docs drift checks)
-5. **Unit tests**: `npx vitest run` (all tests must pass)
+4. **Nadicode AST contract**: `npm run ds:ast-check` (AST-level import/style/class enforcement)
+5. **Docs integrity**: `npm run docs:check` (agent/docs drift checks)
+6. **Unit tests**: `npx vitest run` (all tests must pass)
 
 ### Pre-push (blocks `git push`)
 
-6. **Typecheck + lint + contract + docs + tests + build** run on tracked snapshot:
-   `npm run typecheck`, `npm run lint`, `npm run ds:check`, `npm run docs:check`, `npx vitest run --coverage`, `npm run build`
-7. **Scaffold sync drift**: `npm run scaffold:check-sync` (fails if vendored scaffold diverges from source-of-truth)
+7. **Typecheck + lint + contract + docs + tests + build** run on tracked snapshot:
+   `npm run typecheck`, `npm run lint`, `npm run ds:check`, `npm run ds:ast-check`, `npm run docs:check`, `npx vitest run --coverage`, `npm run build`
+8. **Scaffold sync drift**: `npm run scaffold:check-sync` (fails if vendored scaffold diverges from source-of-truth)
 
 ### NPM Scripts
 
@@ -386,6 +387,7 @@ without passing all of these checks:
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | `eslint .` (check only) |
 | `npm run lint:fix` | `eslint . --fix` (auto-fix) |
+| `npm run ds:ast-check` | AST-enforced Nadicode contract checks |
 | `npm run test` | `vitest run` |
 | `npm run test:all` | typecheck + lint + tests |
 

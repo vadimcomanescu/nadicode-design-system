@@ -38,6 +38,7 @@ Use this recipe for overview/summary surfaces with KPIs, trends, and quick actio
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npx tsc --noEmit
 npm run build
 ```

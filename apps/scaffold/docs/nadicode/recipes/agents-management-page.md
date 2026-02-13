@@ -86,6 +86,7 @@ npm run build
 npm run lint
 npm run test
 npm run ds:check
+npm run ds:ast-check
 ```
 
 ## Reference Implementation

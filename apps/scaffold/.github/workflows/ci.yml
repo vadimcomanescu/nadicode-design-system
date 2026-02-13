@@ -27,6 +27,9 @@ jobs:
       - name: Nadicode Contract Check
         run: npm run ds:check
 
+      - name: Nadicode AST Contract Check
+        run: npm run ds:ast-check
+
       - name: Typecheck
         run: npm run typecheck
 

@@ -14,6 +14,7 @@ Then verify:
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md
 npx tsc --noEmit
 npm run build
@@ -26,8 +27,10 @@ npm run build
 - `docs/nadicode/` contract, recipes, and prompt templates
 - `docs/nadicode/factory/page-intent-catalog.json`
 - `scripts/ds-check.mjs`
+- `scripts/ds-ast-check.mjs`
 - `scripts/ds-generate-task-pack.mjs`
 - `package.json` script: `ds:check`
+- `package.json` script: `ds:ast-check`
 - `package.json` script: `ds:task-pack`
 
 ## How To Work With Agents (Simple)
@@ -37,6 +40,7 @@ npm run build
 3. Use `docs/nadicode/PROMPT_TEMPLATES.md` prompts as-is.
 4. Require this gate on every migration PR:
    - `npm run ds:check`
+   - `npm run ds:ast-check`
    - `npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md`
    - `npx tsc --noEmit`
    - `npm run build`

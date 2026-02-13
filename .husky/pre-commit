@@ -1,5 +1,6 @@
 npx tsc --noEmit
 npx lint-staged --config package.json
 npm run ds:check
+npm run ds:ast-check
 npm run docs:check
 npx vitest run

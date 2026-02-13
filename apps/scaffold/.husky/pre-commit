@@ -1,4 +1,5 @@
 npx tsc --noEmit
 npx lint-staged
 npm run ds:check
+npm run ds:ast-check
 npx vitest run --coverage

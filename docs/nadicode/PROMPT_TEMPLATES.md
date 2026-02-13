@@ -18,6 +18,7 @@ Rules:
 
 Done when all pass:
 - npm run ds:check
+- npm run ds:ast-check
 - npx tsc --noEmit
 - npm run build
 - npm run test
@@ -39,6 +40,7 @@ Rules:
 
 Done when all pass:
 - npm run ds:check
+- npm run ds:ast-check
 - npx tsc --noEmit
 - npm run build
 - npm run test
@@ -59,6 +61,7 @@ Required:
 
 Done when all pass:
 - npm run ds:check
+- npm run ds:ast-check
 - npx tsc --noEmit
 - npm run build
 - npm run test
@@ -79,5 +82,6 @@ Fix violations of docs/nadicode/NADICODE_CONTRACT.md:
 Do not refactor unrelated logic.
 Run:
 - npm run ds:check
+- npm run ds:ast-check
 - npx tsc --noEmit
 ```

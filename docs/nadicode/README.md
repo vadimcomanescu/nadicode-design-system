@@ -21,6 +21,7 @@ npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/
 
 ```bash
 npm run ds:check
+npm run ds:ast-check
 ```
 
 Then run typecheck/build/tests before handoff.

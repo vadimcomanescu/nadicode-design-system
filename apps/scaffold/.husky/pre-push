@@ -1,2 +1,3 @@
 npm run ds:check
+npm run ds:ast-check
 npm run build

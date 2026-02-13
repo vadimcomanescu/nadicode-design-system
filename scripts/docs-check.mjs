@@ -208,6 +208,14 @@ if (existsSync(scaffoldRoot)) {
   )
   compareMirroredFile("scripts/ds-check.mjs", "apps/scaffold/scripts/ds-check.mjs")
   compareMirroredFile(
+    "scripts/ds-ast-check.mjs",
+    "apps/scaffold/scripts/ds-ast-check.mjs"
+  )
+  compareMirroredFile(
+    "scripts/ds-ast-allowlist.json",
+    "apps/scaffold/scripts/ds-ast-allowlist.json"
+  )
+  compareMirroredFile(
     "scripts/ds-generate-task-pack.mjs",
     "apps/scaffold/scripts/ds-generate-task-pack.mjs"
   )
@@ -231,6 +239,7 @@ if (existsSync(scaffoldRoot)) {
       "docs/nadicode/NADICODE_CONTRACT.md",
       ".agents/skills/seed-design-system/SKILL.md",
       "npm run ds:check",
+      "npm run ds:ast-check",
     ]
     for (const section of requiredScaffoldSections) {
       if (!scaffoldAgentGuide.includes(section)) {

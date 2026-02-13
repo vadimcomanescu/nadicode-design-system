@@ -27,6 +27,7 @@ Run:
 ```bash
 npm run docs:check
 npm run ds:check
+npm run ds:ast-check
 ```
 
 This catches stale paths, stale legacy references, and known drift markers.

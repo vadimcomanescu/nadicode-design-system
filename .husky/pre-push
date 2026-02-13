@@ -26,6 +26,7 @@ rm -rf .next
 npm run typecheck
 npm run lint
 npm run ds:check
+npm run ds:ast-check
 npm run docs:check
 npx vitest run --coverage
 npm run build

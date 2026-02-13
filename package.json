@@ -32,7 +32,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "{src,scripts,bin}/**/*.{ts,tsx}": [
       "eslint --fix"
     ]
   },

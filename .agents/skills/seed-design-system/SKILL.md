@@ -15,6 +15,15 @@ Dual-axis theming: `theme` (light/dark/system) + `style` (arctic/bloom).
 Arctic: cool teal-tinted glassmorphism. Bloom: warm light-only organic aesthetic.
 Next.js App Router with file-based routing. Dev server defaults to `localhost:5001` in this repo.
 
+When this design system is vendored into another repository, read in this order:
+1. `docs/nadicode/NADICODE_CONTRACT.md` (binary rules)
+2. `docs/nadicode/factory/page-intent-catalog.json` (intent -> recipe contract)
+3. matching `docs/nadicode/recipes/*.md` page recipe(s)
+4. this skill file (`.agents/skills/seed-design-system/SKILL.md`)
+
+If `scope-definition.json` is available, generate deterministic tasks before coding:
+`npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/generated/task-pack.md`
+
 ---
 
 ## 1. Forbidden Patterns
@@ -471,6 +480,7 @@ The full opinions document lives at `docs/OPINIONS.md`. When building UI, enforc
 8. **Chart colors use chart-1 through chart-6 tokens** -- Never raw color values.
 9. **Touch targets >= 44px mobile, >= 40px desktop** -- Check all interactive elements.
 10. **Font weight 300 (font-light) forbidden** -- Fails on glass backgrounds.
+11. **No page-level horizontal overflow at 375px** -- Header control rows wrap on mobile and tab rails use local `overflow-x-auto`.
 
 ### Decision Tables
 

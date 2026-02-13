@@ -1650,6 +1650,48 @@ try {
 
 ---
 
+### Rule 8.4: Control Rails Must Not Create Page Overflow
+
+**THE RULE:** Mobile control rails (top action rows, tab strips, segmented filters) must either wrap or scroll within their own container. The page root must never gain horizontal scroll.
+
+**WHY:** Fitts's Law + Law of Proximity. When controls overflow the viewport, targets become clipped, hard to acquire, and unrelated controls appear disconnected. Localized overflow preserves hierarchy without breaking the page layout.
+
+**WHEN TO USE:** Headers that include search/theme/style controls, tabs, filter chips, and other horizontal control groups.
+**WHEN NOT TO:** Never force single-line control rows that push the document wider than the viewport.
+
+**DO:**
+```tsx
+// Header controls: wrap on mobile, align right on desktop
+<div className="flex w-full flex-wrap items-center gap-2 md:w-auto md:flex-nowrap md:justify-end">
+  <button className="min-h-11 px-3">Search</button>
+  <ThemeToggle />
+  <StyleToggle />
+</div>
+
+// Tabs: local horizontal scroll, hidden scrollbar
+<TabsList className="w-full justify-start overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:justify-center">
+  <TabsTrigger value="foundations">Foundations</TabsTrigger>
+  <TabsTrigger value="components">Components</TabsTrigger>
+</TabsList>
+```
+
+**DON'T:**
+```tsx
+// Forces page-level overflow on narrow viewports
+<div className="flex items-center justify-between gap-4">
+  <button className="whitespace-nowrap">Search ⌘K</button>
+  <ThemeToggle />
+  <StyleToggle />
+</div>
+
+// Tabs clipped off-screen with no local scroll
+<TabsList className="justify-center">
+  {/* Long tab labels become unreachable on mobile */}
+</TabsList>
+```
+
+---
+
 ## Domain 9: Spacing & Density
 
 ### Rule 9.1: Base Unit

@@ -214,6 +214,15 @@ xl (1280px)        -> 4 columns, expanded spacing
 2xl (1536px)       -> containers center
 ```
 
+## Mobile Control Rails
+
+```
+header_controls_mobile -> flex-wrap enabled, no forced single row
+tab_rail_mobile        -> overflow-x-auto on rail container, not page root
+tab_rail_alignment     -> justify-start mobile, can center at sm+
+viewport_375_check     -> documentElement.scrollWidth == documentElement.clientWidth
+```
+
 ## Density Modes
 
 ```

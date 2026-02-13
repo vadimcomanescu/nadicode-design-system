@@ -37,6 +37,13 @@ The single most common source of bugs. Memorize this table.
 | `border-error`                         | `border-destructive`                         | `error` is undefined                     |
 | `bg-black/80` (overlays)              | `bg-overlay/80`                              | Use semantic overlay token               |
 | `bg-zinc-950`, `bg-slate-900`, etc.   | `bg-background` or `bg-surface`              | Never use Tailwind default colors        |
+| `text-[10px]`, `text-[11px]` in admin UI | `Typography` variants or `text-xs/text-sm` scale | Enforce consistent admin typography   |
+| ad-hoc `chat-*` classes               | Compose Nadicode primitives + motion tokens  | Avoid one-off chat styling islands       |
+| local admin chat primitives (`./MessageList`, `./ToolProgress`, etc.) | Nadicode agentic primitives from `@/components/ui/*` | Prevent bespoke chat stacks |
+| flat admin sidebar menu without `SidebarGroupLabel` | Add `SidebarGroupLabel` group headings | Enforce modern information architecture |
+| manual admin chart bars (`<div style={{ width: ... }}>`) | `AreaChart` / `BarChart` / `LineChart` / `PieChart` + `ChartContainer` | Prevent pseudo-charts and inconsistent behavior |
+| `pixelTheme=` in admin cards          | Use default card texture (or disable pixel background) | Avoid noisy retro glyph backgrounds in data surfaces |
+| `font-pixel` in admin UI or chart text | semantic typography (`Typography`, token text classes) | Pixel fonts are decorative, not default data typography |
 | `h-screen`                             | `h-dvh`                                      | Mobile viewport bug                      |
 | `min-h-screen`                         | `min-h-dvh`                                  | Mobile viewport bug                      |
 | `glass-card`                           | `glass-panel`                                | `glass-card` is deleted                  |
@@ -481,6 +488,9 @@ The full opinions document lives at `docs/OPINIONS.md`. When building UI, enforc
 9. **Touch targets >= 44px mobile, >= 40px desktop** -- Check all interactive elements.
 10. **Font weight 300 (font-light) forbidden** -- Fails on glass backgrounds.
 11. **No page-level horizontal overflow at 375px** -- Header control rows wrap on mobile and tab rails use local `overflow-x-auto`.
+12. **Admin UI typography must use scale tokens** -- No arbitrary `text-[Npx]` in `app/admin/**` or `src/components/admin/**`.
+13. **No `chat-*` utility classes** -- Build chat/conversation surfaces from existing design-system primitives.
+14. **Admin chat must use agentic primitives** -- include conversation (`ConversationThread` or `AgentMessageBubble`), tooling (`ToolCallCard` or `ThinkingIndicator`), and traceability (`SourceCitation` or `AgentTimeline` or `WorkflowGraph` or `HandoffIndicator`) layers.
 
 ### Decision Tables
 

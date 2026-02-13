@@ -362,18 +362,22 @@ python3 tests/validate_design.py                     # Token validation
 
 ## 13. Quality Gates (enforced by git hooks)
 
-Every commit is gated by husky pre-commit hooks. Nothing reaches the repo
-without passing ALL of these:
+Every commit is gated by husky hooks. Nothing reaches the repo
+without passing all of these checks:
 
 ### Pre-commit (blocks `git commit`)
 
 1. **Type-check**: `npx tsc --noEmit` (zero tolerance for type errors)
 2. **Lint + auto-fix staged files**: `npx lint-staged` (runs `eslint --fix` on staged `*.{ts,tsx}`)
-3. **Unit tests**: `npx vitest run` (all tests must pass)
+3. **Nadicode contract**: `npm run ds:check` (forbidden patterns and composition contract)
+4. **Docs integrity**: `npm run docs:check` (agent/docs drift checks)
+5. **Unit tests**: `npx vitest run` (all tests must pass)
 
 ### Pre-push (blocks `git push`)
 
-4. **Full build**: `npm run build` (next build must succeed)
+6. **Typecheck + lint + contract + docs + tests + build** run on tracked snapshot:
+   `npm run typecheck`, `npm run lint`, `npm run ds:check`, `npm run docs:check`, `npx vitest run --coverage`, `npm run build`
+7. **Scaffold sync drift**: `npm run scaffold:check-sync` (fails if vendored scaffold diverges from source-of-truth)
 
 ### NPM Scripts
 

@@ -179,13 +179,11 @@ npm run docs:check          # Validate docs and agent references
 
 ## Scaffold Integrity
 
-Scaffold verification is manual (not enforced by CI hooks):
+Scaffold drift is now enforced in root quality gates:
 
-- Run `npm run scaffold:sync` to refresh scaffold from design-system source
-- Run `git diff --exit-code -- apps/scaffold` to confirm no drift
-- Run scaffold checks on demand:
-  `npm run scaffold:typecheck && npm run scaffold:lint && npm run scaffold:test && npm run scaffold:build`
-- Root `vitest` excludes `apps/scaffold/**`; scaffold tests run via `npm run scaffold:test`
+- Root CI runs `npm run scaffold:check-sync` and fails on drift (excluding `.seed-version`).
+- Root pre-push also runs `npm run scaffold:check-sync` (excluding `.seed-version`).
+- Root `vitest` still excludes `apps/scaffold/**`; run scaffold tests with `npm run scaffold:test`.
 
 ## Theming
 

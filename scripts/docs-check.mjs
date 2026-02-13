@@ -18,17 +18,57 @@ function walk(dir, matcher, acc = []) {
   return acc
 }
 
-const docFiles = [
+let docFiles = [
   join(root, "README.md"),
   join(root, "AGENTS.md"),
   ...walk(join(root, "docs"), (p) => p.endsWith(".md")),
   ...walk(join(root, ".agents", "skills", "seed-design-system"), (p) => p.endsWith(".md")),
 ]
+const scaffoldRoot = join(root, "apps", "scaffold")
+
+if (existsSync(scaffoldRoot)) {
+  docFiles.push(join(scaffoldRoot, "AGENTS.md"))
+  docFiles.push(...walk(join(scaffoldRoot, "docs", "nadicode"), (p) => p.endsWith(".md")))
+  docFiles.push(
+    ...walk(join(scaffoldRoot, ".agents", "skills", "seed-design-system"), (p) => p.endsWith(".md"))
+  )
+}
+docFiles = [...new Set(docFiles)]
 
 const issues = []
 
 function addIssue(file, message) {
   issues.push({ file: file.replace(`${root}/`, ""), message })
+}
+
+function compareMirroredFile(sourceRelativePath, targetRelativePath) {
+  const sourcePath = join(root, sourceRelativePath)
+  const targetPath = join(root, targetRelativePath)
+
+  if (!existsSync(sourcePath)) return
+  if (!existsSync(targetPath)) {
+    addIssue(targetPath, `missing mirrored file (must match \`${sourceRelativePath}\`)`)
+    return
+  }
+
+  const sourceContent = readFileSync(sourcePath, "utf8")
+  const targetContent = readFileSync(targetPath, "utf8")
+  if (sourceContent !== targetContent) {
+    addIssue(targetPath, `drift from source-of-truth \`${sourceRelativePath}\``)
+  }
+}
+
+function compareMirroredMarkdownTree(sourceRelativeDir, targetRelativeDir) {
+  const sourceDir = join(root, sourceRelativeDir)
+  if (!existsSync(sourceDir)) return
+
+  const sourceFiles = walk(sourceDir, (p) => p.endsWith(".md"))
+  for (const sourceFile of sourceFiles) {
+    const relativeTail = sourceFile.slice(sourceDir.length + 1)
+    const sourceRelativePath = join(sourceRelativeDir, relativeTail)
+    const targetRelativePath = join(targetRelativeDir, relativeTail)
+    compareMirroredFile(sourceRelativePath, targetRelativePath)
+  }
 }
 
 function hasFile(candidate) {
@@ -160,6 +200,63 @@ if (expectedPort) {
 }
 
 const staleMarkers = ["localhost:5173", "src/App.tsx", "Harversting"]
+
+if (existsSync(scaffoldRoot)) {
+  compareMirroredFile(
+    "docs/nadicode/NADICODE_CONTRACT.md",
+    "apps/scaffold/docs/nadicode/NADICODE_CONTRACT.md"
+  )
+  compareMirroredFile("scripts/ds-check.mjs", "apps/scaffold/scripts/ds-check.mjs")
+  compareMirroredFile(
+    "scripts/ds-generate-task-pack.mjs",
+    "apps/scaffold/scripts/ds-generate-task-pack.mjs"
+  )
+  compareMirroredFile(
+    ".agents/skills/seed-design-system/SKILL.md",
+    "apps/scaffold/.agents/skills/seed-design-system/SKILL.md"
+  )
+  compareMirroredMarkdownTree(
+    ".agents/skills/seed-design-system/references",
+    "apps/scaffold/.agents/skills/seed-design-system/references"
+  )
+
+  const scaffoldAgentGuidePath = join(scaffoldRoot, "AGENTS.md")
+  if (!existsSync(scaffoldAgentGuidePath)) {
+    addIssue(scaffoldAgentGuidePath, "missing scaffold AGENTS.md")
+  } else {
+    const scaffoldAgentGuide = readFileSync(scaffoldAgentGuidePath, "utf8")
+    const requiredScaffoldSections = [
+      "## Install And Bootstrap",
+      "## Mandatory Read Order Before Any UI Change",
+      "docs/nadicode/NADICODE_CONTRACT.md",
+      ".agents/skills/seed-design-system/SKILL.md",
+      "npm run ds:check",
+    ]
+    for (const section of requiredScaffoldSections) {
+      if (!scaffoldAgentGuide.includes(section)) {
+        addIssue(scaffoldAgentGuidePath, `missing required scaffold guidance: \`${section}\``)
+      }
+    }
+
+    const toolAgentEntryPoints = [
+      "apps/scaffold/.codex/AGENTS.md",
+      "apps/scaffold/.claude/CLAUDE.md",
+      "apps/scaffold/.opencode/AGENTS.md",
+    ]
+    for (const entryPoint of toolAgentEntryPoints) {
+      const entryPointPath = join(root, entryPoint)
+      if (!existsSync(entryPointPath)) {
+        addIssue(entryPointPath, "missing tool agent entrypoint")
+        continue
+      }
+      const entryPointContent = readFileSync(entryPointPath, "utf8")
+      if (entryPointContent !== scaffoldAgentGuide) {
+        addIssue(entryPointPath, "tool agent entrypoint must match apps/scaffold/AGENTS.md")
+      }
+    }
+  }
+}
+
 for (const file of docFiles) {
   const content = readFileSync(file, "utf8")
 

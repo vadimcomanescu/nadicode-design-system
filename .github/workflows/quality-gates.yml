@@ -38,8 +38,14 @@ jobs:
       - name: Docs drift check
         run: npm run docs:check
 
+      - name: Nadicode contract check
+        run: npm run ds:check
+
       - name: Test design system with coverage
         run: npx vitest run --coverage
 
       - name: Build design system
         run: npm run build
+
+      - name: Scaffold sync drift check
+        run: npm run scaffold:check-sync

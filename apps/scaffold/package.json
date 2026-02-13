@@ -16,7 +16,7 @@
     "test:coverage": "vitest run --coverage --configLoader runner",
     "test:e2e": "playwright test",
     "test:all": "npm run typecheck && npm run lint && vitest run --coverage --configLoader runner && playwright test",
-    "precommit": "npm run typecheck && npx lint-staged && vitest run --coverage --configLoader runner",
+    "precommit": "npm run typecheck && npx lint-staged && npm run ds:check && vitest run --coverage --configLoader runner",
     "ci": "npm run ds:check && npm run typecheck && npm run lint && npm run test:unit && npm run build",
     "prepare": "husky",
     "ds:check": "node scripts/ds-check.mjs",

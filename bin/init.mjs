@@ -557,8 +557,27 @@ npm run ds:task-pack           # Generate deterministic tasks from scope-definit
 `
 
 function generateAgentMd() {
-  // Write/update agent instructions in each tool's config dir
-  // .claude/CLAUDE.md, .codex/AGENTS.md, .opencode/AGENTS.md
+  const rootAgentPath = join(TARGET, 'AGENTS.md')
+  if (!existsSync(rootAgentPath)) {
+    writeFileSync(rootAgentPath, SEED_SECTION)
+    ok('AGENTS.md')
+  } else {
+    const existingRootAgent = readFileSync(rootAgentPath, 'utf8')
+    const hasSeedGuidance =
+      existingRootAgent.includes('Seed Design System') ||
+      existingRootAgent.includes('Nadicode Design System') ||
+      existingRootAgent.includes('docs/nadicode/NADICODE_CONTRACT.md')
+
+    if (!hasSeedGuidance) {
+      const updatedRootAgent = `${existingRootAgent.trimEnd()}\n\n${SEED_SECTION}\n`
+      writeFileSync(rootAgentPath, updatedRootAgent)
+      ok('AGENTS.md (appended Seed section)')
+    }
+  }
+
+  const rootAgentContent = readFileSync(rootAgentPath, 'utf8')
+
+  // Keep all tool entrypoints identical to the canonical AGENTS.md.
   const targets = [
     { dir: '.claude', file: 'CLAUDE.md' },
     { dir: '.codex', file: 'AGENTS.md' },
@@ -568,34 +587,8 @@ function generateAgentMd() {
   for (const { dir, file } of targets) {
     const dest = join(TARGET, dir, file)
     mkdirSync(dirname(dest), { recursive: true })
-
-    if (existsSync(dest)) {
-      const existing = readFileSync(dest, 'utf8')
-      if (existing.includes('Seed Design System') || existing.includes('Nadicode Design System')) {
-        if (UPDATE) {
-          // Strip old provenance + seed sections, replace with new template
-          let updated = existing.replace(
-            /# Provenance[\s\S]*?(?=\n# (?!Seed|Provenance)|$)/,
-            ''
-          ).replace(
-            /# Seed Design System[\s\S]*?(?=\n# (?!Seed)|$)/,
-            ''
-          ).trim()
-          updated = SEED_SECTION + updated + '\n'
-          writeFileSync(dest, updated)
-          ok(`${dir}/${file} (updated Seed section)`)
-        } else {
-          ok(`${dir}/${file} already has Seed instructions`)
-        }
-        continue
-      }
-      writeFileSync(dest, existing.trimEnd() + '\n\n' + SEED_SECTION)
-      ok(`${dir}/${file} (appended Seed section)`)
-      continue
-    }
-
-    writeFileSync(dest, SEED_SECTION)
-    ok(`${dir}/${file}`)
+    writeFileSync(dest, rootAgentContent)
+    ok(`${dir}/${file} (synced from AGENTS.md)`)
   }
 }
 

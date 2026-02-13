@@ -25,6 +25,8 @@ echo "pre-push: running checks against tracked snapshot only"
 rm -rf .next
 npm run typecheck
 npm run lint
+npm run ds:check
 npm run docs:check
 npx vitest run --coverage
 npm run build
+npm run scaffold:check-sync

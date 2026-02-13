@@ -25,6 +25,15 @@ Use this file as the first and only policy contract in destination apps.
 7. Use glass tiers for containers: `.glass-panel`, `.glass-floating`, or `.glass-overlay`.
 8. New forms must use stacked labels (`Label` above control), never inline/floating labels.
 9. If a needed primitive is missing, stop and report it. Do not invent ad-hoc replacements.
+10. In admin UI (`app/admin/**`, `src/components/admin/**`), do not use arbitrary text sizes (`text-[10px]`, `text-[11px]`, etc.). Use `Typography` variants or standard Tailwind text scale (`text-xs`, `text-sm`, ...).
+11. Do not create or use ad-hoc `chat-*` classes. Conversation UIs must compose existing Nadicode primitives and motion tokens.
+12. Admin chat features (`app/admin/(chat)/**`, `src/components/admin/chat/**`) must include Nadicode agentic primitives:
+   - Conversation layer: `ConversationThread` or `AgentMessageBubble`
+   - Tooling layer: `ToolCallCard` or `ThinkingIndicator`
+   - Traceability layer: `SourceCitation`, `AgentTimeline`, `WorkflowGraph`, or `HandoffIndicator`
+13. Admin sidebar navigation must include IA grouping with `SidebarGroupLabel`, do not ship flat unlabeled sidebar menus.
+14. Admin analytics views must use Nadicode chart primitives (`AreaChart`, `BarChart`, `LineChart`, `PieChart`, plus `ChartContainer`), not pseudo-charts built from raw `<div>` bars and inline width styles.
+15. Do not use `pixelTheme` on admin data cards and do not use `font-pixel` in admin UI typography.
 
 ## Page Composition Matrix
 

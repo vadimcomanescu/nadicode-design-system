@@ -105,25 +105,25 @@ export default function ShowcaseLayout({ children }: { children: React.ReactNode
     <div className="min-h-dvh bg-background text-text-primary py-12 relative overflow-hidden">
       <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-85" />
       <Container className="relative z-10">
-        <header className="mb-12 flex items-start justify-between">
+        <header className="mb-8 flex flex-col gap-4 md:mb-12 md:flex-row md:items-start md:justify-between">
           <div>
             <Typography variant="h1" className="mb-4">
-              <AnimatedGradientText className="text-5xl sm:text-6xl">Nadicode System</AnimatedGradientText>
+              <AnimatedGradientText className="text-4xl sm:text-6xl">Nadicode System</AnimatedGradientText>
             </Typography>
             <Typography variant="body" className="text-xl text-text-secondary max-w-2xl">
               A comprehensive design system for AI-integrated web applications.
               Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
             </Typography>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex w-full flex-wrap items-center justify-between gap-2 md:w-auto md:flex-nowrap md:justify-end">
             <button
               onClick={() => setCmdkOpen(true)}
-              className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-colors"
+              className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-text-secondary transition-colors hover:bg-surface-hover hover:text-text-primary md:flex-none"
               aria-label="Open command palette"
             >
               <SearchIcon size={14} />
               <span className="hidden sm:inline">Search</span>
-              <Kbd className="ml-1">
+              <Kbd className="ml-1 hidden sm:inline-flex">
                 <span className="text-xs">&#8984;K</span>
               </Kbd>
             </button>
@@ -137,7 +137,7 @@ export default function ShowcaseLayout({ children }: { children: React.ReactNode
           onValueChange={handleTabChange}
           className="space-y-8"
         >
-          <AnimatedTabsList className="glass-panel mb-8">
+          <AnimatedTabsList className="glass-panel mb-8 w-full justify-start overflow-x-auto overflow-y-hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:justify-center">
             {TABS.map(tab => (
               <AnimatedTabsTrigger key={tab.value} value={tab.value}>{tab.label}</AnimatedTabsTrigger>
             ))}

@@ -658,7 +658,7 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                   <NotificationCenter
                     notifications={[
                       { id: "1", title: "Build succeeded", description: "Production deployment complete", type: "success", read: false, timestamp: "2 min ago" },
-                      { id: "2", title: "PR review requested", description: "alice requested your review on #142", type: "info", read: false, timestamp: "15 min ago" },
+                      { id: "2", title: "PR review requested", description: "alice requested your review on PR 142", type: "info", read: false, timestamp: "15 min ago" },
                       { id: "3", title: "Disk usage warning", description: "Storage at 90% capacity", type: "warning", read: true, timestamp: "1 hour ago" },
                     ]}
                   />

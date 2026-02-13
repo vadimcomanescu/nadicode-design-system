@@ -16,6 +16,17 @@ const AnimatedDialogClose = DialogPrimitive.Close
 
 const AnimatedDialogPortal = DialogPrimitive.Portal
 
+function hasChildWithDisplayName(children: React.ReactNode, displayName: string) {
+  return React.Children.toArray(children).some((child) => {
+    if (!React.isValidElement(child) || typeof child.type === "string") {
+      return false
+    }
+
+    const childType = child.type as { displayName?: string }
+    return childType.displayName === displayName
+  })
+}
+
 const AnimatedDialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -42,11 +53,16 @@ const AnimatedDialogContent = React.forwardRef<
   AnimatedDialogContentProps
 >(({ className, children, ...props }, ref) => {
   const motionConfig = useMotionConfig()
+  const hasDescription = hasChildWithDisplayName(children, "AnimatedDialogDescription")
 
   return (
     <AnimatedDialogPortal>
       <AnimatedDialogOverlay />
-      <DialogPrimitive.Content ref={ref} asChild {...props}>
+      <DialogPrimitive.Content
+        ref={ref}
+        asChild
+        {...props}
+      >
         <motion.div
           className={cn(
             "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg gap-4 glass-panel p-6 sm:rounded-lg",
@@ -58,6 +74,11 @@ const AnimatedDialogContent = React.forwardRef<
           exit={{ opacity: 0, scale: 0.85 }}
           transition={{ ...motionSpring.snappy, ...motionConfig }}
         >
+          {!hasDescription && (
+            <AnimatedDialogDescription className="sr-only">
+              Animated dialog content
+            </AnimatedDialogDescription>
+          )}
           {children}
           <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary text-text-primary">
             <XIcon size={16} />

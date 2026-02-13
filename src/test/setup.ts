@@ -71,35 +71,81 @@ if (typeof window !== 'undefined') {
 }
 
 // Mock localStorage for theme tests
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
+const localStorageMock: Storage = (() => {
+  const store: Record<string, string> = {}
+
   return {
     getItem: (key: string) => store[key] ?? null,
     setItem: (key: string, value: string) => {
-      store[key] = value;
+      store[key] = value
     },
     removeItem: (key: string) => {
-      delete store[key];
+      delete store[key]
     },
     clear: () => {
-      store = {};
+      Object.keys(store).forEach((key) => delete store[key])
     },
-  };
-})();
+    key: (index: number) => {
+      return Object.keys(store)[index] ?? null
+    },
+    get length() {
+      return Object.keys(store).length
+    },
+  } as Storage
+})()
 
-if (typeof window !== 'undefined' && !window.localStorage) {
-  Object.defineProperty(window, 'localStorage', {
-    value: localStorageMock,
-  });
-}
-
-// Ensure localStorage methods exist (even if localStorage exists but methods are stubbed)
-if (typeof window !== 'undefined' && window.localStorage) {
-  const originalLocalStorage = window.localStorage;
-  if (typeof originalLocalStorage.clear !== 'function') {
-    Object.defineProperty(window, 'localStorage', {
+if (typeof window !== "undefined") {
+  // Avoid touching jsdom's localStorage directly so we don't trigger
+  // internal warnings about missing --localstorage-file support.
+  try {
+    Object.defineProperty(window, "localStorage", {
       value: localStorageMock,
       writable: true,
-    });
+      configurable: true,
+    })
+  } catch {
+    // Fallback for environments where localStorage is non-configurable.
+    (window as unknown as { localStorage: Storage }).localStorage = localStorageMock
   }
+}
+
+if (typeof window !== "undefined") {
+  const originalGetBoundingClientRect = window.Element.prototype.getBoundingClientRect
+
+  Object.defineProperty(window.Element.prototype, "getBoundingClientRect", {
+    configurable: true,
+    value(): DOMRect {
+      const rect = originalGetBoundingClientRect.call(this)
+      const element = this as Element
+      const isChartElement = element.closest?.("[data-chart]") !== null
+
+      if (isChartElement && rect.width === 0 && rect.height === 0) {
+        return {
+          ...rect,
+          width: 1024,
+          height: 300,
+          top: 0,
+          right: 1024,
+          bottom: 300,
+          left: 0,
+          x: 0,
+          y: 0,
+          toJSON() {
+            return {
+              x: 0,
+              y: 0,
+              width: 1024,
+              height: 300,
+              top: 0,
+              right: 1024,
+              bottom: 300,
+              left: 0,
+            }
+          },
+        }
+      }
+
+      return rect
+    },
+  })
 }

@@ -13,10 +13,10 @@ interface SuccessCheckProps {
 
 export const SuccessCheck = React.forwardRef<HTMLDivElement, SuccessCheckProps>(
   ({ size = 48, className, onComplete }, ref) => {
-    const { spring, style } = useStyleMotion();
+    const { spring } = useStyleMotion();
 
-    const strokeColor = style === "bloom" ? "#3DD6A0" : "#3DD68C";
-    const circleColor = style === "bloom" ? "#E8573A" : "#38BDB8";
+    const strokeColor = "rgb(var(--color-success))";
+    const circleColor = "rgb(var(--color-accent))";
 
     return (
       <div ref={ref} className={cn("inline-flex items-center justify-center", className)}>

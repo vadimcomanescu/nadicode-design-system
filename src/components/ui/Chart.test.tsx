@@ -4,7 +4,7 @@ import { ChartContainer, type ChartConfig } from './Chart'
 import { BarChart, Bar } from 'recharts'
 
 const config: ChartConfig = {
-  value: { label: 'Value', color: '#8884d8' },
+  value: { label: 'Value', color: 'var(--chart-1)' },
 }
 
 describe('Chart', () => {

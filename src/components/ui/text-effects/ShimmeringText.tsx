@@ -16,8 +16,8 @@ function ShimmeringText({
   duration = 1,
   transition,
   wave = false,
-  color = 'var(--color-neutral-500)',
-  shimmeringColor = 'var(--color-neutral-300)',
+  color = 'rgb(var(--color-text-secondary))',
+  shimmeringColor = 'rgb(var(--color-text-primary))',
   ...props
 }: ShimmeringTextProps) {
   return (

@@ -80,7 +80,7 @@ describe('Opinion: Chart Color Tokens (Rule 2.4)', () => {
 
     expect(
       violations,
-      `Raw colors in chart configs (use var(--color-chart-N)):\n${violations.join('\n')}`
+      `Raw colors in chart configs (use chart token variables):\n${violations.join('\n')}`
     ).toHaveLength(0);
   });
 });

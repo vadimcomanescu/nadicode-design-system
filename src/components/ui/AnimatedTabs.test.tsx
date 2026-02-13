@@ -82,7 +82,8 @@ describe('AnimatedTabs', () => {
     const user = userEvent.setup();
     renderTabs('tab1');
 
-    screen.getByRole('tab', { name: 'Tab 1' }).focus();
+    const firstTab = screen.getByRole('tab', { name: 'Tab 1' });
+    await user.click(firstTab);
     await user.keyboard('{ArrowRight}');
     expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveFocus();
 

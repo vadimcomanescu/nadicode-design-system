@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card";
 import { Typography } from "../../ui/Typography";
 import { Grid } from "../../layout/Grid";
@@ -90,21 +90,66 @@ function createEmptyColors(): Record<CssVarName, string> {
   return empty;
 }
 
+const EMPTY_COLORS = createEmptyColors();
+let cachedClientSnapshot = EMPTY_COLORS;
+let cachedSnapshotKey = CSS_VAR_NAMES.map(() => "").join("|");
+
+function getComputedColorsSnapshot(): Record<CssVarName, string> {
+  if (typeof window === "undefined") {
+    return EMPTY_COLORS;
+  }
+
+  const styles = getComputedStyle(document.documentElement);
+  const result = createEmptyColors();
+  for (const variableName of CSS_VAR_NAMES) {
+    result[variableName] = rgbToHex(styles.getPropertyValue(variableName));
+  }
+
+  const nextKey = CSS_VAR_NAMES.map((variableName) => result[variableName]).join("|");
+  if (nextKey === cachedSnapshotKey) {
+    return cachedClientSnapshot;
+  }
+
+  cachedSnapshotKey = nextKey;
+  cachedClientSnapshot = result;
+  return cachedClientSnapshot;
+}
+
+function subscribeToColorChanges(onStoreChange: () => void): () => void {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const observer = new MutationObserver(() => {
+    onStoreChange();
+  });
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "style"],
+  });
+
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const handleMediaChange = () => {
+    onStoreChange();
+  };
+  media.addEventListener("change", handleMediaChange);
+
+  return () => {
+    observer.disconnect();
+    media.removeEventListener("change", handleMediaChange);
+  };
+}
+
 function useComputedColors(): Record<CssVarName, string> {
   const { resolvedTheme, style } = useTheme();
   void resolvedTheme;
   void style;
 
-  if (typeof window === "undefined") {
-    return createEmptyColors();
-  }
-
-  const styles = getComputedStyle(document.documentElement);
-  const result = {} as Record<CssVarName, string>;
-  for (const v of CSS_VAR_NAMES) {
-    result[v] = rgbToHex(styles.getPropertyValue(v));
-  }
-  return result;
+  return useSyncExternalStore(
+    subscribeToColorChanges,
+    getComputedColorsSnapshot,
+    () => EMPTY_COLORS
+  );
 }
 
 function ColorCard({

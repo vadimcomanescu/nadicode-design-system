@@ -16,6 +16,17 @@ const DialogPortal = DialogPrimitive.Portal
 
 const DialogClose = DialogPrimitive.Close
 
+function hasChildWithDisplayName(children: React.ReactNode, displayName: string) {
+  return React.Children.toArray(children).some((child) => {
+    if (!React.isValidElement(child) || typeof child.type === "string") {
+      return false
+    }
+
+    const childType = child.type as { displayName?: string }
+    return childType.displayName === displayName
+  })
+}
+
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -35,6 +46,7 @@ const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
+  const hasDescription = hasChildWithDisplayName(children, "DialogDescription")
   const prefersReduced = useReducedMotion()
 
   return (
@@ -51,6 +63,9 @@ const DialogContent = React.forwardRef<
       >
         {prefersReduced ? (
           <div className="grid gap-4">
+            {!hasDescription && (
+              <DialogDescription className="sr-only">Dialog content</DialogDescription>
+            )}
             {children}
           </div>
         ) : (
@@ -60,6 +75,9 @@ const DialogContent = React.forwardRef<
             animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
             transition={motionSpring.snappy}
           >
+            {!hasDescription && (
+              <DialogDescription className="sr-only">Dialog content</DialogDescription>
+            )}
             {children}
           </motion.div>
         )}

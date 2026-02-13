@@ -116,7 +116,12 @@ export function IconsPage() {
                     {filteredIcons.map((item) => {
                         const IconComp = item.component;
                         return (
-                            <Card key={item.name} className="hover:border-accent/50 transition-colors cursor-pointer group border-accent/20" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 120px' }}>
+                            <Card
+                              key={item.name}
+                              interactive
+                              className="group cursor-pointer border-accent/20"
+                              style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 120px' }}
+                            >
                                 <CardContent className="flex flex-col items-center justify-center p-6 gap-3">
                                     <IconComp size={32} className="text-primary group-hover:text-accent transition-colors" />
                                     <span className="text-xs text-text-secondary group-hover:text-text-primary transition-colors leading-tight line-clamp-2 w-full text-center" title={item.name}>

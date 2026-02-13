@@ -14,11 +14,11 @@ const CONTRAST_PAIRS: ContrastPair[] = [
   { fg: 'text.primary', bg: 'surface.DEFAULT', minRatio: 4.5, label: 'text on surface' },
   { fg: 'text.secondary', bg: 'background', minRatio: 4.5, label: 'secondary text on background' },
   { fg: 'text.tertiary', bg: 'background', minRatio: 3.0, label: 'tertiary text (large)' },
-  // Light accent (#FFFFFF on #1A8F88) is 4.07:1, light success (#FFFFFF on #1B9450) is 3.89:1
+  // Light accent (white on accent) is 4.07:1, light success (white on success) is 3.89:1
   // These are pre-existing issues tracked for future correction.
   // Using AA Large (3:1) threshold for these pairs until colors are updated.
   { fg: 'accent.foreground', bg: 'accent.DEFAULT', minRatio: 3.0, label: 'accent button' },
-  // Dark destructive (#FFFFFF on #E5484D) is 3.91:1 - pre-existing issue
+  // Dark destructive (white on destructive) is 3.91:1 - pre-existing issue
   { fg: 'destructive.foreground', bg: 'destructive.DEFAULT', minRatio: 3.0, label: 'destructive button' },
   { fg: 'success.foreground', bg: 'success.DEFAULT', minRatio: 3.0, label: 'success badge' },
   { fg: 'warning.foreground', bg: 'warning.DEFAULT', minRatio: 3.0, label: 'warning (large text)' },

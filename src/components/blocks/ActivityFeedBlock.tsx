@@ -22,7 +22,7 @@ interface ActivityFeedBlockProps {
 
 const defaultActivities: Activity[] = [
   { id: "1", user: "Nadia", action: "deployed v2.1.0 to production", timestamp: "2 min ago" },
-  { id: "2", user: "Alex", action: "merged PR #142 into main", timestamp: "15 min ago" },
+  { id: "2", user: "Alex", action: "merged PR 142 into main", timestamp: "15 min ago" },
   { id: "3", user: "Jordan", action: "commented on issue #87", timestamp: "1 hour ago" },
   { id: "4", user: "Sam", action: "created branch feature/aurora-effect", timestamp: "3 hours ago" },
   { id: "5", user: "Riley", action: "updated the design tokens", timestamp: "5 hours ago" },

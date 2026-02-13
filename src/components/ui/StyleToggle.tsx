@@ -28,29 +28,31 @@ export const StyleToggle = React.forwardRef<HTMLDivElement, StyleToggleProps>(
           role="radio"
           aria-checked={style === 'arctic'}
           onClick={() => setStyle('arctic')}
+          aria-label="Select arctic style"
           className={cn(
-            'inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all',
+            'inline-flex items-center justify-center gap-1.5 rounded-full px-2 py-1.5 text-sm font-medium transition-all sm:px-3',
             style === 'arctic'
               ? 'bg-primary text-primary-foreground shadow-sm'
               : 'text-text-secondary hover:text-text-primary'
           )}
         >
           <SnowflakeIcon size={14} />
-          Arctic
+          <span className="hidden sm:inline">Arctic</span>
         </button>
         <button
           role="radio"
           aria-checked={style === 'bloom'}
           onClick={() => setStyle('bloom')}
+          aria-label="Select bloom style"
           className={cn(
-            'inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all',
+            'inline-flex items-center justify-center gap-1.5 rounded-full px-2 py-1.5 text-sm font-medium transition-all sm:px-3',
             style === 'bloom'
               ? 'bg-primary text-primary-foreground shadow-sm'
               : 'text-text-secondary hover:text-text-primary'
           )}
         >
           <SunIcon size={14} />
-          Bloom
+          <span className="hidden sm:inline">Bloom</span>
         </button>
       </div>
     );

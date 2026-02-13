@@ -1,10 +1,37 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
+function stripMotionProps(props: Record<string, unknown>) {
+  const cleaned = { ...props }
+
+  for (const key of [
+    "whileHover",
+    "whileTap",
+    "whileInView",
+    "whileFocus",
+    "whileDrag",
+    "initial",
+    "animate",
+    "exit",
+    "transition",
+    "variants",
+    "layout",
+    "layoutId",
+  ] as const) {
+    delete cleaned[key]
+  }
+
+  return cleaned
+}
+
 vi.mock('motion/react', () => ({
   motion: {
-    div: ({ children, className, ...props }: Record<string, unknown>) => (
-      <div className={className as string} {...props}>{children as React.ReactNode}</div>
+    div: ({
+      children,
+      className,
+      ...props
+    }: Record<string, unknown>) => (
+      <div className={className as string} {...stripMotionProps(props)}>{children as React.ReactNode}</div>
     ),
   },
 }))

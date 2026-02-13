@@ -12,8 +12,13 @@ interface ConfettiBurstProps {
   trigger?: boolean;
 }
 
-const ARCTIC_COLORS = ["#38BDB8", "#6B7A8A", "#A0AEBB", "#3E96F4", "#8B5CF6"];
-const BLOOM_COLORS = ["#E8573A", "#8B5CF6", "#3DD6A0", "#F5A623", "#5AB4F5"];
+const CHART_COLORS = [
+  "rgb(var(--chart-1))",
+  "rgb(var(--chart-2))",
+  "rgb(var(--chart-3))",
+  "rgb(var(--chart-4))",
+  "rgb(var(--chart-5))",
+];
 
 function randomBetween(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -21,8 +26,8 @@ function randomBetween(min: number, max: number) {
 
 export const ConfettiBurst = React.forwardRef<HTMLDivElement, ConfettiBurstProps>(
   ({ count = 12, spread = 80, className, trigger = true }, ref) => {
-    const { spring, style } = useStyleMotion();
-    const colors = style === "bloom" ? BLOOM_COLORS : ARCTIC_COLORS;
+    const { spring } = useStyleMotion();
+    const colors = CHART_COLORS;
 
     const [particles, setParticles] = React.useState<
       { id: number; color: string; x: number; y: number; rotate: number; size: number }[]

@@ -19,7 +19,7 @@ const roleVariants = cva(
                 owner:
                     "border-warning/50 bg-warning/10 text-warning shadow-[0_0_10px_-4px_rgba(var(--color-warning),0.5)]",
                 admin:
-                    "border-chart-5/50 bg-chart-5/10 text-chart-5 shadow-[0_0_10px_-4px_rgba(var(--color-chart-5),0.5)]",
+                    "border-chart-5/50 bg-chart-5/10 text-chart-5 shadow-[0_0_10px_-4px_rgba(var(--chart-5),0.5)]",
                 member:
                     "border-border/30 bg-surface-hover/50 text-text-secondary hover:bg-surface-hover",
                 guest:

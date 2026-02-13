@@ -41,17 +41,23 @@ function VoiceAgentCard({
   onSelect,
   className,
 }: VoiceAgentCardProps) {
+  const isInteractive = typeof onSelect === "function"
+
   return (
-    <motion.div
+    <motion.button
+      type="button"
       className={cn(
-        "flex flex-col items-center gap-3 rounded-xl p-4 transition-colors cursor-pointer",
+        "flex flex-col items-center gap-3 rounded-xl p-4 transition-colors border-0 bg-transparent text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent",
+        isInteractive ? "cursor-pointer" : "cursor-default",
         selected
           ? "glass-panel ring-1 ring-accent/30"
           : "hover:bg-surface-hover/50",
         className
       )}
       onClick={onSelect}
-      whileHover={{ y: -2 }}
+      disabled={!isInteractive}
+      aria-pressed={selected}
+      whileHover={isInteractive ? { y: -2 } : undefined}
       transition={motionSpring.snappy}
     >
       <Avatar3D
@@ -60,6 +66,7 @@ function VoiceAgentCard({
         state={selected ? state : "idle"}
         size="lg"
         enableTilt={selected}
+        interactive={false}
       />
 
       <div className="flex flex-col items-center gap-1 text-center">
@@ -82,7 +89,7 @@ function VoiceAgentCard({
           </Badge>
         </motion.div>
       )}
-    </motion.div>
+    </motion.button>
   )
 }
 

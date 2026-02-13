@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { Typography } from "../../ui/Typography";
 import { Grid } from "../../layout/Grid";
 import { Card, CardContent } from "../../ui/Card";
@@ -99,6 +99,33 @@ function BlocksTOC({ activeSection }: { activeSection: string }) {
         ))}
       </nav>
     </>
+  );
+}
+
+function LazySection({ children, minHeight = 600 }: { children: ReactNode; minHeight?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={visible ? undefined : { minHeight }}>
+      {visible ? children : null}
+    </div>
   );
 }
 
@@ -281,240 +308,247 @@ function BlocksShowcase() {
             {/* AUTHENTICATION */}
             <section id="authentication" data-toc-heading className="space-y-8">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Authentication</Typography>
-              <Grid cols={1} gap="xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <Typography variant="h3">Password Recovery</Typography>
-                    <PasswordRecoveryBlock mode="reset" />
+              <LazySection minHeight={800}>
+                <Grid cols={1} gap="xl">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <Typography variant="h3">Password Recovery</Typography>
+                      <PasswordRecoveryBlock mode="reset" />
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Magic Link</Typography>
+                      <PasswordRecoveryBlock mode="magic-link" />
+                    </div>
                   </div>
-                  <div className="space-y-4">
-                    <Typography variant="h3">Magic Link</Typography>
-                    <PasswordRecoveryBlock mode="magic-link" />
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <Typography variant="h3">Reset Password</Typography>
-                    <ResetPasswordBlock />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <Typography variant="h3">Reset Password</Typography>
+                      <ResetPasswordBlock />
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Password Changed</Typography>
+                      <AuthSuccessBlock
+                        icon={<ShieldCheckIcon size={32} className="text-success" />}
+                        title="Password changed!"
+                        description="Your password has been successfully updated."
+                        buttonText="Continue to login"
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-4">
-                    <Typography variant="h3">Password Changed</Typography>
-                    <AuthSuccessBlock
-                      icon={<ShieldCheckIcon size={32} className="text-success" />}
-                      title="Password changed!"
-                      description="Your password has been successfully updated."
-                      buttonText="Continue to login"
-                    />
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <Typography variant="h3">Email Verified</Typography>
-                    <AuthSuccessBlock
-                      icon={<CheckIcon size={32} className="text-success" />}
-                      title="Email verified!"
-                      description="Your email address has been successfully verified."
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <Typography variant="h3">Email Verified</Typography>
+                      <AuthSuccessBlock
+                        icon={<CheckIcon size={32} className="text-success" />}
+                        title="Email verified!"
+                        description="Your email address has been successfully verified."
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h3">2FA Challenge</Typography>
+                      <TwoFactorChallengeBlock />
+                    </div>
                   </div>
-                  <div className="space-y-4">
-                    <Typography variant="h3">2FA Challenge</Typography>
-                    <TwoFactorChallengeBlock />
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <Typography variant="h3">Account Locked</Typography>
-                    <AccountLockedBlock reason="too_many_attempts" unlockMinutes={15} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <Typography variant="h3">Account Locked</Typography>
+                      <AccountLockedBlock reason="too_many_attempts" unlockMinutes={15} />
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h3">2FA Setup</Typography>
+                      <TwoFactorSetupBlock />
+                    </div>
                   </div>
-                  <div className="space-y-4">
-                    <Typography variant="h3">2FA Setup</Typography>
-                    <TwoFactorSetupBlock />
-                  </div>
-                </div>
-              </Grid>
+                </Grid>
+              </LazySection>
             </section>
 
             {/* APPLICATION */}
             <section id="application" data-toc-heading className="space-y-8">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">Application</Typography>
-              <Grid cols={1} gap="xl">
-                <div className="space-y-4">
-                  <Typography variant="h3">Chat Interface</Typography>
-                  <ChatLayout />
-                </div>
+              <LazySection minHeight={3000}>
+                <Grid cols={1} gap="xl">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Chat Interface</Typography>
+                    <ChatLayout />
+                  </div>
 
-                <div className="space-y-4">
-                  <Typography variant="h3">Code Block</Typography>
-                  <CodeBlock
-                    filename="example.js"
-                    code={`function greet(name) {
+                  <div className="space-y-4">
+                    <Typography variant="h3">Code Block</Typography>
+                    <CodeBlock
+                      filename="example.js"
+                      code={`function greet(name) {
   return "Hello, " + name;
 }
 
 console.log(greet("World"));`}
-                  />
-                </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">Audio Visualizer</Typography>
-                  <Card>
-                    <CardContent className="flex flex-col items-center justify-center p-12 gap-6">
-                      <AudioVisualizer isPlaying={true} />
-                      <Button variant="outline">Play Voice Sample</Button>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">Directory (Sidebar + Menu)</Typography>
-                  <DirectoryBlock />
-                </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">Create Form (Zod + Validation)</Typography>
-                  <CreateBlock />
-                </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">Stats Generic (KPIs)</Typography>
-                  <StatsGeneric />
-                </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">Data Grid (Advanced)</Typography>
-                  <DataGridBlock />
-                </div>
-
-                <div className="space-y-4">
-                  <Typography variant="h3">Settings Layout</Typography>
-                  <div className="border border-border rounded-lg overflow-hidden h-[600px]">
-                    <SettingsLayout />
+                    />
                   </div>
-                </div>
 
-                <div className="space-y-4">
-                  <Typography variant="h3">Wizard</Typography>
-                  <div className="flex justify-center py-12 bg-muted/10 rounded-xl border border-dashed">
-                    <WizardBlock />
-                  </div>
-                </div>
-
-                <ScrollFadeIn>
                   <div className="space-y-4">
-                    <Typography variant="h3">Changelog</Typography>
-                    <ChangelogBlock />
+                    <Typography variant="h3">Audio Visualizer</Typography>
+                    <Card>
+                      <CardContent className="flex flex-col items-center justify-center p-12 gap-6">
+                        <AudioVisualizer isPlaying={true} />
+                        <Button variant="outline">Play Voice Sample</Button>
+                      </CardContent>
+                    </Card>
                   </div>
-                </ScrollFadeIn>
 
-                <ScrollFadeIn>
                   <div className="space-y-4">
-                    <Typography variant="h3">Comparison</Typography>
-                    <ComparisonBlock />
+                    <Typography variant="h3">Directory (Sidebar + Menu)</Typography>
+                    <DirectoryBlock />
                   </div>
-                </ScrollFadeIn>
 
-                <ScrollFadeIn>
                   <div className="space-y-4">
-                    <Typography variant="h3">Activity Feed</Typography>
-                    <ActivityFeedBlock />
+                    <Typography variant="h3">Create Form (Zod + Validation)</Typography>
+                    <CreateBlock />
                   </div>
-                </ScrollFadeIn>
 
-                <ScrollFadeIn>
                   <div className="space-y-4">
-                    <Typography variant="h3">Onboarding</Typography>
-                    <div className="flex justify-center py-8">
-                      <OnboardingBlock />
+                    <Typography variant="h3">Stats Generic (KPIs)</Typography>
+                    <StatsGeneric />
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Data Grid (Advanced)</Typography>
+                    <DataGridBlock />
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Settings Layout</Typography>
+                    <div className="border border-border rounded-lg overflow-hidden h-[600px]">
+                      <SettingsLayout />
                     </div>
                   </div>
-                </ScrollFadeIn>
-              </Grid>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Wizard</Typography>
+                    <div className="flex justify-center py-12 bg-muted/10 rounded-xl border border-dashed">
+                      <WizardBlock />
+                    </div>
+                  </div>
+
+                  <ScrollFadeIn>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Changelog</Typography>
+                      <ChangelogBlock />
+                    </div>
+                  </ScrollFadeIn>
+
+                  <ScrollFadeIn>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Comparison</Typography>
+                      <ComparisonBlock />
+                    </div>
+                  </ScrollFadeIn>
+
+                  <ScrollFadeIn>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Activity Feed</Typography>
+                      <ActivityFeedBlock />
+                    </div>
+                  </ScrollFadeIn>
+
+                  <ScrollFadeIn>
+                    <div className="space-y-4">
+                      <Typography variant="h3">Onboarding</Typography>
+                      <div className="flex justify-center py-8">
+                        <OnboardingBlock />
+                      </div>
+                    </div>
+                  </ScrollFadeIn>
+                </Grid>
+              </LazySection>
             </section>
 
             {/* AI & VOICE */}
             <section id="ai-voice" data-toc-heading className="space-y-8">
               <Typography variant="h2" className="mb-8 border-b border-border pb-2">AI & Voice</Typography>
+              <LazySection minHeight={600}>
+                <div className="space-y-8">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Voice Agent Card</Typography>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-lg">
+                      <VoiceAgentCard
+                        agent={{ id: "atlas", name: "Atlas", role: "Engineering", avatar: "https://picsum.photos/seed/atlas/200/200" }}
+                        state="idle"
+                        selected={false}
+                      />
+                      <VoiceAgentCard
+                        agent={{ id: "nova", name: "Nova", role: "Design", avatar: "https://picsum.photos/seed/nova/200/200" }}
+                        state="speaking"
+                        selected={true}
+                      />
+                      <VoiceAgentCard
+                        agent={{ id: "echo", name: "Echo", role: "Support", avatar: "https://picsum.photos/seed/echo/200/200" }}
+                        state="listening"
+                        selected={true}
+                      />
+                    </div>
+                  </div>
 
-              <div className="space-y-4">
-                <Typography variant="h3">Voice Agent Card</Typography>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-lg">
-                  <VoiceAgentCard
-                    agent={{ id: "atlas", name: "Atlas", role: "Engineering", avatar: "https://picsum.photos/seed/atlas/200/200" }}
-                    state="idle"
-                    selected={false}
-                  />
-                  <VoiceAgentCard
-                    agent={{ id: "nova", name: "Nova", role: "Design", avatar: "https://picsum.photos/seed/nova/200/200" }}
-                    state="speaking"
-                    selected={true}
-                  />
-                  <VoiceAgentCard
-                    agent={{ id: "echo", name: "Echo", role: "Support", avatar: "https://picsum.photos/seed/echo/200/200" }}
-                    state="listening"
-                    selected={true}
-                  />
+                  <div className="space-y-4">
+                    <Typography variant="h3">Agent Conversation</Typography>
+                    <AgentConversationBlock
+                      messages={[
+                        {
+                          id: "1",
+                          role: "user",
+                          content: "Help me optimize the database queries in the dashboard. The page load is over 3 seconds.",
+                          timestamp: "10:30 AM",
+                        },
+                        {
+                          id: "2",
+                          role: "agent",
+                          content: "I'll investigate the slow queries. Let me read the data access layer first.",
+                          timestamp: "10:30 AM",
+                          isThinking: true,
+                          reasoning: "The user reports 3s+ load times on the dashboard. This likely involves N+1 queries or missing indexes. I should check the data fetching code first.",
+                          toolCalls: [
+                            {
+                              toolName: "read_file",
+                              args: { path: "src/lib/dashboard-queries.ts" },
+                              status: "complete",
+                              result: "Found 3 sequential queries that could be batched into a single JOIN",
+                              duration: 280,
+                            },
+                          ],
+                        },
+                        {
+                          id: "3",
+                          role: "system",
+                          content: "Agent identified 3 N+1 query patterns",
+                        },
+                        {
+                          id: "4",
+                          role: "agent",
+                          content: "Found the bottleneck: three sequential queries fetching users, orders, and metrics separately. I've combined them into a single query with JOINs, reducing round trips from 3 to 1. Expected load time improvement: ~60%.",
+                          timestamp: "10:31 AM",
+                          toolCalls: [
+                            {
+                              toolName: "edit_file",
+                              args: { path: "src/lib/dashboard-queries.ts", description: "Batch N+1 queries into JOIN" },
+                              status: "complete",
+                              duration: 450,
+                            },
+                            {
+                              toolName: "bash",
+                              args: { command: "npm run test -- --filter dashboard" },
+                              status: "complete",
+                              result: "12 tests passed, 0 failed",
+                              duration: 3200,
+                            },
+                          ],
+                        },
+                      ]}
+                    />
+                  </div>
                 </div>
-              </div>
-
-              <div className="space-y-4">
-                <Typography variant="h3">Agent Conversation</Typography>
-                <AgentConversationBlock
-                  messages={[
-                    {
-                      id: "1",
-                      role: "user",
-                      content: "Help me optimize the database queries in the dashboard. The page load is over 3 seconds.",
-                      timestamp: "10:30 AM",
-                    },
-                    {
-                      id: "2",
-                      role: "agent",
-                      content: "I'll investigate the slow queries. Let me read the data access layer first.",
-                      timestamp: "10:30 AM",
-                      isThinking: true,
-                      reasoning: "The user reports 3s+ load times on the dashboard. This likely involves N+1 queries or missing indexes. I should check the data fetching code first.",
-                      toolCalls: [
-                        {
-                          toolName: "read_file",
-                          args: { path: "src/lib/dashboard-queries.ts" },
-                          status: "complete",
-                          result: "Found 3 sequential queries that could be batched into a single JOIN",
-                          duration: 280,
-                        },
-                      ],
-                    },
-                    {
-                      id: "3",
-                      role: "system",
-                      content: "Agent identified 3 N+1 query patterns",
-                    },
-                    {
-                      id: "4",
-                      role: "agent",
-                      content: "Found the bottleneck: three sequential queries fetching users, orders, and metrics separately. I've combined them into a single query with JOINs, reducing round trips from 3 to 1. Expected load time improvement: ~60%.",
-                      timestamp: "10:31 AM",
-                      toolCalls: [
-                        {
-                          toolName: "edit_file",
-                          args: { path: "src/lib/dashboard-queries.ts", description: "Batch N+1 queries into JOIN" },
-                          status: "complete",
-                          duration: 450,
-                        },
-                        {
-                          toolName: "bash",
-                          args: { command: "npm run test -- --filter dashboard" },
-                          status: "complete",
-                          result: "12 tests passed, 0 failed",
-                          duration: 3200,
-                        },
-                      ],
-                    },
-                  ]}
-                />
-              </div>
+              </LazySection>
             </section>
       </div>
     </div>

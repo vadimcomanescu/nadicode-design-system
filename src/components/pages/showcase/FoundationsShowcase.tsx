@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card";
 import { Typography } from "../../ui/Typography";
 import { Grid } from "../../layout/Grid";
@@ -84,22 +84,27 @@ const CSS_VAR_NAMES = [
 
 type CssVarName = (typeof CSS_VAR_NAMES)[number];
 
+function createEmptyColors(): Record<CssVarName, string> {
+  const empty = {} as Record<CssVarName, string>;
+  for (const v of CSS_VAR_NAMES) empty[v] = "";
+  return empty;
+}
+
 function useComputedColors(): Record<CssVarName, string> {
   const { resolvedTheme, style } = useTheme();
-  return useMemo(() => {
-    if (typeof document === "undefined") {
-      const empty = {} as Record<CssVarName, string>;
-      for (const v of CSS_VAR_NAMES) empty[v] = "";
-      return empty;
-    }
-    const styles = getComputedStyle(document.documentElement);
-    const result = {} as Record<CssVarName, string>;
-    for (const v of CSS_VAR_NAMES) {
-      result[v] = rgbToHex(styles.getPropertyValue(v));
-    }
-    return result;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resolvedTheme, style]);
+  void resolvedTheme;
+  void style;
+
+  if (typeof window === "undefined") {
+    return createEmptyColors();
+  }
+
+  const styles = getComputedStyle(document.documentElement);
+  const result = {} as Record<CssVarName, string>;
+  for (const v of CSS_VAR_NAMES) {
+    result[v] = rgbToHex(styles.getPropertyValue(v));
+  }
+  return result;
 }
 
 function ColorCard({

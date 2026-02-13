@@ -67,7 +67,6 @@ export function TwoFactorChallengeBlock({
               maxLength={6}
               value={code}
               onChange={handleComplete}
-              autoFocus
             >
               <InputOTPGroup>
                 <InputOTPSlot index={0} />

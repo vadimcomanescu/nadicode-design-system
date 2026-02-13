@@ -24,8 +24,13 @@ export const ConfettiBurst = React.forwardRef<HTMLDivElement, ConfettiBurstProps
     const { spring, style } = useStyleMotion();
     const colors = style === "bloom" ? BLOOM_COLORS : ARCTIC_COLORS;
 
-    const particles = React.useMemo(
-      () =>
+    const [particles, setParticles] = React.useState<
+      { id: number; color: string; x: number; y: number; rotate: number; size: number }[]
+    >([]);
+
+    React.useEffect(() => {
+      if (!trigger) return;
+      setParticles(
         Array.from({ length: count }, (_, i) => ({
           id: i,
           color: colors[i % colors.length],
@@ -33,11 +38,11 @@ export const ConfettiBurst = React.forwardRef<HTMLDivElement, ConfettiBurstProps
           y: randomBetween(-spread, -spread / 3),
           rotate: randomBetween(-180, 180),
           size: randomBetween(4, 8),
-        })),
-      [count, spread, colors]
-    );
+        }))
+      );
+    }, [count, spread, colors, trigger]);
 
-    if (!trigger) return null;
+    if (!trigger || particles.length === 0) return null;
 
     return (
       <div

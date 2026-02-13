@@ -87,7 +87,8 @@ export default function ShowcaseLayout({ children }: { children: React.ReactNode
   }, [])
 
   const handleTabChange = (value: string) => {
-    router.push(`/${value}`)
+    router.push(`/${value}`, { scroll: false })
+    window.scrollTo(0, 0)
   }
 
   const handleSearchSelect = (result: SearchResult) => {

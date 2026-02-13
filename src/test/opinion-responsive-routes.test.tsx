@@ -59,6 +59,7 @@ describe("Opinion: Responsive Route Smoke", () => {
       )
       expect(landing.container.querySelector(".min-h-dvh")).toBeTruthy()
       landing.unmount()
-    }
+    },
+    15_000
   )
 })

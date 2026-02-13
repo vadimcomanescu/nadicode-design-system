@@ -15,8 +15,8 @@ describe("ComponentsShowcase", () => {
         />
       </ThemeProvider>
     );
-    expect(screen.getByText("Actions & Indicators")).toBeInTheDocument();
-    expect(screen.getByText("Data Entry")).toBeInTheDocument();
+    expect(screen.getByText("Actions & Inputs")).toBeInTheDocument();
+    expect(screen.getByText("Content & Display")).toBeInTheDocument();
     expect(screen.getByText("Overlays & Feedback")).toBeInTheDocument();
   });
 });

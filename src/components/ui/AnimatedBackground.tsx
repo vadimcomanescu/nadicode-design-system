@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export const AnimatedBackground = ({ className }: { className?: string }) => {
     return (
-        <div className={cn("relative w-full h-full overflow-hidden bg-background", className)}>
+        <div className={cn("relative w-full h-full overflow-hidden bg-background", className)} style={{ contain: 'paint layout' }}>
             {/* 1. Deep Space/Dark Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-background to-background opacity-80" />
 
@@ -15,13 +15,13 @@ export const AnimatedBackground = ({ className }: { className?: string }) => {
             {/* 3. Moving Orbs - "Lava Lamp" / "Aurora" Effect */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden filter blur-[80px] opacity-60">
                 {/* Primary Orb - Moving slowly top-left to center */}
-                <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-primary/30 rounded-full mix-blend-screen animate-blob" />
+                <div className="absolute top-[-20%] left-[-10%] w-[80%] h-[80%] bg-primary/30 rounded-full mix-blend-screen animate-blob" />
 
                 {/* Accent Orb - Moving bottom-right to center */}
-                <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] bg-accent/30 rounded-full mix-blend-screen animate-blob animation-delay-2000" />
+                <div className="absolute top-[20%] right-[-10%] w-[65%] h-[65%] bg-accent/30 rounded-full mix-blend-screen animate-blob animation-delay-2000" />
 
                 {/* Secondary Orb - Moving bottom-left */}
-                <div className="absolute bottom-[-20%] left-[20%] w-[45vw] h-[45vw] bg-chart-2/30 rounded-full mix-blend-screen animate-blob animation-delay-4000" />
+                <div className="absolute bottom-[-20%] left-[20%] w-[70%] h-[70%] bg-chart-2/30 rounded-full mix-blend-screen animate-blob animation-delay-4000" />
             </div>
 
             {/* 4. Noise Texture for Realism */}

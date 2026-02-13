@@ -1,5 +1,6 @@
 'use client'
 
+import { useRef } from "react";
 import { Button } from "../../ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card";
 import { Input } from "../../ui/Input";
@@ -81,6 +82,37 @@ import { BentoGrid } from "../../ui/BentoGrid";
 import { InfiniteSlider } from "../../ui/InfiniteSlider";
 import { StaggerChildren } from "../../ui/StaggerChildren";
 import { StaggeredEntrance } from "../../ui/StaggeredEntrance";
+import { AnimatedTabs, AnimatedTabsList, AnimatedTabsTrigger, AnimatedTabsContent } from "../../ui/AnimatedTabs";
+import { AnimatedDialog, AnimatedDialogTrigger, AnimatedDialogContent, AnimatedDialogHeader, AnimatedDialogTitle, AnimatedDialogDescription, AnimatedDialogFooter } from "../../ui/AnimatedDialog";
+import { AnimatedSheet, AnimatedSheetTrigger, AnimatedSheetContent, AnimatedSheetHeader, AnimatedSheetTitle, AnimatedSheetDescription } from "../../ui/AnimatedSheet";
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "../../ui/Command";
+import { AvatarUpload } from "../../ui/AvatarUpload";
+import { AnnouncementBanner } from "../../ui/AnnouncementBanner";
+import { AspectRatio } from "../../ui/AspectRatio";
+import { AmbientGrid } from "../../ui/AmbientGrid";
+import { AuroraEffect } from "../../ui/AuroraEffect";
+import { AnimatedBeam } from "../../ui/AnimatedBeam";
+import { StreamingText } from "../../ui/text-effects";
+import { StatusDot } from "../../ui/StatusDot";
+import { AgentStatus } from "../../ui/AgentStatus";
+import { AudioWaveform } from "../../ui/AudioWaveform";
+import { ConversationThread } from "../../ui/ConversationThread";
+import { AgentAvatar } from "../../ui/AgentAvatar";
+import { ToolCallCard } from "../../ui/ToolCallCard";
+import { ThinkingIndicator } from "../../ui/ThinkingIndicator";
+import { AgentMessageBubble } from "../../ui/AgentMessageBubble";
+import { ApprovalCard } from "../../ui/ApprovalCard";
+import { AgentTeamPanel } from "../../ui/AgentTeamPanel";
+import { AgentTimeline } from "../../ui/AgentTimeline";
+import { WorkflowGraph } from "../../ui/WorkflowGraph";
+import { HandoffIndicator } from "../../ui/HandoffIndicator";
+import { ContextMeter } from "../../ui/ContextMeter";
+import { SourceCitation } from "../../ui/SourceCitation";
+import { AgentMetricsCard } from "../../ui/AgentMetricsCard";
+import { MemoryInspector } from "../../ui/MemoryInspector";
+import { ArtifactCard } from "../../ui/ArtifactCard";
+import { CodeDiffViewer } from "../../ui/CodeDiffViewer";
+import { AgentTerminal } from "../../ui/AgentTerminal";
 import { HomeIcon } from "../../ui/icons/home";
 import { GlobeIcon } from "../../ui/icons/globe";
 import { MailIcon } from "../../ui/icons/mail";
@@ -135,12 +167,16 @@ interface ComponentsShowcaseProps {
 }
 
 function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowcaseProps) {
+  const beamContainerRef = useRef<HTMLDivElement>(null);
+  const beamFromRef = useRef<HTMLDivElement>(null);
+  const beamToRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
-            {/* ACTIONS & INDICATORS */}
+            {/* ACTIONS & INPUTS */}
             <ScrollFadeIn>
             <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Actions & Indicators</Typography>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Actions & Inputs</Typography>
               <div className="space-y-8">
                 <div className="flex flex-wrap gap-4 items-center">
                   <Button variant="primary">Primary</Button>
@@ -179,6 +215,163 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                     </ToggleGroupItem>
                   </ToggleGroup>
                 </div>
+
+                <Grid cols={2} gap="xl">
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <Label>Email</Label>
+                      <Input placeholder="user@example.com" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Bio</Label>
+                      <Textarea placeholder="Tell us about yourself" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>One-Time Password</Label>
+                      <InputOTP maxLength={6}>
+                        <InputOTPGroup>
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                          <InputOTPSlot index={3} />
+                          <InputOTPSlot index={4} />
+                          <InputOTPSlot index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Framework</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select framework" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="react">React</SelectItem>
+                          <SelectItem value="vue">Vue</SelectItem>
+                          <SelectItem value="svelte">Svelte</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h4">Combobox</Typography>
+                      <Combobox
+                        options={[
+                          { label: "Option 1", value: "1" },
+                          { label: "Option 2", value: "2" },
+                          { label: "Option 3", value: "3" },
+                        ]}
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h4">Native Select</Typography>
+                      <NativeSelect>
+                        <option>Selection A</option>
+                        <option>Selection B</option>
+                      </NativeSelect>
+                    </div>
+                  </div>
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="terms-2" />
+                        <Label htmlFor="terms-2">Accept terms</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Switch id="notify" />
+                        <Label htmlFor="notify">Enable Notifications</Label>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Format</Label>
+                      <RadioGroup defaultValue="compact">
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="default" id="r1" />
+                          <Label htmlFor="r1">Default</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="compact" id="r2" />
+                          <Label htmlFor="r2">Compact</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                    <Slider label="Security Level" defaultValue={50} max={100} step={1} />
+                    <div className="space-y-2">
+                      <Label>Date Picker</Label>
+                      <DatePicker />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Date Range</Label>
+                      <DatePickerWithRange />
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h4">Input Group</Typography>
+                      <InputGroup>
+                        <InputGroupAddon>https://</InputGroupAddon>
+                        <Input placeholder="example.com" className="rounded-none" />
+                        <InputGroupAddon>.com</InputGroupAddon>
+                      </InputGroup>
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h4">File Upload</Typography>
+                      <FileUpload
+                        helperText="PDF, PNG, JPG up to 10MB"
+                        maxSize={10 * 1024 * 1024}
+                        files={[
+                          { name: "design-tokens.json", size: 4200, type: "application/json" },
+                          { name: "screenshot.png", size: 1240000, type: "image/png" },
+                        ]}
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <Typography variant="h4">Password Input</Typography>
+                      <form onSubmit={e => e.preventDefault()}>
+                        <PasswordInput placeholder="Enter your password" />
+                      </form>
+                    </div>
+                  </div>
+                </Grid>
+
+                <Grid cols={2} gap="xl">
+                  <div className="space-y-4">
+                    <Typography variant="h3">Tag Input</Typography>
+                    <TagInput tags={["react", "typescript"]} onTagsChange={() => {}} placeholder="Add tags..." />
+                  </div>
+                  <div className="space-y-4">
+                    <Typography variant="h3">Tree View</Typography>
+                    <div className="border border-border rounded-lg p-4 bg-surface max-w-sm">
+                      <TreeView
+                        data={[
+                          {
+                            id: "src",
+                            label: "src",
+                            children: [
+                              {
+                                id: "components",
+                                label: "components",
+                                children: [
+                                  { id: "ui", label: "ui", children: [
+                                    { id: "button", label: "Button.tsx" },
+                                    { id: "card", label: "Card.tsx" },
+                                    { id: "input", label: "Input.tsx" },
+                                  ]},
+                                  { id: "blocks", label: "blocks", children: [
+                                    { id: "hero", label: "HeroBlock.tsx" },
+                                    { id: "faq", label: "FAQBlock.tsx" },
+                                  ]},
+                                ],
+                              },
+                              { id: "lib", label: "lib", children: [
+                                { id: "utils", label: "utils.ts" },
+                                { id: "tokens", label: "tokens.config.js" },
+                              ]},
+                              { id: "app", label: "App.tsx" },
+                            ],
+                          },
+                        ]}
+                      />
+                    </div>
+                  </div>
+                </Grid>
               </div>
             </section>
             </ScrollFadeIn>
@@ -206,6 +399,26 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                       <Card><CardContent className="pt-6"><Typography variant="muted">Generated reports.</Typography></CardContent></Card>
                     </TabsContent>
                   </Tabs>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h4">Animated Tabs</Typography>
+                  <AnimatedTabs defaultValue="design" className="w-full">
+                    <AnimatedTabsList>
+                      <AnimatedTabsTrigger value="design">Design</AnimatedTabsTrigger>
+                      <AnimatedTabsTrigger value="code">Code</AnimatedTabsTrigger>
+                      <AnimatedTabsTrigger value="preview">Preview</AnimatedTabsTrigger>
+                    </AnimatedTabsList>
+                    <AnimatedTabsContent value="design">
+                      <Card><CardContent className="pt-6"><Typography variant="muted">Design workspace with animated transitions.</Typography></CardContent></Card>
+                    </AnimatedTabsContent>
+                    <AnimatedTabsContent value="code">
+                      <Card><CardContent className="pt-6"><Typography variant="muted">Code editor panel.</Typography></CardContent></Card>
+                    </AnimatedTabsContent>
+                    <AnimatedTabsContent value="preview">
+                      <Card><CardContent className="pt-6"><Typography variant="muted">Live preview area.</Typography></CardContent></Card>
+                    </AnimatedTabsContent>
+                  </AnimatedTabs>
                 </div>
 
                 <div className="space-y-4">
@@ -325,125 +538,6 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
             </section>
             </ScrollFadeIn>
 
-            {/* DATA ENTRY */}
-            <ScrollFadeIn>
-            <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Data Entry</Typography>
-              <Grid cols={2} gap="xl">
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <Label>Email</Label>
-                    <Input placeholder="user@example.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Bio</Label>
-                    <Textarea placeholder="Tell us about yourself" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>One-Time Password</Label>
-                    <InputOTP maxLength={6}>
-                      <InputOTPGroup>
-                        <InputOTPSlot index={0} />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
-                      </InputOTPGroup>
-                    </InputOTP>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Framework</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select framework" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="react">React</SelectItem>
-                        <SelectItem value="vue">Vue</SelectItem>
-                        <SelectItem value="svelte">Svelte</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-4">
-                    <Typography variant="h4">Combobox</Typography>
-                    <Combobox
-                      options={[
-                        { label: "Option 1", value: "1" },
-                        { label: "Option 2", value: "2" },
-                        { label: "Option 3", value: "3" },
-                      ]}
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <Typography variant="h4">Native Select</Typography>
-                    <NativeSelect>
-                      <option>Selection A</option>
-                      <option>Selection B</option>
-                    </NativeSelect>
-                  </div>
-                </div>
-                <div className="space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="terms-2" />
-                      <Label htmlFor="terms-2">Accept terms</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Switch id="notify" />
-                      <Label htmlFor="notify">Enable Notifications</Label>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Format</Label>
-                    <RadioGroup defaultValue="compact">
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="default" id="r1" />
-                        <Label htmlFor="r1">Default</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="compact" id="r2" />
-                        <Label htmlFor="r2">Compact</Label>
-                      </div>
-                    </RadioGroup>
-                  </div>
-                  <Slider label="Security Level" defaultValue={50} max={100} step={1} />
-                  <div className="space-y-2">
-                    <Label>Date Picker</Label>
-                    <DatePicker />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Date Range</Label>
-                    <DatePickerWithRange />
-                  </div>
-                  <div className="space-y-4">
-                    <Typography variant="h4">Input Group</Typography>
-                    <InputGroup>
-                      <InputGroupAddon>https://</InputGroupAddon>
-                      <Input placeholder="example.com" className="rounded-none" />
-                      <InputGroupAddon>.com</InputGroupAddon>
-                    </InputGroup>
-                  </div>
-                  <div className="space-y-4">
-                    <Typography variant="h4">File Upload</Typography>
-                    <FileUpload
-                      helperText="PDF, PNG, JPG up to 10MB"
-                      maxSize={10 * 1024 * 1024}
-                      files={[
-                        { name: "design-tokens.json", size: 4200, type: "application/json" },
-                        { name: "screenshot.png", size: 1240000, type: "image/png" },
-                      ]}
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <Typography variant="h4">Password Input</Typography>
-                    <PasswordInput placeholder="Enter your password" />
-                  </div>
-                </div>
-              </Grid>
-            </section>
-            </ScrollFadeIn>
-
             {/* OVERLAYS & FEEDBACK */}
             <ScrollFadeIn>
             <section>
@@ -535,6 +629,27 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                 >
                   Show Toast
                 </Button>
+
+                <AnimatedDialog>
+                  <AnimatedDialogTrigger asChild><Button variant="outline">Animated Dialog</Button></AnimatedDialogTrigger>
+                  <AnimatedDialogContent>
+                    <AnimatedDialogHeader>
+                      <AnimatedDialogTitle>Animated Dialog</AnimatedDialogTitle>
+                      <AnimatedDialogDescription>Spring-animated entrance with scale effect.</AnimatedDialogDescription>
+                    </AnimatedDialogHeader>
+                    <AnimatedDialogFooter><Button>Got it</Button></AnimatedDialogFooter>
+                  </AnimatedDialogContent>
+                </AnimatedDialog>
+
+                <AnimatedSheet>
+                  <AnimatedSheetTrigger asChild><Button variant="secondary">Animated Sheet</Button></AnimatedSheetTrigger>
+                  <AnimatedSheetContent>
+                    <AnimatedSheetHeader>
+                      <AnimatedSheetTitle>Animated Sheet</AnimatedSheetTitle>
+                      <AnimatedSheetDescription>Swipe to dismiss on mobile.</AnimatedSheetDescription>
+                    </AnimatedSheetHeader>
+                  </AnimatedSheetContent>
+                </AnimatedSheet>
               </div>
 
               <div className="mt-8 space-y-4">
@@ -549,13 +664,30 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                   />
                 </div>
               </div>
+
+              <div className="mt-8 space-y-4">
+                <Typography variant="h3">Command Palette</Typography>
+                <div className="max-w-sm border border-border rounded-lg overflow-hidden">
+                  <Command>
+                    <CommandInput placeholder="Type a command..." />
+                    <CommandList>
+                      <CommandEmpty>No results found.</CommandEmpty>
+                      <CommandGroup heading="Actions">
+                        <CommandItem>New File</CommandItem>
+                        <CommandItem>Search Project</CommandItem>
+                        <CommandItem>Toggle Theme</CommandItem>
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </div>
+              </div>
             </section>
             </ScrollFadeIn>
 
-            {/* DATA DISPLAY */}
+            {/* CONTENT & DISPLAY */}
             <ScrollFadeIn>
             <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Data Display</Typography>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Content & Display</Typography>
               <Grid cols={2} gap="xl">
                 <div className="space-y-8">
                   <div className="flex items-center space-x-4">
@@ -803,14 +935,72 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                     />
                   </div>
                 </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Avatar Upload</Typography>
+                  <AvatarUpload />
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Announcement Banner</Typography>
+                  <div className="space-y-3">
+                    <AnnouncementBanner variant="accent" storageKey="demo-accent">New release: animated components now available.</AnnouncementBanner>
+                    <AnnouncementBanner variant="warning" storageKey="demo-warning">Scheduled maintenance this weekend.</AnnouncementBanner>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Status Dot</Typography>
+                  <div className="flex flex-wrap items-center gap-6">
+                    <div className="flex items-center gap-2">
+                      <StatusDot status="online" />
+                      <Typography variant="small">Online</Typography>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <StatusDot status="busy" />
+                      <Typography variant="small">Busy</Typography>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <StatusDot status="dnd" />
+                      <Typography variant="small">Do Not Disturb</Typography>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <StatusDot status="offline" />
+                      <Typography variant="small">Offline</Typography>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-6">
+                    <div className="flex items-center gap-2">
+                      <StatusDot status="online" size="sm" />
+                      <Typography variant="small">Small</Typography>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <StatusDot status="online" size="default" />
+                      <Typography variant="small">Default</Typography>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <StatusDot status="online" size="lg" />
+                      <Typography variant="small">Large</Typography>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Aspect Ratio</Typography>
+                  <div className="max-w-sm">
+                    <AspectRatio ratio={16 / 9} className="bg-secondary rounded-lg overflow-hidden">
+                      <div className="flex items-center justify-center h-full text-text-secondary text-sm">16:9</div>
+                    </AspectRatio>
+                  </div>
+                </div>
               </div>
             </section>
             </ScrollFadeIn>
 
-            {/* COMPOSITION & LAYOUT */}
+            {/* COMPOSITION */}
             <ScrollFadeIn>
             <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Composition & Layout</Typography>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Composition</Typography>
               <div className="space-y-8">
                 <div className="space-y-4">
                   <Typography variant="h3">Fields & Groups</Typography>
@@ -947,87 +1137,6 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
             </section>
             </ScrollFadeIn>
 
-            {/* UTILITY */}
-            <ScrollFadeIn>
-            <section>
-              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Utility</Typography>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="space-y-4">
-                  <Typography variant="h4">Keyboard Shortcut</Typography>
-                  <div className="flex gap-2 items-center">
-                    <span>Press</span>
-                    <Kbd>&#x2318;</Kbd>
-                    <Kbd>K</Kbd>
-                    <span>to search</span>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <Typography variant="h4">Spinner</Typography>
-                  <Spinner className="text-accent" />
-                </div>
-                <div className="space-y-4">
-                  <Typography variant="h4">Search Command</Typography>
-                  <SearchCommand
-                    value="dash"
-                    results={[
-                      { id: "1", title: "Dashboard", description: "Main analytics view", category: "Pages" },
-                      { id: "2", title: "DashboardPage.tsx", description: "src/components/pages/", category: "Files" },
-                      { id: "3", title: "DataGridBlock", description: "Advanced data table", category: "Components" },
-                    ]}
-                  />
-                </div>
-              </div>
-            </section>
-            </ScrollFadeIn>
-
-            {/* SPECIALIZED INPUTS */}
-            <ScrollFadeIn>
-              <section>
-                <Typography variant="h2" className="mb-8 border-b border-border pb-2">Specialized Inputs</Typography>
-                <Grid cols={2} gap="xl">
-                  <div className="space-y-4">
-                    <Typography variant="h3">Tag Input</Typography>
-                    <TagInput tags={["react", "typescript"]} onTagsChange={() => {}} placeholder="Add tags..." />
-                  </div>
-                  <div className="space-y-4">
-                    <Typography variant="h3">Tree View</Typography>
-                    <div className="border border-border rounded-lg p-4 bg-surface max-w-sm">
-                      <TreeView
-                        data={[
-                          {
-                            id: "src",
-                            label: "src",
-                            children: [
-                              {
-                                id: "components",
-                                label: "components",
-                                children: [
-                                  { id: "ui", label: "ui", children: [
-                                    { id: "button", label: "Button.tsx" },
-                                    { id: "card", label: "Card.tsx" },
-                                    { id: "input", label: "Input.tsx" },
-                                  ]},
-                                  { id: "blocks", label: "blocks", children: [
-                                    { id: "hero", label: "HeroBlock.tsx" },
-                                    { id: "faq", label: "FAQBlock.tsx" },
-                                  ]},
-                                ],
-                              },
-                              { id: "lib", label: "lib", children: [
-                                { id: "utils", label: "utils.ts" },
-                                { id: "tokens", label: "tokens.config.js" },
-                              ]},
-                              { id: "app", label: "App.tsx" },
-                            ],
-                          },
-                        ]}
-                      />
-                    </div>
-                  </div>
-                </Grid>
-              </section>
-            </ScrollFadeIn>
-
             {/* EFFECTS & ANIMATION */}
             <ScrollFadeIn>
               <section>
@@ -1162,8 +1271,458 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                       </StaggeredEntrance>
                     </div>
                   </Grid>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Ambient Grid</Typography>
+                    <div className="relative h-[160px] rounded-lg border border-border overflow-hidden bg-background">
+                      <AmbientGrid />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Typography variant="h4" className="text-text-primary z-10">Structural Grid</Typography>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Aurora Effect</Typography>
+                    <div className="relative h-[200px] rounded-lg border border-border overflow-hidden bg-background">
+                      <AuroraEffect intensity="medium" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Typography variant="h4" className="text-text-primary z-10">Aurora Glow</Typography>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Typography variant="h3">Animated Beam</Typography>
+                    <div ref={beamContainerRef} className="relative flex items-center justify-between h-[100px] rounded-lg border border-border overflow-hidden bg-background px-16">
+                      <div ref={beamFromRef} className="h-10 w-10 rounded-full bg-accent/20 border border-accent/50 flex items-center justify-center text-xs text-accent">A</div>
+                      <div ref={beamToRef} className="h-10 w-10 rounded-full bg-accent/20 border border-accent/50 flex items-center justify-center text-xs text-accent">B</div>
+                      <AnimatedBeam fromRef={beamFromRef} toRef={beamToRef} containerRef={beamContainerRef} />
+                    </div>
+                  </div>
                 </div>
               </section>
+            </ScrollFadeIn>
+
+            {/* AI & VOICE */}
+            <ScrollFadeIn>
+            <section>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">AI & Voice</Typography>
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <Typography variant="h3">Agent Status</Typography>
+                  <div className="flex flex-wrap gap-4">
+                    <AgentStatus status="idle" />
+                    <AgentStatus status="thinking" />
+                    <AgentStatus status="streaming" />
+                    <AgentStatus status="error" />
+                    <AgentStatus status="complete" />
+                    <AgentStatus status="thinking" label="Processing query..." size="lg" />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Audio Waveform</Typography>
+                  <Card>
+                    <CardContent className="p-6 space-y-4">
+                      <div className="space-y-2">
+                        <Typography variant="small" className="text-text-secondary">Active (accent)</Typography>
+                        <AudioWaveform active variant="accent" bars={32} />
+                      </div>
+                      <div className="space-y-2">
+                        <Typography variant="small" className="text-text-secondary">Inactive</Typography>
+                        <AudioWaveform bars={32} />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Streaming Text</Typography>
+                  <Card>
+                    <CardContent className="p-6">
+                      <StreamingText
+                        text="The agent is analyzing your codebase and generating a comprehensive review of all components, patterns, and potential improvements..."
+                        speed={2}
+                        interval={25}
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Conversation Thread</Typography>
+                  <Card>
+                    <CardContent className="p-6">
+                      <ConversationThread
+                        showTimestamps
+                        messages={[
+                          { id: "1", role: "user", content: "Can you review the token system?", timestamp: "10:24 AM" },
+                          { id: "2", role: "assistant", content: "I'll analyze the token architecture. The three-file flow looks solid.", timestamp: "10:24 AM" },
+                          { id: "3", role: "system", content: "Agent started code analysis" },
+                          { id: "4", role: "assistant", content: "Found 3 hardcoded colors. I'll fix those now.", timestamp: "10:25 AM" },
+                        ]}
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Agent Avatar</Typography>
+                  <div className="flex items-center gap-8">
+                    <AgentAvatar src="https://picsum.photos/seed/agent/200/200" name="Atlas" state="idle" size="lg" />
+                    <AgentAvatar src="https://picsum.photos/seed/agent2/200/200" name="Nova" state="speaking" size="lg" />
+                  </div>
+                </div>
+              </div>
+            </section>
+            </ScrollFadeIn>
+
+            {/* AGENTIC UI */}
+            <ScrollFadeIn>
+            <section>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Agentic UI</Typography>
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <Typography variant="h3">Tool Call Card</Typography>
+                  <div className="space-y-3 max-w-lg">
+                    <ToolCallCard
+                      toolName="web_search"
+                      args={{ query: "Next.js 15 features" }}
+                      status="complete"
+                      result="Found 5 results for Next.js 15 features including Server Actions, Partial Prerendering, and improved caching."
+                      duration={1230}
+                    />
+                    <ToolCallCard
+                      toolName="read_file"
+                      args={{ path: "/src/app/page.tsx" }}
+                      status="running"
+                    />
+                    <ToolCallCard
+                      toolName="execute_code"
+                      args={{ language: "python", code: "print(data)" }}
+                      status="error"
+                      result="SyntaxError: unexpected EOF while parsing"
+                    />
+                    <ToolCallCard
+                      toolName="bash"
+                      args={{ command: "npm install" }}
+                      status="pending"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Thinking Indicator</Typography>
+                  <div className="space-y-3">
+                    <ThinkingIndicator size="sm" />
+                    <ThinkingIndicator />
+                    <ThinkingIndicator
+                      size="lg"
+                      reasoning="Analyzing the codebase structure to find the authentication module and determine the best approach for adding OAuth support..."
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Agent Message Bubble</Typography>
+                  <div className="space-y-3 max-w-xl">
+                    <AgentMessageBubble
+                      role="user"
+                      content="Can you help me optimize the database queries in the dashboard?"
+                      timestamp="10:30 AM"
+                    />
+                    <AgentMessageBubble
+                      role="agent"
+                      content="I'll analyze the query patterns. Let me start by reading the data access layer."
+                      timestamp="10:30 AM"
+                      toolCalls={
+                        <ToolCallCard
+                          toolName="read_file"
+                          args={{ path: "src/lib/db.ts" }}
+                          status="complete"
+                          duration={340}
+                        />
+                      }
+                    />
+                    <AgentMessageBubble
+                      role="system"
+                      content="Agent switched to code analysis mode"
+                    />
+                    <AgentMessageBubble
+                      role="agent"
+                      content="Found 3 N+1 queries in the dashboard loader. I can batch these into a single JOIN."
+                      timestamp="10:31 AM"
+                      isStreaming
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Approval Card</Typography>
+                  <Grid cols={2} gap="xl">
+                    <ApprovalCard
+                      title="Delete database table"
+                      description="This will permanently remove the users table and all associated data."
+                      riskLevel="high"
+                      onApprove={() => {}}
+                      onReject={() => {}}
+                      timeout={30}
+                    />
+                    <ApprovalCard
+                      title="Deploy to staging"
+                      description="Push latest changes to the staging environment for QA review."
+                      riskLevel="low"
+                      onApprove={() => {}}
+                      onReject={() => {}}
+                    />
+                  </Grid>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Agent Team Panel</Typography>
+                  <div className="max-w-xs">
+                    <AgentTeamPanel
+                      agents={[
+                        { id: "planner", name: "Planner", role: "Task decomposition and delegation", status: "active" },
+                        { id: "researcher", name: "Researcher", role: "Web search and documentation lookup", status: "complete" },
+                        { id: "coder", name: "Coder", role: "Code generation and editing", status: "idle" },
+                        { id: "reviewer", name: "Reviewer", role: "Code review and testing", status: "error" },
+                      ]}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Agent Timeline</Typography>
+                  <div className="max-w-md">
+                    <AgentTimeline
+                      events={[
+                        { id: "1", timestamp: "10:30:15", type: "message", agent: "Planner", title: "Received task assignment" },
+                        { id: "2", timestamp: "10:30:18", type: "tool_call", agent: "Researcher", title: "Called web_search", detail: 'query: "React server components best practices"' },
+                        { id: "3", timestamp: "10:30:25", type: "decision", agent: "Planner", title: "Delegated to Coder agent", detail: "Task requires implementation changes in 3 files" },
+                        { id: "4", timestamp: "10:30:45", type: "error", agent: "Coder", title: "Build failed", detail: "TypeScript error: Property 'data' does not exist on type 'Response'" },
+                        { id: "5", timestamp: "10:31:02", type: "tool_call", agent: "Coder", title: "Applied fix and rebuilt", detail: "Added proper type narrowing with runtime check" },
+                        { id: "6", timestamp: "10:31:15", type: "message", agent: "Reviewer", title: "All tests passing" },
+                      ]}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Workflow Graph</Typography>
+                  <WorkflowGraph
+                    nodes={[
+                      { id: "plan", label: "Plan", status: "done" },
+                      { id: "research", label: "Research", status: "done" },
+                      { id: "implement", label: "Implement", status: "active" },
+                      { id: "test", label: "Test", status: "pending" },
+                      { id: "review", label: "Review", status: "pending" },
+                    ]}
+                    edges={[
+                      { from: "plan", to: "research" },
+                      { from: "plan", to: "implement" },
+                      { from: "research", to: "implement" },
+                      { from: "implement", to: "test" },
+                      { from: "test", to: "review" },
+                    ]}
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Handoff Indicator</Typography>
+                  <HandoffIndicator
+                    fromAgent={{ name: "Researcher" }}
+                    toAgent={{ name: "Coder" }}
+                    reason="Research complete, handing off implementation task"
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Context Meter</Typography>
+                  <div className="space-y-4 max-w-md">
+                    <ContextMeter used={12000} total={128000} size="compact" />
+                    <ContextMeter used={85000} total={128000} />
+                    <ContextMeter
+                      used={110000}
+                      total={128000}
+                      size="expanded"
+                      breakdown={{ system: 15, user: 35, assistant: 50 }}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Source Citation</Typography>
+                  <Grid cols={2} gap="xl">
+                    <SourceCitation
+                      size="inline"
+                      sources={[
+                        { id: "1", title: "Next.js Docs", score: 0.95 },
+                        { id: "2", title: "React RFC", score: 0.82 },
+                        { id: "3", title: "MDN Web Docs", score: 0.71 },
+                        { id: "4", title: "Stack Overflow", score: 0.55 },
+                      ]}
+                    />
+                    <SourceCitation
+                      sources={[
+                        { id: "1", title: "Server Components RFC", url: "https://github.com/reactjs/rfcs", score: 0.95, snippet: "Server Components allow rendering components on the server, reducing the JavaScript bundle sent to the client." },
+                        { id: "2", title: "Vercel Blog: Next.js 15", score: 0.88, snippet: "Partial Prerendering combines static and dynamic content in a single route." },
+                        { id: "3", title: "MDN: Fetch API", url: "https://developer.mozilla.org", score: 0.62 },
+                      ]}
+                    />
+                  </Grid>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Agent Metrics Card</Typography>
+                  <Grid cols={2} gap="xl">
+                    <AgentMetricsCard
+                      layout="grid"
+                      metrics={[
+                        { label: "Latency (p95)", value: "1.2", unit: "s", trend: "down" },
+                        { label: "Tokens Used", value: "45.2k", trend: "up" },
+                        { label: "Tool Calls", value: 12, trend: "flat" },
+                        { label: "Cost", value: "$0.18", trend: "down" },
+                      ]}
+                    />
+                    <AgentMetricsCard
+                      layout="row"
+                      metrics={[
+                        { label: "Success Rate", value: "98.5", unit: "%", trend: "up" },
+                        { label: "Avg Turn Time", value: "3.4", unit: "s" },
+                        { label: "Errors", value: 1, trend: "down" },
+                      ]}
+                    />
+                  </Grid>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Memory Inspector</Typography>
+                  <div className="max-w-lg">
+                    <MemoryInspector
+                      entries={[
+                        { id: "1", type: "episodic", content: "User prefers TypeScript strict mode and avoids any types. Always use explicit interfaces.", timestamp: "2 hours ago", source: "conversation" },
+                        { id: "2", type: "semantic", content: "The project uses Next.js App Router with Tailwind CSS 4 and Radix UI primitives for all interactive components.", timestamp: "1 day ago", source: "codebase analysis" },
+                        { id: "3", type: "procedural", content: "Run npx tsc --noEmit before committing. All tests must pass with npx vitest run. Use semantic tokens, never hardcode colors.", timestamp: "3 days ago", source: "CLAUDE.md" },
+                      ]}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Artifact Card</Typography>
+                  <Grid cols={2} gap="xl">
+                    <ArtifactCard
+                      type="code"
+                      title="optimized-query.sql"
+                      language="sql"
+                      content={`SELECT u.id, u.name, COUNT(o.id) as order_count
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+WHERE u.created_at > NOW() - INTERVAL '30 days'
+GROUP BY u.id, u.name
+ORDER BY order_count DESC
+LIMIT 10;`}
+                      defaultExpanded
+                    />
+                    <ArtifactCard
+                      type="markdown"
+                      title="Architecture Decision"
+                      content={`We should migrate from REST to tRPC for the internal API layer.
+
+Benefits:
+- End-to-end type safety
+- No code generation step
+- Smaller bundle size
+- Better developer experience with autocompletion`}
+                      defaultExpanded
+                    />
+                  </Grid>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Code Diff Viewer</Typography>
+                  <div className="max-w-2xl">
+                    <CodeDiffViewer
+                      filePath="src/lib/db.ts"
+                      language="typescript"
+                      hunks={[{
+                        changes: [
+                          { type: "context", content: "export async function getUsers() {", lineNumber: 14 },
+                          { type: "remove", content: "  const users = await db.query('SELECT * FROM users');", lineNumber: 15 },
+                          { type: "remove", content: "  for (const user of users) {", lineNumber: 16 },
+                          { type: "remove", content: "    user.orders = await db.query('SELECT * FROM orders WHERE user_id = ?', [user.id]);", lineNumber: 17 },
+                          { type: "remove", content: "  }", lineNumber: 18 },
+                          { type: "add", content: "  const users = await db.query(`", lineNumber: 15 },
+                          { type: "add", content: "    SELECT u.*, json_agg(o.*) as orders", lineNumber: 16 },
+                          { type: "add", content: "    FROM users u LEFT JOIN orders o ON o.user_id = u.id", lineNumber: 17 },
+                          { type: "add", content: "    GROUP BY u.id", lineNumber: 18 },
+                          { type: "add", content: "  `);", lineNumber: 19 },
+                          { type: "context", content: "  return users;", lineNumber: 20 },
+                          { type: "context", content: "}", lineNumber: 21 },
+                        ],
+                      }]}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <Typography variant="h3">Agent Terminal</Typography>
+                  <div className="max-w-2xl">
+                    <AgentTerminal
+                      title="build-output"
+                      lines={[
+                        { text: "npm run build", type: "stdin" },
+                        { text: "next build", type: "stdout" },
+                        { text: "Creating an optimized production build...", type: "stdout" },
+                        { text: "Compiled successfully.", type: "stdout" },
+                        { text: "", type: "stdout" },
+                        { text: "Route (app)                Size     First Load JS", type: "stdout" },
+                        { text: "/                          5.2 kB   89.1 kB", type: "stdout" },
+                        { text: "/dashboard                 12.4 kB  96.3 kB", type: "stdout" },
+                        { text: "/(showcase)/components     3.1 kB   87.0 kB", type: "stdout" },
+                        { text: "", type: "stdout" },
+                        { text: "Build completed in 14.2s", type: "stdout" },
+                      ]}
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+            </ScrollFadeIn>
+
+            {/* UTILITY */}
+            <ScrollFadeIn>
+            <section>
+              <Typography variant="h2" className="mb-8 border-b border-border pb-2">Utility</Typography>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="space-y-4">
+                  <Typography variant="h4">Keyboard Shortcut</Typography>
+                  <div className="flex gap-2 items-center">
+                    <span>Press</span>
+                    <Kbd>&#x2318;</Kbd>
+                    <Kbd>K</Kbd>
+                    <span>to search</span>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <Typography variant="h4">Spinner</Typography>
+                  <Spinner className="text-accent" />
+                </div>
+                <div className="space-y-4">
+                  <Typography variant="h4">Search Command</Typography>
+                  <SearchCommand
+                    value="dash"
+                    results={[
+                      { id: "1", title: "Dashboard", description: "Main analytics view", category: "Pages" },
+                      { id: "2", title: "DashboardPage.tsx", description: "src/components/pages/", category: "Files" },
+                      { id: "3", title: "DataGridBlock", description: "Advanced data table", category: "Components" },
+                    ]}
+                  />
+                </div>
+              </div>
+            </section>
             </ScrollFadeIn>
     </>
   );

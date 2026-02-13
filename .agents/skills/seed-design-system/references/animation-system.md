@@ -8,8 +8,8 @@ Central animation infrastructure built on `motion/react` (NOT framer-motion) and
 
 | File                          | Purpose                                    |
 | ----------------------------- | ------------------------------------------ |
-| `src/lib/animation.tokens.ts` | Easing curves, duration scale, spring configs |
-| `src/lib/motion.ts`           | Motion variants, spring presets, stagger, reduced motion |
+| `src/lib/animation.tokens.ts` | Easing curves, duration scale, spring configs, style-specific presets |
+| `src/lib/motion.ts`           | Motion variants, spring presets, stagger, useStyleMotion, reduced motion |
 | `tailwind.config.js`          | Tailwind keyframes and animation utilities |
 | `src/index.css`               | CSS keyframes and `prefers-reduced-motion` |
 
@@ -53,13 +53,28 @@ Central animation infrastructure built on `motion/react` (NOT framer-motion) and
 
 ## Spring Presets
 
-Defined in `src/lib/motion.ts` as `motionSpring`:
+### Arctic Springs (precise, controlled)
 
-| Name     | Duration | Bounce | Use For                              |
-| -------- | -------- | ------ | ------------------------------------ |
-| `snappy` | 0.2s     | 0      | Micro-interactions, tooltips, badges |
-| `gentle` | 0.4s     | 0.1    | Page transitions, slide-ins          |
-| `bouncy` | 0.5s     | 0.25   | Playful UI, celebratory moments      |
+Defined in `src/lib/animation.tokens.ts` as `spring`, exposed in `src/lib/motion.ts` as `motionSpring`:
+
+| Name       | Stiffness | Damping | Mass | Use For                              |
+| ---------- | --------- | ------- | ---- | ------------------------------------ |
+| `snappy`   | 400       | 28      | 0.8  | Micro-interactions, tooltips, badges |
+| `gentle`   | 200       | 20      | 1.0  | Page transitions, slide-ins          |
+| `bouncy`   | 300       | 14      | 0.8  | Playful UI, celebratory moments      |
+| `dramatic` | 500       | 24      | 1.2  | Hero entrances, major reveals        |
+
+### Bloom Springs (softer, bouncier, more playful)
+
+Defined as `springBloom` in `src/lib/animation.tokens.ts`:
+
+| Name       | Stiffness | Damping | Mass | Use For                              |
+| ---------- | --------- | ------- | ---- | ------------------------------------ |
+| `snappy`   | 300       | 16      | 0.6  | Micro-interactions                   |
+| `gentle`   | 150       | 12      | 0.8  | Transitions                          |
+| `bouncy`   | 200       | 8       | 0.5  | Playful UI                           |
+| `dramatic` | 250       | 8       | 0.6  | Hero entrances                       |
+| `wobbly`   | 180       | 6       | 0.4  | Extra-playful (bloom-only)           |
 
 ```tsx
 import { motionSpring } from "@/lib/motion"
@@ -69,6 +84,52 @@ import { motionSpring } from "@/lib/motion"
   transition={motionSpring.snappy}
 />
 ```
+
+---
+
+## Style-Aware Motion (`useStyleMotion`)
+
+Components that need to adapt animations to the active style (arctic vs bloom) use the `useStyleMotion()` hook:
+
+```tsx
+import { useStyleMotion } from "@/lib/motion"
+
+function MyComponent() {
+  const { spring, distance, scale, blur, style } = useStyleMotion()
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: distance.md }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={spring.snappy}
+    />
+  )
+}
+```
+
+### Return values
+
+| Property   | Type                              | Description                          |
+| ---------- | --------------------------------- | ------------------------------------ |
+| `spring`   | Arctic or Bloom spring configs    | Style-specific spring presets        |
+| `distance` | `{ sm, md, lg }` in px           | Animation travel distances           |
+| `scale`    | `{ subtle, normal }`             | Starting scales (animate to 1.0)     |
+| `blur`     | `{ subtle, normal }` in px       | Blur amounts for reveal effects      |
+| `style`    | `'arctic' \| 'bloom'`            | Current active style                 |
+
+### Style comparison
+
+| Property       | Arctic              | Bloom               |
+| -------------- | ------------------- | ------------------- |
+| `distance.sm`  | 16px                | 20px                |
+| `distance.md`  | 32px                | 40px                |
+| `distance.lg`  | 56px                | 72px                |
+| `scale.subtle` | 0.90                | 0.85                |
+| `scale.normal` | 0.80                | 0.70                |
+| `blur.subtle`  | 4px                 | 6px                 |
+| `blur.normal`  | 8px                 | 12px                |
+
+Components using `useStyleMotion()` or `useTheme()` require a `ThemeProvider` wrapper in tests.
 
 ---
 
@@ -87,33 +148,27 @@ import { fadeIn, fadeInUp, fadeInDown, scaleIn, slideInLeft, slideInRight } from
 // Spread syntax applies initial + animate + transition
 ```
 
-| Variant        | Initial State                  | Spring   |
-| -------------- | ------------------------------ | -------- |
-| `fadeIn`       | `opacity: 0`                   | snappy   |
-| `fadeInUp`     | `opacity: 0, y: 20`           | snappy   |
-| `fadeInDown`   | `opacity: 0, y: -20`          | snappy   |
-| `scaleIn`      | `opacity: 0, scale: 0.95`     | snappy   |
-| `slideInLeft`  | `opacity: 0, x: -30`          | gentle   |
-| `slideInRight` | `opacity: 0, x: 30`           | gentle   |
+| Variant        | Initial State                          | Spring   |
+| -------------- | -------------------------------------- | -------- |
+| `fadeIn`       | `opacity: 0`                           | snappy   |
+| `fadeInUp`     | `opacity: 0, y: 32, blur: 4px`       | snappy   |
+| `fadeInDown`   | `opacity: 0, y: -32, blur: 4px`      | snappy   |
+| `scaleIn`      | `opacity: 0, scale: 0.85, blur: 6px` | snappy   |
+| `slideInLeft`  | `opacity: 0, x: -30`                  | gentle   |
+| `slideInRight` | `opacity: 0, x: 30`                   | gentle   |
 
 ### Stagger Patterns
 
 ```tsx
 import { staggerContainer, blockStagger, heroStagger } from "@/lib/motion"
 
-// Generic stagger container
-<motion.div variants={staggerContainer(100)} initial="initial" animate="animate">
-  <motion.div variants={fadeInUp}>Item 1</motion.div>
-  <motion.div variants={fadeInUp}>Item 2</motion.div>
-</motion.div>
-
-// Block-level stagger (80ms delay, 16px up)
+// Block-level stagger (80ms delay, 24px up)
 <motion.div variants={blockStagger.container()} initial="hidden" animate="visible">
   <motion.div variants={blockStagger.child}>Card 1</motion.div>
   <motion.div variants={blockStagger.child}>Card 2</motion.div>
 </motion.div>
 
-// Hero-level stagger (100ms delay, 24px up, gentle spring)
+// Hero-level stagger (100ms delay, 36px up, gentle spring)
 <motion.div variants={heroStagger.container} initial="hidden" animate="visible">
   <motion.div variants={heroStagger.child}>Headline</motion.div>
   <motion.div variants={heroStagger.child}>Subtitle</motion.div>
@@ -123,8 +178,43 @@ import { staggerContainer, blockStagger, heroStagger } from "@/lib/motion"
 | Pattern         | Delay  | Distance | Spring  | Best For          |
 | --------------- | ------ | -------- | ------- | ----------------- |
 | `staggerContainer` | configurable | N/A | N/A | Custom stagger |
-| `blockStagger`  | 80ms   | 16px up  | snappy  | Card grids, lists |
-| `heroStagger`   | 100ms  | 24px up  | gentle  | Hero sections     |
+| `blockStagger`  | 80ms   | 24px up  | snappy  | Card grids, lists |
+| `heroStagger`   | 100ms  | 36px up  | gentle  | Hero sections     |
+
+---
+
+## PageTransition
+
+Route-level transition wrapper used in the showcase layout:
+
+```tsx
+import { PageTransition } from "@/components/ui/PageTransition"
+
+<PageTransition pathname={pathname} mode="slide">
+  {children}
+</PageTransition>
+```
+
+Keyed on `pathname` to trigger entrance animations on route changes.
+
+---
+
+## AnimatedTabs
+
+Tab component with a sliding indicator using `motion/react` `layoutId`:
+
+```tsx
+import { AnimatedTabs, AnimatedTabsList, AnimatedTabsTrigger } from "@/components/ui/AnimatedTabs"
+
+<AnimatedTabs value={currentTab} onValueChange={handleTabChange}>
+  <AnimatedTabsList>
+    <AnimatedTabsTrigger value="tab1">Tab 1</AnimatedTabsTrigger>
+    <AnimatedTabsTrigger value="tab2">Tab 2</AnimatedTabsTrigger>
+  </AnimatedTabsList>
+</AnimatedTabs>
+```
+
+The active indicator slides between tabs using `layoutId` for smooth spring animation.
 
 ---
 
@@ -159,7 +249,7 @@ function MyComponent() {
 }
 ```
 
-### 3. Radix `useReducedMotion` (from motion/react)
+### 3. From motion/react
 ```tsx
 import { useReducedMotion } from "motion/react"
 const prefersReduced = useReducedMotion() // boolean

@@ -1,3 +1,4 @@
 npx tsc --noEmit
 npx lint-staged
+npm run docs:check
 npx vitest run

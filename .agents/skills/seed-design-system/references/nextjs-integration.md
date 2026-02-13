@@ -227,8 +227,8 @@ export default {
 // app/layout.tsx (SERVER component - no "use client")
 import type { Metadata } from "next"
 import localFont from "next/font/local"
-import { ThemeProvider } from "@/lib/ThemeProvider"
 import "./globals.css"
+import { Providers } from "./providers"
 
 const satoshi = localFont({
   src: [
@@ -247,24 +247,42 @@ export const metadata: Metadata = {
   description: "Built with Seed Design System",
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={satoshi.variable} suppressHydrationWarning>
-      <body className="bg-background text-text-primary antialiased min-h-dvh font-sans">
-        <ThemeProvider defaultTheme="system" storageKey="theme">
-          {children}
-        </ThemeProvider>
+      <head>
+        {/* Prevent flash of wrong theme */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){
+          var t=localStorage.getItem('design-system-theme')||'system';
+          var d=t==='dark'||(t==='system'&&matchMedia('(prefers-color-scheme:dark)').matches);
+          document.documentElement.classList.add(d?'dark':'light')
+        })()` }} />
+      </head>
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
 }
 ```
 
-Satoshi fonts are bundled locally in `public/fonts/satoshi/` (copied by `init.mjs`). The `@font-face` declarations in `seed-tokens.css` serve as a fallback. For optimal loading, use `next/font/local` as shown above.
+### Step 7b: Client Providers
+
+```tsx
+// app/providers.tsx ("use client")
+import { ThemeProvider } from "@/lib/ThemeProvider"
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  // Optionally load THREE/p5 globals for background effects
+  return (
+    <ThemeProvider defaultTheme="system">
+      {children}
+    </ThemeProvider>
+  )
+}
+```
+
+Satoshi fonts are bundled locally in `public/fonts/satoshi/` (for scaffold customers) and `src/app/fonts/` (for `next/font/local` in this repo).
 
 ---
 
@@ -414,3 +432,42 @@ export default function LoginPage() {
   )
 }
 ```
+
+---
+
+## App Router File Structure (this repo)
+
+```
+src/app/
+  layout.tsx              # Root layout: font loading, <Providers>
+  providers.tsx           # Client: ThemeProvider + THREE/p5 globals
+  globals.css             # Imports index.css
+  page.tsx                # "/" redirects to /foundations
+  not-found.tsx           # 404 page
+  (showcase)/             # Route group: showcase tabs
+    layout.tsx              # Header + AnimatedTabs + Cmd+K palette + PageTransition
+    foundations/page.tsx     # Renders FoundationsShowcase
+    components/page.tsx     # Renders ComponentsShowcase
+    blocks/page.tsx         # Renders BlocksShowcase
+    charts/page.tsx         # Renders ChartsShowcase
+    icons/page.tsx          # Renders IconsPage
+    pages/page.tsx          # Renders PagesShowcase
+    patterns/page.tsx       # Renders PatternsPage
+  dashboard/page.tsx      # Standalone pages (no showcase chrome)
+  landing/page.tsx
+  pricing/page.tsx
+  onboarding/page.tsx
+  changelog/page.tsx
+  blog/page.tsx
+  voice-agents/page.tsx
+  login/vanta/*/page.tsx  # Vanta login variants (7)
+```
+
+### Showcase Structure
+
+The `(showcase)` route group provides the design system browser:
+- `layout.tsx` renders the header, `AnimatedTabs` for navigation, `StyleToggle`, `ThemeToggle`, Cmd+K command palette, and `PageTransition`
+- Tab content lives in `src/components/pages/showcase/` as client components
+- Route pages simply import and render the showcase components
+
+To add a new component to the showcase, edit the appropriate file in `src/components/pages/showcase/` (e.g., `ComponentsShowcase.tsx` for UI primitives).

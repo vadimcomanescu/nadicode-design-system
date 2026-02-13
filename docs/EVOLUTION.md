@@ -46,8 +46,8 @@ Not everything belongs in the design system.
 
 ### C. Documentation (The Next Big Step)
 *   **The Input:** Visibility.
-*   **Current State:** `App.tsx` serves as a component lab and ad-hoc documentation.
-*   **Future State:** As the library grows beyond 20-30 components, `App.tsx` will become unmanageable.
+*   **Current State:** `src/app/(showcase)/` serves as the component lab and documentation surface.
+*   **Future State:** As the library grows, route-level showcase docs and generated inventories become essential to avoid drift.
 *   **Evolution:** Implement **Storybook**. It allows developing components in isolation and provides automatic documentation for props and variants. This becomes essential when scaling the team.
 
 ## Summary: The Phases
@@ -61,7 +61,7 @@ Not everything belongs in the design system.
 
 ## 4. The Genesis Input (The API of Adaptation)
 
-While the automated pipeline handles technical evolution (Harversting), the initial setup of the system for a new project requires human input.
+While the automated pipeline handles technical evolution (Harvesting), the initial setup of the system for a new project requires human input.
 
 Refer to **`GENESIS_INTAKE.md`** and **`MUTATION_GENOME.md`** for the framework on how to configure the "Seeds" (Visual, Structural, Behavioral) that will condition the Design System before the first line of code is written.
 

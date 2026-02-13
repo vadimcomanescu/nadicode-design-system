@@ -4,7 +4,6 @@ import {
     RadialBar,
     RadialBarChart as RechartsRadialBarChart,
     PolarAngleAxis,
-    ResponsiveContainer
 } from "recharts"
 
 import {
@@ -42,32 +41,26 @@ export function RadialBarChart({
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={300}>
-                <RechartsRadialBarChart
-                    data={data}
-                    innerRadius={innerRadius}
-                    outerRadius={outerRadius}
-                    startAngle={90}
-                    endAngle={90 - maxAngle}
-                >
-                    <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent hideLabel nameKey={nameKey} />}
-                    />
-                    {/* 
-            Recharts RadialBar background doesn't work well with transparency in dark mode usually, 
-            so we omit it or keep it simple. 
-          */}
-                    <RadialBar
-                        dataKey={dataKey}
-                        background={{ fill: "var(--color-surface)", opacity: 0.3 }}
-                        cornerRadius={4}
-                    />
-                    <PolarAngleAxis type="number" domain={[0, 'auto']} tick={false} />
+            <RechartsRadialBarChart
+                data={data}
+                innerRadius={innerRadius}
+                outerRadius={outerRadius}
+                startAngle={90}
+                endAngle={90 - maxAngle}
+            >
+                <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent hideLabel nameKey={nameKey} />}
+                />
+                <RadialBar
+                    dataKey={dataKey}
+                    background={{ fill: "var(--color-surface)", opacity: 0.3 }}
+                    cornerRadius={4}
+                />
+                <PolarAngleAxis type="number" domain={[0, 'auto']} tick={false} />
 
-                    {showLegend && <ChartLegend content={<ChartLegendContent />} />}
-                </RechartsRadialBarChart>
-            </ResponsiveContainer>
+                {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+            </RechartsRadialBarChart>
         </ChartContainer>
     )
 }

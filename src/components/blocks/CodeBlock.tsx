@@ -39,13 +39,13 @@ export function CodeBlock({
     <ScrollFadeIn>
     <div
       className={cn(
-        "relative overflow-hidden rounded-lg glass-panel !bg-neutral-950/80 border-white/10",
+        "relative overflow-hidden rounded-lg bg-surface border border-border/30 shadow-lg",
         className
       )}
       {...props}
     >
       {filename && (
-        <div className="flex items-center justify-between border-b border-border bg-muted/30 px-4 py-2 text-xs text-text-secondary">
+        <div className="flex items-center justify-between border-b border-border/30 bg-surface-hover px-4 py-2 text-xs text-text-tertiary">
           <span>{filename}</span>
         </div>
       )}
@@ -53,7 +53,7 @@ export function CodeBlock({
         <Button
           size="icon"
           variant="ghost"
-          className="absolute right-2 top-2 h-6 w-6 text-text-tertiary hover:bg-surface-active hover:text-text-primary"
+          className="absolute right-2 top-2 h-6 w-6 text-text-tertiary hover:bg-surface-hover hover:text-text-secondary"
           onClick={onCopy}
         >
           {copied ? <CheckIcon size={12} /> : <CopyIcon size={12} />}

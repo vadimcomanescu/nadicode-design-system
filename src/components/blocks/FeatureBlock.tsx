@@ -107,8 +107,8 @@ export function FeatureList() {
                         <Card className="p-0 overflow-hidden border-border/50">
                             <div className="p-4 border-b border-border/50 flex items-center gap-2">
                                 <div className="h-3 w-3 rounded-full bg-destructive/50" />
-                                <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
-                                <div className="h-3 w-3 rounded-full bg-chart-4/50" />
+                                <div className="h-3 w-3 rounded-full bg-warning/50" />
+                                <div className="h-3 w-3 rounded-full bg-success/50" />
                             </div>
                             <div className="p-8 h-[300px] flex items-center justify-center bg-background/50">
                                 <div className="grid grid-cols-2 gap-4 w-full opacity-80">

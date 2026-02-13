@@ -1,5 +1,9 @@
 # Design Principles & Micro-interactions
 
+> For the complete, enforceable design opinions covering all 10 domains (navigation,
+> data visualization, typography, layout, effects, forms, feedback, responsive,
+> spacing, accessibility), see **[`OPINIONS.md`](./OPINIONS.md)**.
+
 This document outlines the core design philosophies and interaction rules for the Seed Design System.
 
 ## Affordance & Micro-interactions

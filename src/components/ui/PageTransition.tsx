@@ -18,14 +18,14 @@ const variants = {
     exit: { opacity: 0 },
   },
   slide: {
-    initial: { opacity: 0, y: 32, filter: "blur(4px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-    exit: { opacity: 0, y: -32, filter: "blur(4px)" },
+    initial: { opacity: 0, y: 32 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -32 },
   },
   scale: {
-    initial: { opacity: 0, scale: 0.90, filter: "blur(6px)" },
-    animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
-    exit: { opacity: 0, scale: 0.90, filter: "blur(6px)" },
+    initial: { opacity: 0, scale: 0.90 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.90 },
   },
 } as const
 

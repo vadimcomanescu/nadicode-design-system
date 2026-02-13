@@ -9,6 +9,7 @@ vi.mock('motion/react', () => ({
   },
   useMotionValue: () => ({ set: vi.fn(), get: () => 0 }),
   useMotionTemplate: () => 'none',
+  useReducedMotion: () => false,
 }))
 
 import { MouseSpotlight } from './MouseEffect'
@@ -22,5 +23,16 @@ describe('MouseSpotlight', () => {
   it('accepts custom className', () => {
     const { container } = render(<MouseSpotlight className="custom">Content</MouseSpotlight>)
     expect(container.firstChild).toHaveClass('custom')
+  })
+
+  it('forwards ref', () => {
+    const ref = { current: null }
+    render(<MouseSpotlight ref={ref}>Content</MouseSpotlight>)
+    expect(ref.current).toBeInstanceOf(HTMLElement)
+  })
+
+  it('accepts color and size props', () => {
+    render(<MouseSpotlight color="rgb(100 200 150 / 0.1)" size={400}>Styled</MouseSpotlight>)
+    expect(screen.getByText('Styled')).toBeInTheDocument()
   })
 })

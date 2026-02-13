@@ -9,7 +9,7 @@ import { cn } from "../../lib/utils"
 import { Button } from "../ui/Button"
 import { Input } from "../ui/Input"
 import { ScrollArea } from "../ui/ScrollArea"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
+import { Avatar, AvatarFallback } from "../ui/Avatar"
 import { motion } from "motion/react"
 
 interface Message {
@@ -61,10 +61,9 @@ export function ChatLayout() {
 
   return (
     <div className="flex h-[500px] w-full flex-col overflow-hidden rounded-lg glass-panel">
-      <div className="flex items-center justify-between border-b border-white/10 p-4">
+      <div className="flex items-center justify-between border-b border-border/50 p-4">
         <div className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="/ai-avatar.png" />
             <AvatarFallback className="bg-accent text-white"><BotIcon size={16} /></AvatarFallback>
           </Avatar>
           <div>

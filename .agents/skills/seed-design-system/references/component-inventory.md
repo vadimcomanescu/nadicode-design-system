@@ -1,10 +1,11 @@
 # Component Inventory
 
 All components live under `src/components/`. Import via `@/components/ui/...` or `@/components/blocks/...`.
+Do not treat this document as exhaustive. Use `npm run docs:inventory` for filesystem-backed inventory output.
 
 ---
 
-## Form Controls (~20)
+## Form Controls
 
 | Component       | Path                    | Radix Primitive          | Key Variants / Notes                           |
 | --------------- | ----------------------- | ------------------------ | ---------------------------------------------- |
@@ -34,7 +35,7 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
-## Display (~20)
+## Display
 
 | Component       | Path                    | Radix Primitive              | Notes                                        |
 | --------------- | ----------------------- | ---------------------------- | -------------------------------------------- |
@@ -53,7 +54,7 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 | StatusDot       | `ui/StatusDot`          | -                            | Status indicator dot                         |
 | Accordion       | `ui/Accordion`          | `@radix-ui/react-accordion`  | Accordion, AccordionItem, AccordionTrigger, AccordionContent |
 | Tabs            | `ui/Tabs`               | `@radix-ui/react-tabs`      | Tabs, TabsList, TabsTrigger, TabsContent     |
-| AnimatedTabs    | `ui/AnimatedTabs`       | -                            | Tabs with animated indicator                 |
+| AnimatedTabs    | `ui/AnimatedTabs`       | -                            | Tabs with sliding indicator (layoutId)       |
 | Tooltip         | `ui/Tooltip`            | `@radix-ui/react-tooltip`   | TooltipProvider, Tooltip, TooltipTrigger, TooltipContent |
 | HoverCard       | `ui/HoverCard`          | `@radix-ui/react-hover-card`| HoverCard, HoverCardTrigger, HoverCardContent|
 | Popover         | `ui/Popover`            | `@radix-ui/react-popover`   | Popover, PopoverTrigger, PopoverContent      |
@@ -67,7 +68,7 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
-## Navigation (~10)
+## Navigation
 
 | Component       | Path                    | Radix Primitive                | Notes                                      |
 | --------------- | ----------------------- | ------------------------------ | ------------------------------------------ |
@@ -83,12 +84,12 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
-## Layout & Overlays (~10)
+## Layout & Overlays
 
 | Component       | Path                    | Radix Primitive              | Notes                                      |
 | --------------- | ----------------------- | ---------------------------- | ------------------------------------------ |
 | Dialog          | `ui/Dialog`             | `@radix-ui/react-dialog`    | Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription |
-| AnimatedDialog  | `ui/AnimatedDialog`     | `@radix-ui/react-dialog`    | Dialog with motion animations              |
+| AnimatedDialog  | `ui/AnimatedDialog`     | `@radix-ui/react-dialog`    | Dialog with motion spring animations       |
 | Drawer          | `ui/Drawer`             | `vaul`                       | Mobile-friendly bottom drawer              |
 | Sheet           | `ui/Sheet`              | `@radix-ui/react-dialog`    | Slide-in side panel                        |
 | AnimatedSheet   | `ui/AnimatedSheet`      | `@radix-ui/react-dialog`    | Sheet with motion animations               |
@@ -103,18 +104,17 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
-## Decorative Effects (~15)
+## Decorative Effects
 
 | Component         | Path                      | Notes                                      |
 | ----------------- | ------------------------- | ------------------------------------------ |
 | AmbientGrid       | `ui/AmbientGrid`          | CSS grid overlay (24px cells, 0.06 opacity)|
 | AuroraEffect      | `ui/AuroraEffect`         | Animated gradient aurora background        |
 | MeteorShower      | `ui/MeteorShower`         | Falling meteor particles                   |
-| Spotlight         | `ui/Spotlight`            | Mouse-following spotlight effect           |
 | AnimatedBackground| `ui/AnimatedBackground`   | Vanta.js 3D background                    |
 | AnimatedBeam      | `ui/AnimatedBeam`         | SVG beam connector animation               |
 | PixelBackground   | `ui/PixelBackground`      | Pixel art background effects               |
-| MouseEffect       | `ui/MouseEffect`          | Mouse-tracking visual effects              |
+| MouseEffect       | `ui/MouseEffect`          | Mouse-tracking visual effects (MouseGlow, MouseSpotlight) |
 | MovingBorder      | `ui/MovingBorder`         | Animated border rotation                   |
 | ProgressiveBlur   | `ui/ProgressiveBlur`      | Gradient blur effect                       |
 | TiltCard          | `ui/TiltCard`             | 3D perspective tilt on hover               |
@@ -123,7 +123,9 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
-## Text Effects (10)
+## Text Effects
+
+All in `@/components/ui/text-effects/`.
 
 | Component            | Path                               | Notes                                |
 | -------------------- | ---------------------------------- | ------------------------------------ |
@@ -140,14 +142,17 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
-## Animation Utilities (~5)
+## Animation Utilities
 
 | Component          | Path                        | Notes                                    |
 | ------------------ | --------------------------- | ---------------------------------------- |
 | ScrollFadeIn       | `ui/ScrollFadeIn`           | Fade in on scroll intersection           |
 | StaggerChildren    | `ui/StaggerChildren`        | Stagger child element entrances          |
 | StaggeredEntrance  | `ui/StaggeredEntrance`      | Sequential entrance animation            |
-| PageTransition     | `ui/PageTransition`         | Route transition wrapper                 |
+| PageTransition     | `ui/PageTransition`         | Route transition wrapper (keyed on pathname) |
+| ConfettiBurst      | `ui/ConfettiBurst`          | Celebratory confetti animation           |
+| SpringHover        | `ui/SpringHover`            | Spring-based hover effect wrapper        |
+| SuccessCheck       | `ui/SuccessCheck`           | Animated success checkmark               |
 
 ---
 
@@ -166,7 +171,7 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
-## AI / Voice (~5)
+## AI / Voice
 
 | Component          | Path                        | Notes                                  |
 | ------------------ | --------------------------- | -------------------------------------- |
@@ -178,11 +183,53 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 
 ---
 
+## Agentic UI (15 components)
+
+Components for building AI agent interfaces, tool-use visualization, and multi-agent workflows.
+
+### Core
+
+| Component            | Path                          | Notes                                  |
+| -------------------- | ----------------------------- | -------------------------------------- |
+| ToolCallCard         | `ui/ToolCallCard`             | Displays a tool invocation with name, args, status, result |
+| ThinkingIndicator    | `ui/ThinkingIndicator`        | Animated "thinking..." indicator for agent reasoning |
+| AgentMessageBubble   | `ui/AgentMessageBubble`       | Chat bubble for agent messages with role-based styling |
+| ApprovalCard         | `ui/ApprovalCard`             | Human-in-the-loop approval/reject interface |
+
+### Multi-Agent
+
+| Component            | Path                          | Notes                                  |
+| -------------------- | ----------------------------- | -------------------------------------- |
+| AgentTeamPanel       | `ui/AgentTeamPanel`           | Panel showing agent team members and their statuses |
+| AgentTimeline        | `ui/AgentTimeline`            | Timeline of agent actions and events   |
+| WorkflowGraph        | `ui/WorkflowGraph`            | Visual graph of agent workflow steps   |
+| HandoffIndicator     | `ui/HandoffIndicator`         | Shows agent-to-agent task handoff      |
+
+### Observability
+
+| Component            | Path                          | Notes                                  |
+| -------------------- | ----------------------------- | -------------------------------------- |
+| ContextMeter         | `ui/ContextMeter`             | Visualizes context window usage        |
+| SourceCitation       | `ui/SourceCitation`           | Displays cited sources with links      |
+| AgentMetricsCard     | `ui/AgentMetricsCard`         | Metrics dashboard for agent performance |
+| MemoryInspector      | `ui/MemoryInspector`          | Inspects agent memory/state            |
+
+### Artifacts
+
+| Component            | Path                          | Notes                                  |
+| -------------------- | ----------------------------- | -------------------------------------- |
+| ArtifactCard         | `ui/ArtifactCard`             | Displays generated artifacts (files, images, etc.) |
+| CodeDiffViewer       | `ui/CodeDiffViewer`           | Side-by-side or unified code diff view |
+| AgentTerminal        | `ui/AgentTerminal`            | Terminal-style output for agent commands |
+
+---
+
 ## Miscellaneous
 
 | Component          | Path                        | Notes                                  |
 | ------------------ | --------------------------- | -------------------------------------- |
 | ThemeToggle        | `ui/ThemeToggle`            | Light/dark/system theme switcher       |
+| StyleToggle        | `ui/StyleToggle`            | Arctic/bloom style switcher            |
 | Toast / Toaster    | `ui/Toast`, `ui/Toaster`    | `@radix-ui/react-toast` based         |
 | Sonner             | `ui/Sonner`                 | Sonner toast integration               |
 | Logo               | `ui/Logo`                   | Brand logo component                   |
@@ -193,7 +240,6 @@ All components live under `src/components/`. Import via `@/components/ui/...` or
 | Responsive         | `ui/Responsive`             | Responsive breakpoint utilities        |
 | ButtonGroup        | `ui/ButtonGroup`            | Grouped button layout                  |
 | Item               | `ui/Item`                   | Generic list item                      |
-| Example            | `ui/Example`                | Documentation example wrapper          |
 
 ---
 

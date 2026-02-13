@@ -2,26 +2,22 @@
 
 All blocks live in `src/components/blocks/`. Import via `@/components/blocks/BlockName`.
 Blocks are pre-composed page sections built from Seed UI primitives.
+Inventory is dynamic, run `npm run docs:inventory` for current filesystem-backed lists.
 
 ---
 
-## Auth Flow (13 blocks)
+## Auth Flow
 
 | Block                   | Purpose                                  | Key Props                              |
 | ----------------------- | ---------------------------------------- | -------------------------------------- |
 | LoginBlock              | Email/password login with social OAuth   | `type: "login" \| "signup"`, `showSocial`, `title`, `onLogin` |
-| LoginSimpleBlock        | Minimal login form                       | `onSubmit`                             |
 | SignUpBlock             | Registration form                        | `onSubmit`, `showSocial`               |
-| ForgotPasswordBlock     | Password reset request                   | `onSubmit`                             |
+| PasswordRecoveryBlock   | Password reset request                   | `onSubmit`                             |
 | ResetPasswordBlock      | New password entry (from email link)     | `onSubmit`                             |
-| PasswordChangedBlock    | Password change confirmation             | `onContinue`                           |
-| CheckEmailBlock         | "Check your email" instructions          | `email`                                |
-| EmailVerifiedBlock      | Email verification success               | `onContinue`                           |
-| OTPBlock                | OTP/verification code entry              | `onVerify`, `length`                   |
-| MagicLinkBlock          | Magic link sent confirmation             | `email`                                |
 | TwoFactorChallengeBlock | 2FA code entry challenge                 | `onVerify`                             |
 | TwoFactorSetupBlock     | 2FA setup with QR code                   | `qrCodeUrl`, `secret`                  |
 | AccountLockedBlock      | Account locked notification              | `onContact`, `reason`                  |
+| AuthSuccessBlock        | Generic auth success state               | `title`, `description`, `onContinue`   |
 
 **Auth Layout:**
 
@@ -31,7 +27,7 @@ Blocks are pre-composed page sections built from Seed UI primitives.
 
 ---
 
-## Marketing (13 blocks)
+## Marketing
 
 | Block              | Purpose                                   | Key Props                              |
 | ------------------ | ----------------------------------------- | -------------------------------------- |
@@ -40,7 +36,6 @@ Blocks are pre-composed page sections built from Seed UI primitives.
 | FeatureBlock       | Single feature showcase                   | `title`, `description`, `icon`         |
 | FeatureGridBlock   | Multi-feature grid layout                 | `features: Array<{title, description, icon}>` |
 | PricingBlock       | Pricing cards comparison                  | `plans: Array<Plan>`                   |
-| PricingTableBlock  | Pricing feature comparison table          | `plans`, `features`                    |
 | TestimonialsBlock  | Customer testimonial carousel/grid        | `testimonials: Array<Testimonial>`     |
 | CallToActionBlock  | Call-to-action section                    | `title`, `description`, `action`       |
 | FAQBlock           | Frequently asked questions accordion      | `items: Array<{question, answer}>`     |
@@ -51,7 +46,7 @@ Blocks are pre-composed page sections built from Seed UI primitives.
 
 ---
 
-## Navigation (4 blocks)
+## Navigation
 
 | Block         | Purpose                              | Key Props                    |
 | ------------- | ------------------------------------ | ---------------------------- |
@@ -62,7 +57,7 @@ Blocks are pre-composed page sections built from Seed UI primitives.
 
 ---
 
-## Dashboard & Data (10 blocks)
+## Dashboard & Data
 
 | Block                    | Purpose                            | Key Props                    |
 | ------------------------ | ---------------------------------- | ---------------------------- |
@@ -79,7 +74,7 @@ Blocks are pre-composed page sections built from Seed UI primitives.
 
 ---
 
-## Application (9 blocks)
+## Application
 
 | Block           | Purpose                              | Key Props                    |
 | --------------- | ------------------------------------ | ---------------------------- |
@@ -95,7 +90,7 @@ Blocks are pre-composed page sections built from Seed UI primitives.
 
 ---
 
-## Content & Media (3 blocks)
+## Content & Media
 
 | Block               | Purpose                            | Key Props                    |
 | ------------------- | ---------------------------------- | ---------------------------- |
@@ -105,19 +100,28 @@ Blocks are pre-composed page sections built from Seed UI primitives.
 
 ---
 
-## User (1 block)
+## User
 
 | Block     | Purpose                                | Key Props              |
 | --------- | -------------------------------------- | ---------------------- |
 | TeamBlock | Team members grid with roles/avatars   | `members: Array<Member>` |
+| InviteUserModal | Invite user flow modal            | `open`, `onOpenChange`, `onInvite` |
 
 ---
 
-## AI/Voice (1 block)
+## AI/Voice
 
 | Block          | Purpose                               | Key Props                    |
 | -------------- | ------------------------------------- | ---------------------------- |
 | VoiceAgentCard | AI voice agent interface card         | `agentName`, `state`, `onAction` |
+
+---
+
+## Agentic
+
+| Block                    | Purpose                                      | Key Props                    |
+| ------------------------ | -------------------------------------------- | ---------------------------- |
+| AgentConversationBlock   | Full agent conversation UI composing AgentMessageBubble + ToolCallCard + ThinkingIndicator | `messages`, `tools`, `isThinking` |
 
 ---
 

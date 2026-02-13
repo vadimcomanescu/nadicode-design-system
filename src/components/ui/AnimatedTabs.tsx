@@ -10,32 +10,45 @@ import { motionSpring, useMotionConfig } from "../../lib/motion"
 const AnimatedTabs = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>
->(({ className, onValueChange, ...props }, ref) => {
+>(({ className, onValueChange, value: controlledValue, defaultValue, ...props }, ref) => {
   const [prevIndex, setPrevIndex] = React.useState(0)
   const [currentIndex, setCurrentIndex] = React.useState(0)
+  const [activeValue, setActiveValue] = React.useState<string>(
+    (controlledValue ?? defaultValue ?? '') as string
+  )
   const tabValues = React.useRef<string[]>([])
 
+  // Sync controlled value
+  React.useEffect(() => {
+    if (controlledValue !== undefined) {
+      setActiveValue(controlledValue as string)
+    }
+  }, [controlledValue])
+
   const handleValueChange = React.useCallback(
-    (value: string) => {
-      const newIndex = tabValues.current.indexOf(value)
+    (val: string) => {
+      const newIndex = tabValues.current.indexOf(val)
       if (newIndex !== -1) {
         setPrevIndex(currentIndex)
         setCurrentIndex(newIndex)
       }
-      onValueChange?.(value)
+      setActiveValue(val)
+      onValueChange?.(val)
     },
     [currentIndex, onValueChange]
   )
 
   return (
-    <AnimatedTabsContext.Provider value={{ prevIndex, currentIndex, registerTab: (value: string) => {
-      if (!tabValues.current.includes(value)) {
-        tabValues.current.push(value)
+    <AnimatedTabsContext.Provider value={{ prevIndex, currentIndex, activeValue, registerTab: (val: string) => {
+      if (!tabValues.current.includes(val)) {
+        tabValues.current.push(val)
       }
     }}}>
       <TabsPrimitive.Root
         ref={ref}
         className={className}
+        value={controlledValue}
+        defaultValue={defaultValue}
         onValueChange={handleValueChange}
         {...props}
       />
@@ -47,12 +60,14 @@ AnimatedTabs.displayName = "AnimatedTabs"
 interface AnimatedTabsContextValue {
   prevIndex: number
   currentIndex: number
+  activeValue: string
   registerTab: (value: string) => void
 }
 
 const AnimatedTabsContext = React.createContext<AnimatedTabsContextValue>({
   prevIndex: 0,
   currentIndex: 0,
+  activeValue: '',
   registerTab: () => {},
 })
 
@@ -74,8 +89,9 @@ AnimatedTabsList.displayName = "AnimatedTabsList"
 const AnimatedTabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, value, ...props }, ref) => {
-  const { registerTab } = React.useContext(AnimatedTabsContext)
+>(({ className, value, children, ...props }, ref) => {
+  const { registerTab, activeValue } = React.useContext(AnimatedTabsContext)
+  const isActive = value === activeValue
 
   React.useEffect(() => {
     if (value) registerTab(value)
@@ -86,11 +102,21 @@ const AnimatedTabsTrigger = React.forwardRef<
       ref={ref}
       value={value}
       className={cn(
-        "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-surface data-[state=active]:text-text-primary data-[state=active]:shadow-sm hover:bg-background/50 hover:text-text-primary",
+        "relative inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-text-primary data-[state=active]:shadow-sm hover:bg-background/50 hover:text-text-primary",
         className
       )}
       {...props}
-    />
+    >
+      {isActive && (
+        <motion.span
+          layoutId="active-tab-indicator"
+          className="absolute inset-0 rounded-sm bg-surface"
+          transition={motionSpring.snappy}
+          style={{ zIndex: 0 }}
+        />
+      )}
+      <span className="relative z-10">{children}</span>
+    </TabsPrimitive.Trigger>
   )
 })
 AnimatedTabsTrigger.displayName = "AnimatedTabsTrigger"

@@ -42,7 +42,7 @@ export function AccountLockedBlock({
             animate={{ x: [0, -4, 4, -4, 4, 0] }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10 shadow-[0_0_24px_rgba(229,72,77,0.2)]">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10 shadow-[0_0_24px_rgb(var(--color-destructive)/0.2)]">
               <LockIcon size={32} className="text-destructive" />
             </div>
           </motion.div>

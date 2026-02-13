@@ -62,7 +62,7 @@ export function CreateBlock() {
       title: "You submitted the following values:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-surface-active p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          <code className="text-text-primary">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
     })

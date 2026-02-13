@@ -101,7 +101,7 @@ export function LoginBlock({
                                 className="border-border/50 focus:border-accent/50 transition-colors"
                             />
                         </div>
-                        <Button className="w-full bg-accent hover:bg-accent/90 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all hover:scale-[1.01] active:scale-[0.99] font-semibold">
+                        <Button className="w-full bg-accent hover:bg-accent/90 text-white shadow-[0_0_20px_rgb(var(--color-accent)/0.4)] transition-all hover:scale-[1.01] active:scale-[0.99] font-semibold">
                             {buttonText}
                         </Button>
                     </StaggerChildren>

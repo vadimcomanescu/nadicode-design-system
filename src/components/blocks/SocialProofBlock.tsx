@@ -27,7 +27,7 @@ export function LogoCloud() {
                             key={logo.name}
                             className="group flex items-center justify-center transition-all duration-300 hover:opacity-100 hover:scale-110"
                         >
-                            <logo.icon className="h-8 w-8 text-text-tertiary transition-colors group-hover:text-primary group-hover:drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]" />
+                            <logo.icon className="h-8 w-8 text-text-tertiary transition-colors group-hover:text-primary group-hover:drop-shadow-[0_0_8px_rgb(var(--color-primary)/0.5)]" />
                             <span className="ml-2 text-lg font-semibold text-text-tertiary group-hover:text-text-primary hidden md:inline-block">
                                 {logo.name}
                             </span>

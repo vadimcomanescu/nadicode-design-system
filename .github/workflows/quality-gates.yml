@@ -35,6 +35,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Docs drift check
+        run: npm run docs:check
+
       - name: Test with coverage
         run: npx vitest run --coverage
 

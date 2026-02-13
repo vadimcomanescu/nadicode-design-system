@@ -54,7 +54,7 @@ export function AuthSuccessBlock({
             animate={{ scale: 1, opacity: 1 }}
             transition={motionSpring.bouncy}
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/10 shadow-[0_0_24px_rgba(61,214,140,0.2)]">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/10 shadow-[0_0_24px_rgb(var(--color-success)/0.2)]">
               {icon}
             </div>
           </motion.div>

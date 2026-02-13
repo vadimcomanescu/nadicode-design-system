@@ -3,10 +3,15 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import { motion, useReducedMotion } from "motion/react"
+import type { HTMLMotionProps } from "motion/react"
 import { cn } from "../../lib/utils"
+import { motionSpring } from "@/lib/motion"
+
+const MotionSlot = motion.create(Slot)
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97] transition-all duration-fast ease-out-cubic hover:-translate-y-0.5 hover:shadow-lg",
+  "inline-flex items-center justify-center rounded-md text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50 transition-colors duration-fast",
   {
     variants: {
       variant: {
@@ -17,7 +22,7 @@ const buttonVariants = cva(
         link: "text-text-primary underline-offset-4 hover:underline",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-glow-accent",
-        glass: "glass hover:bg-surface/80 text-text-primary",
+        glass: "glass-panel hover:bg-surface/40 text-text-primary",
       },
       size: {
         sm: "h-8 px-3 text-xs",
@@ -33,21 +38,42 @@ const buttonVariants = cva(
   }
 )
 
-
-
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<HTMLMotionProps<"button">, "variant" | "size">,
   VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+    const prefersReduced = useReducedMotion()
+    const isLink = variant === "link"
+    const shouldAnimate = !prefersReduced && !isLink
+
+    const motionProps = shouldAnimate
+      ? {
+          whileHover: { scale: 1.02, y: -2 },
+          whileTap: { scale: 0.97 },
+          transition: motionSpring.snappy,
+        }
+      : {}
+
+    if (asChild) {
+      return (
+        <MotionSlot
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref as React.Ref<HTMLElement>}
+          {...motionProps}
+          {...props}
+        />
+      )
+    }
+
     return (
-      <Comp
+      <motion.button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        {...motionProps}
         {...props}
       />
     )

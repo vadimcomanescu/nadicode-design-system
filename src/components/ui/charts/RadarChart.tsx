@@ -5,7 +5,6 @@ import {
     RadarChart as RechartsRadarChart,
     PolarGrid,
     PolarAngleAxis,
-    ResponsiveContainer
 } from "recharts"
 
 import {
@@ -41,32 +40,30 @@ export function RadarChart({
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={300}>
-                <RechartsRadarChart data={data} outerRadius="80%">
-                    <PolarGrid gridType={gridShape} stroke="var(--color-border)" strokeOpacity={0.5} />
-                    <PolarAngleAxis
-                        dataKey={indexKey}
-                        tick={{ fill: "var(--color-text-secondary)", fontSize: 12 }}
-                    />
-                    <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent indicator="line" />}
-                    />
+            <RechartsRadarChart data={data} outerRadius="80%">
+                <PolarGrid gridType={gridShape} stroke="var(--color-border)" strokeOpacity={0.5} />
+                <PolarAngleAxis
+                    dataKey={indexKey}
+                    tick={{ fill: "var(--color-text-secondary)", fontSize: 12 }}
+                />
+                <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent indicator="line" />}
+                />
 
-                    {seriesKeys.map((key) => (
-                        <Radar
-                            key={key}
-                            name={key}
-                            dataKey={key}
-                            stroke={`var(--color-${key})`}
-                            fill={`var(--color-${key})`}
-                            fillOpacity={0.4}
-                        />
-                    ))}
+                {seriesKeys.map((key) => (
+                    <Radar
+                        key={key}
+                        name={key}
+                        dataKey={key}
+                        stroke={`var(--color-${key})`}
+                        fill={`var(--color-${key})`}
+                        fillOpacity={0.4}
+                    />
+                ))}
 
-                    {showLegend && <ChartLegend content={<ChartLegendContent />} />}
-                </RechartsRadarChart>
-            </ResponsiveContainer>
+                {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+            </RechartsRadarChart>
         </ChartContainer>
     )
 }

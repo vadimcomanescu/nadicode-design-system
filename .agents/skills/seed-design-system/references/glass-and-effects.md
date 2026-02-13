@@ -130,13 +130,13 @@ import { MeteorShower } from "@/components/ui/MeteorShower"
 <MeteorShower count={20} />
 ```
 
-### Spotlight
-Mouse-following spotlight radial gradient.
+### MouseSpotlight
+Mouse-following spotlight radial gradient (consolidated from former Spotlight component).
 
 ```tsx
-import { Spotlight } from "@/components/ui/Spotlight"
+import { MouseSpotlight } from "@/components/ui/MouseEffect"
 
-<Spotlight className="..." />
+<MouseSpotlight className="...">Content</MouseSpotlight>
 ```
 
 ### AnimatedBackground

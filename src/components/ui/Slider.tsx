@@ -465,8 +465,8 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               borderRadius: HANDLE_SIZE / 2,
               y: "-50%",
               left: handleLeftExpr,
-              backgroundColor: "white",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
+              backgroundColor: "rgb(var(--color-slider-handle))",
+              boxShadow: "0 1px 3px rgb(var(--color-overlay) / 0.3)",
             }}
             animate={{
               opacity: interacting ? 1 : 0,

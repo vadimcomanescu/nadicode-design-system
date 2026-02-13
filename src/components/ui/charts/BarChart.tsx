@@ -6,7 +6,6 @@ import {
     CartesianGrid,
     XAxis,
     YAxis,
-    ResponsiveContainer
 } from "recharts"
 
 import {
@@ -47,74 +46,72 @@ export function BarChart({
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={300}>
-                <RechartsBarChart
-                    data={data}
-                    layout={layout}
-                    margin={{
-                        top: 5,
-                        right: 10,
-                        left: 10,
-                        bottom: 0,
-                    }}
-                >
-                    <CartesianGrid vertical={false} stroke="var(--color-border)" strokeOpacity={0.4} strokeDasharray="4 4" />
+            <RechartsBarChart
+                data={data}
+                layout={layout}
+                margin={{
+                    top: 5,
+                    right: 10,
+                    left: 10,
+                    bottom: 0,
+                }}
+            >
+                <CartesianGrid vertical={false} stroke="var(--color-border)" strokeOpacity={0.4} strokeDasharray="4 4" />
 
-                    {layout === "horizontal" ? (
-                        <>
-                            <XAxis
-                                dataKey={indexKey}
+                {layout === "horizontal" ? (
+                    <>
+                        <XAxis
+                            dataKey={indexKey}
+                            tickLine={false}
+                            axisLine={false}
+                            tickMargin={8}
+                            minTickGap={32}
+                            tickFormatter={(value) => {
+                                if (value instanceof Date) return value.toLocaleDateString()
+                                return `${value}`
+                            }}
+                        />
+                        {showYAxis && (
+                            <YAxis
+                                width={yAxisWidth}
                                 tickLine={false}
                                 axisLine={false}
                                 tickMargin={8}
-                                minTickGap={32}
-                                tickFormatter={(value) => {
-                                    if (value instanceof Date) return value.toLocaleDateString()
-                                    return `${value}`
-                                }}
+                                stroke="var(--color-text-secondary)"
                             />
-                            {showYAxis && (
-                                <YAxis
-                                    width={yAxisWidth}
-                                    tickLine={false}
-                                    axisLine={false}
-                                    tickMargin={8}
-                                    stroke="var(--color-text-secondary)"
-                                />
-                            )}
-                        </>
-                    ) : (
-                        <>
-                            <XAxis type="number" hide />
-                            <YAxis
-                                dataKey={indexKey}
-                                type="category"
-                                tickLine={false}
-                                axisLine={false}
-                                tickMargin={10}
-                                width={100}
-                            />
-                        </>
-                    )}
-
-                    <ChartTooltip
-                        cursor={{ fill: "var(--color-surface-hover)", opacity: 0.5 }}
-                        content={<ChartTooltipContent indicator="dot" />}
-                    />
-
-                    {barKeys.map((key) => (
-                        <Bar
-                            key={key}
-                            dataKey={key}
-                            fill={`var(--color-${key})`}
-                            stackId={stacked ? "a" : undefined}
-                            radius={stacked ? [0, 0, 0, 0] : [4, 4, 0, 0]}
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <XAxis type="number" hide />
+                        <YAxis
+                            dataKey={indexKey}
+                            type="category"
+                            tickLine={false}
+                            axisLine={false}
+                            tickMargin={10}
+                            width={100}
                         />
-                    ))}
+                    </>
+                )}
 
-                    {showLegend && <ChartLegend content={<ChartLegendContent />} />}
-                </RechartsBarChart>
-            </ResponsiveContainer>
+                <ChartTooltip
+                    cursor={{ fill: "var(--color-surface-hover)", opacity: 0.5 }}
+                    content={<ChartTooltipContent indicator="dot" />}
+                />
+
+                {barKeys.map((key) => (
+                    <Bar
+                        key={key}
+                        dataKey={key}
+                        fill={`var(--color-${key})`}
+                        stackId={stacked ? "a" : undefined}
+                        radius={stacked ? [0, 0, 0, 0] : [4, 4, 0, 0]}
+                    />
+                ))}
+
+                {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+            </RechartsBarChart>
         </ChartContainer>
     )
 }

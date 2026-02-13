@@ -12,7 +12,7 @@ import {
 } from "@radix-ui/react-tooltip"
 
 const roleVariants = cva(
-    "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
+    "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
     {
         variants: {
             role: {
@@ -21,9 +21,9 @@ const roleVariants = cva(
                 admin:
                     "border-chart-5/50 bg-chart-5/10 text-chart-5 shadow-[0_0_10px_-4px_rgba(var(--color-chart-5),0.5)]",
                 member:
-                    "border-white/10 bg-white/5 text-text-secondary hover:bg-white/10",
+                    "border-border/30 bg-surface-hover/50 text-text-secondary hover:bg-surface-hover",
                 guest:
-                    "border-white/5 bg-transparent text-text-tertiary",
+                    "border-border/10 bg-transparent text-text-tertiary",
             },
         },
         defaultVariants: {

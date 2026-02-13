@@ -6,7 +6,6 @@ import {
     CartesianGrid,
     XAxis,
     YAxis,
-    ResponsiveContainer
 } from "recharts"
 
 import {
@@ -44,66 +43,63 @@ export function LineChart({
 
     return (
         <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={300}>
-                <RechartsLineChart
-                    data={data}
-                    margin={{
-                        top: 5,
-                        right: 10,
-                        left: 10,
-                        bottom: 0,
+            <RechartsLineChart
+                data={data}
+                margin={{
+                    top: 5,
+                    right: 10,
+                    left: 10,
+                    bottom: 0,
+                }}
+            >
+                <CartesianGrid vertical={false} stroke="var(--color-border)" strokeOpacity={0.4} strokeDasharray="4 4" />
+                <XAxis
+                    dataKey={indexKey}
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    minTickGap={32}
+                    tickFormatter={(value) => {
+                        if (value instanceof Date) return value.toLocaleDateString()
+                        return `${value}`
                     }}
-                >
-                    <CartesianGrid vertical={false} stroke="var(--color-border)" strokeOpacity={0.4} strokeDasharray="4 4" />
-                    <XAxis
-                        dataKey={indexKey}
+                />
+                {showYAxis && (
+                    <YAxis
+                        width={yAxisWidth}
                         tickLine={false}
                         axisLine={false}
                         tickMargin={8}
-                        minTickGap={32}
-                        tickFormatter={(value) => {
-                            // Formatting logic could be passed as prop, but basic string/date handling is good default
-                            if (value instanceof Date) return value.toLocaleDateString()
-                            return `${value}`
+                        stroke="var(--color-text-secondary)"
+                    />
+                )}
+                <ChartTooltip
+                    cursor={{
+                        stroke: "var(--color-border)",
+                        strokeWidth: 1,
+                        strokeDasharray: "4 4"
+                    }}
+                    content={<ChartTooltipContent indicator="dot" />}
+                />
+
+                {lineKeys.map((key) => (
+                    <Line
+                        key={key}
+                        dataKey={key}
+                        type="monotone"
+                        stroke={`var(--color-${key})`}
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={{
+                            r: 4,
+                            strokeWidth: 0,
+                            fill: `var(--color-${key})`
                         }}
                     />
-                    {showYAxis && (
-                        <YAxis
-                            width={yAxisWidth}
-                            tickLine={false}
-                            axisLine={false}
-                            tickMargin={8}
-                            stroke="var(--color-text-secondary)"
-                        />
-                    )}
-                    <ChartTooltip
-                        cursor={{
-                            stroke: "var(--color-border)",
-                            strokeWidth: 1,
-                            strokeDasharray: "4 4"
-                        }}
-                        content={<ChartTooltipContent indicator="dot" />}
-                    />
+                ))}
 
-                    {lineKeys.map((key) => (
-                        <Line
-                            key={key}
-                            dataKey={key}
-                            type="monotone"
-                            stroke={`var(--color-${key})`}
-                            strokeWidth={2}
-                            dot={false}
-                            activeDot={{
-                                r: 4,
-                                strokeWidth: 0,
-                                fill: `var(--color-${key})`
-                            }}
-                        />
-                    ))}
-
-                    {showLegend && <ChartLegend content={<ChartLegendContent />} />}
-                </RechartsLineChart>
-            </ResponsiveContainer>
+                {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+            </RechartsLineChart>
         </ChartContainer>
     )
 }

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { createPortal } from "react-dom"
-import { motion, useMotionValue, useMotionTemplate } from "motion/react"
+import { motion, useMotionValue, useMotionTemplate, useReducedMotion } from "motion/react"
 import { cn } from "../../lib/utils"
 
 interface MouseGlowProps {
@@ -110,34 +110,50 @@ export function MouseGlow({
   return element
 }
 
-export function MouseSpotlight({ children, className }: { children?: React.ReactNode, className?: string }) {
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+interface MouseSpotlightProps {
+  children?: React.ReactNode
+  className?: string
+  color?: string
+  size?: number
+}
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect()
-    mouseX.set(clientX - left)
-    mouseY.set(clientY - top)
-  }
+export const MouseSpotlight = React.forwardRef<HTMLDivElement, MouseSpotlightProps>(
+  ({ children, className, color = "rgba(255,255,255,0.06)", size = 250 }, ref) => {
+    const prefersReduced = useReducedMotion()
+    const mouseX = useMotionValue(0)
+    const mouseY = useMotionValue(0)
 
-  const bgImage = useMotionTemplate`radial-gradient(
-    250px circle at ${mouseX}px ${mouseY}px,
-    rgba(255,255,255,0.06),
+    const handleMouseMove = React.useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        if (prefersReduced) return
+        const rect = e.currentTarget.getBoundingClientRect()
+        mouseX.set(e.clientX - rect.left)
+        mouseY.set(e.clientY - rect.top)
+      },
+      [prefersReduced, mouseX, mouseY]
+    )
+
+    const bgImage = useMotionTemplate`radial-gradient(
+    ${size}px circle at ${mouseX}px ${mouseY}px,
+    ${color},
     transparent 80%
   )`
 
-  return (
-    <div
-      onMouseMove={handleMouseMove}
-      className={cn("group relative", className)}
-    >
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: bgImage,
-        }}
-      />
-      {children}
-    </div>
-  )
-}
+    return (
+      <div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        className={cn("group relative", className)}
+      >
+        {!prefersReduced && (
+          <motion.div
+            className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+            style={{ background: bgImage }}
+          />
+        )}
+        {children}
+      </div>
+    )
+  }
+)
+MouseSpotlight.displayName = "MouseSpotlight"

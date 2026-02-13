@@ -30,6 +30,7 @@ export interface Avatar3DProps
   enableTilt?: boolean
   maxTilt?: number
   onSelect?: () => void
+  interactive?: boolean
 }
 
 export const Avatar3D = React.forwardRef<HTMLDivElement, Avatar3DProps>(
@@ -43,6 +44,7 @@ export const Avatar3D = React.forwardRef<HTMLDivElement, Avatar3DProps>(
       enableTilt = true,
       maxTilt = 15,
       onSelect,
+      interactive = true,
       ...props
     },
     ref
@@ -68,21 +70,26 @@ export const Avatar3D = React.forwardRef<HTMLDivElement, Avatar3DProps>(
     }
 
     const isActive = state !== "idle"
+    const interactionProps = interactive
+      ? {
+          role: "button" as const,
+          tabIndex: 0,
+          "aria-label": name,
+          onClick: onSelect,
+          onKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault()
+              onSelect?.()
+            }
+          },
+        }
+      : {}
 
     return (
       <div
         ref={ref}
-        className={cn("group cursor-pointer inline-flex", className)}
-        role="button"
-        tabIndex={0}
-        aria-label={name}
-        onClick={onSelect}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault()
-            onSelect?.()
-          }
-        }}
+        className={cn("group inline-flex", interactive ? "cursor-pointer" : "cursor-default", className)}
+        {...interactionProps}
         {...props}
       >
         {/* Ambient glow */}

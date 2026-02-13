@@ -43,27 +43,23 @@ export function ThemeProvider({
   storageKey = 'design-system-theme',
   styleStorageKey = 'design-system-style',
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = React.useState<Theme>(() => {
-    if (typeof window === 'undefined') return defaultTheme;
-    const stored = localStorage.getItem(storageKey);
-    if (stored === 'light' || stored === 'dark' || stored === 'system') {
-      return stored;
-    }
-    return defaultTheme;
-  });
-
-  const [style, setStyleState] = React.useState<Style>(() => {
-    if (typeof window === 'undefined') return defaultStyle;
-    const stored = localStorage.getItem(styleStorageKey);
-    if (stored === 'arctic' || stored === 'bloom') {
-      return stored;
-    }
-    return defaultStyle;
-  });
-
+  const [theme, setThemeState] = React.useState<Theme>(defaultTheme);
+  const [style, setStyleState] = React.useState<Style>(defaultStyle);
   const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>(() =>
-    resolveTheme(theme, style)
+    resolveTheme(defaultTheme, defaultStyle)
   );
+
+  // Hydrate from localStorage after mount (avoids SSR mismatch)
+  React.useEffect(() => {
+    const storedTheme = localStorage.getItem(storageKey);
+    if (storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system') {
+      setThemeState(storedTheme);
+    }
+    const storedStyle = localStorage.getItem(styleStorageKey);
+    if (storedStyle === 'arctic' || storedStyle === 'bloom') {
+      setStyleState(storedStyle);
+    }
+  }, [storageKey, styleStorageKey]);
 
   // Apply theme and style classes to document
   React.useEffect(() => {

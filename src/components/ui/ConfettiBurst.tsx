@@ -58,13 +58,14 @@ export const ConfettiBurst = React.forwardRef<HTMLDivElement, ConfettiBurstProps
             animate={{
               x: p.x,
               y: p.y,
-              scale: [0, 1.2, 0.8],
+              scale: 0.8,
               rotate: p.rotate,
               opacity: [1, 1, 0],
             }}
             transition={{
               ...spring.bouncy,
-              opacity: { duration: 0.8, delay: 0.3 },
+              scale: { type: "tween", duration: 0.4, ease: [0.34, 1.56, 0.64, 1] },
+              opacity: { type: "tween", duration: 0.8, delay: 0.3 },
             }}
           />
         ))}

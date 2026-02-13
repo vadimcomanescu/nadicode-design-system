@@ -69,7 +69,7 @@ export function PieChart({
                             <Cell
                                 key={`cell-${index}`}
                                 fill={(entry.fill as string) || configColor || `var(--color-${key})`}
-                                stroke="rgba(0,0,0,0)"
+                                stroke="transparent"
                             />
                         )
                     })}

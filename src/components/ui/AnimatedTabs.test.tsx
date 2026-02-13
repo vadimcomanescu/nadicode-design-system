@@ -10,8 +10,13 @@ vi.mock('motion/react', async (importOriginal) => {
     motion: {
       div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars -- stripping motion props from DOM spread
-        const { initial, animate, exit, transition, whileHover, whileTap, ...domProps } = props;
+        const { initial, animate, exit, transition, whileHover, whileTap, layoutId, ...domProps } = props;
         return <div {...domProps}>{children}</div>;
+      },
+      span: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars -- stripping motion props from DOM spread
+        const { initial, animate, exit, transition, whileHover, whileTap, layoutId, ...domProps } = props;
+        return <span {...domProps}>{children}</span>;
       },
     },
     AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
@@ -65,24 +70,24 @@ describe('AnimatedTabs', () => {
     const user = userEvent.setup();
     renderTabs('tab1');
 
-    const tab1 = screen.getByText('Tab 1');
+    const tab1 = screen.getByRole('tab', { name: 'Tab 1' });
     expect(tab1).toHaveAttribute('data-state', 'active');
 
-    await user.click(screen.getByText('Tab 2'));
+    await user.click(screen.getByRole('tab', { name: 'Tab 2' }));
     expect(tab1).toHaveAttribute('data-state', 'inactive');
-    expect(screen.getByText('Tab 2')).toHaveAttribute('data-state', 'active');
+    expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveAttribute('data-state', 'active');
   });
 
   it('supports keyboard navigation with arrow keys', async () => {
     const user = userEvent.setup();
     renderTabs('tab1');
 
-    screen.getByText('Tab 1').focus();
+    screen.getByRole('tab', { name: 'Tab 1' }).focus();
     await user.keyboard('{ArrowRight}');
-    expect(screen.getByText('Tab 2')).toHaveFocus();
+    expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveFocus();
 
     await user.keyboard('{ArrowRight}');
-    expect(screen.getByText('Tab 3')).toHaveFocus();
+    expect(screen.getByRole('tab', { name: 'Tab 3' })).toHaveFocus();
   });
 
   it('has correct tablist role', () => {

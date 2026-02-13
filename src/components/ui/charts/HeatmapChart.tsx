@@ -6,7 +6,6 @@ import {
     XAxis,
     YAxis,
     CartesianGrid,
-    ResponsiveContainer,
     Cell
 } from "recharts"
 
@@ -68,66 +67,64 @@ export function HeatmapChart({
     }
 
     return (
-        <ChartContainer config={config} className={className}>
-            <ResponsiveContainer width="100%" height={height as number | `${number}%`}>
-                <ScatterChart
-                    margin={{ top: 20, right: 30, bottom: 20, left: 30 }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} stroke="var(--color-border)" opacity={0.3} />
+        <ChartContainer config={config} className={className} style={{ height }}>
+            <ScatterChart
+                margin={{ top: 20, right: 30, bottom: 20, left: 30 }}
+            >
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} stroke="var(--color-border)" opacity={0.3} />
 
-                    <XAxis
-                        type="category"
-                        dataKey={xKey}
-                        allowDuplicatedCategory={false}
-                        tick={{ fill: "rgb(var(--color-text-primary))", fontSize: 13, fontWeight: 500 }}
-                        tickLine={false}
-                        axisLine={false}
-                        interval={0}
-                    />
-                    <YAxis
-                        type="category"
-                        dataKey={yKey}
-                        allowDuplicatedCategory={false}
-                        tick={{ fill: "rgb(var(--color-text-primary))", fontSize: 13, fontWeight: 500 }}
-                        tickLine={false}
-                        axisLine={false}
-                        interval={0}
-                    />
+                <XAxis
+                    type="category"
+                    dataKey={xKey}
+                    allowDuplicatedCategory={false}
+                    tick={{ fill: "rgb(var(--color-text-primary))", fontSize: 13, fontWeight: 500 }}
+                    tickLine={false}
+                    axisLine={false}
+                    interval={0}
+                />
+                <YAxis
+                    type="category"
+                    dataKey={yKey}
+                    allowDuplicatedCategory={false}
+                    tick={{ fill: "rgb(var(--color-text-primary))", fontSize: 13, fontWeight: 500 }}
+                    tickLine={false}
+                    axisLine={false}
+                    interval={0}
+                />
 
-                    <ChartTooltip
-                        cursor={{ strokeDasharray: '3 3' }}
-                        content={({ active, payload }) => {
-                            if (active && payload && payload.length) {
-                                const d = payload[0].payload as Record<string, unknown>
-                                return (
-                                    <div className="rounded-lg border border-border bg-background p-2 shadow-sm">
-                                        <div className="grid grid-cols-2 gap-2">
-                                            <span className="font-medium text-text-secondary">{String(d[xKey])} / {String(d[yKey])}</span>
-                                            <span className="font-bold text-text-primary text-right">{String(d[valueKey])}</span>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            return null
-                        }}
-                    />
-
-                    <Scatter data={data} shape={<CustomShape />}>
-                        {data.map((entry, index) => {
+                <ChartTooltip
+                    cursor={{ strokeDasharray: '3 3' }}
+                    content={({ active, payload }) => {
+                        if (active && payload && payload.length) {
+                            const d = payload[0].payload as Record<string, unknown>
                             return (
-                                <Cell
-                                    key={`cell-${index}`}
-                                    fill={getColor((entry as Record<string, unknown>)[valueKey] as number)}
-                                    fillOpacity={0.9}
-                                    stroke={getColor((entry as Record<string, unknown>)[valueKey] as number)}
-                                    strokeWidth={1}
-                                    strokeOpacity={1}
-                                />
+                                <div className="rounded-lg border border-border bg-surface p-2 shadow-xl">
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <span className="font-medium text-text-secondary">{String(d[xKey])} / {String(d[yKey])}</span>
+                                        <span className="font-bold text-text-primary text-right">{String(d[valueKey])}</span>
+                                    </div>
+                                </div>
                             )
-                        })}
-                    </Scatter>
-                </ScatterChart>
-            </ResponsiveContainer>
+                        }
+                        return null
+                    }}
+                />
+
+                <Scatter data={data} shape={<CustomShape />}>
+                    {data.map((entry, index) => {
+                        return (
+                            <Cell
+                                key={`cell-${index}`}
+                                fill={getColor((entry as Record<string, unknown>)[valueKey] as number)}
+                                fillOpacity={0.9}
+                                stroke={getColor((entry as Record<string, unknown>)[valueKey] as number)}
+                                strokeWidth={1}
+                                strokeOpacity={1}
+                            />
+                        )
+                    })}
+                </Scatter>
+            </ScatterChart>
         </ChartContainer>
     )
 }

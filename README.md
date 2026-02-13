@@ -1,12 +1,12 @@
 # Seed Design System
 
-A premium, opinionated design system for AI-integrated web applications. 96 UI primitives, 50+ blocks, 77+ animated icons, dual-axis theming (light/dark/bloom), glassmorphism effects, and a full agent skill for AI-assisted development.
+A premium, opinionated design system for AI-integrated web applications, with dual-axis theming (light/dark/bloom), glassmorphism effects, and a full agent skill for AI-assisted development.
 
 ## Quick Start (Development)
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
+npm run dev        # http://localhost:5001
 ```
 
 ## Using in Next.js Projects
@@ -99,13 +99,13 @@ This overwrites all source files, re-merges CSS tokens, and re-installs deps. Yo
 ```
 src/
   components/
-    ui/              # 96 primitives (Button, Dialog, DataTable, etc.)
-    ui/icons/        # 77+ animated icons (motion/react)
+    ui/              # UI primitives and effect components
+    ui/icons/        # Animated icons (motion/react)
     ui/charts/       # 7 chart primitives (recharts)
     ui/stepper/      # Multi-step stepper
     ui/text-effects/ # Streaming text, pixel reveal, etc.
     ui/vanta/        # Vanta.js 3D backgrounds
-    blocks/          # 50+ composed blocks (Hero, Pricing, Auth, etc.)
+    blocks/          # Composed blocks (Hero, Pricing, Auth, etc.)
     layout/          # Grid system
     logos/            # Brand SVG logos
     animate-ui/      # Animation primitives (fade, slide, zoom, etc.)
@@ -127,8 +127,9 @@ bin/
 ```bash
 npm run dev          # Start dev server
 npm run build        # Type check + production build
-npm run test         # Run all 1056 tests
+npm run test         # Run tests
 npm run lint         # ESLint
+npm run docs:check   # Validate docs and agent references
 npx tsc -b           # Type check only
 ```
 

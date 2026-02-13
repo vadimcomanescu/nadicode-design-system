@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { motion, AnimatePresence } from "motion/react"
+import { motion } from "motion/react"
 import { XIcon } from "@/components/ui/icons"
 
 import { cn } from "@/lib/utils"
@@ -79,7 +79,7 @@ const AnimatedSheetContent = React.forwardRef<
   const variant = slideVariants[side]
 
   return (
-    <AnimatedSheetPortal forceMount>
+    <AnimatedSheetPortal>
       <AnimatedSheetOverlay />
       <DialogPrimitive.Content ref={ref} asChild {...props}>
         <motion.div
@@ -103,7 +103,7 @@ const AnimatedSheetContent = React.forwardRef<
           }}
         >
           {children}
-          <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:pointer-events-none">
+          <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none">
             <XIcon size={16} />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
@@ -171,5 +171,4 @@ export {
   AnimatedSheetFooter,
   AnimatedSheetTitle,
   AnimatedSheetDescription,
-  AnimatePresence,
 }

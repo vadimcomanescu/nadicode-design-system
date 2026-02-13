@@ -1,7 +1,9 @@
 'use client'
 
 import React from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { cn } from '../../lib/utils';
+import { motionSpring } from '@/lib/motion';
 import { PixelBackground } from './PixelBackground';
 import type { PixelTheme } from './PixelBackground';
 
@@ -12,35 +14,51 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, interactive = false, pixelTheme = "cyber", disablePixelBackground = false, ...props }, ref) => {
+  ({ className, interactive = false, pixelTheme, disablePixelBackground = false, children, ...props }, ref) => {
+    const prefersReduced = useReducedMotion();
+    const useSpring = interactive && !prefersReduced;
 
-    const interactiveStyles = interactive
-      ? "transition-all duration-fast ease-out-cubic hover:border-primary/50 hover:shadow-xl/20 hover:-translate-y-0.5"
+    const interactiveCss = interactive
+      ? "transition-colors duration-fast hover:border-primary/50 hover:shadow-xl/20"
       : "";
 
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "group relative rounded-lg p-6 overflow-hidden",
-          "glass-panel", // Restored premium glass effect (emboss, shadows, noise)
-          interactiveStyles,
-          className
-        )}
-        {...props}
-      >
-        {/* Mandated Pixel Background - Super Mega Futuristic */}
-        {!disablePixelBackground && <PixelBackground theme={pixelTheme} />}
+    const classes = cn(
+      "group relative rounded-lg p-6 overflow-hidden",
+      "glass-panel",
+      interactiveCss,
+      className
+    );
 
-        {/* Mandated Corner Accents - Kept crisp */}
+    const inner = (
+      <>
+        {!disablePixelBackground && <PixelBackground theme={pixelTheme} />}
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/40" />
         <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/40" />
         <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/40" />
         <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary/40" />
-
         <div className="relative z-20">
-          {props.children}
+          {children}
         </div>
+      </>
+    );
+
+    if (useSpring) {
+      return (
+        <motion.div
+          ref={ref}
+          className={classes}
+          whileHover={{ y: -2 }}
+          transition={motionSpring.snappy}
+          {...(props as React.ComponentPropsWithoutRef<typeof motion.div>)}
+        >
+          {inner}
+        </motion.div>
+      );
+    }
+
+    return (
+      <div ref={ref} className={classes} {...props}>
+        {inner}
       </div>
     );
   }

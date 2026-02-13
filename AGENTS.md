@@ -9,14 +9,24 @@ This file is the canonical agent guide for this repository. `CLAUDE.md` symlinks
 | Item | Value |
 |------|-------|
 | Stack | React 19, TypeScript, Next.js App Router, Tailwind CSS 4, Radix UI, CVA |
-| Components | 96 UI primitives, 35 blocks, 10 pages, 7 chart primitives |
+| Components | Dynamic inventory, see `npm run docs:inventory` |
 | Tokens | `src/lib/tokens.config.js` -> `src/index.css` -> `tailwind.config.js` |
-| Theme | Light + Dark via CSS variables, `darkMode: 'class'` |
+| Theme | Dual-axis: `theme` (light/dark/system) + `style` (arctic/bloom) |
 | Tests | Vitest + Testing Library, co-located `*.test.tsx` |
 | Dev | `npm run dev` (port 5001) |
 | Type check | `npx tsc --noEmit` |
 | Test | `npm run test` |
 | Lint | `npm run lint` |
+
+## Instruction Authority
+
+When rules conflict, apply this precedence:
+1. Root `AGENTS.md` (this file)
+2. `.agents/skills/seed-design-system/SKILL.md`
+3. `docs/OPINIONS.md`
+4. Other docs under `docs/` and `.agents/skills/seed-design-system/references/`
+
+For volatile facts (counts, inventories, generated files), prefer repository state over prose.
 
 ## 1. Design Philosophy
 
@@ -44,7 +54,7 @@ Key characteristics:
 > // or barrel import:
 > import { HomeIcon } from '@/components/ui/icons';
 > ```
-> - 76+ animated icon components live in `src/components/ui/icons/`.
+> - Animated icon components live in `src/components/ui/icons/` (see `npm run docs:inventory` for current counts).
 > - Each uses `motion/react` for hover animations with an imperative handle (`startAnimation` / `stopAnimation`).
 > - Icons accept `size` prop (default 28) and standard `HTMLAttributes<HTMLDivElement>`.
 > - An integrity test (`src/test/no-static-lucide-imports.test.ts`) enforces zero direct lucide-react imports in components.
@@ -75,14 +85,14 @@ tokens.config.js (master definition, both light/dark palettes)
 | border | `border-border` | Default borders |
 | primary | `bg-primary`, `text-primary` | Primary actions/text |
 | secondary | `bg-secondary` | Secondary elements |
-| accent | `bg-accent`, `text-accent` | Brand accent (Electric Indigo) |
+| accent | `bg-accent`, `text-accent` | Brand accent (teal in arctic, warm orange in bloom) |
 | destructive | `bg-destructive`, `text-destructive` | Danger/delete actions |
 | success | `bg-success`, `text-success` | Success states |
 | warning | `bg-warning`, `text-warning` | Warning states |
 | info | `bg-info`, `text-info` | Informational states |
 | overlay | `bg-overlay/80` | Modal/dialog overlays |
 | muted | `bg-muted` | Subdued backgrounds |
-| muted-foreground | `text-muted-foreground` | Subdued text |
+| muted-foreground | `text-text-secondary` | Subdued body/meta text |
 | text-primary | `text-text-primary` | Primary body text |
 | text-secondary | `text-text-secondary` | Secondary body text |
 | text-tertiary | `text-text-tertiary` | Tertiary/placeholder text |
@@ -194,35 +204,19 @@ src/
 
 ## 5. Component Inventory
 
-### UI Primitives (96)
+Inventory is intentionally not hardcoded in this guide.
 
-**Forms**: Accordion, Button, ButtonGroup, Calendar, Checkbox, Combobox, Command, DatePicker, DateRangePicker, Field, Form, Input, InputGroup, InputOTP, Label, NativeSelect, RadioGroup, Select, Slider, Switch, Textarea, Toggle, ToggleGroup
+Use runtime discovery commands:
+```bash
+npm run docs:inventory
+ls src/components/ui
+ls src/components/blocks
+find src/components/pages -name '*.tsx'
+```
 
-**Display**: Alert, AlertDialog, Avatar, AvatarUpload, Badge, Breadcrumb, Card, Carousel, Collapsible, ContextMenu, DataTable, Dialog, Drawer, DropdownMenu, Empty, HoverCard, Kbd, Menubar, NavigationMenu, Pagination, Popover, Progress, PromoCard, RoleBadge, ScrollArea, Separator, Sheet, Sidebar, Skeleton, Spinner, Table, Tabs, Toast, Toaster, Tooltip, Typography
-
-**Effects**: AnimatedBackground, AnimatedIcon, InfiniteSlider, MouseEffect, PixelBackground, PixelReveal, ProgressiveBlur
-
-**Charts** (in `ui/charts/`): AreaChart, BarChart, HeatmapChart, LineChart, PieChart, RadarChart, RadialBarChart
-
-**AI / Voice Agent**: AgentStatus, AudioWaveform, ConversationThread, FileUpload, FormWizard, NotificationCenter, SearchCommand, StreamingText
-
-**Other**: BrandIcons, Chart (recharts wrapper), CheckoutForm, CheckoutFormDemo, Logo, Resizable, Responsive, Sonner, ThemeToggle
-
-### Blocks (35)
-
-**Marketing**: HeroBlock, HeroSectionBlock, FeatureBlock, FeatureGridBlock, IntegrationsBlock, PricingBlock, PricingTableBlock, CallToActionBlock, TestimonialsBlock, SocialProofBlock, FooterBlock, HeaderBlock, LogoCloud
-
-**Auth**: AuthLayout, LoginBlock, LoginSimpleBlock, SignUpBlock, OTPBlock
-
-**Dashboard**: StatsBlock, StatsMarketingBlock, DataGridBlock, DirectoryBlock, ChartBlock, ChartCollectionBlock, BarChartBlock, HeatmapChartBlock, InteractiveAreaChartBlock, UsageDonutBlock
-
-**Application**: ChatLayout, CodeBlock, CreateBlock, SettingsLayout, WizardBlock, AudioVisualizerBlock
-
-**User**: InviteUserModal (in `blocks/user/`)
-
-### Pages (10)
-
-CheckoutPage, DashboardPage, IconsPage, LoginPage, PatternsPage, SignupPage, VerificationPage, VantaLoginPages (auth/), ProfilePage (settings/), TeamPage (settings/)
+Detailed references:
+- `.agents/skills/seed-design-system/references/component-inventory.md`
+- `.agents/skills/seed-design-system/references/blocks-catalog.md`
 
 ## 6. Testing Standards
 
@@ -278,12 +272,12 @@ touch src/components/ui/MyComponent.tsx
 touch src/components/ui/MyComponent.test.tsx
 
 # 4. Export from the component file (no barrel needed)
-# 5. MANDATORY: Wire into App.tsx for preview (see rule below)
+# 5. MANDATORY: Wire into showcase route for preview (see rule below)
 ```
 
 > [!CAUTION]
-> **MANDATORY: Wire new components into App.tsx.**
-> Every new component MUST be added to the visual showcase in `src/App.tsx` so it can be evaluated in the browser. Never leave a new component unrendered. Place it in the appropriate tab section (Foundations, Components, Blocks, etc.) with a demo that exercises its key props and variants. This is NOT optional.
+> **MANDATORY: Wire new components into showcase routes.**
+> Every new component MUST be added to the visual showcase under `src/app/(showcase)/` so it can be evaluated in the browser. Never leave a new component unrendered. Place it in the appropriate section (Foundations, Components, Blocks, etc.) with a demo that exercises its key props and variants. This is NOT optional.
 
 ### Using overlay tokens (modals, drawers)
 ```tsx
@@ -375,7 +369,7 @@ without passing ALL of these:
 
 1. **Type-check**: `npx tsc --noEmit` (zero tolerance for type errors)
 2. **Lint + auto-fix staged files**: `npx lint-staged` (runs `eslint --fix` on staged `*.{ts,tsx}`)
-3. **Unit tests**: `npx vitest run` (all 1084+ tests must pass)
+3. **Unit tests**: `npx vitest run` (all tests must pass)
 
 ### Pre-push (blocks `git push`)
 
@@ -403,10 +397,20 @@ Modern flat config (`eslint.config.mjs`) with typescript-eslint, react-hooks, re
 
 > [!IMPORTANT]
 > **After any architectural change, update the agent skill.**
-> The `.claude/skills/seed-design-system/` directory contains an agent skill (SKILL.md + reference files) that teaches AI assistants how to use this design system. When you make changes that affect the system's architecture, conventions, or component inventory, you MUST update the skill to match:
+> The `.agents/skills/seed-design-system/` directory contains an agent skill (SKILL.md + reference files) that teaches AI assistants how to use this design system. When you make changes that affect the system's architecture, conventions, or component inventory, you MUST update the skill to match:
 > - **SKILL.md**: Forbidden patterns, token references, component categories, theming, animation, project structure
-> - **references/**: Token catalog, component inventory, animation system, glass effects, blocks catalog, icons catalog, Next.js integration
+> - **`.agents/skills/seed-design-system/references/`**: Token catalog, component inventory, animation system, glass effects, blocks catalog, icons catalog, Next.js integration
 >
 > The skill should contain **general guidance** (patterns, conventions, rules), not fragile specifics (exact counts, exhaustive lists). Point agents to `ls` or `grep` commands for dynamic discovery instead of hardcoding inventories.
+
+## 15. Design Opinions
+
+See `docs/OPINIONS.md` for the complete opinions bible (10 domains, ~60 rules). Top 5 cardinal rules:
+
+1. **Never hardcode colors** -- use semantic tokens (`bg-surface`, `text-text-primary`). Raw Tailwind scales break theming.
+2. **Spring for entrances, CSS easing for properties** -- `motionSpring.snappy` for mounts, `transition-colors` for hover.
+3. **Stacked labels always** -- label above input. No floating, no inline. No exceptions.
+4. **prefers-reduced-motion is non-negotiable** -- every animation must degrade via `useReducedMotion()`.
+5. **Max 3 navigation levels** -- sidebar group > item > sub-item. Flatten deeper into tabs/filters/search.
 
 <!-- NEXT-AGENTS-MD-START -->[Next.js Docs Index]|root: ./.next-docs|STOP. What you remember about Next.js is WRONG for this project. Always search docs and read before any task.|If docs missing, run this command first: npx @next/codemod agents-md --output AGENTS.md|01-app:{04-glossary.mdx}|01-app/01-getting-started:{01-installation.mdx,02-project-structure.mdx,03-layouts-and-pages.mdx,04-linking-and-navigating.mdx,05-server-and-client-components.mdx,06-cache-components.mdx,07-fetching-data.mdx,08-updating-data.mdx,09-caching-and-revalidating.mdx,10-error-handling.mdx,11-css.mdx,12-images.mdx,13-fonts.mdx,14-metadata-and-og-images.mdx,15-route-handlers.mdx,16-proxy.mdx,17-deploying.mdx,18-upgrading.mdx}|01-app/02-guides:{analytics.mdx,authentication.mdx,backend-for-frontend.mdx,caching.mdx,ci-build-caching.mdx,content-security-policy.mdx,css-in-js.mdx,custom-server.mdx,data-security.mdx,debugging.mdx,draft-mode.mdx,environment-variables.mdx,forms.mdx,incremental-static-regeneration.mdx,instrumentation.mdx,internationalization.mdx,json-ld.mdx,lazy-loading.mdx,local-development.mdx,mcp.mdx,mdx.mdx,memory-usage.mdx,multi-tenant.mdx,multi-zones.mdx,open-telemetry.mdx,package-bundling.mdx,prefetching.mdx,production-checklist.mdx,progressive-web-apps.mdx,public-static-pages.mdx,redirecting.mdx,sass.mdx,scripts.mdx,self-hosting.mdx,single-page-applications.mdx,static-exports.mdx,tailwind-v3-css.mdx,third-party-libraries.mdx,videos.mdx}|01-app/02-guides/migrating:{app-router-migration.mdx,from-create-react-app.mdx,from-vite.mdx}|01-app/02-guides/testing:{cypress.mdx,jest.mdx,playwright.mdx,vitest.mdx}|01-app/02-guides/upgrading:{codemods.mdx,version-14.mdx,version-15.mdx,version-16.mdx}|01-app/03-api-reference:{07-edge.mdx,08-turbopack.mdx}|01-app/03-api-reference/01-directives:{use-cache-private.mdx,use-cache-remote.mdx,use-cache.mdx,use-client.mdx,use-server.mdx}|01-app/03-api-reference/02-components:{font.mdx,form.mdx,image.mdx,link.mdx,script.mdx}|01-app/03-api-reference/03-file-conventions/01-metadata:{app-icons.mdx,manifest.mdx,opengraph-image.mdx,robots.mdx,sitemap.mdx}|01-app/03-api-reference/03-file-conventions:{default.mdx,dynamic-routes.mdx,error.mdx,forbidden.mdx,instrumentation-client.mdx,instrumentation.mdx,intercepting-routes.mdx,layout.mdx,loading.mdx,mdx-components.mdx,not-found.mdx,page.mdx,parallel-routes.mdx,proxy.mdx,public-folder.mdx,route-groups.mdx,route-segment-config.mdx,route.mdx,src-folder.mdx,template.mdx,unauthorized.mdx}|01-app/03-api-reference/04-functions:{after.mdx,cacheLife.mdx,cacheTag.mdx,connection.mdx,cookies.mdx,draft-mode.mdx,fetch.mdx,forbidden.mdx,generate-image-metadata.mdx,generate-metadata.mdx,generate-sitemaps.mdx,generate-static-params.mdx,generate-viewport.mdx,headers.mdx,image-response.mdx,next-request.mdx,next-response.mdx,not-found.mdx,permanentRedirect.mdx,redirect.mdx,refresh.mdx,revalidatePath.mdx,revalidateTag.mdx,unauthorized.mdx,unstable_cache.mdx,unstable_noStore.mdx,unstable_rethrow.mdx,updateTag.mdx,use-link-status.mdx,use-params.mdx,use-pathname.mdx,use-report-web-vitals.mdx,use-router.mdx,use-search-params.mdx,use-selected-layout-segment.mdx,use-selected-layout-segments.mdx,userAgent.mdx}|01-app/03-api-reference/05-config/01-next-config-js:{adapterPath.mdx,allowedDevOrigins.mdx,appDir.mdx,assetPrefix.mdx,authInterrupts.mdx,basePath.mdx,browserDebugInfoInTerminal.mdx,cacheComponents.mdx,cacheHandlers.mdx,cacheLife.mdx,compress.mdx,crossOrigin.mdx,cssChunking.mdx,devIndicators.mdx,distDir.mdx,env.mdx,expireTime.mdx,exportPathMap.mdx,generateBuildId.mdx,generateEtags.mdx,headers.mdx,htmlLimitedBots.mdx,httpAgentOptions.mdx,images.mdx,incrementalCacheHandlerPath.mdx,inlineCss.mdx,isolatedDevBuild.mdx,logging.mdx,mdxRs.mdx,onDemandEntries.mdx,optimizePackageImports.mdx,output.mdx,pageExtensions.mdx,poweredByHeader.mdx,productionBrowserSourceMaps.mdx,proxyClientMaxBodySize.mdx,reactCompiler.mdx,reactMaxHeadersLength.mdx,reactStrictMode.mdx,redirects.mdx,rewrites.mdx,sassOptions.mdx,serverActions.mdx,serverComponentsHmrCache.mdx,serverExternalPackages.mdx,staleTimes.mdx,staticGeneration.mdx,taint.mdx,trailingSlash.mdx,transpilePackages.mdx,turbopack.mdx,turbopackFileSystemCache.mdx,typedRoutes.mdx,typescript.mdx,urlImports.mdx,useLightningcss.mdx,viewTransition.mdx,webVitalsAttribution.mdx,webpack.mdx}|01-app/03-api-reference/05-config:{02-typescript.mdx,03-eslint.mdx}|01-app/03-api-reference/06-cli:{create-next-app.mdx,next.mdx}|02-pages/01-getting-started:{01-installation.mdx,02-project-structure.mdx,04-images.mdx,05-fonts.mdx,06-css.mdx,11-deploying.mdx}|02-pages/02-guides:{analytics.mdx,authentication.mdx,babel.mdx,ci-build-caching.mdx,content-security-policy.mdx,css-in-js.mdx,custom-server.mdx,debugging.mdx,draft-mode.mdx,environment-variables.mdx,forms.mdx,incremental-static-regeneration.mdx,instrumentation.mdx,internationalization.mdx,lazy-loading.mdx,mdx.mdx,multi-zones.mdx,open-telemetry.mdx,package-bundling.mdx,post-css.mdx,preview-mode.mdx,production-checklist.mdx,redirecting.mdx,sass.mdx,scripts.mdx,self-hosting.mdx,static-exports.mdx,tailwind-v3-css.mdx,third-party-libraries.mdx}|02-pages/02-guides/migrating:{app-router-migration.mdx,from-create-react-app.mdx,from-vite.mdx}|02-pages/02-guides/testing:{cypress.mdx,jest.mdx,playwright.mdx,vitest.mdx}|02-pages/02-guides/upgrading:{codemods.mdx,version-10.mdx,version-11.mdx,version-12.mdx,version-13.mdx,version-14.mdx,version-9.mdx}|02-pages/03-building-your-application/01-routing:{01-pages-and-layouts.mdx,02-dynamic-routes.mdx,03-linking-and-navigating.mdx,05-custom-app.mdx,06-custom-document.mdx,07-api-routes.mdx,08-custom-error.mdx}|02-pages/03-building-your-application/02-rendering:{01-server-side-rendering.mdx,02-static-site-generation.mdx,04-automatic-static-optimization.mdx,05-client-side-rendering.mdx}|02-pages/03-building-your-application/03-data-fetching:{01-get-static-props.mdx,02-get-static-paths.mdx,03-forms-and-mutations.mdx,03-get-server-side-props.mdx,05-client-side.mdx}|02-pages/03-building-your-application/06-configuring:{12-error-handling.mdx}|02-pages/04-api-reference:{06-edge.mdx,08-turbopack.mdx}|02-pages/04-api-reference/01-components:{font.mdx,form.mdx,head.mdx,image-legacy.mdx,image.mdx,link.mdx,script.mdx}|02-pages/04-api-reference/02-file-conventions:{instrumentation.mdx,proxy.mdx,public-folder.mdx,src-folder.mdx}|02-pages/04-api-reference/03-functions:{get-initial-props.mdx,get-server-side-props.mdx,get-static-paths.mdx,get-static-props.mdx,next-request.mdx,next-response.mdx,use-params.mdx,use-report-web-vitals.mdx,use-router.mdx,use-search-params.mdx,userAgent.mdx}|02-pages/04-api-reference/04-config/01-next-config-js:{adapterPath.mdx,allowedDevOrigins.mdx,assetPrefix.mdx,basePath.mdx,bundlePagesRouterDependencies.mdx,compress.mdx,crossOrigin.mdx,devIndicators.mdx,distDir.mdx,env.mdx,exportPathMap.mdx,generateBuildId.mdx,generateEtags.mdx,headers.mdx,httpAgentOptions.mdx,images.mdx,isolatedDevBuild.mdx,onDemandEntries.mdx,optimizePackageImports.mdx,output.mdx,pageExtensions.mdx,poweredByHeader.mdx,productionBrowserSourceMaps.mdx,proxyClientMaxBodySize.mdx,reactStrictMode.mdx,redirects.mdx,rewrites.mdx,serverExternalPackages.mdx,trailingSlash.mdx,transpilePackages.mdx,turbopack.mdx,typescript.mdx,urlImports.mdx,useLightningcss.mdx,webVitalsAttribution.mdx,webpack.mdx}|02-pages/04-api-reference/04-config:{01-typescript.mdx,02-eslint.mdx}|02-pages/04-api-reference/05-cli:{create-next-app.mdx,next.mdx}|03-architecture:{accessibility.mdx,fast-refresh.mdx,nextjs-compiler.mdx,supported-browsers.mdx}|04-community:{01-contribution-guide.mdx,02-rspack.mdx}<!-- NEXT-AGENTS-MD-END -->

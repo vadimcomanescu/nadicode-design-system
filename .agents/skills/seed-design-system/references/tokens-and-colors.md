@@ -249,3 +249,31 @@ Steps usage guide:
 
 ### Spacing
 Base unit: 4px. Custom: `spacing-4.5` = `1.125rem`
+
+---
+
+## Bloom Style Palette
+
+The `.bloom` CSS selector overrides the light theme with a warm, organic palette. Bloom is light-only (forces `resolvedTheme` to `'light'`).
+
+### Key Bloom Token Overrides
+
+| Token | Bloom Value | Arctic Light Value | Notes |
+| ----- | ----------- | ------------------ | ----- |
+| `--color-background` | `254 253 251` (warm cream) | `251 252 253` (cool white) | Warmer base |
+| `--color-surface` | `251 249 246` | `245 247 249` | Cream tint |
+| `--color-accent` | `232 87 58` (coral) | `26 143 136` (teal) | Different hue entirely |
+| `--color-accent-foreground` | `255 255 255` | `255 255 255` | Both white |
+| `--color-border` | `217 209 199` (warm) | `205 212 220` (cool) | Brown vs blue-gray |
+| `--color-destructive` | `232 86 109` (rose) | `206 44 59` (red) | Softer destructive |
+| `--color-success` | `61 214 160` (mint) | `27 148 80` (green) | Brighter |
+| `--color-warning` | `245 166 35` (peach) | `208 158 16` (amber) | Warmer |
+
+### Bloom Glass Overrides
+
+Bloom glass uses warm cream tints instead of cool white:
+- `glass-panel`: cream gradient with brown shadows (`rgba(45, 35, 24, 0.06)`)
+- `glass-floating`: warm hover rotation (`rotate(0.3deg)`)
+- `glass-overlay`: cream-tinted with brown shadows
+
+See `src/index.css` for full `.bloom .glass-*` overrides.

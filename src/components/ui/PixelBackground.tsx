@@ -1,30 +1,33 @@
 'use client'
 
-import { useMemo } from "react";
+import { memo, useMemo, useSyncExternalStore } from "react";
 import { cn } from "../../lib/utils";
 
 export type PixelTheme = "cyber" | "encryption" | "void";
+
+const subscribeToDarkMode = (cb: () => void) => {
+    const observer = new MutationObserver(cb);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+};
+const getDarkModeSnapshot = () => document.documentElement.classList.contains('dark');
+const getDarkModeServerSnapshot = () => true;
 
 interface PixelBackgroundProps {
     theme?: PixelTheme;
     className?: string;
 }
 
-export function PixelBackground({
-    theme = "cyber",
+function PixelBackgroundBase({
+    theme: themeProp,
     className,
 }: PixelBackgroundProps) {
-    // Debug logging
-    console.log("PixelBackground rendering with theme:", theme);
-
-    // Deterministic content generation to avoid hydration mismatch
-    // In a real app, this could be seeded. Here we use static patterns.
+    const isDark = useSyncExternalStore(subscribeToDarkMode, getDarkModeSnapshot, getDarkModeServerSnapshot);
+    const theme = themeProp ?? (isDark ? 'cyber' : 'void');
 
     const content = useMemo(() => {
         switch (theme) {
             case "encryption":
-                // Density: High. Content: Numbers, Slashed 0 (ss04), Glyphs.
-                // Refined: Removed heavy blocks for elegance.
                 return Array.from({ length: 200 })
                     .map((_, i) => {
                         const r = (i * 1337) % 100;
@@ -33,14 +36,13 @@ export function PixelBackground({
                         if (r > 70) return "+";
                         if (r > 60) return "-";
                         if (r > 50) return "_";
-                        if (r > 40) return "0"; // Will be slashed via CSS
-                        return " "; // More negative space
+                        if (r > 40) return "0";
+                        return " ";
                     })
                     .join("");
 
             case "void":
-                // Density: Low. Content: Dots, Crosses.
-                return Array.from({ length: 200 }) // Reduced from 400
+                return Array.from({ length: 200 })
                     .map((_, i) => {
                         const r = (i * 7331) % 100;
                         if (r > 95) return "+";
@@ -51,8 +53,7 @@ export function PixelBackground({
 
             case "cyber":
             default:
-                // Density: Medium. Content: Alphanumeric, Mixed Case.
-                return Array.from({ length: 200 }) // Reduced from 400
+                return Array.from({ length: 200 })
                     .map((_, i) => {
                         const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
                         const r = (i * 42) % chars.length;
@@ -67,7 +68,6 @@ export function PixelBackground({
             case "encryption":
                 return {
                     fontFeatureSettings: '"ss04" on',
-                    // Opacity handled via className for light/dark mode
                     animation: "pixel-scan 20s linear infinite",
                     maskImage: "linear-gradient(to bottom, transparent, black 10%, black 70%, transparent)",
                     maskSize: "100% 200%",
@@ -75,7 +75,6 @@ export function PixelBackground({
             case "void":
                 return {
                     fontFeatureSettings: '"ss02" on, "ss06" on',
-                    // Opacity handled via className for light/dark mode
                     animation: "pixel-drift 60s ease-in-out infinite",
                     maskImage: "radial-gradient(circle at center, black 30%, transparent 85%)",
                 };
@@ -83,8 +82,6 @@ export function PixelBackground({
             default:
                 return {
                     fontFeatureSettings: '"ss02" on, "ss06" on',
-                    // Opacity handled via className for light/dark mode
-                    // Removed animation for zero distraction
                     maskImage: "linear-gradient(135deg, black 0%, transparent 60%)",
                 };
         }
@@ -109,12 +106,14 @@ export function PixelBackground({
                 opacityClass,
                 className
             )}
+            role="presentation"
             aria-hidden="true"
         >
             <div
                 className="w-full h-full break-all whitespace-pre-wrap"
+                aria-hidden="true"
                 style={{
-                    fontFamily: "'GeistPixelGrid'", // Use the Grid variant for perfect alignment
+                    fontFamily: "'GeistPixelGrid'",
                     fontSize: "24px",
                     lineHeight: "24px",
                     ...themeStyles,
@@ -126,3 +125,5 @@ export function PixelBackground({
         </div>
     );
 }
+
+export const PixelBackground = memo(PixelBackgroundBase);

@@ -25,6 +25,7 @@ echo "pre-push: running checks against tracked snapshot only"
 rm -rf .next
 npx tsc --noEmit
 npm run lint
+npm run docs:check
 npx vitest run --coverage
 npm run build
 bash bin/test-sync.sh

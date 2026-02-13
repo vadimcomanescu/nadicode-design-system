@@ -88,9 +88,13 @@ export default function ShowcaseLayout({ children }: { children: React.ReactNode
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
 
+  // Keep tab navigation deterministic on mobile by forcing top-of-page after route changes.
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [pathname])
+
   const handleTabChange = (value: string) => {
-    router.push(`/${value}`, { scroll: false })
-    window.scrollTo(0, 0)
+    router.push(`/${value}`)
   }
 
   const handleSearchSelect = (result: SearchResult) => {
@@ -108,6 +112,7 @@ export default function ShowcaseLayout({ children }: { children: React.ReactNode
       <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-85" />
       <Container className="relative z-10">
         <AnimatedTabs
+          id="showcase-tabs"
           value={currentTab}
           onValueChange={handleTabChange}
           className="mb-6 md:mb-10"

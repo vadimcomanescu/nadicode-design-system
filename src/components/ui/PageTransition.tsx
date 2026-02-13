@@ -50,7 +50,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({
   }
 
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={pathname}
         className={cn(className)}

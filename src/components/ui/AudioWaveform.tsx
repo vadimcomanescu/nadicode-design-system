@@ -65,25 +65,27 @@ const AudioWaveform = React.forwardRef<HTMLDivElement, AudioWaveformProps>(
         aria-label={active ? "Audio waveform active" : "Audio waveform inactive"}
         {...props}
       >
-        {Array.from({ length: bars }).map((_, i) => (
-          <span
-            key={i}
-            className={cn(
-              "rounded-full bg-[var(--waveform-color)] transition-all",
-              active && "animate-pulse"
-            )}
-            style={{
-              width: barWidth,
-              height: active
-                ? `${20 + Math.sin(i * 0.7) * 60 + randomOffsets[i]}%`
-                : "15%",
-              opacity: active ? 0.6 + Math.sin(i * 0.5) * 0.4 : 0.3,
-              animationDelay: `${i * 75}ms`,
-              animationDuration: `${600 + (i % 5) * 200}ms`,
-            }}
-            aria-hidden="true"
-          />
-        ))}
+        {Array.from({ length: bars }).map((_, i) => {
+          const activeHeight = 20 + Math.sin(i * 0.7) * 60 + randomOffsets[i]
+          const activeOpacity = 0.6 + Math.sin(i * 0.5) * 0.4
+          return (
+            <span
+              key={i}
+              className={cn(
+                "rounded-full bg-[var(--waveform-color)] transition-all",
+                active && "animate-pulse"
+              )}
+              style={{
+                width: `${barWidth}px`,
+                height: active ? `${activeHeight.toFixed(3)}%` : "15%",
+                opacity: active ? activeOpacity.toFixed(6) : "0.300000",
+                animationDelay: `${i * 75}ms`,
+                animationDuration: `${600 + (i % 5) * 200}ms`,
+              }}
+              aria-hidden="true"
+            />
+          )
+        })}
       </div>
     )
   }

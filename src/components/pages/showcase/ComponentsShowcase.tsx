@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Button } from "../../ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/Card";
 import { Input } from "../../ui/Input";
@@ -166,6 +166,34 @@ interface ComponentsShowcaseProps {
   progress: number;
 }
 
+function DeferredMount({ children, minHeight = 0 }: { children: ReactNode; minHeight?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={visible ? undefined : { minHeight }}>
+      {visible ? children : null}
+    </div>
+  );
+}
+
 function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowcaseProps) {
   const beamContainerRef = useRef<HTMLDivElement>(null);
   const beamFromRef = useRef<HTMLDivElement>(null);
@@ -325,7 +353,19 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                     <div className="space-y-4">
                       <Typography variant="h4">Password Input</Typography>
                       <form onSubmit={e => e.preventDefault()}>
-                        <PasswordInput placeholder="Enter your password" />
+                        <Input
+                          type="text"
+                          name="username"
+                          autoComplete="username"
+                          className="sr-only"
+                          tabIndex={-1}
+                          aria-hidden="true"
+                        />
+                        <PasswordInput
+                          name="new-password"
+                          placeholder="Enter your password"
+                          autoComplete="new-password"
+                        />
                       </form>
                     </div>
                   </div>
@@ -665,22 +705,24 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                 </div>
               </div>
 
-              <div className="mt-8 space-y-4">
-                <Typography variant="h3">Command Palette</Typography>
-                <div className="max-w-sm border border-border rounded-lg overflow-hidden">
-                  <Command>
-                    <CommandInput placeholder="Type a command..." />
-                    <CommandList>
-                      <CommandEmpty>No results found.</CommandEmpty>
-                      <CommandGroup heading="Actions">
-                        <CommandItem>New File</CommandItem>
-                        <CommandItem>Search Project</CommandItem>
-                        <CommandItem>Toggle Theme</CommandItem>
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
+              <DeferredMount minHeight={220}>
+                <div className="mt-8 space-y-4">
+                  <Typography variant="h3">Command Palette</Typography>
+                  <div className="max-w-sm border border-border rounded-lg overflow-hidden">
+                    <Command>
+                      <CommandInput placeholder="Type a command..." />
+                      <CommandList className="h-40">
+                        <CommandEmpty>No results found.</CommandEmpty>
+                        <CommandGroup heading="Actions">
+                          <CommandItem>New File</CommandItem>
+                          <CommandItem>Search Project</CommandItem>
+                          <CommandItem>Toggle Theme</CommandItem>
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </div>
                 </div>
-              </div>
+              </DeferredMount>
             </section>
             </ScrollFadeIn>
 
@@ -1091,16 +1133,29 @@ function ComponentsShowcase({ toast, date, setDate, progress }: ComponentsShowca
                         title: "Account",
                         description: "Basic info",
                         content: (
-                          <div className="space-y-4">
+                          <form
+                            className="space-y-4"
+                            onSubmit={event => event.preventDefault()}
+                          >
                             <div className="space-y-2">
                               <Label>Email</Label>
-                              <Input placeholder="you@example.com" />
+                              <Input
+                                type="email"
+                                name="username"
+                                autoComplete="username"
+                                placeholder="you@example.com"
+                              />
                             </div>
                             <div className="space-y-2">
                               <Label>Password</Label>
-                              <Input type="password" placeholder="Create a password" />
+                              <Input
+                                type="password"
+                                name="new-password"
+                                autoComplete="new-password"
+                                placeholder="Create a password"
+                              />
                             </div>
-                          </div>
+                          </form>
                         ),
                       },
                       {
@@ -1710,17 +1765,19 @@ Benefits:
                   <Typography variant="h4">Spinner</Typography>
                   <Spinner className="text-accent" />
                 </div>
-                <div className="space-y-4">
-                  <Typography variant="h4">Search Command</Typography>
-                  <SearchCommand
-                    value="dash"
-                    results={[
-                      { id: "1", title: "Dashboard", description: "Main analytics view", category: "Pages" },
-                      { id: "2", title: "DashboardPage.tsx", description: "src/components/pages/", category: "Files" },
-                      { id: "3", title: "DataGridBlock", description: "Advanced data table", category: "Components" },
-                    ]}
-                  />
-                </div>
+                <DeferredMount minHeight={220}>
+                  <div className="space-y-4">
+                    <Typography variant="h4">Search Command</Typography>
+                    <SearchCommand
+                      value="dash"
+                      results={[
+                        { id: "1", title: "Dashboard", description: "Main analytics view", category: "Pages" },
+                        { id: "2", title: "DashboardPage.tsx", description: "src/components/pages/", category: "Files" },
+                        { id: "3", title: "DataGridBlock", description: "Advanced data table", category: "Components" },
+                      ]}
+                    />
+                  </div>
+                </DeferredMount>
               </div>
             </section>
             </ScrollFadeIn>

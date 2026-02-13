@@ -4,7 +4,6 @@ on:
   push:
     branches: [master]
     paths-ignore:
-      - ".github/**"
       - "plans/**"
       - "README.md"
 
@@ -96,6 +95,7 @@ jobs:
         working-directory: scaffold
         env:
           GH_TOKEN: ${{ secrets.SCAFFOLD_PAT }}
+          HUSKY: 0
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -103,7 +103,7 @@ jobs:
           git fetch origin "$BRANCH" 2>/dev/null || true
           git checkout -B "$BRANCH"
           git add -A
-          git commit -m "$(cat <<'EOF'
+          git commit --no-verify -m "$(cat <<'EOF'
           Sync design system (${{ steps.ds-info.outputs.sha }})
 
           Upstream: ${{ steps.ds-info.outputs.msg }}

@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Typecheck, lint, test, build
+    name: Validate design system
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
@@ -29,17 +29,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Typecheck
-        run: npx tsc --noEmit
+      - name: Typecheck design system
+        run: npm run typecheck
 
-      - name: Lint
+      - name: Lint design system
         run: npm run lint
 
       - name: Docs drift check
         run: npm run docs:check
 
-      - name: Test with coverage
+      - name: Test design system with coverage
         run: npx vitest run --coverage
 
-      - name: Build
+      - name: Build design system
         run: npm run build

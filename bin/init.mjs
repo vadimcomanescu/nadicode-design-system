@@ -183,7 +183,12 @@ function copyFonts() {
     const dest = join(TARGET, 'public', 'fonts', family)
     mkdirSync(dest, { recursive: true })
     for (const f of readdirSync(src)) {
-      copyFileSync(join(src, f), join(dest, f))
+      const fontPath = join(src, f)
+      const fontStat = statSync(fontPath)
+      if (!fontStat.isFile()) {
+        continue
+      }
+      copyFileSync(fontPath, join(dest, f))
       count++
     }
   }

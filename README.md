@@ -7,7 +7,17 @@ A premium, opinionated design system for AI-integrated web applications, with du
 ```bash
 npm install
 npm run dev        # http://localhost:5001
+npm run dev:scaffold # scaffold app package
 ```
+
+## Monorepo Scaffold App
+
+The scaffold now lives in this repository at `apps/scaffold`.
+
+- Design system source of truth: root `src/`
+- Scaffold app: `apps/scaffold`
+- Sync command: `npm run scaffold:sync`
+- Sync guard: `npm run scaffold:check-sync` (fails when scaffold drifts)
 
 ## Using in Next.js Projects
 
@@ -119,6 +129,8 @@ This overwrites all source files, re-merges CSS tokens, and re-installs deps. Yo
 ## Project Structure
 
 ```
+apps/
+  scaffold/          # In-repo scaffold app package
 src/
   components/
     ui/              # UI primitives and effect components
@@ -147,34 +159,33 @@ bin/
 ## Commands
 
 ```bash
-npm run dev          # Start dev server
-npm run build        # Type check + production build
-npm run test         # Run tests
-npm run lint         # ESLint
-npm run ds:check     # Nadicode contract enforcement
-npm run ds:task-pack # Build task pack from scope-definition.json
-npm run docs:check   # Validate docs and agent references
-npx tsc -b           # Type check only
+npm run dev                 # Start DS dev server
+npm run dev:scaffold        # Start scaffold app dev server
+npm run build               # Build design system
+npm run build:all           # Build design system + scaffold
+npm run test                # Run DS tests
+npm run lint                # Lint DS source
+npm run scaffold:sync       # Refresh apps/scaffold from DS source
+npm run scaffold:check-sync # Refresh and fail on uncommitted scaffold drift
+npm run scaffold:typecheck  # Typecheck scaffold app
+npm run scaffold:lint       # Lint scaffold app
+npm run scaffold:test       # Run scaffold unit tests
+npm --prefix apps/scaffold run test:e2e # Run scaffold Playwright e2e tests
+npm run scaffold:build      # Build scaffold app
+npm run ds:check            # Nadicode contract enforcement
+npm run ds:task-pack        # Build task pack from scope-definition.json
+npm run docs:check          # Validate docs and agent references
 ```
 
-## Scaffold Sync Reliability
+## Scaffold Integrity
 
-Use `bin/test-sync.sh` to validate that `bin/init.mjs --update` works against the scaffold app.
+Scaffold verification is manual (not enforced by CI hooks):
 
-```bash
-bash bin/test-sync.sh
-```
-
-Supported environment controls:
-
-- `SCAFFOLD_PAT`: Optional GitHub token for private scaffold clone access.
-- `SCAFFOLD_REPO_URL`: Override scaffold repository URL (defaults to `https://github.com/vadimcomanescu/scaffold-nextjs-saas.git`).
-- `SYNC_SCAFFOLD_REQUIRED`: Set to `1` to fail hard when scaffold clone is unavailable. Default is `0` (skip gracefully when clone/auth/network is unavailable).
-
-CI behavior in `.github/workflows/sync-scaffold.yml`:
-
-- If `SCAFFOLD_PAT` is present, scaffold sync runs fully (typecheck, lint, tests, build).
-- If `SCAFFOLD_PAT` is missing, workflow is marked as skipped instead of failing the pipeline.
+- Run `npm run scaffold:sync` to refresh scaffold from design-system source
+- Run `git diff --exit-code -- apps/scaffold` to confirm no drift
+- Run scaffold checks on demand:
+  `npm run scaffold:typecheck && npm run scaffold:lint && npm run scaffold:test && npm run scaffold:build`
+- Root `vitest` excludes `apps/scaffold/**`; scaffold tests run via `npm run scaffold:test`
 
 ## Theming
 

@@ -1,0 +1,156 @@
+{
+  "version": "1.0.0",
+  "description": "Deterministic mapping from scope-definition page_intent to Nadicode page recipes and enforcement rules.",
+  "intents": {
+    "marketing-landing": {
+      "recipe": "docs/nadicode/recipes/marketing-landing-page.md",
+      "routePatterns": ["/"],
+      "requiredComponents": [
+        "HeroBlock",
+        "FeatureBlock",
+        "FAQBlock",
+        "Button",
+        "Typography"
+      ],
+      "requiredStates": ["default", "mobile-navigation"],
+      "navigationPolicy": "marketing-shell"
+    },
+    "dashboard": {
+      "recipe": "docs/nadicode/recipes/dashboard-page.md",
+      "routePatterns": ["/dashboard"],
+      "requiredComponents": [
+        "Card",
+        "AgentMetricsCard",
+        "Tabs",
+        "Progress",
+        "Badge"
+      ],
+      "requiredStates": ["loading", "empty", "has-data", "error"],
+      "navigationPolicy": "app-shell"
+    },
+    "crud-list-detail": {
+      "recipe": "docs/nadicode/recipes/crud-list-detail-page.md",
+      "routePatterns": ["/[entity]", "/[entity]/[id]"],
+      "requiredComponents": [
+        "DataTable",
+        "Table",
+        "Pagination",
+        "Dialog",
+        "Card"
+      ],
+      "requiredStates": ["loading", "empty", "has-data", "error", "filtering"],
+      "navigationPolicy": "app-shell"
+    },
+    "crud-form": {
+      "recipe": "docs/nadicode/recipes/crud-form-page.md",
+      "routePatterns": ["/[entity]/new", "/[entity]/[id]/edit"],
+      "requiredComponents": [
+        "Form",
+        "Field",
+        "Label",
+        "Input",
+        "Select",
+        "Button"
+      ],
+      "requiredStates": ["pristine", "dirty", "submitting", "success", "validation-error"],
+      "navigationPolicy": "app-shell"
+    },
+    "settings": {
+      "recipe": "docs/nadicode/recipes/settings-page.md",
+      "routePatterns": ["/settings"],
+      "requiredComponents": [
+        "Card",
+        "Tabs",
+        "Switch",
+        "Input",
+        "Select",
+        "Button"
+      ],
+      "requiredStates": ["loading", "default", "saving", "saved", "error"],
+      "navigationPolicy": "app-shell"
+    },
+    "auth": {
+      "recipe": "docs/nadicode/recipes/auth-page.md",
+      "routePatterns": ["/login", "/signup"],
+      "requiredComponents": [
+        "Card",
+        "Label",
+        "Input",
+        "PasswordInput",
+        "Button"
+      ],
+      "requiredStates": ["default", "submitting", "error", "success"],
+      "navigationPolicy": "auth-shell"
+    },
+    "onboarding": {
+      "recipe": "docs/nadicode/recipes/onboarding-page.md",
+      "routePatterns": ["/onboarding"],
+      "requiredComponents": [
+        "FormWizard",
+        "Progress",
+        "Button",
+        "Card"
+      ],
+      "requiredStates": ["step-active", "step-valid", "step-error", "complete"],
+      "navigationPolicy": "onboarding-shell"
+    },
+    "pricing": {
+      "recipe": "docs/nadicode/recipes/pricing-page.md",
+      "routePatterns": ["/pricing"],
+      "requiredComponents": [
+        "PricingBlock",
+        "Card",
+        "Badge",
+        "Button"
+      ],
+      "requiredStates": ["default", "annual-toggle", "cta-loading"],
+      "navigationPolicy": "marketing-shell"
+    },
+    "analytics": {
+      "recipe": "docs/nadicode/recipes/analytics-page.md",
+      "routePatterns": ["/analytics"],
+      "requiredComponents": [
+        "AreaChart",
+        "BarChart",
+        "LineChart",
+        "Card",
+        "Tabs"
+      ],
+      "requiredStates": ["loading", "empty", "has-data", "error", "date-filtered"],
+      "navigationPolicy": "app-shell"
+    },
+    "agents-management": {
+      "recipe": "docs/nadicode/recipes/agents-management-page.md",
+      "routePatterns": ["/agents", "/voice-agents"],
+      "requiredComponents": [
+        "AgentTeamPanel",
+        "AgentStatus",
+        "ConversationThread",
+        "ToolCallCard",
+        "ApprovalCard",
+        "AgentTerminal",
+        "CodeDiffViewer"
+      ],
+      "requiredStates": [
+        "empty",
+        "loading",
+        "running",
+        "blocked-approval",
+        "failed",
+        "complete"
+      ],
+      "navigationPolicy": "app-shell"
+    },
+    "error": {
+      "recipe": "docs/nadicode/recipes/error-and-not-found-pages.md",
+      "routePatterns": ["/404", "/500"],
+      "requiredComponents": [
+        "Card",
+        "Typography",
+        "Button"
+      ],
+      "requiredStates": ["not-found", "server-error"],
+      "navigationPolicy": "fallback-shell"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+@config "../../tailwind.config.js";
+@import "../seed-tokens.css";
+
+@import '../index.css';

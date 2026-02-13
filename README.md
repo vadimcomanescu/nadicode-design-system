@@ -157,6 +157,25 @@ npm run docs:check   # Validate docs and agent references
 npx tsc -b           # Type check only
 ```
 
+## Scaffold Sync Reliability
+
+Use `bin/test-sync.sh` to validate that `bin/init.mjs --update` works against the scaffold app.
+
+```bash
+bash bin/test-sync.sh
+```
+
+Supported environment controls:
+
+- `SCAFFOLD_PAT`: Optional GitHub token for private scaffold clone access.
+- `SCAFFOLD_REPO_URL`: Override scaffold repository URL (defaults to `https://github.com/vadimcomanescu/scaffold-nextjs-saas.git`).
+- `SYNC_SCAFFOLD_REQUIRED`: Set to `1` to fail hard when scaffold clone is unavailable. Default is `0` (skip gracefully when clone/auth/network is unavailable).
+
+CI behavior in `.github/workflows/sync-scaffold.yml`:
+
+- If `SCAFFOLD_PAT` is present, scaffold sync runs fully (typecheck, lint, tests, build).
+- If `SCAFFOLD_PAT` is missing, workflow is marked as skipped instead of failing the pipeline.
+
 ## Theming
 
 Dual-axis: `theme` (light / dark / system) + `style` (arctic / bloom).

@@ -4,7 +4,6 @@ import * as React from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Typography } from '@/components/ui/Typography'
 import { Container } from '@/components/layout/Grid'
-import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { StyleToggle } from '@/components/ui/StyleToggle'
 import { Toaster } from '@/components/ui/Toaster'
 import { AnimatedTabs, AnimatedTabsList, AnimatedTabsTrigger } from '@/components/ui/AnimatedTabs'
@@ -15,6 +14,8 @@ import { Dialog, DialogContent } from '@/components/ui/Dialog'
 import { SearchCommand, type SearchResult } from '@/components/ui/SearchCommand'
 import { SearchIcon } from '@/components/ui/icons'
 import { Kbd } from '@/components/ui/Kbd'
+import { cn } from '@/lib/utils'
+import { useTheme } from '@/lib/ThemeProvider'
 
 const TABS = [
   { value: 'foundations', label: 'Foundations' },
@@ -69,6 +70,7 @@ function buildSearchResults(query: string): SearchResult[] {
 export default function ShowcaseLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
+  const { theme, setTheme, style } = useTheme()
   const currentTab = pathname.split('/').pop() || 'foundations'
 
   const [cmdkOpen, setCmdkOpen] = React.useState(false)
@@ -102,47 +104,79 @@ export default function ShowcaseLayout({ children }: { children: React.ReactNode
   const searchResults = buildSearchResults(searchQuery)
 
   return (
-    <div className="min-h-dvh bg-background text-text-primary py-12 relative overflow-hidden">
+    <div className="min-h-dvh bg-background text-text-primary py-4 md:py-12 relative overflow-hidden">
       <MouseGlow className="fixed inset-0 z-0 pointer-events-none opacity-85" />
       <Container className="relative z-10">
-        <header className="mb-8 flex flex-col gap-4 md:mb-12 md:flex-row md:items-start md:justify-between">
-          <div>
-            <Typography variant="h1" className="mb-4">
-              <AnimatedGradientText className="text-4xl sm:text-6xl">Nadicode System</AnimatedGradientText>
-            </Typography>
-            <Typography variant="body" className="text-xl text-text-secondary max-w-2xl">
-              A comprehensive design system for AI-integrated web applications.
-              Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
-            </Typography>
-          </div>
-          <div className="flex w-full flex-wrap items-center justify-between gap-2 md:w-auto md:flex-nowrap md:justify-end">
-            <button
-              onClick={() => setCmdkOpen(true)}
-              className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-text-secondary transition-colors hover:bg-surface-hover hover:text-text-primary md:flex-none"
-              aria-label="Open command palette"
-            >
-              <SearchIcon size={14} />
-              <span className="hidden sm:inline">Search</span>
-              <Kbd className="ml-1 hidden sm:inline-flex">
-                <span className="text-xs">&#8984;K</span>
-              </Kbd>
-            </button>
-            <StyleToggle />
-            <ThemeToggle />
-          </div>
-        </header>
-
         <AnimatedTabs
           value={currentTab}
           onValueChange={handleTabChange}
-          className="space-y-8"
+          className="mb-6 md:mb-10"
         >
-          <AnimatedTabsList className="glass-panel mb-8 w-full justify-start overflow-x-auto overflow-y-hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:justify-center">
-            {TABS.map(tab => (
-              <AnimatedTabsTrigger key={tab.value} value={tab.value}>{tab.label}</AnimatedTabsTrigger>
-            ))}
-          </AnimatedTabsList>
+          <div className="sticky top-2 z-30 rounded-xl border border-border/60 bg-surface/85 p-2 shadow-lg backdrop-blur-xl">
+            <div className="flex w-full items-center gap-2">
+              <button
+                onClick={() => setCmdkOpen(true)}
+                className="inline-flex h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-border bg-surface px-3 text-sm text-text-secondary transition-colors hover:bg-surface-hover hover:text-text-primary md:h-10 md:flex-none"
+                aria-label="Open command palette"
+              >
+                <SearchIcon size={14} />
+                <span>Search</span>
+                <Kbd className="ml-1 hidden sm:inline-flex">
+                  <span className="text-xs">&#8984;K</span>
+                </Kbd>
+              </button>
+              <StyleToggle className="shrink-0" />
+              <div
+                className="inline-flex shrink-0 items-center rounded-full border border-border bg-surface p-1"
+                role="radiogroup"
+                aria-label="Theme mode"
+              >
+                {[
+                  { value: 'light', label: 'Light', short: 'L' },
+                  { value: 'dark', label: 'Dark', short: 'D', disabled: style === 'bloom' },
+                  { value: 'system', label: 'System', short: 'Sys', disabled: style === 'bloom' },
+                ].map(option => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    role="radio"
+                    aria-checked={theme === option.value}
+                    aria-label={`Set theme to ${option.label.toLowerCase()}`}
+                    onClick={() => setTheme(option.value as 'light' | 'dark' | 'system')}
+                    disabled={option.disabled}
+                    className={cn(
+                      'inline-flex min-h-10 items-center justify-center rounded-full px-2.5 text-xs font-medium transition-all sm:px-3',
+                      theme === option.value
+                        ? 'bg-primary text-primary-foreground shadow-sm'
+                        : 'text-text-secondary hover:text-text-primary',
+                      option.disabled && 'opacity-50'
+                    )}
+                  >
+                    <span className="sm:hidden">{option.short}</span>
+                    <span className="hidden sm:inline">{option.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <AnimatedTabsList className="glass-panel mt-2 h-11 w-full justify-start overflow-x-auto overflow-y-hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:justify-center">
+              {TABS.map(tab => (
+                <AnimatedTabsTrigger key={tab.value} value={tab.value} className="min-h-10">
+                  {tab.label}
+                </AnimatedTabsTrigger>
+              ))}
+            </AnimatedTabsList>
+          </div>
         </AnimatedTabs>
+
+        <header className="mb-8 md:mb-12">
+          <Typography variant="h1" className="mb-3">
+            <AnimatedGradientText className="text-3xl sm:text-5xl md:text-6xl">Nadicode System</AnimatedGradientText>
+          </Typography>
+          <Typography variant="body" className="max-w-2xl text-base text-text-secondary sm:text-lg md:text-xl">
+            A comprehensive design system for AI-integrated web applications.
+            Featuring ultra-realistic aesthetics, deep blacks, and high-contrast accessibility.
+          </Typography>
+        </header>
 
         <PageTransition pathname={pathname} mode="slide">
           {children}

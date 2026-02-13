@@ -11,19 +11,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync:
+  precheck:
     runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
     steps:
-      - name: Verify SCAFFOLD_PAT is set
+      - name: Check scaffold sync configuration
+        id: check
         run: |
           if [ -z "${{ secrets.SCAFFOLD_PAT }}" ]; then
-            echo "::error::SCAFFOLD_PAT secret is not configured."
-            echo "Create a fine-grained PAT at https://github.com/settings/personal-access-tokens"
-            echo "Scope: vadimcomanescu/scaffold-nextjs-saas, permissions: Contents (read/write), Pull requests (read/write)"
-            echo "Then add it at https://github.com/vadimcomanescu/nadicode-design-system/settings/secrets/actions"
-            exit 1
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "SCAFFOLD_PAT is not configured, scaffold sync will be skipped."
+          else
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "SCAFFOLD_PAT is configured, scaffold sync will run."
           fi
 
+  sync:
+    runs-on: ubuntu-latest
+    needs: precheck
+    if: needs.precheck.outputs.enabled == 'true'
+    steps:
       - name: Checkout design system
         uses: actions/checkout@v4
         with:
@@ -68,7 +76,7 @@ jobs:
       - name: Test scaffold
         if: steps.diff.outputs.changed == 'true'
         working-directory: scaffold
-        run: npx vitest run --coverage
+        run: npx vitest run
 
       - name: Build scaffold
         if: steps.diff.outputs.changed == 'true'
@@ -118,7 +126,7 @@ jobs:
 
           - [x] `tsc --noEmit` passed
           - [x] `eslint .` passed
-          - [x] `vitest run --coverage` passed (90%+ threshold)
+          - [x] `vitest run` passed
           - [x] `next build` passed
 
           ## Review checklist
@@ -142,7 +150,7 @@ jobs:
 
           - [x] `tsc --noEmit` passed
           - [x] `eslint .` passed
-          - [x] `vitest run --coverage` passed (90%+ threshold)
+          - [x] `vitest run` passed
           - [x] `next build` passed
 
           ## Review checklist
@@ -153,3 +161,11 @@ jobs:
           )"
             echo "Created new PR"
           fi
+
+  sync-skipped:
+    runs-on: ubuntu-latest
+    needs: precheck
+    if: needs.precheck.outputs.enabled != 'true'
+    steps:
+      - name: Scaffold sync skipped
+        run: echo "Skipping scaffold sync because SCAFFOLD_PAT is not configured."

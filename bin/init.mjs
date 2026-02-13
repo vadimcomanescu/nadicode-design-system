@@ -381,7 +381,7 @@ function setupPostCSS() {
 
   writeFileSync(
     join(TARGET, 'postcss.config.mjs'),
-    `export default {\n  plugins: {\n    '@tailwindcss/postcss': {},\n  },\n}\n`
+    `const config = {\n  plugins: {\n    '@tailwindcss/postcss': {},\n  },\n}\n\nexport default config\n`
   )
   ok('postcss.config.mjs')
 }

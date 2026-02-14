@@ -7,8 +7,10 @@ This playbook is for applying Nadicode to an existing app with agents.
 Run from the target app root:
 
 ```bash
-node <path-to-nadicode-design-system>/bin/init.mjs
+node ~/Code/nadicode-design-system/bin/init.mjs
 ```
+
+If your DS clone is in a different location, replace `~/Code/nadicode-design-system` with your local path.
 
 Then verify:
 

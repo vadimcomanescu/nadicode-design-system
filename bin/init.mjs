@@ -531,7 +531,7 @@ const SEED_SECTION = `# Provenance
 This project uses the [Nadicode Design System](https://github.com/vadimcomanescu/nadicode-design-system) (Seed).
 
 - **Vendored commit**: see \`.seed-version\` in project root
-- **Update**: clone the DS repo, then run \`node <ds-path>/bin/init.mjs --update\`
+- **Update**: from your app root, run \`node ~/Code/nadicode-design-system/bin/init.mjs --update\` (adjust path if your DS clone lives elsewhere)
 - **What updates**: components, tokens, icons, blocks, hooks, agent skill, CSS
 - **What it won't touch**: your app routes, layouts, pages, or custom components
 

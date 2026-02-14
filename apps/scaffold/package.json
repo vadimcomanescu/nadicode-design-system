@@ -21,7 +21,8 @@
     "prepare": "husky",
     "ds:check": "node scripts/ds-check.mjs",
     "ds:ast-check": "node scripts/ds-ast-check.mjs",
-    "ds:task-pack": "node scripts/ds-generate-task-pack.mjs"
+    "ds:task-pack": "node scripts/ds-generate-task-pack.mjs",
+    "ds:update": "node scripts/ds-update.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

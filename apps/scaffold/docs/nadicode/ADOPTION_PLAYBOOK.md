@@ -7,10 +7,14 @@ This playbook is for applying Nadicode to an existing app with agents.
 Run from the target app root:
 
 ```bash
-node ~/Code/nadicode-design-system/bin/init.mjs
+npx --yes github:vadimcomanescu/nadicode-design-system
 ```
 
-If your DS clone is in a different location, replace `~/Code/nadicode-design-system` with your local path.
+After first install, use this stable update command in the target app:
+
+```bash
+npm run ds:update
+```
 
 Then verify:
 
@@ -31,9 +35,11 @@ npm run build
 - `scripts/ds-check.mjs`
 - `scripts/ds-ast-check.mjs`
 - `scripts/ds-generate-task-pack.mjs`
+- `scripts/ds-update.mjs`
 - `package.json` script: `ds:check`
 - `package.json` script: `ds:ast-check`
 - `package.json` script: `ds:task-pack`
+- `package.json` script: `ds:update`
 
 ## How To Work With Agents (Simple)
 

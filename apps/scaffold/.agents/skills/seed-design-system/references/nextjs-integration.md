@@ -9,7 +9,7 @@ Seed Design System is vendored (shadcn/ui-style): copy source files into your Ne
 Use the vendoring CLI so destination repos get the same rules and guardrails:
 
 ```bash
-node <path-to-nadicode-design-system>/bin/init.mjs
+npx --yes github:vadimcomanescu/nadicode-design-system
 ```
 
 This installs:
@@ -19,9 +19,13 @@ This installs:
 - `docs/nadicode/recipes/`
 - `docs/nadicode/PROMPT_TEMPLATES.md`
 - `scripts/ds-check.mjs`
+- `scripts/ds-ast-check.mjs`
 - `scripts/ds-generate-task-pack.mjs`
+- `scripts/ds-update.mjs`
 - `package.json` script: `ds:check`
+- `package.json` script: `ds:ast-check`
 - `package.json` script: `ds:task-pack`
+- `package.json` script: `ds:update`
 
 Run this gate before and after migration tasks:
 

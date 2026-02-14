@@ -25,7 +25,7 @@ One command vendors the entire design system into any Next.js project:
 
 ```bash
 # From your Next.js project directory:
-node ~/Code/nadicode-design-system/bin/init.mjs
+npx --yes github:vadimcomanescu/nadicode-design-system
 ```
 
 This copies all components, installs dependencies, sets up Tailwind/PostCSS config, and installs the agent skill for Claude/Codex/OpenCode.
@@ -39,7 +39,7 @@ This copies all components, installs dependencies, sets up Tailwind/PostCSS conf
 | Agent skill | Copies to `.agents/skills/`, symlinks from `.claude/`, `.codex/`, `.opencode/` |
 | Agent contract kit | Writes `docs/nadicode/` (contract, recipes, prompts) |
 | Factory contracts | Writes `docs/nadicode/factory/page-intent-catalog.json` |
-| Enforcement | Writes `scripts/ds-check.mjs`, `scripts/ds-generate-task-pack.mjs`, and package scripts |
+| Enforcement | Writes `scripts/ds-check.mjs`, `scripts/ds-ast-check.mjs`, `scripts/ds-generate-task-pack.mjs`, `scripts/ds-update.mjs`, and package scripts |
 | CSS tokens | Creates `seed-tokens.css` with all design tokens, glass effects, keyframes |
 | globals.css | Patches with Tailwind v4 directives and seed token import |
 | Tailwind | Copies config with Next.js content paths |
@@ -51,10 +51,10 @@ This copies all components, installs dependencies, sets up Tailwind/PostCSS conf
 ### Flags
 
 ```bash
-node ~/Code/nadicode-design-system/bin/init.mjs --update     # Re-copy all files, re-install deps
-node ~/Code/nadicode-design-system/bin/init.mjs --force      # Skip confirmation prompts
-node ~/Code/nadicode-design-system/bin/init.mjs --skip-deps  # Skip npm install
-node ~/Code/nadicode-design-system/bin/init.mjs --help       # Show help
+npx --yes github:vadimcomanescu/nadicode-design-system --update     # Re-copy all files, re-install deps
+npx --yes github:vadimcomanescu/nadicode-design-system --force      # Skip confirmation prompts
+npx --yes github:vadimcomanescu/nadicode-design-system --skip-deps  # Skip npm install
+npx --yes github:vadimcomanescu/nadicode-design-system --help       # Show help
 ```
 
 ### After running init
@@ -122,7 +122,13 @@ npm run ds:task-pack -- --scope input/scope-definition.json --out docs/nadicode/
 When the design system evolves, re-run from your Next.js project:
 
 ```bash
-node ~/Code/nadicode-design-system/bin/init.mjs --update
+npm run ds:update
+```
+
+If this is a legacy target app that does not have `ds:update` yet, run:
+
+```bash
+npx --yes github:vadimcomanescu/nadicode-design-system --update
 ```
 
 This overwrites all source files, re-merges CSS tokens, and re-installs deps. Your own code (pages, app routes) is untouched.

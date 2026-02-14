@@ -7,7 +7,7 @@
  * One command: components, tokens, config, agent contract kit, and dependencies.
  *
  * Usage:
- *   node ~/Code/nadicode-design-system/bin/init.mjs [flags]
+ *   npx --yes github:vadimcomanescu/nadicode-design-system [flags]
  *
  * Flags:
  *   --update     Re-copy all source files and re-install deps
@@ -271,6 +271,11 @@ function installAdoptionKit() {
     join(TARGET, 'scripts', 'ds-generate-task-pack.mjs'),
     'scripts/ds-generate-task-pack.mjs'
   )
+  copyTemplateFile(
+    join(DS_ROOT, 'scripts', 'ds-update.mjs'),
+    join(TARGET, 'scripts', 'ds-update.mjs'),
+    'scripts/ds-update.mjs'
+  )
 
   patchPackageScripts()
 }
@@ -288,6 +293,7 @@ function patchPackageScripts() {
     'ds:check': 'node scripts/ds-check.mjs',
     'ds:ast-check': 'node scripts/ds-ast-check.mjs',
     'ds:task-pack': 'node scripts/ds-generate-task-pack.mjs',
+    'ds:update': 'node scripts/ds-update.mjs',
   }
 
   for (const [name, command] of Object.entries(requiredScripts)) {
@@ -299,7 +305,7 @@ function patchPackageScripts() {
 
   packageJson.scripts = { ...scripts, ...requiredScripts }
   writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + '\n')
-  ok('package.json scripts ds:check, ds:ast-check, ds:task-pack')
+  ok('package.json scripts ds:check, ds:ast-check, ds:task-pack, ds:update')
 }
 
 // ─── Step 4: Setup CSS ──────────────────────────────────────
@@ -531,7 +537,8 @@ const SEED_SECTION = `# Provenance
 This project uses the [Nadicode Design System](https://github.com/vadimcomanescu/nadicode-design-system) (Seed).
 
 - **Vendored commit**: see \`.seed-version\` in project root
-- **Update**: from your app root, run \`node ~/Code/nadicode-design-system/bin/init.mjs --update\` (adjust path if your DS clone lives elsewhere)
+- **Update**: from your app root, run \`npm run ds:update\` (installed by Nadicode init)
+- **Bootstrap update (if ds:update is missing)**: run \`npx --yes github:vadimcomanescu/nadicode-design-system --update\`
 - **What updates**: components, tokens, icons, blocks, hooks, agent skill, CSS
 - **What it won't touch**: your app routes, layouts, pages, or custom components
 
@@ -728,7 +735,10 @@ async function main() {
   log(`    3. Make sure ${c.dim}globals.css${c.reset} is imported in your root layout`)
   log(`    4. Run ${c.cyan}npm run dev${c.reset} to verify`)
   log('')
-  log(`  To update later:`)
+  log(`  To update later in target projects:`)
+  log(`    ${c.dim}npm run ds:update${c.reset}`)
+  log('')
+  log(`  Or from this DS clone:`)
   log(`    ${c.dim}node ${DS_ROOT}/bin/init.mjs --update${c.reset}`)
   log('')
 }
